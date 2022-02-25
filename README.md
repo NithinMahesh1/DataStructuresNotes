@@ -1,5 +1,4 @@
 DataStructuresNotes
-======
 
 ## Brief Introduction: 
 
