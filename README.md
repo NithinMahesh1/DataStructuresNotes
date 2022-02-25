@@ -1,6 +1,5 @@
 # DataStructuresNotes
 
-<br/>
 
 ### Brief Introduction: 
 
