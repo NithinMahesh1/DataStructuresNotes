@@ -14,4 +14,4 @@ Array Big O Notation
 ## Linked Lists:
 
 Linked List Big O Notation
-![DataStructuresNotes](images/LinkedList_BigO_Notation.jpg.jpg)
+![DataStructuresNotes](images/LinkedList_BigO_Notation.jpg)
