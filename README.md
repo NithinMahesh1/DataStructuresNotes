@@ -14,7 +14,7 @@ The size of an array must be provided before storing data.
 
 Example: For example, let us say, we want to store marks of all students in a class, we can use an array to store them. This helps in reducing the use of a number of variables as we dont need to create a separate variable for marks of every subject. All marks can be accessed by simply traversing the array. 
 
-=======
+
 
 ## Linked Lists:
 
