@@ -6,7 +6,6 @@
 Comprehensive Notes on all things related to Data Structures 
 
 <br/>
-<br/>
 
 ## Arrays:
 
