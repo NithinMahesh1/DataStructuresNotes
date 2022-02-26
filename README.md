@@ -23,6 +23,36 @@ Example: For example, let us say, we want to store marks of all students in a cl
 * The variables in the array are ordered, and each has an index beginning from 0.
 * Java array can be also be used as a static field, a local variable, or a method parameter.
 * The size of an array must be specified by int or short value and not long.
+* The direct superclass of an array type is Object
+* Every array type implements the interfaces Cloneable and java.io.serializable
+
+An array can contain primitives (int, char, etc.) and object (or non-primitive) references of a class depending on the definition of the array. In the case of primitive data types, the actual values are stored in contiguous memory locations.
+
+![DataStructuresNotes](images/Arrays1.png)
+
+Example of array declarations in Java:
+```
+// both are valid declarations
+int intArray[]; 
+or int[] intArray; 
+
+byte byteArray[];
+short shortsArray[];
+boolean booleanArray[];
+long longArray[];
+float floatArray[];
+double doubleArray[];
+char charArray[];
+
+// an array of references to objects of
+// the class MyClass (a class created by
+// user)
+MyClass myClassArray[]; 
+
+Object[]  ao,        // array of Object
+Collection[] ca;  // array of Collection
+                     // of unknown type
+```
 
 
 <br/>
