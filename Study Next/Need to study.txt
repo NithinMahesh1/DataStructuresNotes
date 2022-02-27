@@ -1,0 +1,3 @@
+1.search algorithms BST
+	e.g. linear search, binary search, fibonacci search
+2. All the sort algorithms such as bubble sort, array sort

@@ -54,6 +54,131 @@ Collection[] ca;  // array of Collection
                      // of unknown type
 ```
 
+Instantiating an Array in Java
+
+When an array is declared, only a reference of an array is created. To create or give memory to the array, you create an array like this: The general form of new as it applies to one-dimensional arrays appears as follows: 
+```
+var-name = new type [size];
+```
+
+Here, type specifies the type of data being allocated, size determines the number of elements in the array, and var-name is the name of the array variable that is linked to the array. To use new to allocate an array, you must specify the type and number of elements to allocate.
+
+Example: 
+```
+int intArray[];    //declaring array
+intArray = new int[20];  // allocating memory to array
+```
+OR
+```
+int[] intArray = new int[20]; // combining both statements in one
+```
+
+Here is an example of an array of objects:
+```
+
+// Java program to illustrate creating
+//  an array of objects
+ 
+class Student
+{
+    public int roll_no;
+    public String name;
+    Student(int roll_no, String name)
+    {
+        this.roll_no = roll_no;
+        this.name = name;
+    }
+}
+ 
+// Elements of the array are objects of a class Student.
+public class GFG
+{
+    public static void main (String[] args)
+    {
+        // declares an Array of integers.
+        Student[] arr;
+ 
+        // allocating memory for 5 objects of type Student.
+        arr = new Student[5];
+ 
+        // initialize the first elements of the array
+        arr[0] = new Student(1,"aman");
+ 
+        // initialize the second elements of the array
+        arr[1] = new Student(2,"vaibhav");
+ 
+        // so on...
+        arr[2] = new Student(3,"shikar");
+        arr[3] = new Student(4,"dharmesh");
+        arr[4] = new Student(5,"mohit");
+ 
+        // accessing the elements of the specified array
+        for (int i = 0; i < arr.length; i++)
+            System.out.println("Element at " + i + " : " +
+                        arr[i].roll_no +" "+ arr[i].name);
+    }
+}
+```
+Multidimensional Arrays:
+
+Multidimensional arrays are arrays of arrays with each element of the array holding the reference of other arrays. These are also known as Jagged Arrays. A multidimensional array is created by appending one set of square brackets ([]) per dimension. Examples: 
+```
+int[][] intArray = new int[10][20]; //a 2D array or matrix
+int[][][] intArray = new int[10][20][10]; //a 3D array
+```
+
+Java Example:
+```
+public class multiDimensional
+{
+    public static void main(String args[])
+    {
+        // declaring and initializing 2D array
+        int arr[][] = { {2,7,9},{3,6,1},{7,4,2} };
+ 
+        // printing 2D array
+        for (int i=0; i< 3 ; i++)
+        {
+            for (int j=0; j < 3 ; j++)
+                System.out.print(arr[i][j] + " ");
+ 
+            System.out.println();
+        }
+    }
+}
+```
+
+C# Example:
+```
+using System;
+
+namespace HelloWorld 
+{
+    class HelloWorld {
+        static void Main(string[] args) {
+         
+           int[,] array2d = new int[3,3]{ {2,7,9},{3,6,1},{7,4,2} };
+
+            for(int i=0; i<array2d.GetLength(0); i++) {
+                for(int j=0; j<array2d.GetLength(1); j++) {
+                    Console.WriteLine(array2d[i,j] + " ");
+                }
+            }
+        }
+    }
+}
+```
+
+Output:
+```
+2 7 9 
+3 6 1 
+7 4 2 
+```
+
+![DataStructuresNotes](images/Blank-Diagram-Page-1-13.jpeg)
+
+
 
 <br/>
 
