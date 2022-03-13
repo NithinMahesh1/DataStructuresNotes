@@ -274,7 +274,7 @@ True
 True
 ```
 
-![DataStructuresNotes](images/multi dimensional array cloning.jpeg)
+![DataStructuresNotes](images/multi_dimensional_array_cloning.jpeg)
 
 
 
