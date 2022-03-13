@@ -274,8 +274,85 @@ True
 True
 ```
 
+
 ![DataStructuresNotes](images/multi_dimensional_array_cloning.jpeg)
 
+Array Rotation Practice Problem:
+
+Write a function rotate(arr[], d, n) that rotates arr[] of size d by n elements.
+
+My Solution:
+```
+package com.company;
+
+import java.lang.reflect.Array;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    /*
+	        Write a function rotate(arr[], d, n) that rotates arr[] of size d by n elements.
+
+	        Input:
+
+	        d = 2
+	        n = 7
+	        array = {1,2,3,4,5,6,7}
+
+	        Expected Output:
+
+	        rotatedArray = {3,4,5,6,7,1,2}
+	    */
+
+        int d = 7;
+        int n = 2;
+
+        int[] arr = new int[]{1,2,3,4,5,6,7};
+
+        arr = rotate(arr, n, d);
+        for(int i=0; i<arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+    }
+
+    public static int[] rotate(int[] arr, int n, int d) {
+
+        int[] temp = new int[n];
+        int[] rotatedArr = new int[arr.length];
+
+        int count = -1;
+        int nCount = n;
+        int placement = d - n;
+        int placementCount = 0;
+        for(int i=0; i<arr.length; i++) {
+
+            if(placementCount == temp.length) {
+                break;
+            }
+
+            if(nCount < arr.length) {
+                rotatedArr[i] = arr[nCount];
+                nCount++;
+            }
+
+            count ++;
+            if(count < n) {
+                temp[i] = arr[count];
+            }
+            else if(nCount == arr.length) {
+                rotatedArr[placement] = temp[placementCount];
+                temp[placementCount]--;
+                placementCount++;
+                placement++;
+            }
+
+        }
+
+        System.out.println("This is the rotated array");
+        return rotatedArr;
+    }
+}
+```
 
 
  
