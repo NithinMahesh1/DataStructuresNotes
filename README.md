@@ -178,7 +178,107 @@ Output:
 
 ![DataStructuresNotes](images/Blank-Diagram-Page-1-13.jpeg)
 
+Cloning of arrays:
 
+When you clone a single-dimensional array, such as Object[], a “deep copy” is performed with the new array containing copies of the original array’s elements as opposed to references.
+
+```
+// Java program to demonstrate
+// cloning of one-dimensional arrays
+ 
+class Test
+{   
+    public static void main(String args[])
+    {
+        int intArray[] = {1,2,3};
+         
+        int cloneArray[] = intArray.clone();
+         
+        // will print false as deep copy is created
+        // for one-dimensional array
+        System.out.println(intArray == cloneArray);
+         
+        for (int i = 0; i < cloneArray.length; i++) {
+            System.out.print(cloneArray[i]+" ");
+        }
+    }
+}
+
+Output:
+false
+1 2 3 
+```
+
+Cloning of two dimensional arrays:
+
+A clone of a multi-dimensional array (like Object[][]) is a “shallow copy,” however, which is to say that it creates only a single new array with each element array a reference to an original element array, but subarrays are shared. 
+
+Example in C#:
+```
+using System;
+
+namespace HelloWorld 
+{
+    class HelloWorld {
+        static void Main(string[] args) {
+         
+           
+            int[,] intArray = new int[2,3] {{1,2,3},{4,5,6}};
+
+            int[,] cloneArray = intArray.Clone() as int[,];
+
+
+            Console.WriteLine("This is the intial Array");
+            for(int i=0; i<intArray.GetLength(0); i++) {
+                for(int j=0; j<intArray.GetLength(1); j++) {
+                    Console.WriteLine(intArray[i,j] + " ");
+                }
+            }
+
+
+            Console.WriteLine("This is the clone of the Array");
+            for(int i=0; i<cloneArray.GetLength(0); i++) {
+                for(int j=0; j<cloneArray.GetLength(1); j++) {
+                    Console.WriteLine(cloneArray[i,j] + " ");
+                }
+            }
+
+            // will print false
+            Console.WriteLine(intArray == cloneArray);
+            
+            // will print true as shallow copy is created
+            // i.e. sub-arrays are shared
+            Console.WriteLine(intArray[0,0] == cloneArray[0,0]);
+            Console.WriteLine(intArray[1,1] == cloneArray[1,1]);
+
+        }
+    }
+}
+
+Output:This is the intial Array
+1
+2
+3
+4
+5
+6
+This is the clone of the Array
+1
+2
+3
+4
+5
+6
+False
+True
+True
+```
+
+![DataStructuresNotes](images/multi dimensional array cloning.jpeg.jpeg)
+
+
+
+ 
 
 <br/>
 
