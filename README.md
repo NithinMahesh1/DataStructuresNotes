@@ -375,6 +375,71 @@ Types of Linked List :
 Example: Consider the previous example where we made an array of marks of students. Now if a new subject is added to the course, its marks are also to be added to the array of marks. But the size of the array was fixed and it is already full so it can not add any new element. If we make an array of a size lot more than the number of subjects it is possible that most of the array will remain empty. We reduce the space wastage Linked List is formed which adds a node only when a new element is introduced. Insertions and deletions also become easier with a linked list. 
 One big drawback of a linked list is, random access is not allowed. With arrays, we can access ith element in O(1) time. In the linked list, it takes O(i) time. 
 
+Implementing a simple Linked List in Java:
+```
+//Main File aka driver
+package com.practice;
+
+public class Main {
+
+    public static void main(String[] args) {
+	    LinkedList list = new LinkedList();
+
+        list = LinkedList.insert(list, 0);
+        list = LinkedList.insert(list, 1);
+
+        Node curr = list.head;
+        while(curr != null) {
+            System.out.println(curr.data);
+            curr = curr.next;
+        }
+
+    }
+}
+```
+
+```
+// Node Java Class
+package com.practice;
+
+public class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        next = null;
+    }
+}
+```
+
+```
+//LinkedList Java Class
+package com.practice;
+
+public class LinkedList {
+    Node head;
+
+    public static LinkedList insert(LinkedList list, int data) {
+        Node new_node =  new Node(data);
+        new_node.next = null;
+
+        if(list.head == null) {
+            list.head = new_node;
+        }
+        else {
+            Node last = list.head;
+            while(last.next != null) {
+                last = last.next;
+            }
+            last.next = new_node;
+        }
+        return list;
+    }
+}
+```
+
+
 <br/>
 
 ## Stacks:
