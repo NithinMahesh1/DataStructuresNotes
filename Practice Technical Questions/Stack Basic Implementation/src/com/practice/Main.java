@@ -3,6 +3,13 @@ package com.practice;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+        Stack stack = new Stack(5);
+
+        stack.push(1);
+        stack.push(2);
+
+        stack.pop();
+
+
     }
 }
