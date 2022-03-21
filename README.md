@@ -570,6 +570,97 @@ A stack or LIFO (last in, first out) is an abstract data type that serves as a c
 
 Example: Stacks are used for maintaining function calls (the last called function must finish execution first), we can always remove recursion with the help of stacks. Stacks are also used in cases where we have to reverse a word, check for balanced parenthesis, and in editors where the word you typed the last is the first to be removed when you use undo operation. Similarly, to implement back functionality in web browsers. 
 
+Simple Stack Implementation:
+```
+// Main Class aka driver
+
+package com.practice;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Stack stack = new Stack(5);
+
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        stack.pop();
+        stack.push(4);
+
+        stack.print();
+    }
+}
+```
+
+```
+// Actual Stack Class
+
+package com.practice;
+
+public class Stack {
+    private static int arr[];
+    private static int capacity;
+    private static int top;
+
+    Stack(int size) {
+        arr = new int[size];
+        capacity = size;
+        top = -1;
+    }
+
+    public static void push(int x) {
+        if(isFull()) {
+            System.out.println("Stack Overflow Error");
+        }
+
+        top++;
+        arr[top] = x;
+    }
+
+    public static void pop() {
+        if(isEmpty()) {
+            System.out.println("Stack Underflow Error");
+        }
+
+        arr[top] = 0;
+        top--;
+    }
+
+    public static int peep() {
+        if(isEmpty()) {
+            System.out.println("Stack is empty");
+        }
+
+        return arr[top];
+    }
+
+    public static void print() {
+        if(isEmpty()) {
+            System.out.println("Stack is empty");
+            return;
+        }
+
+       for (int n : arr) {
+           System.out.print(n + " ");
+       }
+    }
+
+    public static boolean isFull() {
+        return top == capacity - 1;
+    }
+
+    public static boolean isEmpty() {
+        return top == -1;
+    }
+}
+```
+Other possibilities with Stacks are: empty() and search(Object element). We can also use a Vector as such:
+```
+public class Stack<E> extends Vector<E>
+```
+
+
 <br/>
 
 ## Queues:

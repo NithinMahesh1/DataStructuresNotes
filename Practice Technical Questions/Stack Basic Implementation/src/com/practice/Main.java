@@ -7,9 +7,11 @@ public class Main {
 
         stack.push(1);
         stack.push(2);
+        stack.push(3);
 
         stack.pop();
+        stack.push(4);
 
-
+        stack.print();
     }
 }
