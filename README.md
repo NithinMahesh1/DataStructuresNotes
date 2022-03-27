@@ -673,6 +673,154 @@ Example: Queue as the name says is the data structure built according to the que
 
 Circular Queue The advantage of this data structure is that it reduces wastage of space in case of array implementation, As the insertion of the (n+1),’th element is done at the 0’th index if it is empty. 
 
+This is a basic Queue Java Implementation:
+
+```
+// Main Class aka Driver
+
+public class Main {
+
+    public static void main(String[] args) {
+        Queue queue = new Queue(5);
+
+        queue.enqueue(1);
+        queue.enqueue(2);
+        queue.enqueue(3);
+        queue.enqueue(4);
+        queue.enqueue(5);
+
+        queue.dequeue();
+        queue.first();
+
+        queue.print();
+    }
+}
+```
+
+```
+// Queue Java Class
+
+public class Queue {
+    private static int queue[];
+    private static int front, rear, capacity;
+
+    Queue(int size) {
+        front = rear = 0;
+        capacity = size;
+        queue = new int[capacity];
+    }
+
+    public static void enqueue(int data) {
+        if(capacity == rear) {
+            System.out.println("Queue is full");
+            return;
+        }
+
+        queue[rear] = data;
+        rear++;
+    }
+
+    public static void dequeue() {
+        if(front == rear) {
+            System.out.println("Queue is empty");
+            return;
+        }
+
+        else {
+            for (int i = 0; i < rear - 1; i++) {
+                queue[i] = queue[i + 1];
+            }
+
+            if (rear < capacity) {
+                queue[rear] = 0;
+            }
+            rear--;
+        }
+
+        return;
+    }
+
+    public static void first() {
+        if(front == rear) {
+            System.out.println("Queue is empty");
+            return;
+        }
+
+        System.out.print("This is the first element in queue: " + queue[front]);
+    }
+
+    public static void print() {
+        if(front == rear) {
+            System.out.println("Queue is full");
+            return;
+        }
+
+        System.out.println("Printing out the queue");
+        for(int i=front; i<rear; i++) {
+            System.out.print(queue[i]);
+        }
+    }
+    
+}
+```
+
+Priority Queue is a queue in which every element has a a priority determining the order in which it is dequeued. Note as well if there are two elements with the same priorities they are served according to their order in the queue. 
+
+These are the two types of priority Queues:
+
+1) Ascending Order: As the name suggests, in ascending order priority queue, the element with a lower priority value is given a higher priority in the priority list. For example, if we have the following elements in a priority queue arranged in ascending order like 4,6,8,9,10. Here, 4 is the smallest number, therefore, it will get the highest priority in a priority queue.
+
+2) Descending order: The root node is the maximum element in a max heap, as you may know. It will also remove the element with the highest priority first. As a result, the root node is removed from the queue. This deletion leaves an empty space, which will be filled with fresh insertions in the future. The heap invariant is then maintained by comparing the newly inserted element to all other entries in the queue.
+
+The simplest implementation of this would be using an array.
+
+```
+public static void main(String args[])
+{
+    PriorityQueue<String> pq = new PriorityQueue<>();
+
+    pq.add("Geeks");
+    pq.add("For");
+    pq.add("Geeks");
+
+    System.out.println(pq);
+}
+
+Output: [For, Geeks, Geeks]
+```
+
+Note also that when implementing Priority Queue it is ascending by default. We can change this by creating a custom comparator to change this to be descending. 
+
+For Example:
+
+```
+static class CustomIntegerComparator implements Comparator<Integer> {
+
+    @Override
+    public int compare(Integer o1, Integer o2) {
+        return o1 < o2 ? 1 : -1;
+    }
+}
+```
+
+Now implementing this as such:
+
+```
+testIntegersPQ.add(11);
+    testIntegersPQ.add(5);
+    testIntegersPQ.add(-1);
+    testIntegersPQ.add(12);
+    testIntegersPQ.add(6);
+
+    System.out.println("Integers stored in reverse order of priority in a Priority Queue\n");
+    while (!testIntegersPQ.isEmpty()) {
+        System.out.println(testIntegersPQ.poll());
+    }
+
+Output: 12 6 5 -1
+```
+
+
 <br/>
 
 ## Binary Tree:
