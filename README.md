@@ -858,7 +858,16 @@ BST provides moderate insertion/deletion (quicker than Arrays and slower than Li
 
 Examples: Its main use is in search applications where data is constantly entering/leaving and data needs to be printed in sorted order. For example in implementation in E-commerce websites where a new product is added or product goes out of stock and all products are listed in sorted order. 
 
-Binary Heap 
+Binary Search Implementation:
+
+```
+
+```
+
+<br/>
+
+## Binary Heap:
+
 A Binary Heap is a Binary Tree with the following properties. 
 1) It’s a complete tree (All levels are completely filled except possibly the last level and the last level has all keys as left as possible). This property of Binary Heap makes them suitable to be stored in an array. 
 2) A Binary Heap is either Min Heap or Max Heap. In a Min Binary Heap, the key at the root must be minimum among all keys present in Binary Heap. The same property must be recursively true for all nodes in Binary Tree. Max Binary Heap is similar to Min Heap. It is mainly implemented using an array. 
@@ -868,6 +877,10 @@ A Binary Heap is a Binary Tree with the following properties.
 Example: Used in implementing efficient priority queues, which in turn are used for scheduling processes in operating systems. Priority Queues are also used in Dijkstra’s and Prim’s graph algorithms. 
 The Heap data structure can be used to efficiently find the k smallest (or largest) elements in an array, merging k sorted arrays, a median of a stream, etc. 
 Heap is a special data structure and it cannot be used for searching a particular element. 
+
+<br/>
+
+## Hashing:
 
 HashingHash Function: A function that converts a given big input key to a small practical integer value. The mapped integer value is used as an index in the hash table. A good hash function should have the following properties 
 1) Efficiently computable. 
