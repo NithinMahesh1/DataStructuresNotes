@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Grade_Test.java&apos; to &apos;hamspam-student&apos;&#x0A;- Original project: &apos;2disc2-junit_style&apos;&#x0A;- Destination element: &apos;hamspam-student&apos;&#x0A;- Original element: &apos;Grade_Test.java&apos;" description="Copy compilation unit" destination="=hamspam-student" element1="/test&lt;{Grade_Test.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1454339379367" units="1" version="1.0"/>
+</session>

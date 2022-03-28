@@ -1,0 +1,155 @@
+package sets;
+
+import java.util.Iterator;
+
+public class LinkedSet<E> implements Set<E> {
+  private LinkedNode<E> head = null;
+
+  // Constructors
+  public LinkedSet() {
+	  //Set<E> sets = new LinkedSet<E>(); 
+  }
+
+  public LinkedSet(E e) {
+    this.head = new LinkedNode<E>(e, null);
+  }
+
+  private LinkedSet(LinkedNode<E> head) {
+    this.head = head;
+  }
+
+  @Override
+  public int size() {
+    // TODO (1)
+	Iterator<E> ite = new LinkedNodeIterator<E>(head);
+	int count = 0;
+	while(ite.hasNext()) {
+		count++;
+		E data = ite.next();
+	}
+    return count;
+  }
+
+  @Override  
+  public boolean isEmpty() {
+    // TODO (2)
+	if (size() == 0) {
+		return true;
+	}
+		return false;
+  }
+
+  @Override
+  public Iterator<E> iterator() {
+    return new LinkedNodeIterator<E>(this.head);
+  }
+
+  @Override
+  public boolean contains(Object o) {
+    // TODO (3)
+	Iterator<E> iter = iterator();
+	
+	try {
+	if(head.getData() != null && head.getData() == o) {
+		return true;
+	}
+	while(iter.hasNext()) {
+		if(iter.next() == o) {
+			return true;
+		}
+	}
+	} catch (Exception tmpException) {
+		
+	}
+
+    return false;
+  }
+
+  @Override
+  public boolean isSubset(Set<E> that) {
+    // TODO (4)
+    return true;
+  }
+
+  @Override
+  public boolean isSuperset(Set<E> that) {
+    // TODO (5)
+    return true;
+  }
+
+  @Override
+  public Set<E> adjoin(E e) {
+    // TODO (6)
+//try {
+	if(this.contains(e)) {
+		return this;
+	} 
+	else {
+		LinkedNode<E> node = new LinkedNode<E>(e,head);
+		Set<E> sets = new LinkedSet<E>(node);
+		//this.add(e);
+		//return this;
+		return sets;
+	}
+/*} catch (Exception adjoinException) {
+		System.out.println("Error in adjoin method: " + adjoinException);
+	}*/
+		
+  }
+
+  @Override
+  public Set<E> union(Set<E> that) {
+    // TODO (7)
+    return null;
+  }
+
+  @Override
+  public Set<E> intersect(Set<E> that) {
+    // TODO (8)
+    return null;
+  }
+
+  @Override
+  public Set<E> subtract(Set<E> that) {
+    // TODO (9)
+	Iterator<E> s1 = new Iterator<E>(that);
+	Iterator<E> s2 = new Iterator<E>();
+	LinkedNode node = new LinkedNode();
+	boolean check = true;
+	while(s1.hasNext()) {
+		
+		while(s2.hasNext()) {
+			
+		}
+		if(check == true) {
+			
+		}
+	}
+    return null;
+  }
+
+  @Override
+  public Set<E> remove(E e) {
+    // TODO (10)
+    return null;
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public boolean equals(Object o) {
+    if (! (o instanceof Set)) {
+      return false;
+    }
+    Set<E> that = (Set<E>)o;
+    return this.isSubset(that) && that.isSubset(this);
+  }
+
+  @Override
+    public int hashCode() {
+    int result = 0;
+    for (E e : this) {
+      result += e.hashCode();
+    }
+    return result;
+  }
+}

@@ -1,0 +1,30 @@
+Public Class Node {
+
+	public int val;
+	public Node next;
+
+	public Node(int val, Node next) {
+		this.next = next;
+		this.val = val;
+	}
+
+	
+
+}
+
+Node node = new Node(1, next);
+Node next = new Node(2, third);
+Node third = new Node(3, null);
+
+
+
+	public Node reverse(Node node) {
+		int i = 0;
+		Node head =  new Node(node.getData, node);
+		Node curr =  new Node();
+		
+		
+		
+	}
+
+

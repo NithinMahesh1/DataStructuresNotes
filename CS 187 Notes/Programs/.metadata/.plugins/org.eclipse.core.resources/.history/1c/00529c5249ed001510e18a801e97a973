@@ -1,0 +1,154 @@
+package structures;
+
+import java.util.Iterator;
+
+public class RecursiveList<T> implements ListInterface<T> {
+
+	protected int size = 0;
+	protected Node<T> head = null;
+	
+	@Override
+	public Iterator<T> iterator() {
+		// TODO Auto-generated method stub
+		return new LinkedIterator<T>(head);
+		//return null;
+	}
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return size;
+		//return 0;
+	}
+
+	@Override
+	public ListInterface<T> insertFirst(T elem) {
+		// TODO Auto-generated method stub
+		if(elem == null) {
+			throw new NullPointerException();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public ListInterface<T> insertLast(T elem) {
+		// TODO Auto-generated method stub
+		if(elem == null) {
+			throw new NullPointerException();
+		}
+		return null;
+	}
+
+	@Override
+	public ListInterface<T> insertAt(int index, T elem) {
+		// TODO Auto-generated method stub
+		if(elem == null) {
+			throw new NullPointerException();
+		}
+		if(index < 0 || index > this.size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		get(index);
+		Node newNode = new Node<T>(elem, null);
+		return newNode.getData();
+	}
+
+	@Override
+	public T removeFirst() {
+		// TODO Auto-generated method stub
+		if(this.isEmpty()) {
+			throw new IllegalStateException();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public T removeLast() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T removeAt(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T getFirst() {
+		// TODO Auto-generated method stub
+		iterator();
+		Iterator<T> iter = iterator();
+		if(!iter.hasNext()) {
+			throw new IllegalStateException();
+		}
+		return null;
+	}
+
+	@Override
+	public T getLast() {
+		// TODO Auto-generated method stub
+		if(isEmpty()) {
+			throw new IllegalStateException();
+		}
+		iterator();
+		Iterator<T> iter = iterator();
+		T curr;
+		if(iter.hasNext()) {
+			curr = iter.next();
+		}
+		if(iter.next() ==  null) {
+			
+		}
+		return null;
+	}
+
+	@Override
+	public T get(int i) {
+		// TODO Auto-generated method stub
+		iterator();
+		Iterator<T> iter = iterator();
+		if(i < 0 || i >= size()) {
+			throw new IndexOutOfBoundsException();
+		}
+		T curr;
+		if(iter.hasNext()) {
+			curr = iter.next();
+		}
+		return get(i);
+		//return null;
+	}
+
+	@Override
+	public boolean remove(T elem) {
+		// TODO Auto-generated method stub
+		if(elem == null) {
+			throw new NullPointerException();
+		}
+		
+		return false;
+	}
+
+	@Override
+	public int indexOf(T elem) {
+		// TODO Auto-generated method stub
+		if(elem == null) {
+			throw new NullPointerException();
+		}
+		return 0;
+	}
+	
+	private int indexOfHelper(T toFind, Node<T> toCheck, int currentIndex) {
+		return currentIndex;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return (size == 0);
+		//return false; 
+	}
+
+}

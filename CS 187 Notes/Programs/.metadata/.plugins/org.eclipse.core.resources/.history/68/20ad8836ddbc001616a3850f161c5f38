@@ -1,0 +1,76 @@
+package simulation;
+
+import java.util.List;
+
+/**
+ * 
+ * A Java class to simulate the card game War. See assignment writeup for details.
+ * 
+ * @author liberato
+ *
+ */
+public class War {
+	/**
+	 * Determines the winner of a game of War, returning 1 if player A wins, -1 if player B wins, 0 if a draw.
+	 * 
+	 * The rules of the game are defined in the assignment writeup.
+	 * 
+	 * @param deck
+	 * @return 1 if player A wins, -1 if player B wins, 0 if a draw
+	 */
+	private static List<Integer> spoils; 
+	private static List<Integer> deckA;
+	private static List<Integer> deckB;
+	private static int outcome;
+	private static boolean gameOver;
+	
+	public static int findWinner(List<Integer> deck) {
+		// TODO
+//		int index = 0;
+//		while (outcome == 0) {
+//			battle();
+//		}
+		for (int i = 0; i < deck.size() - 1; i += 2) {
+			deckA.get(i);
+		}
+		for (int i = 1; i < deck.size() - 1; i += 2) {
+			deckB.get(i);
+		}
+		
+		return 0;
+	}
+	
+	
+	public static void war() {
+		if (deckA) {
+			
+		}
+	}
+	
+	public static void battle() {
+		if ((deckA.isEmpty()) && (deckB.isEmpty())) {
+			gameOver = true;
+			outcome = 0;
+		}
+		
+		if (deckA.get(0) == (deckB.get(0))) {
+			spoils.add(deckA.get(0));
+			spoils.add(deckB.get(0));
+			war();
+		}
+		
+		if (deckA.get(0) > deckB.get(0)) {
+			deckA.add(deckA.size() - 1, spoils.get(0));
+			spoils.remove(0);
+		} 
+		
+		else if (deckB.get(0) > deckA.get(0)) {
+			deckB.add(deckB.size() - 1, spoils.get(0));
+			spoils.remove(0);
+		}
+		
+		
+		
+	}
+	
+}

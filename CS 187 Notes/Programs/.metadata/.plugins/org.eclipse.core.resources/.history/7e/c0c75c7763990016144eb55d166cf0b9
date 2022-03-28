@@ -1,0 +1,91 @@
+package stylist;
+
+/**
+ * A standard playing card.
+ * 
+ * Adapted from code Copyright © 2016 Allen B. Downey and Chris Mayfield.
+ * 
+ * Code used under Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+ */
+public class Card {
+
+	public static final String[] RANKS = {null,"Ace","2","3","4","5","6","7","8","9","10","Jack","Queen","King"};
+	public static final String[] suits = {"Clubs","Diamonds","Hearts","Spades"};
+	private final int r;
+	private final int s;
+
+	/**
+	 * Constructs a card of the given rank and suit.
+	 */
+	public Card(int r, int s) {
+		this.r = r;
+		this.s = s;
+	}
+
+	/**
+	 * Returns a negative integer if this card comes before the given card, zero
+	 * if the two cards are equal, or a positive integer if this card comes
+	 * after the card.
+	 */
+	public int CompareTo(Card that) {
+		if (this.s < that.s) 
+			return -1;
+		
+		if (this.s > that.s) 
+			return 1;
+		
+		if (this.r < that.r) 
+			return -1;
+		
+		if (this.r > that.r) 
+			return 1;
+		
+		return 0;
+	}
+
+	/**
+	 * Returns true if the given card has the same rank AND same suit; otherwise
+	 * returns false.
+	 */
+	public boolean equals(Card that) {
+		return this.r == that.r && this.s == that.s;
+	}
+
+	/**
+	 * Gets the card's rank.
+	 */
+	public int getRank() {
+	return this.r;
+	}
+
+	/**
+	 * Gets the card's suit.
+	 */
+	public int getSuit() {
+	return this.s;
+	}
+
+	/**
+	 * Returns the card's index in a sorted deck of 52 cards.
+	 */
+	public int position() {
+		return this.s*13+this.r-1;
+	}
+
+	/**
+	 * Returns a string representation of the card.
+	 */
+	public String toString() {
+		return RANKS [this.r]+" of "+suits[this.s];
+	}
+
+	public static void main(String[] args) {
+		Card[] cards = new Card[52];
+		int idx = 0;
+		for (int r = 1; r < RANKS.length; r++) 
+		for (int s = 0 ; s < suits.length; s++) 
+		cards[idx++] = new Card(r, s);			
+		for (Card c : cards)
+		System.out.println(c);
+	}
+}

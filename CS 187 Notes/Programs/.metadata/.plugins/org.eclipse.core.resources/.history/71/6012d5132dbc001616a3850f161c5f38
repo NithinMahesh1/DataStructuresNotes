@@ -1,0 +1,47 @@
+package simulation;
+
+import java.util.List;
+
+/**
+ * 
+ * A Java class to simulate the card game War. See assignment writeup for details.
+ * 
+ * @author liberato
+ *
+ */
+public class War {
+	/**
+	 * Determines the winner of a game of War, returning 1 if player A wins, -1 if player B wins, 0 if a draw.
+	 * 
+	 * The rules of the game are defined in the assignment writeup.
+	 * 
+	 * @param deck
+	 * @return 1 if player A wins, -1 if player B wins, 0 if a draw
+	 */
+	private static List<Integer> spoils; 
+	private static List<Integer> deck;
+	private static List<Integer> deckA;
+	private static List<Integer> deckB;
+	private static List<Integer> outcome;
+	private static boolean gameOver;
+	
+	public static int findWinner(List<Integer> deck) {
+		// TODO
+		int i = 0;
+		while (!outcome.isEmpty()) {
+			
+		}
+		
+		return 0;
+	}
+	
+	
+	public static void war() {
+		
+	}
+	
+	public static void battle() {
+		
+	}
+	
+}

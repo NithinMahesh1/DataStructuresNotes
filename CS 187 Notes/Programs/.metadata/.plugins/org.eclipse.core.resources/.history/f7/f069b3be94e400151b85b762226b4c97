@@ -1,0 +1,61 @@
+package structures;
+
+import java.util.NoSuchElementException;
+
+public class Queue<T> implements UnboundedQueueInterface<T> {
+	
+	public Queue() {
+		// TODO 1
+	}
+	
+	public Queue(Queue<T> other) {
+		// TODO 2
+		// Hint: Maybe save this one until after you finish enqueue()/dequeue()
+	}
+	
+	@Override
+	public boolean isEmpty() {
+		// TODO 3
+		return false;
+	}
+
+	@Override
+	public int size() {
+		// TODO 4
+		return -1;
+	}
+
+	@Override
+	public void enqueue(T element) {
+		// TODO 5;
+		
+	}
+
+	@Override
+	public T dequeue() throws NoSuchElementException {
+		// TODO 6;
+		if(isEmpty()) {
+			throw new NoSuchElementException();
+		} else {
+			T elem = front.getInfo();
+			front = front.getLink();
+			if(front == null) {
+				
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public T peek() throws NoSuchElementException {
+		// TODO 7
+		return null;
+	}
+
+	@Override
+	public UnboundedQueueInterface<T> reversed() {
+		// TODO 8
+		// Hint: Maybe save this one until after you finish enqueue()/dequeue()
+		return null;
+	}
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ExternalProjectImportWizard">
+		<item value="true" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="true" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value=""/>
+			<item value="/Users/nithinmahesh/Documents/Comp Sci 187/Programs"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value="/Users/nithinmahesh/Downloads/hangman-student-2.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/war-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/crawler-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/search-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/information-retrieval-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/image-mosaic-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/needle-in-a-haystack-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/similarity-detector-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/dna-sequence-assembly-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/working-with-lists-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/hamspam-student (1).zip"/>
+			<item value="/Users/nithinmahesh/Downloads/sorting-kata-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/heap-queues-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/bst-scapegoat-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/deque-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/recursive-list-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/sorting-with-stacks-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/hanoi-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/postfix-student.zip"/>
+			<item value="/Users/nithinmahesh/Downloads/sets-student.zip"/>
+		</list>
+	</section>
+	<section name="NewWizardAction">
+		<item value="org.eclipse.ui.wizards.new.project" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.ui.Basic"/>
+		</list>
+	</section>
+	<section name="BasicNewProjectResourceWizard">
+	</section>
+	<section name="SaveAsDialogSettings">
+		<item value="525" key="DIALOG_WIDTH"/>
+		<item value="1|.SF NS Text|11.0|0|COCOA|1|.SFNSText" key="DIALOG_FONT_NAME"/>
+		<item value="529" key="DIALOG_HEIGHT"/>
+		<item value="378" key="DIALOG_X_ORIGIN"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

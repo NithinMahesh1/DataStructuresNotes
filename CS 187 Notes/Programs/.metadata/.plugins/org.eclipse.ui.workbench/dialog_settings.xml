@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="WorkbenchPreferenceDialogSettings">
+		<item value="348" key="DIALOG_X_ORIGIN"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.ui.internal.QuickAccess">
+		<item value="500" key="dialogHeight"/>
+		<item value="800" key="dialogWidth"/>
+		<list key="textEntries">
+		</list>
+		<list key="orderedElements">
+		</list>
+		<list key="orderedProviders">
+		</list>
+		<list key="textArray">
+		</list>
+	</section>
+	<section name="NewWizardAction">
+	</section>
+	<section name="FileSystemExportWizard">
+		<item value="false" key="WizardFileSystemResourceExportPage1.STORE_OVERWRITE_EXISTING_FILES_ID"/>
+		<item value="false" key="WizardFileSystemResourceExportPage1.STORE_CREATE_STRUCTURE_ID"/>
+		<list key="WizardFileSystemResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="/Users/nithinmahesh/Desktop"/>
+		</list>
+	</section>
+	<section name="ImportExportAction">
+		<item value="org.eclipse.ui.wizards.export.ZipFile" key="ImportExportPage.STORE_SELECTED_EXPORT_WIZARD_ID"/>
+		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
+		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
+			<item value="org.eclipse.ui.Basic"/>
+		</list>
+		<list key="ImportExportPage.STORE_EXPANDED_EXPORT_CATEGORIES">
+			<item value="org.eclipse.ui.Basic"/>
+		</list>
+	</section>
+	<section name="ZipFileImportWizard">
+	</section>
+	<section name="FileSystemImportWizard">
+		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
+		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
+		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="/Users/nithinmahesh/Downloads/dog_teams"/>
+		</list>
+	</section>
+	<section name="ZipFileExportWizard">
+		<item value="true" key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID"/>
+		<item value="true" key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID"/>
+		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="/Users/nithinmahesh/Desktop/csShit.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/working-with-lists-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/hangman-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/war-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/crawler-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/heap-queues-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/search-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/information-retrieval-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/recursive-list-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/image-mosaic-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/similarity-detector-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/postfix-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/dna-sequence-assembly-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/sets-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/hamspam-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/hamspam.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/sorting-kata-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/bst-scapegoat-student.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/recursive-list-studentEdited.zip"/>
+			<item value="/Users/nithinmahesh/Desktop/queues-student.zip"/>
+		</list>
+	</section>
+</section>
