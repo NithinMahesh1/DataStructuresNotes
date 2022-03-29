@@ -858,10 +858,142 @@ BST provides moderate insertion/deletion (quicker than Arrays and slower than Li
 
 Examples: Its main use is in search applications where data is constantly entering/leaving and data needs to be printed in sorted order. For example in implementation in E-commerce websites where a new product is added or product goes out of stock and all products are listed in sorted order. 
 
-Binary Search Implementation:
+Binary Search Implementation for finding index of a value in a sorted array:
 
 ```
+// Main Class aka driver class
 
+public class Main {
+
+    public static void main(String[] args) {
+        // Find Target 41 using binary search algorithm
+
+        int[] sortedArr = new int[] {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47};
+
+        BinarySearch.binarySearch(41, sortedArr);
+    }
+}
+```
+
+```
+public class BinarySearch {
+
+    public static int binarySearch(int x, int[] sortedArr) {
+
+        int numOfArray = 0;
+        for(int n : sortedArr) {
+            numOfArray++;
+        }
+
+        int lower = 0, upper = numOfArray-1;
+
+        while(lower <= upper) {
+            int curr = (lower + upper)/2;
+
+            //Check if x is at mid
+            if(sortedArr[curr] == x) {
+                System.out.println("Located at index: " +curr);
+                System.out.println("This is the value: " +sortedArr[curr]);
+                return curr;
+            }
+
+            //If x is greater ignore left half
+            if(sortedArr[curr] < x) {
+                lower = curr+1;
+            }
+
+            //If x is lower ignored right half
+            if(sortedArr[curr] > x) {
+                upper = curr-1;
+            }
+        }
+
+        return -1;
+    }
+
+}
+```
+
+Implementation from CS 187 using a custom implementation of the IntegerComparator:
+
+Takes 4 steps always to get to the result:
+
+```
+// Main Java
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Find Target 41 using binary search algorithm
+
+        int[] sortedArr = new int[] {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47};
+
+        BinarySearch.binarySearch(41, sortedArr);
+    }
+}
+```
+
+```
+public class BinarySearch {
+
+    public static int binarySearch(int x, int[] sortedArr) {
+
+        int numOfArray = 0;
+        for(int n : sortedArr) {
+            numOfArray++;
+        }
+
+        int lower = 0, upper = numOfArray-1;
+        int count = 0;
+        while(lower <= upper) {
+            int curr = (lower + upper)/2;
+            IntegerComparator comparator = new IntegerComparator();
+            int result = comparator.compare(x,sortedArr[curr]);
+
+            if(result == 0) {
+                count++;
+                System.out.println("We found " +sortedArr[curr]+ " at index: " +curr);
+                System.out.println("This took us " +count+ " steps to get here");
+                return curr;
+            }
+
+            else if(result < 0) {
+                upper = curr - 1;
+            }
+
+            else {
+                lower = curr + 1;
+            }
+            count++;
+        }
+
+        return -1;
+    }
+
+}
+```
+
+```
+// Custom Comparator
+
+import java.util.Comparator;
+
+public class IntegerComparator implements Comparator<Integer>{
+
+    @Override
+    public int compare(Integer o1, Integer o2) {
+        if(o1 == o2) {
+            return 0;
+        }
+        else if(o1 > o2) {
+            return 1;
+        }
+        else {
+            return -1;
+        }
+    }
+
+}
 ```
 
 <br/>
