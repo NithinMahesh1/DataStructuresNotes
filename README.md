@@ -1041,6 +1041,39 @@ Inserting occurs as follows:
 
 ![DataStructuresNotes](images/InsertBSTExample.jpg)
 
+The Remove Operation:
+
+remove(elem): remove node containing elem
+* The most complicated in BST operations
+* We must ensure when we remove an element that we maintain the binary search tree property
+* No need to memorize the code, but given a BST and a node to remove, you need to be able to draw the resulting BST after removal
+
+Three cases for remove:
+* Remove a leaf (no children): removing a leaf is simply a matter of setting the appropriate link of its parent to null
+* Removing a node with only one child: make the reference from the parent skip over the removed node and point to the child of the node we intend to remove
+* Removing a node with two children: replaces the node's info with the info from another node in the tree so that the search property is retained - then remove this other node
+
+Example of a tricky situation of removing a node with two children:
+![DataStructuresNotes](images/BSTtwonoderemoval.jpg)
+
+CS 187 Implementation of contains method:
+![DataStructuresNotes](images/BSTContainsMethod.jpg)
+
+CS 187 Implementation of get method:
+![DataStructuresNotes](images/BSTGetMethod.jpg)
+
+CS 187 Implementation of size method:
+![DataStructuresNotes](images/BSTSizeMethod.jpg)
+
+Lets take a look at balancing a BST:
+* Another way to think about balance is to look at how the tree hieght h is related to the number of nodes N. Ideally we want to garauntee that h = 0(log N)
+* Because inesertion and deletion can cause the BST to become unbalanced, we need to perform extra steps to restore the balance (or preserve the height garauntee)
+* Such trees are called self-balancing trees (aka height-balanced trees)
+
+Examples of balanced trees:
+![DataStructuresNotes](images/BalancedTrees.jpg)
+
+
 <br/>
 
 ## Binary Heap:
