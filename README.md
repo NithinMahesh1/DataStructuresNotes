@@ -844,10 +844,9 @@ Binary Tree Properties
 Examples: One reason to use binary trees or trees, in general, is for the things that form a hierarchy. They are useful in File structures where each file is located in a particular directory and there is a specific hierarchy associated with files and directories. Another example where Trees are useful is storing hierarchical objects like JavaScript Document Object Model considers HTML page as a tree with nesting of tags as parent-child relations. 
 
 Binary Search Tree 
-In Binary Search Tree is a Binary Tree with the following additional properties: 
-1. The left subtree of a node contains only nodes with keys less than the node’s key. 
-2. The right subtree of a node contains only nodes with keys greater than the node’s key. 
-3. The left and right subtree each must also be a binary search tree. 
+In Binary Search Tree is a Binary Tree with the following additional properties where any NODE, its value is: 
+1. Greater than or equal to the value of any node in it's left subtree, and 
+2. Less than the value of any node in its right subtree
 
 Time Complexity
 
@@ -995,6 +994,52 @@ public class IntegerComparator implements Comparator<Integer>{
 
 }
 ```
+
+Back to Binary Trees. There are three ways to recursively traverse: pre-order, in-order, and post-order.
+
+![DataStructuresNotes](images/BT_Traversal.jpg)
+
+* Pre-order: visit the current node, left subtree, right subtree
+* In-order: visit the left subtree, current node, right subtree
+* Post-order: visit the left subtree, right subtree, current node
+
+To find the height of a full binary tree of height h it would be 2^h
+
+Math of a full binary tree and the height with N nodes:
+
+![DataStructuresNotes](images/Math_BT_Height.jpg)
+
+Binary Seach in a sorted array and BST are similar in the sense that we can find a value the same way:
+
+![DataStructuresNotes](images/SearchInBST.jpg)
+
+We can implement BSTNode class as follows:
+
+![DataStructuresNotes](images/BSTNodeClass.jpg)
+
+The Basic operations of BSTs are as follows:
+
+Must Maintain BST ordering property:
+* add(elem): insert a new node to BST
+* remove(elem): remove node containing elem
+Exploit BST ordering property:
+* contains(elem): return true if tree contains node containing elem
+* get(elem): find a tree node with info matching elem, return a reference to it; otherwise return null
+Elegant recursive solution:
+* size: return count of nodes in BST
+
+We can implement the BinarySearchTree class as follows:
+
+![DataStructuresNotes](images/BinarySearchTreeClass.jpg)
+
+Summary of insertion:
+* First, find the node to insert the new element to. This is much the same process as trying to find an element that turns out not to exist.
+* Once you've found the node, insert the new element as either its left child or right child depending on the comparison result
+* Note that the new element is always inserted into BST as a leaf node!
+
+Inserting occurs as follows:
+
+![DataStructuresNotes](images/InsertBSTExample.jpg)
 
 <br/>
 
