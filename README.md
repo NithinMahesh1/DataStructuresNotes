@@ -1073,6 +1073,41 @@ Lets take a look at balancing a BST:
 Examples of balanced trees:
 ![DataStructuresNotes](images/BalancedTrees.jpg)
 
+Examples of Self-Balancing Trees:
+* AVL Tree: Guarantees that at any node. the height difference between its left and right subtrees is no more than 1.
+* Red-Black tree: Colors each node with red/black (requires extra bit per node), and enforces color compatability rules during insertion/deletion to maintain height guarantee.
+* Scapegoat tree: When tree becomes unbalanced, find a 'scapegoat' and re-balances the sub-tree rooted at the scapegoat
+* 2-3 tree (not binary tree): Each interior node either stores 1 data element and has 2 node children, or stores 2 data elements and has 3 children
+
+DJW's approach to balancing:
+* The user manually calls a balance() method from time to time (at the users discretion) to rebuild the tree into a balanced version.
+* Does not qualify as self balancing since it is done manually
+
+![DataStructuresNotes](images/DJWBalanceTree.jpg)
+
+DJW how to implement:
+* We export all nodes into an array sorted in ascending order: do an in-order traversal and save the result to an array (or queue)
+* We build the balanced tree with a sorted array as follows: (similar to binary search) you start from the entire array, pick the middle element to make it a tree node, then recurse on the left and right sub-arrays
+
+![DataStructuresNotes](images/insertDJW.jpg)
+
+![DataStructuresNotes](images/improvisedVersionDJW.jpg)
+
+Balance Method Summary:
+* First performs an in-order traversal to store all nodes into array, then calls recursive insertTree (orsortedArray2BST) to build a balanced tree from the sorted array
+* Instead of balancing the whole tree, you can choose to balance a sub-tree (this is a step you will need for scapegoat tree)
+
+<!-- TODO we will come back to implementations of scapegoat shortly -->
+
+<br/>
+
+## Sorting:
+
+
+
+
+
+
 
 <br/>
 
