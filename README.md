@@ -1103,8 +1103,123 @@ Balance Method Summary:
 
 ## Sorting:
 
+Bubble Sort:
+
+Intuition
+* Round 1: find the largest number
+* Round 2: find the second largest number
+* Round 3: find the third largest number
+* ....
+
+* Bubble sort finds the largest number in each round by repeatedely comparing every two adjacent numbers, and swapping them if the one on the left is larger
+
+![DataStructuresNotes](images/BubbleSort.jpg)
+
+How does this work:
+* After one pass, we find the largest number in that round
+* Its like the biggest 'bubble' floats to the top of the surface, hence the name 'bubble sort'
+
+Lets look at an example of this: 45 1 9 30 21
+* In the second pass, we repeat the same process, but have only N-1 numbers to work on
+* In the third pass, we only have N-2 numbers to work on
+* ....
+* Repeat until we are left with just 1 number
+* How many comparisons in total do we have to perform?
+    * How many comparisons in the 1st, 2nd, 3rd round?
+
+```
+(N-1) + (N-2) + (N-3) + ... 1 = N(N-1)/2 = O(N^2)
+```
+Here is the CS 187 Implementation of this:
+![DataStructuresNotes](images/bubblesortimplementation.jpg)
+![DataStructuresNotes](images/swapmethod.jpg)
 
 
+Selection Sort:
+
+* Better than bubble sort that can lead to a large number of swaps (each3 assignments)
+* We can improve it by doing only one swap per outer loop, reducing the number of swaps to O(N)
+
+* Idea
+    * Keep track of the index of the smallest element in each round
+    * Swap the smallest element towards the beginning of the array after each round
+    * Repeat the above two steps
+
+Lets take a look at an example: 70 67 3 18 30
+* This is slight different from bubble sort as you build up the sorted array from the left (smallest elements)
+* Number of swaps?
+    * O(N) in all cases
+* Number of comparisons?
+    * Same as before: N(N-1)/2 = O(N^2)
+So while selection sort reduces the number of swaps, it does not reduce the number of comparisons
+
+CS 187 Implementation:
+![DataStructuresNotes](images/SelectionSort.jpg)
+
+
+Insertion Sort:
+
+What it looks like:
+![DataStructuresNotes](images/InsertionSortExample.jpg)
+
+* Idea
+    * Build up the sorted array from the left (similar to selection sort)
+    * Assume the left portion of the array is partially sorted, take the first element in the right portion, insert it to the left portion at the correct position (just like inserting an element to a sorted array)
+    * Repeat until done
+
+CS 187 Implementation:
+![DataStructuresNotes](images/InsertionSortImplementation.jpg)
+
+Lets take a look at an example of this: 16 8 47 52 9
+* Note that our Insertion Sort code does not use swap (unlike Bubble Sort and Selection Sort). Insetad, it uses a copy at the end of the outer loop. 
+    * Swap involves 3 copies, so triples the cost
+* Number of copies:
+    * Best case(while condition never true): N
+    * Worst case: N(N-1)/2
+
+
+Merge Sort:
+
+* Idea
+    * Divide and conquer 
+    * Can be implemented recursively or iteratively 
+    * Cost is O(N log N), much faster than simple sorting 
+    * Requies additional memory space
+        * A temporary array as larfe as the input array
+
+Merging two sorted arrays:
+* This is a key step to merge sort
+* Assume arrays A and B are already sorted 
+* Merge them into array C such that C contains all elements from A and B, and remains sorted
+* Note that two arrays may have different sizes. In fact, one of them may be empty! Must correctly handle all cases
+* Example:
+    A: 23 47 81 95
+    B: 7 14 39 55 62 74
+
+Summary of Merge Sort two sorted arrays:
+1. Start from the first elements of A and B
+2. Compare and copy the smaller of the smaller of the two to C 
+3. Increment index of C as well as the array where you picked the smaller element from
+4. Repeat
+5. If reaching the ened of either A or B, quit loop and append the remaining elements to C
+
+CS 187 Implementation:
+![DataStructuresNotes](images/MergeSortImplementation.jpg)
+
+Merge Sort Method:
+With the merge() method, merge sort is quite simple:
+* Divide the array into halves
+* Sort each half(Conquer). How? Recursion!
+* Call merge() to merge two halves
+* Whats the best case of the recurison? 
+When there is only 1 element left to sort, its trivially sorted, so return immediately
+
+Example of merge sort in action:
+![DataStructuresNotes](images/MergeSortExample.jpg)
+![DataStructuresNotes](images/MergeSortExample2.jpg)
+
+CS 187 Implementation 2:
+![DataStructuresNotes](images/MergeSortImplementation2.jpg)
 
 
 
