@@ -1240,6 +1240,73 @@ How to implement:
         * This is conceptually similar to selection sort, but each round costs only O(Log N) due to the heap operations
 
 
+We perform Heap Sort as follows:
+* Once we construct a heap (using heapify), the next step is to repeatedely remove the root element and move it towards the end of the array.
+* This is done in placem and think of the array as partitioned into a heap region and a sorted region. 
+    * As we keep moving elements, the heap region shrinks, while the sorted region grows.
+    * Removing elements from the heap is done like this:
+        1. Remove the element at index o (root)
+        2. Move the last element in the heap to index 0
+        3. Call bubbledown(0)
+
+We need to implement the following elements for heapsort to work: 
+* BuildMaxHeap
+* Heapify
+
+CS 187 Example:
+![DataStructuresNotes](images/187HeapSortExample.jpg)
+
+* Once we move the last element to index 0, it leaves and empty spot, and thats exactly where the removed root should go. So we simply do a swap:
+![DataStructuresNotes](images/187MainMethodCallsHeapSort.jpg)
+
+Summary:
+* Sorts an array 'in place' without additinoal storage.
+* Involves a hepify step (transforms an unsorted array into a heap) and sorting step (very much like selection sort)
+* Both steps are O(N Log N)
+Total cost of Heap Sort is O(N Log N) also called log-linear cost
+
+
+Quick Sort:
+
+* Like Merge sort, quick sort uses divide and conquer
+* It sorts in place, hence does nto require additional buffer.
+1. A key step in Quick sort is Patition (aka Split)
+    * Given an input array, find a pivot element, then partition the array into two groups, all elements smaller than the pivot are placed on its left, and all elements larger than the pivot are placed on the right.
+    * This implies that the pivot element is in its final position
+2. Recusrion on the left and right group
+
+Example: 8 5 3 7 1 9 6
+* We can use Partition - Idea: keep track of where the next element smaller than pivot should be stored call it a [storedIndex]
+* how do we pick the pivot:
+    * It can be any element in the array, first, last, or middle
+    * Without loss of generality, we pick the last element as the pivot
+
+![DataStructuresNotes](images/187ParitionQuickSort.jpg)
+
+For our input example [8 5 3 7 1 9 6]
+* Pivot: 6 (last element)
+* storeIndex is 0 (points to 8) to being with
+* Walk through this example on the board
+* The return value (storeIndex) marks where the pivote element is stored at
+
+With Partition method we can implement quick sort as follows:
+![DataStructuresNotes](images/187QuickSort.jpg)
+
+
+Summary of Merge, Heap, and Quick sorts
+
+Merge:
+* A Key step is to merge two sorted arrays
+* Requires an additional storage buffer
+Heap Sort 
+* Leverages heaps efficient insert/remove methods
+* The same input array is split into a heap region and sorted region
+* Sorts in place
+Quick Sort
+* A key step is to partition around a pivot element
+* Sorts in place 
+
+
 <br/>
 
 ## Binary Heap:
