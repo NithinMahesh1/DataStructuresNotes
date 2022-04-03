@@ -1221,7 +1221,23 @@ Example of merge sort in action:
 CS 187 Implementation 2:
 ![DataStructuresNotes](images/MergeSortImplementation2.jpg)
 
+Heap Sort:
 
+* While merge sort is easy to implement and fast, it requires additional storage (the temp buffer)
+* Now lets look at Heap Sort and Quick Sort:
+    * First, think about a trivial implementation of Heap Sort:
+    ```
+    for(i=0; i<nElems; i++) heap.add(array[i]);
+    for(i=nElems-1; i>=0; i--) array[i] = heap.remove();
+    ```
+    * Assuming heap is a maxHeap, this sorts elements in order. Whats the cost? O(N log N)
+    * Is there additional storage involved here? Yes, the heap!
+
+How to implement: 
+* To eliminate the additional storage, recall that a heap is typically store in an array. Since we already have an input array, the same array can be used as a heap.
+    1. Convert the input array to a heap in place (heapify)
+    2. Repeatedly remove the root element from the heap and move it towards the end of the array. 
+        * This is conceptually similar to selection sort, but each round costs only O(Log N) due to the heap operations
 
 
 <br/>
@@ -1237,6 +1253,138 @@ A Binary Heap is a Binary Tree with the following properties.
 Example: Used in implementing efficient priority queues, which in turn are used for scheduling processes in operating systems. Priority Queues are also used in Dijkstra’s and Prim’s graph algorithms. 
 The Heap data structure can be used to efficiently find the k smallest (or largest) elements in an array, merging k sorted arrays, a median of a stream, etc. 
 Heap is a special data structure and it cannot be used for searching a particular element. 
+
+How we map a min Heap:
+![DataStructuresNotes](images/minHeapMapping.jpg)
+
+This is a simple Java implementation:
+
+```
+// Main Class
+
+import java.util.Arrays;
+
+public class Main {
+
+    public static void main(String[] args) {
+        MinIntHeap heap = new MinIntHeap();
+        int test = (0-1)/2;
+
+        System.out.print("This is what (1-2)/2 is: " +test);
+
+        heap.add(4);
+        heap.add(8);
+        heap.add(3);
+        heap.add(10);
+        heap.add(9);
+        heap.add(7);
+        heap.add(15);
+        heap.add(9);
+        heap.add(20);
+        heap.add(13);
+
+        heap.poll();
+
+
+     }
+}
+```
+
+```
+//Min Heap Implementation
+
+import java.util.Arrays;
+
+public class MinIntHeap {
+    private int capacity = 10;
+    private int size = 0;
+
+    int[] items = new int[capacity];
+
+    private int getLeftChildIndex(int parentIndex) {return 2*parentIndex+1;}
+    private int getRightChildIndex(int parentIndex) {return 2*parentIndex+2;}
+    private int getParentIndex(int childIndex) {return (childIndex-1)/2;}
+
+    private boolean hasLeftChild(int index) {return getLeftChildIndex(index) < size;}
+    private boolean hasRightChild(int index) {return getRightChildIndex(index) < size;}
+    private boolean hasParent(int index) {return getParentIndex(index) >= 0;}
+
+    private int leftChild(int index) {return items[getLeftChildIndex(index)];}
+    private int rightChild(int index) {return items[getRightChildIndex(index)];}
+    private int parent(int index) {return items[getParentIndex(index)];}
+
+    // use a temp to swap each item at their indexes
+    private void swap(int indexOne, int indexTwo) {
+        int temp = items[indexOne];
+        items[indexOne] = items[indexTwo];
+        items[indexTwo] = temp;
+    }
+
+    // Simply copying to a new array with twice the capacity
+    // Increasing capacity to match the new size of twice the previous array
+    private void ensureExtraCapacity() {
+        if(size == capacity) {
+            items = Arrays.copyOf(items, capacity*2);
+            capacity *= 2;
+        }
+    }
+
+    public int peek() {
+        if(size == 0) throw new IllegalStateException();
+        return items[0];
+    }
+
+    // Extract the minimum element (removes it from the array)
+    // Take the last element of the array and move it to the first element
+    public int poll() {
+        if(size == 0) throw new IllegalStateException();
+        int item = items[0];
+        items[0] = items[size-1];
+        items[size-1] = 0;
+        size--;
+        heapifyDown();
+        return item;
+    }
+
+    public void add(int item) {
+        ensureExtraCapacity();
+        items[size] = item;
+        size++;
+        heapifyUp();
+    }
+
+    public void heapifyUp() {
+        int index = size-1;
+        while(hasParent(index) && parent(index) > items[index]) {
+            swap(getParentIndex(index), index);
+            index = getParentIndex(index);
+        }
+    }
+
+    public void heapifyDown() {
+        int index = 0;
+        // Only check if there is a left child
+        // This is because if there is no left child there is definitely no right child
+        while(hasLeftChild(index)) {
+            int smallerChildIndex = getLeftChildIndex(index);
+            if(hasRightChild(index) && rightChild(index) < leftChild(index)) {
+                smallerChildIndex = getRightChildIndex(index);
+            }
+
+            if(items[index] < items[smallerChildIndex]) {
+                break;
+            }
+            else {
+                swap(index, smallerChildIndex);
+            }
+            index = smallerChildIndex;
+        }
+    }
+    
+}
+```
+
+
 
 <br/>
 
