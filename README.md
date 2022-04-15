@@ -1097,6 +1097,21 @@ Balance Method Summary:
 * First performs an in-order traversal to store all nodes into array, then calls recursive insertTree (orsortedArray2BST) to build a balanced tree from the sorted array
 * Instead of balancing the whole tree, you can choose to balance a sub-tree (this is a step you will need for scapegoat tree)
 
+BST Java Implementation:
+
+The orders of traversal are as follows:
+
+In-Order:
+![DataStructuresNotes](images/traversingInOrder.jpg)
+
+Pre-Order:
+![DataStructuresNotes](images/TraversalPreOrder.jpg)
+
+Post-Order:
+![DataStructuresNotes](images/traversingPostOrder.jpg)
+
+
+
 <!-- TODO we will come back to implementations of scapegoat shortly -->
 
 <br/>
