@@ -7,6 +7,56 @@ Comprehensive Notes on all things related to Data Structures
 
 <br/>
 
+## Basics of OOP:
+
+The main ideas behind Java Object-Oriented Programming include abstraction, encapsulation, and polymorphism. 
+
+* Abstraction: Using simple things to represent complexity. We all know how to turn on a TV, but we don't need to know how it works in order to enjoy it. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets you avoid repeating the same work multiple times.
+* Encapsulation: The practice of keeping fields within a class private, then providing access to those fields via public methods. Encapsulation is a protective barrier that keeps data and code safe within the class itself. We can the reuse objects like code components or variables without allowing open access to the data system-wide.
+* Inheritance: A special feature of OOP in Java, inheritance lets programmers create new classes that share some of the attributes of existing classes. Using inheritance lets us build on previous work without reinventing the wheel.
+* Polymorphism: Allows programmers to use the same word in Java to mean different things in different contexts. One form of polymorphism is method overloading. Thats when code itself implies different meanings. The other form is method overriding. Thats when values of the supplied variables imply different meanings.
+    - Polymorphism in Java works by using a reference to a parent class to affect an object in the child class. We might create a class called “horse” by extending the “animal” class. That class might also implement the “professional racing” class. The “horse” class is “polymorphic,” since it inherits attributes of both the “animal” and “professional racing” class.
+    - Method overriding: the child class can use the OOP polymorphism concept to override the method of its parents class. That allows the programmer to use one method in different ways depending on whether its invoked by an object or the parent class or an object of the child class.
+    - Method Overloading: a single method may perform different functions depending on the context in which it is called. This means that a single method name might work in different ways depending on what arguments are passed to it.
+
+Example of method overloading:
+```
+class Adder{  
+static int add(int a,int b){return a+b;}  
+static int add(int a,int b,int c){return a+b+c;}  
+}  
+class TestOverloading1{  
+public static void main(String[] args){  
+System.out.println(Adder.add(11,11));  
+System.out.println(Adder.add(11,11,11));  
+}}  
+```
+
+Example of method overriding:
+```
+class Human{
+   //Overridden method
+   public void eat()
+   {
+      System.out.println("Human is eating");
+   }
+}
+class Boy extends Human{
+   //Overriding method
+   public void eat(){
+      System.out.println("Boy is eating");
+   }
+   public static void main( String args[]) {
+      Boy obj = new Boy();
+      //This will call the child class version of eat()
+      obj.eat();
+   }
+}
+```
+
+
+<br/>
+
 ## Arrays:
 
 The size of an array must be provided before storing data.
