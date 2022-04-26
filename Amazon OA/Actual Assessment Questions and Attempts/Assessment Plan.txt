@@ -1,0 +1,6 @@
+90 min 
+
+45:
+10 min - understand problem (including the math to get to solution)
+5 min - to figure out how to implement with data structures and TODOs
+30 min - code/debug
