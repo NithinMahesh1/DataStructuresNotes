@@ -1,0 +1,13 @@
+        // Loop through and get the last node
+        // head always 
+
+        
+        
+        // Use a stack to get last element then pop that element
+        // get first element through stack.firstElement()
+        // loop through ana pop each element in stack disregarding the last pop element
+        Stack<Integer> list = new Stack<Integer>();
+        
+        while(curr != null) {
+            System.out.println(curr);
+        }
