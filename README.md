@@ -154,6 +154,17 @@ What is the output file from a garbage collector?
 - In Java this would be .java files 
 - In C# this would be clr files (common language runtime)
 
+Some notes on Big O notation:
+
+Space Complexity:
+
+O(1):
+- The space required by an algorithm does not grow with the inpt or size of the data on which we are using the algorithm. 
+- If you have a traversal algorithm for traversing the list which allocate a single pointer to do so, the traversal algorithms is considered to be of O(1) space complexity.
+- Additionally, let's say that traversal algorithm needs not 1 but 1000 pointers, the space complexity is still considered to be O(1).
+- However, if let's say for some reason the algorithm needs to allocate 'N' pointers when traversing a list of size N, i.e., it needs to allocate 3 pointers for traversing a list of 3 elements, 10 pointers for a list of 10 elements, 1000 pointers for a list of 1000 elements and so on, then the algorithm is considered to have a space complexity of O(N). This is true even when 'N' is very small, eg., N=1.
+Citation: https://stackoverflow.com/questions/43260889/what-is-o1-space-complexity#:~:text=o(1)%20space%20complexity%20means,%E2%80%93%20Rodrigo%20Gonzalez
+
 
 <br/>
 
