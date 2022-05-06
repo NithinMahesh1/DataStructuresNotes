@@ -1,0 +1,65 @@
+ListNode result = new ListNode(0);
+        ListNode dummyHead = new ListNode(0);
+        ListNode curr1 = l1;
+        ListNode curr2 = l2;
+        
+        String concat1 = "";
+        String concat2 = "";
+        
+        while(curr1!=null) {
+            concat1 = concat1 + String.valueOf(curr1.val);
+            // if(curr1.next == null) {
+            //     result = curr1;
+            //     return result;
+            // }
+            curr1 = curr1.next;
+        }
+
+        while(curr2!=null) {
+            concat2 = concat2 + String.valueOf(curr2.val);
+            // if(curr2.next == null) {
+            //     result = curr2;
+            //     return result;
+            // }
+            curr2 = curr2.next;
+        }
+
+        String reverse1 = new StringBuilder(concat1).reverse().toString();
+        String reverse2 =  new StringBuilder(concat2).reverse().toString();
+
+        int add1 = Integer.parseInt(reverse1);
+        int add2 = Integer.parseInt(reverse2);
+
+        String traverse = new StringBuilder(String.valueOf(add1+add2)).reverse().toString();
+
+        for(int i=0; i<traverse.length(); i++) {
+            char eachNum = traverse.charAt(i);
+            int res = Character.getNumericValue(eachNum);
+            result.next = new ListNode();
+            // result.insert(result,res);
+        }
+        
+        return result;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            if(i==0) {
+                result.val = res;
+            }
+            else {
+                ListNode add = new ListNode(res);
+                    // result.val = res;
+                result.next = add;
+            }

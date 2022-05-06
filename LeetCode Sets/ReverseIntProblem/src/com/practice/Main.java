@@ -1,42 +1,37 @@
 package com.practice;
 
+import java.util.Stack;
+
 public class Main {
 
-    public static int reverse(int inputInt) {
-        int modInt = inputInt;
-//        String resultString = "";
-        int reverseInt = 0;
+    public static int reverse(int x) {
+        String s = String.valueOf(x);
+        Stack<String> stack = new Stack<>();
 
-        String stringAnswer = String.valueOf(inputInt);
-        if(stringAnswer.length() == 1) {
-            System.out.print(inputInt);
-            return inputInt;
+        for(int i=0; i<s.length(); i++) {
+            String add = String.valueOf(s.charAt(i));
+            stack.push(add);
         }
 
-        stringAnswer = new StringBuilder(String.valueOf(inputInt)).reverse().toString();
-        System.out.print(stringAnswer);
+        String stringResult = "";
+        while(!(stack.isEmpty())) {
+            if(stack.peek().contains("-")) {
+                stringResult = "-" + stringResult;
+                break;
+            }
+            else {
+                String reverseString = stack.pop();
+                stringResult = stringResult + reverseString;
+            }
+        }
 
+        int result = Integer.parseInt(stringResult);
 
-//        // 321 -> 1
-//        // 32 -> 2
-//        // 3 -> 0;
-//        while(modInt != 0) {
-//            String s = String.valueOf(inputInt);
-//            s = s.trim();
-//            modInt = modInt%10;
-//            if(modInt == 0) {
-//                reverseInt = Integer.parseInt(resultString);
-//                return reverseInt;
-//            }
-//            resultString = resultString + String.valueOf(modInt);
-//        }
-
-        reverseInt = Integer.parseInt(stringAnswer);
-        return reverseInt;
+        return result;
     }
 
     public static void main(String[] args) {
-        int inputInt = 9;
+        int inputInt = -321;
 
 	    reverse(inputInt);
     }

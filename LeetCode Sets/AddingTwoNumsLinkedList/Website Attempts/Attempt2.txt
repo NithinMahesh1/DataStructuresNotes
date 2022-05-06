@@ -1,0 +1,64 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode result = new ListNode(10);
+        ListNode curr1 = l1;
+        ListNode curr2 = l2;
+        
+        String concat1 = "";
+        String concat2 = "";
+
+
+        while(curr1!=null) {
+            concat1 = concat1 + String.valueOf(curr1.val);
+            curr1 = curr1.next;
+        }
+
+        
+        while(curr2!=null) {
+            concat2 = concat2 + String.valueOf(curr2.val);
+            curr2 = curr2.next;
+        }
+        
+        String reverse1 = new StringBuilder(concat1).reverse().toString();
+        String reverse2 =  new StringBuilder(concat2).reverse().toString();
+
+        int add1 = Integer.parseInt(reverse1);
+        int add2 = Integer.parseInt(reverse2);
+        
+        String traverse = new StringBuilder(String.valueOf(add1+add2)).reverse().toString();
+        // String traverse = "708";
+
+        ListNode add = new ListNode(0);
+        for(int i=0; i<traverse.length()-1; i++) {
+            char eachNum = traverse.charAt(i);
+            int res = Character.getNumericValue(eachNum);
+            add = new ListNode(0);
+            add.val = res;
+            if(result.val == 10) {
+                result.val = res;
+            }
+            // else if(result.next == null) {
+            //     result.next = add;
+            // }
+            else {
+                result.next = add;
+            }           
+
+        }
+        
+        // result.val = traverse.length();
+    
+        
+        return result;
+    }
+}

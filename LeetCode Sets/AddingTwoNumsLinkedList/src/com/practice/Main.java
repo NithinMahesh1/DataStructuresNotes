@@ -22,27 +22,27 @@ public class Main {
         LinkedList list2 = new LinkedList();
 
 //        Data Set 1:
-//        list1.insert(list1,2);
-//        list1.insert(list1,4);
-//        list1.insert(list1,3);
-//
-//        list2.insert(list2,5);
-//        list2.insert(list2,6);
-//        list2.insert(list2,4);
+        list1.insert(list1,2);
+        list1.insert(list1,4);
+        list1.insert(list1,3);
+
+        list2.insert(list2,5);
+        list2.insert(list2,6);
+        list2.insert(list2,4);
 
 //      Data Set 2:
-        list1.insert(list1,9);
-        list1.insert(list1,9);
-        list1.insert(list1,9);
-        list1.insert(list1,9);
-        list1.insert(list1,9);
-        list1.insert(list1,9);
-        list1.insert(list1,9);
-
-        list2.insert(list2,9);
-        list2.insert(list2,9);
-        list2.insert(list2,9);
-        list2.insert(list2,9);
+//        list1.insert(list1,9);
+//        list1.insert(list1,9);
+//        list1.insert(list1,9);
+//        list1.insert(list1,9);
+//        list1.insert(list1,9);
+//        list1.insert(list1,9);
+//        list1.insert(list1,9);
+//
+//        list2.insert(list2,9);
+//        list2.insert(list2,9);
+//        list2.insert(list2,9);
+//        list2.insert(list2,9);
 
         addTwoNumbers(list1, list2);
     }
