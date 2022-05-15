@@ -165,6 +165,20 @@ O(1):
 - However, if let's say for some reason the algorithm needs to allocate 'N' pointers when traversing a list of size N, i.e., it needs to allocate 3 pointers for traversing a list of 3 elements, 10 pointers for a list of 10 elements, 1000 pointers for a list of 1000 elements and so on, then the algorithm is considered to have a space complexity of O(N). This is true even when 'N' is very small, eg., N=1.
 Citation: https://stackoverflow.com/questions/43260889/what-is-o1-space-complexity#:~:text=o(1)%20space%20complexity%20means,%E2%80%93%20Rodrigo%20Gonzalez
 
+<br/>
+
+## Occurences in Java I did not know about:
+
+When getting the char at an index in String you can convert it to an int using the following :
+* int digit = string.charAt(index) - '0';
+* You need to add the "- '0'"
+
+We can also get Character.isDigit() :
+* Does the obvious of checking whether there is a digit at that index
+
+Integer.MAX_VALUE :
+* This will check if the integer is within 32 bit range integer range in memory
+
 
 <br/>
 
