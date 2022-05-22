@@ -27,6 +27,7 @@ public class Main {
     public static List<String> letterCombinations(String digits) {
         List<String> result = new ArrayList<>();
         Map<String, char[]> map = new HashMap<>();
+        String concat = "";
 
         map.put("2",new char[]{'a','b','c'});
         map.put("3", new char[]{'d','e','f'});
@@ -46,25 +47,35 @@ public class Main {
         }
 
         else {
-            // Pass the first digit then
-            // Call recursive function checking the next index
-            letterHelper(digits, result, map);
+            // Use helper method
+            // loop through first index
+            // concat first char with each char in the helper method and add to result
+            for(int i=0; i<digits.length(); i++) {
+                char[] elems = map.get(String.valueOf(digits.charAt(i)));
+                if(i+1 == digits.length()) {
+                    break;
+                }
+                char[] nextElems = map.get(String.valueOf(digits.charAt(i+1)));
+                for(int j=0; j<elems.length; j++) {
+                    letterHelper(elems[j], nextElems, result);
+                }
+            }
+        }
+
+        System.out.print(result);
+        return result;
+    }
+
+    public static List<String> letterHelper(char current, char[] elems, List<String> result) {
+        String concat = "";
+
+        for(int i=0; i<elems.length; i++) {
+            concat = concat + current + elems[i];
+            result.add(concat);
+            concat = "";
         }
 
         return result;
     }
 
-    public static void letterHelper(String nums, List<String> answer, Map<String, char[]> map) {
-        String concat = "";
-
-        // All the values at the map index
-        for(int i=0; i<nums.length(); i++) {
-            char[] mapChars = map.get(nums.charAt(i));
-            // All the chars in that index
-            for(int j=0; j<mapChars.length; j++) {
-                concat = concat + mapChars[j] + letterCombinations(String.valueOf(nums.charAt(i+1)), answer, map);
-                answer.add();
-            }
-        }
-    }
 }
