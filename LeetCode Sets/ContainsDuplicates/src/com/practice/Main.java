@@ -29,17 +29,28 @@ public class Main {
         int[] nums = new int[]{1,2,3,1};
         int[] nums2 = new int[]{1,2,3,4};
         int[] nums3 = new int[]{1,1,1,3,3,4,3,2,4,2};
+        int[] nums4 = new int[]{0,1,2,2,8,7,3};
 
-        containsDuplicate(nums2);
+        containsDuplicate(nums4);
     }
 
     public static boolean containsDuplicate(int[] nums) {
         int[] arr = nums;
         Arrays.sort(arr);
+        int moreThanOnce = 0;
+        int prev = -1;
 
-        if(arr[0] == arr[1]) {
-           System.out.print("There is a duplicate");
-           return true;
+        for(int i=0; i<arr.length; i++) {
+            if(i == 0) {
+                prev++;
+                continue;
+            }
+            else if(arr[i] == arr[prev]) {
+                System.out.print("There is more than one value duplicated");
+                moreThanOnce++;
+                return true;
+            }
+            prev++;
         }
 
         System.out.print("There is not a duplicate");
