@@ -13,7 +13,7 @@ public class Main {
         Return the quotient after dividing dividend by divisor.
 
          Note: Assume we are dealing with an environment that could only store integers within the 32-bit signed integer range:
-         [−231, 231 − 1]. For this problem, if the quotient is strictly greater than 231 - 1, then return 231 - 1, and if the quotient is strictly less than -231, then return -231.
+         [−2^31, 2^31 − 1]. For this problem, if the quotient is strictly greater than 2^31 - 1, then return 2^31 - 1, and if the quotient is strictly less than -2^31, then return -2^31.
 
          Example 1:
          Input: dividend = 10, divisor = 3
@@ -27,30 +27,53 @@ public class Main {
     */
 
     public static void main(String[] args) {
-        int dividend = 10;
-        int divisor = 3;
+        int dividend = 7;
+        int divisor = -3;
 
         divide(dividend, divisor);
     }
 
+    
+    // Note that we can also use Math.abs() to convert a negative int to a postive one
+    // Another thing to note we should also be taking into account the Integer.MIN_VALUE. As such:
+    //          if (dividend == Integer.MIN_VALUE && divisor == -1)
+    //              return Integer.MAX_VALUE;
     public static int divide(int dividend, int divisor) {
-        // Use an Arraylist of values from -2^31 (figure out how to get the exponent in code) to 2^31 -1
-            // Going to need a loop to create those values and add to the list
-        // Multiply each value by the divisor to find what result is closest to the dividend
-        // Instead of using multiplication add the divisor how many times we are multiplying by
+        // Essentially how many times we multiply the divisor to get the closest possible value
+        boolean resIsNegative = false;
 
-        ArrayList<Integer> divideBy = new ArrayList<>();
-        double start = Math.pow(2,-31);
-        double end = Math.pow(2,31)-1;
-
-
-        for(double i=start; i<end; i++) {
-//            System.out.println((int) i);
-            divideBy.add((int) i);
+        if(dividend < 0 || divisor < 0) {
+            resIsNegative = true;
+        }
+        if(divisor < 0) {
+            String posDivisor = String.valueOf(divisor);
+            posDivisor = posDivisor.substring(1);
+            divisor = Integer.parseInt(posDivisor);
+        }
+        if(dividend < 0) {
+            String posDividend = String.valueOf(dividend);
+            posDividend = posDividend.substring(1);
+            dividend = Integer.parseInt(posDividend);
         }
 
 
+        int sum = divisor;
+        int count = 0;
 
-        return -1;
+        while(sum <= dividend) {
+            count++;
+            if(sum + divisor > dividend) {
+                break;
+            }
+            sum = sum + divisor;
+        }
+
+        if(resIsNegative) {
+            System.out.println("The quotient is: " +"-"+ +count);
+            return 0-count;
+        }
+
+        System.out.println("The quotient is: " +count);
+        return count;
     }
 }
