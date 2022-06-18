@@ -182,6 +182,53 @@ Integer.MAX_VALUE :
 
 <br/>
 
+## System Architecture and Design:
+
+One common approach for designing a larger enterprise web application is using an MVC, DDD (domain driven design) and a database-independent data layer:
+* Presentation Layer: Model - View - Controller (calls from the UI to the business logic layer should be placed inside the presentation controller)
+* Business Layer: Application Logic
+* Data Layer: Data Repositories - Data Access Layer
+
+Note that we should place the business logic in the controller. Since the contoller handles the calls to a specific resource, queries the data by making calls to the business logic layer and links the data (model) back to the appropriate view.
+
+For more information about business logic layer and proper architecture practices look at: https://stackoverflow.com/questions/4415904/business-logic-in-mvc/17065503#17065503
+More importantly this is taken from there:
+
+```
+MVC is an architectural style for the presentation layer of an application. For non trivial applications, business logic/business rules/data access should not be placed directly into Models, Views, or Controllers. To do so would be placing business logic in your presentation layer and thus reducing reuse and maintainability of your code.
+
+The model is a very reasonable choice choice to place business logic, but a better/more maintainable approach is to separate your presentation layer from your business logic layer and create a business logic layer and simply call the business logic layer from your models when needed. The business logic layer will in turn call into the data access layer.
+```
+
+GeeksforGeeks Notes on DDD: https://www.geeksforgeeks.org/domain-driven-design-ddd/
+
+More information about DDD:
+* DDD is domain driven design: an approach to developing software for complex needs by deeply connecting the implementation to an evolving model of the core business concepts.
+
+Its premise is:
+* Place the project’s primary focus on the core domain and domain logic
+* Base complex designs on a model
+* Initiate a creative collaboration between technical and domain experts to iteratively cut ever closer to the conceptual heart of the problem.
+* It is an approach for architecting software design by looking at software in top-down approach. Before discussing topic in detail let’s try to focus some light and understand what is mean by domain in this context.
+
+What is Domain?
+The word Domain used in context of software development refers to business. In the process of application development, term domain logic or business logic is commonly used. Basically, business logic is area of knowledge around which application logic revolves. The business logic of an application is a set of rules and guidelines that explain how business object should interact with each other to process modeled data.
+
+Here is an example of a data model using a business layer:
+![DataStructuresNotes](images/BusinessLayerModelExample.png)
+
+Also another food for thought this is another approach from the stackoverflow thread. 
+
+```
+It does not make sense to put your business layer in the Model for an MVC project.
+
+Say that your boss decides to change the presentation layer to something else, you would be screwed! The business layer should be a separate assembly. A Model contains the data that comes from the business layer that passes to the view to display. Then on post for example, the model binds to a Person class that resides in the business layer and calls PersonBusiness.SavePerson(p); where p is the Person class. Here's what I do (BusinessError class is missing but would go in the BusinessLayer too):
+```
+
+
+
+<br/>
+
 ## Arrays:
 
 The size of an array must be provided before storing data.
