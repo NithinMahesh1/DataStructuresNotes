@@ -225,6 +225,16 @@ It does not make sense to put your business layer in the Model for an MVC projec
 Say that your boss decides to change the presentation layer to something else, you would be screwed! The business layer should be a separate assembly. A Model contains the data that comes from the business layer that passes to the view to display. Then on post for example, the model binds to a Person class that resides in the business layer and calls PersonBusiness.SavePerson(p); where p is the Person class. Here's what I do (BusinessError class is missing but would go in the BusinessLayer too):
 ```
 
+Now lets take a look at some steps to architecting proper systems from the Coursera Course "System Design and Architecture":
+1. Creating requirements based on the system includes the following to ensure there are proper tradeoffs:
+    * Performance and maintainability – High performance code may be less clear and less modular, making it harder to maintain. Alternately, extra code for backward compatibility may affect both performance and maintainability. 
+    * Performance and security – Extra overhead for high security may lessen performance. 
+2. Creating CRC cards (Class, Responsibility, Collaborator cards) are used to organize and refine components of the system and are comprised of structurally the: class name, responsibilities, and collaborators (which are the other classes that the class at the top of the card interacts with):
+![DataStructuresNotes](images/CRC_Card_Structure.jpg)
+
+When it comes to adding the details for converting to classes for coding and implementation we use a UML Class Diagram:
+
+
 
 
 <br/>
