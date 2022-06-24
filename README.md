@@ -61,6 +61,10 @@ What is static?
 - Belongs to the class then the instance of the class
 - Used as constant variable (as the name suggests) or a method that is the same for every instance of a class
 
+What is abstract?
+- Indicates that the class cannot be instantiated
+- Object cannot be created
+
 When a member is declared static, it can be accessed before any objects of its class are created, and without reference to any object. For example, in the below java program, we are accessing static method m1() without creating any object of the Test class. 
 ```
 // Java program to demonstrate that a static member
@@ -234,6 +238,7 @@ Now lets take a look at some steps to architecting proper systems from the Cours
 
 When it comes to adding the details for converting to classes for coding and implementation we use a UML Class Diagram:
 ![DataStructuresNotes](images/CRC_Example.jpg)
+
 This is a CRC Diagram, now lets look at the same concept as a class diagram.
 
 ![DataStructuresNotes](images/ClassDiagram_Example.jpg)
@@ -252,6 +257,7 @@ public class Food {
     public String manufacturer;
     public Date expiryDate;
     public double price;
+
     public boolean isOnSale( Date date ) {
     }
 }
@@ -275,6 +281,152 @@ Now lets take a look at Decomposition in software design. The three types of rel
 * Association
 * Aggregation
 * Composition
+
+Association
+Indicates a loose relationship between two objects which many not ineteract with each other for some time. They are not dependent on each other, the other can continue to exist, and there can be any number of each item in the relationship. One object does not belong to the other, and they may have numbers that are not tied to each other. 
+
+An example of this may be a person and a hotel. A person might interact with a hotel but not own one. However, a hotel may interact with many people. 
+![DataStructuresNotes](images/association.jpg)
+
+The straight line between the two UML objects denote there is a relationship between the two UML objects of person and hotel, and that relationship is an association. The “zero dot dot star” (0…*) on the right side of the line shows that a Person object is associated with zero or more Hotel objects, while the “zero dot dot star” on the left side of the line shows that a Hotel object is associated with zero or more Person objects. 
+
+Association can be respresented in Java as well:
+```
+public class Student {
+    public void play( Sport sport ){
+
+    execute.play( sport );
+    }
+    …
+}
+```
+
+In this example student is passed a sport object to play, but the student does not possess the sport. It only interacts with it to play. The two objects are completely seperate, but have a loose relationship. Any number of sports can be played by a student and any number of students can play a sport. 
+
+
+Aggregation
+This is a "has-a" relationship where a whole has parts that belong to it. Parts may be shared among wholes in this relationship. Aggregation relationships are typically weak, however. This means that althought parts can belong to wholes, they can also exist independently. An example of an aggregate relationship is that one of a airliner and its crew. The airliner would not be able to offer services without the crew. However, the airliner does not cease to exist if the crew leave. The crew also do not cease to exist if they are not in the airliner.
+![DataStructuresNotes](images/aggregationConnection_Example.jpg)
+
+In this example the empty diamond indicates which object is considered the whole and not the part in the relationship. 
+
+This is represented in Java code as:
+```
+public class Airliner {
+    private ArrayList<CrewMember> crew;
+
+    public Airliner() {
+        crew = new ArrayList<CrewMember>();
+    }
+
+    public void add( CrewMember crewMember ) {
+        …
+    }
+}
+```
+
+In the Airliner class, there is a list of crew members. The list of crew members is initialized to be empty and a public method allows new crew members to be added. An airliner has a crew. This means that an airliner can have zero or more crew members. 
+
+
+Composition:
+One of the most dependent of the decomposition relationships. The relationship is an exclusive containment of parts, otherwise known as a strong "has-a" relationship. In other words, a whole cannot exist without its parts, and if the whole is destroyed, then the parts are destroyed too. In this relationship, you can typically only access the parts through its whole. Contained parts are exclusive to the whole. An example of a composition relationship is between a house and a room. A house is made up of multiple rooms, but if you remove the house, the room no longer exists.
+![DataStructuresNotes](images/Composition_Example.jpg)
+
+The lines between the House object and the Room object indicates a relationship between the two. The filled-in diamond next to the House object symbolizes that the "has-a" reationship is strong. The two objects would cease to exist without each other. The one "dot dot star" indicates that there must be one or more Room objects for the House object.
+
+Represented in Java as:
+```
+public class House {
+    private Room room;
+
+    public House(){
+        room = new Room();
+    }
+}
+```
+
+In this example, a Room object is created at the ame time that the House object is, by instantiating the Room class. This Room object does not need to be created elsewhere, and it does not need to be passed in when creating the House object, The two parts are tightly dependent with one not being able to exist without the other.
+
+
+Generalization:
+Takes repeated, common, or shared characteristics between two or more classes and factors them out into another class, so that the code can be reused, and the characteristics can be inherited by subclasses. 
+![DataStructuresNotes](images/Generalization_example.jpg)
+
+
+The solid-lined arrow indicates that the two classes are connected by inheritance. The supercalss is at the head of the arrow, while the subclass is at the tail. It is conventional to have the arrow pointing upwards. The class diagram is structured so that the superclasses are always on top and subclasses are towards the bottom.
+
+
+Inherited superclass attributes and behaviors do not need to be rewritten in the subclass. Instead, the arrow symbolizes that the subclass will have the superclass' attributes and methods. Superclasses are generalized classes, and the subclasses are the specialized classes.
+![DataStructuresNotes](images/Superclass_and_subclass_example.jpg)
+
+
+Note that the use of a # symbol. This symbolizes that the Animal's attributes are protected.
+
+Protected attributes in Java can only be accessed by:
+* the encapsulated class itself
+* all subclasses
+* all classes within the same package
+
+In Java, a package is a way to organize classes into a namespace that represents those classes.
+
+```
+public abstract class Animal {
+    protected int numberOfLegs;
+    protected int numberOfTails;
+    protected String name;
+
+    public Animal( String petName, int legs, int
+    tails ) {
+        this.name = petName;
+        this.numberOfLegs = legs;
+        this.numberOfTails = tails;
+    }
+    public void walk() { … }
+    public void run() { … }
+    public void eat() { … }
+}
+```
+
+Since the animal class is a generalization, it should not be created as an object on its own. The keyword abstract indicates that the class cannot be instantiated. In other words, an Animal object cannot be created.
+
+The Animal class is a superclass, and any class that inherits from the Animal class will have its own attributes and behaviors. Those subclasses that inherit from the supercalss will share the same attributes and behaviors from the Animal class.
+
+This is the Lion subclass:
+```
+public class Lion extends Animal {
+    public Lion( String name, int legs, int tails
+    ) {
+        super( name, legs, tails );
+    }
+
+    public void roar() { … }
+}
+```
+None of the attributes and behaviors inherited from the Animal class need to be declares. This mirrors the UML class diagram as only specialized attributes and methods are declares in the superclass and subclass.
+
+Inheritance is declared in Java using the keyword extends. Objects are instantiated from a class by using constructors. With inheritance, if you want an instance of a subclass, you must give the superclass a chance to prepare the attributes for the object appropriately. Classes can have implicit constructors or explicit constructors.
+
+Implicit:
+```
+public abstract class Animal {
+    protected int numberOfLegs;
+    public void walk() { … }
+}
+```
+In this implementation, we have not written our own constructor. All attributes are assigned zero or null when using the default constructor.
+
+Explicit:
+```
+public abstract class Animal {
+    protected int numberOfLegs;
+
+    public Animal( int legs ) {
+        this.numberOfLegs = legs;
+    }
+}
+```
+
+In this implementation, an explicit constructor will let us instantiate an animal with as many legs we want. Explicit constructors allow you to assign values to attributes during instantiation. 
 
 
 
