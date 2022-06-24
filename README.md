@@ -233,6 +233,48 @@ Now lets take a look at some steps to architecting proper systems from the Cours
 ![DataStructuresNotes](images/CRC_Card_Structure.jpg)
 
 When it comes to adding the details for converting to classes for coding and implementation we use a UML Class Diagram:
+![DataStructuresNotes](images/CRC_Example.jpg)
+This is a CRC Diagram, now lets look at the same concept as a class diagram.
+
+![DataStructuresNotes](images/ClassDiagram_Example.jpg)
+This is the UML Class Diagram version of the same CRC.
+
+Every concept or class in a class diagram is respresented by a box. There are three sections:
+* Class Name: is the same as the class name in your Java class
+* Properties: equivalent to Java member variables. In this template we use the variable name and variable type which can be classes or primitive types.
+* Operations: equivalent to Java methods. The template uses an operation name, parameter list, and return type
+
+We can see it is easier to translate a class diagram into code with our food example:
+```
+public class Food {
+    public String groceryID;
+    public String name;
+    public String manufacturer;
+    public Date expiryDate;
+    public double price;
+    public boolean isOnSale( Date date ) {
+    }
+}
+```
+The class name in the class diagram turns into a class in Java. The properties turn into member variables. Operations become methods. It is possible to use this mapping in reverse to turn code into class diagrams. 
+
+We can also express encapsulation within our diagrams to ensure access to certain data and functions are restricted or open to other classes. 
+
+The class diagram itself already bundles data and functions in a self-contained object. However, access and restriction (two aspects of visibility) can be represented as well, through the use of symbols – and +. Below is an example of a UML class diagram for a student. 
+![DataStructuresNotes](images/Encapsulation_Class_Diagram.jpg)
+
+In this example gpa and degreeProgram are hidden from public access indicated by the minus signs. In other words this indicates a method is private and can only be accessed from within the class. On the other hand the plus sign indicates it can be accessed publically. 
+
+In this example this means that the public methods can be used to manipulate the student's GPA. This prevents the students GPA attribute from being directly manipulated. 
+
+In order to preserve data integrity we use two types of methods:
+* Getter Methods: Used to retrieve data typically have the format: get<Name of the attribute>, where the attribute is the value that will be returned through the method. Getters often retrieve private data. 
+* Setter Methods: Used to change the data and have the format of: set<Name of the attribute>, where the attribute is what will be changed through the method. Setters often set a private attribute in a safe way. 
+
+Now lets take a look at Decomposition in software design. The three types of relationships define the interaction between the whole and the parts:
+* Association
+* Aggregation
+* Composition
 
 
 
