@@ -230,7 +230,7 @@ O(1):
 - If you have a traversal algorithm for traversing the list which allocate a single pointer to do so, the traversal algorithms is considered to be of O(1) space complexity.
 - Additionally, let's say that traversal algorithm needs not 1 but 1000 pointers, the space complexity is still considered to be O(1).
 - However, if let's say for some reason the algorithm needs to allocate 'N' pointers when traversing a list of size N, i.e., it needs to allocate 3 pointers for traversing a list of 3 elements, 10 pointers for a list of 10 elements, 1000 pointers for a list of 1000 elements and so on, then the algorithm is considered to have a space complexity of O(N). This is true even when 'N' is very small, eg., N=1.
-Citation: https://stackoverflow.com/questions/43260889/what-is-o1-space-complexity#:~:text=o(1)%20space%20complexity%20means,%E2%80%93%20Rodrigo%20Gonzalez
+[Citation](https://stackoverflow.com/questions/43260889/what-is-o1-space-complexity#:~:text=o(1)%20space%20complexity%20means,%E2%80%93%20Rodrigo%20Gonzalez)
 
 <br/>
 
@@ -258,7 +258,7 @@ One common approach for designing a larger enterprise web application is using a
 
 Note that we should place the business logic in the controller. Since the contoller handles the calls to a specific resource, queries the data by making calls to the business logic layer and links the data (model) back to the appropriate view.
 
-For more information about business logic layer and proper architecture practices look at: https://stackoverflow.com/questions/4415904/business-logic-in-mvc/17065503#17065503
+For more information about business logic layer and proper architecture practices look at this [link](https://stackoverflow.com/questions/4415904/business-logic-in-mvc/17065503#17065503)
 More importantly this is taken from there:
 
 ```
@@ -267,7 +267,7 @@ MVC is an architectural style for the presentation layer of an application. For 
 The model is a very reasonable choice choice to place business logic, but a better/more maintainable approach is to separate your presentation layer from your business logic layer and create a business logic layer and simply call the business logic layer from your models when needed. The business logic layer will in turn call into the data access layer.
 ```
 
-GeeksforGeeks Notes on DDD: https://www.geeksforgeeks.org/domain-driven-design-ddd/
+[GeeksforGeeks Notes on DDD](https://www.geeksforgeeks.org/domain-driven-design-ddd/)
 
 More information about DDD:
 * DDD is domain driven design: an approach to developing software for complex needs by deeply connecting the implementation to an evolving model of the core business concepts.
