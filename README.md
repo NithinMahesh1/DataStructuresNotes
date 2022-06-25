@@ -7,6 +7,69 @@ Comprehensive Notes on all things related to Data Structures
 
 <br/>
 
+## Interview Prep w/Some Solutions:
+
+Allscripts Interview Question:
+Given a list of n integers combine the lists and return one full sorted list at the end. He specified he was looking for a solution using a data structure, I tried to do it by adding every element in two loops to combine them into one array and then sort this. 
+
+This is my solution after thinking about the problem more. I think there is a better way to solve this, but this solution uses a priority queue to push the elements from each list of list integers. Then once we create the queue (I noticed this was unsorted) we have to remove from it and add to an array to get it to sort. The reasoning is explained in this [stackoverflow solution](https://stackoverflow.com/questions/20923615/sorting-integers-by-a-priority-queue), but essentially when converting the queue to an array the elements are in no particular order. So this way adding it to the array each element at a time is how we return a sorted list.
+
+Also note this solution can be better since its O(n^2 + n)
+
+```
+package com.practice;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.PriorityQueue;
+
+public class Main {
+    // We pass to this method the following values for each list
+    list1 = [2, 5, 6, 8, 12]
+    list2 = [7, 8, 13, 14, 19, 20, 26, 30]
+    list3 = [1, 2, 3, 14]
+    listoflists = [list1, list2, list3]
+
+    public static List<Integer> mergeSortedLists(List<List<Integer>> listoflists) {
+        List<Integer> combinedList = new ArrayList();
+
+        // Loop through each list
+        // For each list get the inner lists ints and push to the priority queue
+        // Run a while loop until queue is empty and pop to combinedList
+
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+
+
+        for(int i=0; i<listoflists.size(); i++) {
+            List<Integer> inputList = new ArrayList<>();
+            inputList = listoflists.get(i);
+            int count = 0;
+            while(count != inputList.size()) {
+                int inputVal = inputList.get(count);
+                queue.add(inputVal);
+                count++;
+            }
+        }
+
+        Integer[] arr = new Integer[queue.size()];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = queue.remove();
+        }
+
+
+        combinedList = Arrays.asList(arr);
+        System.out.println(combinedList.toString());
+
+        return combinedList;
+    }
+}
+```
+
+
+
+<br/>
+
 ## Basics of OOP:
 
 The main ideas behind Java Object-Oriented Programming include abstraction, encapsulation, and polymorphism. 
