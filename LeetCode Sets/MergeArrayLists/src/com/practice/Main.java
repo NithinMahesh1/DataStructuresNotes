@@ -1,7 +1,9 @@
 package com.practice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Main {
     // Given a list of lists n integers combine the lists return one full sorted list at the end
@@ -39,6 +41,33 @@ public class Main {
 
     public static List<Integer> mergeSortedLists(List<List<Integer>> listoflists) {
         List<Integer> combinedList = new ArrayList();
+
+        // Loop through each list
+        // For each list get the inner lists ints and push to the priority queue
+        // Run a while loop until queue is empty and pop to combinedList
+
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+
+
+        for(int i=0; i<listoflists.size(); i++) {
+            List<Integer> inputList = new ArrayList<>();
+            inputList = listoflists.get(i);
+            int count = 0;
+            while(count != inputList.size()) {
+                int inputVal = inputList.get(count);
+                queue.add(inputVal);
+                count++;
+            }
+        }
+
+        Integer[] arr = new Integer[queue.size()];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = queue.remove();
+        }
+
+
+        combinedList = Arrays.asList(arr);
+        System.out.println(combinedList.toString());
 
         return combinedList;
     }
