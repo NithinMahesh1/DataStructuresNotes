@@ -491,6 +491,61 @@ public abstract class Animal {
 
 In this implementation, an explicit constructor will let us instantiate an animal with as many legs we want. Explicit constructors allow you to assign values to attributes during instantiation. 
 
+Interfaces:
+We use interfaces in cases where instead of having a Superclass and Subclass in which one Subclass can only implement one Superclass. However when we can use multiple interfaces for one subclass.
+
+When declaring this as part of a UML diagram it would look like this:
+![DataStructuresNotes](images/interface_example_UML.jpg)
+
+
+Interfaces are explicitly noted using guillemets, or French quotes, to surround the word «interface».
+
+![DataStructuresNotes](images/InterfaceWithClass_UMLDiagram.jpg)
+
+
+The interaction between an interface and a class that is implementing the interface is indicated using a dotted arrow. The implementing class touches the tail end of the arrow and the interface touches the head of the arrow. The conventional way to draw interfaces on your UML class diagrams is to have the arrow pointing upward, so the interface is always on the top, and the classes that implement them are towards the bottom.
+
+We can also have cases where we implement an Interface in another interface. Lets look at the example of if we have a car that moves x and y axises, but we want another vehicle that may travel in the z axis then instead of changing the main interface we can have implement and include a new method to add to the other two methods from the first interface:
+
+Note: since classes can implement one or more interfaces at a time, allowing for multiple types. 
+
+```
+public interface IVehicleMovement {
+    public void moveOnX();
+    public void moveOnY();
+}
+```
+
+
+```
+public interface IVehicleMovement3D extends IVehicleMovement {
+    public void moveOnZ();
+}
+```
+
+Information Hiding:
+This is the concept of encapsulation and ensuring that certain classes have permission to access certain methods or variables and uses access modifiers. This is associated with sensitive data - the more sensitive the data the more likely it should have limited access.
+
+These are the differet access modifiers we should use:
+
+* Public:
+    - Accessible by any class in your system
+    - This means that other classes can retrieve and modify the attribute or change.
+    - Methods can also be given a public level of access, so any class in the system can access the method. 
+
+* Protected:
+    - Attributes and methods that are protected are not accessible to every class in the system
+    - Only available to the encapsulated class itself, all subclasses, and classes within the same package. 
+    - Packages are the means by which Java organizes related classes into a single namespace
+
+* Default:
+    - Only allows access to attributes and methods to subclasses or classes that are part of the same package or encapsulation.
+    - This access modifier is also known as the no modifier access because it does not need to be explicitly declared in the code.
+
+* Private:
+    - Not accessible by any other class other than by the encapsulating class itself. 
+    - Attributes cannot be accessed directly and these methods cannot be invoked by any other classes. 
+
 
 
 
