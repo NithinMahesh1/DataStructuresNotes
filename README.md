@@ -93,6 +93,8 @@ Common System Design Topics to Know:
 * Take a look at [github on System Design](https://github.com/checkcheckzz/system-design-interview) contains everything you need to learn how to answer these questions
 * There is a [blog](http://blog.gainlo.co/index.php/category/system-design-interview-questions/) as well containing specific interview questions such as how to build a key value store, garabage collector, or web crawler and how you would build them
 
+[Guide to Take Home Challenges](https://www.freecodecamp.org/news/the-essential-guide-to-take-home-coding-challenges-a0e746220dd7)
+
 
 
 
