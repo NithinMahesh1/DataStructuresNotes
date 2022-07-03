@@ -68,6 +68,34 @@ public class Main {
 
 
 
+
+Common Interview Topics to Know by Heart:
+![DataStructuresNotes](Interview Udemy Courses/Technical Interviewing/Common_Technical_Topics.jpg)
+
+Note: A lot of these problems can be solved with Breadth First Search and Hash Tables (hence why they are highlighted)
+* Also should know how to write a breadth first search from scratch
+
+Take a Look at the:
+Resource-White-Boarding-Resources-Guide.pdf -> Contains free mock interviews sights that can be used to practive live technical interviews.
+
+Some Useful Blog Posts to Handle Technical Interview Pressure (especially for questions you don't know)
+
+[Top 8 Common Mistakes and Why](https://blog.pramp.com/top-8-mistakes-in-technical-interviews-according-to-data-27d2572bda1f)
+
+[How to get Unstuck During Technical Interview](https://blog.pramp.com/how-to-get-unstuck-in-technical-interviews-93d4632ef996)
+
+[Need Some Coding Projects to Learn (From Coding Bootcamps)](https://www.google.com/search?q=ideas+for+programming+projects&oq=ideas+for+program&aqs=chrome.0.0j69i57j0l4.5016j0j7&sourceid=chrome&ie=UTF-8)
+
+Common System Design Topics to Know:
+![DataStructuresNotes](Interview Udemy Courses/Technical Interviewing/System Design Questions/Common_System_Design_Topics.jpg)
+
+* Spend some time asking questions about the scope of the requirements of the system
+* Take a look at [github on System Design](https://github.com/checkcheckzz/system-design-interview) contains everything you need to learn how to answer these questions
+* There is a [blog](http://blog.gainlo.co/index.php/category/system-design-interview-questions/) as well containing specific interview questions such as how to build a key value store, garabage collector, or web crawler and how you would build them
+
+
+
+
 <br/>
 
 ## Basics of OOP:
