@@ -70,7 +70,7 @@ public class Main {
 
 
 Common Interview Topics to Know by Heart:
-![DataStructuresNotes](Interview Udemy Courses/Technical Interviewing/Common_Technical_Topics.jpg)
+![DataStructuresNotes](images/Common_Technical_Topics.jpg)
 
 Note: A lot of these problems can be solved with Breadth First Search and Hash Tables (hence why they are highlighted)
 * Also should know how to write a breadth first search from scratch
@@ -87,7 +87,7 @@ Some Useful Blog Posts to Handle Technical Interview Pressure (especially for qu
 [Need Some Coding Projects to Learn (From Coding Bootcamps)](https://www.google.com/search?q=ideas+for+programming+projects&oq=ideas+for+program&aqs=chrome.0.0j69i57j0l4.5016j0j7&sourceid=chrome&ie=UTF-8)
 
 Common System Design Topics to Know:
-![DataStructuresNotes](Interview Udemy Courses/Technical Interviewing/System Design Questions/Common_System_Design_Topics.jpg)
+![DataStructuresNotes](images/Common_System_Design_Topics.jpg)
 
 * Spend some time asking questions about the scope of the requirements of the system
 * Take a look at [github on System Design](https://github.com/checkcheckzz/system-design-interview) contains everything you need to learn how to answer these questions
