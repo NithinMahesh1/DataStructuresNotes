@@ -96,6 +96,20 @@ Common System Design Topics to Know:
 [Guide to Take Home Challenges](https://www.freecodecamp.org/news/the-essential-guide-to-take-home-coding-challenges-a0e746220dd7)
 
 
+Breadth First Search and Depth First Search:
+- Used for graphs
+
+DFS:
+* Goes deep to each child before going broad to each neighbor
+* Done recursively using helper such as hasPath() to check each node, node by node until we find the one we are looking for
+* Need an isVisited flag to identify we have found the node to avoid being stuck in a infinite loop
+
+BFS:
+* Goes broad to each neighbor before going deep
+* Iterative, need to use a queue e.g. queue a,b
+* Add all the children to the queue, then pull out the first element to the queue, check if it has a path, and if it is not the final element add all of its children to the queue
+
+
 
 
 <br/>
