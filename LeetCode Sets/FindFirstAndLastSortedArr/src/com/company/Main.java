@@ -21,8 +21,8 @@ public class Main {
     */
 
     public static void main(String[] args) {
-        int[] nums = new int[]{5,7,7,8,8,10};
-        int target = 8;
+//        int[] nums = new int[]{5,7,7,8,8,10};
+//        int target = 8;
 
 //        int[] nums = new int[]{5,7,7,8,8,10};
 //        int target = 6;
@@ -35,6 +35,9 @@ public class Main {
 
 //        int[] nums = new int[]{2,2};
 //        int target = 3;
+
+        int[] nums = new int[]{2,2};
+        int target = 2;
 
         searchRange(nums, target);
     }
