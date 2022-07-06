@@ -20,8 +20,6 @@ public class Main {
         Output: [-1,-1]
     */
 
-    public static int[] returnIndices = new int[2];
-
     public static void main(String[] args) {
         int[] nums = new int[]{5,7,7,8,8,10};
         int target = 8;
@@ -32,58 +30,77 @@ public class Main {
 //        int[] nums = new int[]{};
 //        int target = 0;
 
+//        int[] nums = new int[]{1};
+//        int target = 1;
+
+//        int[] nums = new int[]{2,2};
+//        int target = 3;
+
         searchRange(nums, target);
     }
 
     public static int[] searchRange(int[] nums, int target) {
-        // Binary search helper method to get the first occurrence target
-        // Once we get the first one, we check the index after to make sure
+        /*
+            int[] answers = new int[2]
+            if(arr.length == 1 && target == the one element) return 0,0
+            if(arr.length == 0) return -1,-1
 
-        // Since it is sorted the last element will always be one plus the targets indices
-        int[] resultArr = new int[2];
+            int index = binarySearch(nums);
+            int duplicateIndex = index+1
 
-        if(nums.length == 0 && target == 0) {
-            resultArr[0] = -1;
-            resultArr[1] = -1;
-            System.out.print(resultArr[0] + "," + resultArr[1]);
-            return resultArr;
+            answers[0] = index;
+            answers[1] = duplicateIndex
+        */
+        int[] answers = new int[2];
+
+        if(nums.length == 1 && target == nums[0]) {
+            answers[0] = 0;
+            answers[1] = 0;
+        }
+        else if(nums.length == 0) {
+            answers[0] = -1;
+            answers[1] = -1;
         }
 
-        binarySearch(nums, target);
-        resultArr = getIndexOf();
-
-        System.out.print(resultArr[0] + "," + resultArr[1]);
-        return resultArr;
-    }
-
-    public static int[] getIndexOf() {
-        return returnIndices;
-    }
-
-    public static int[] setIndex(int index) {
-        if(index == -1) {
-            returnIndices[0] = -1;
-            returnIndices[1] = -1;
-        }
         else {
-            int lastIndex = index + 1;
-            returnIndices[0] = index;
-            returnIndices[1] = lastIndex;
+            int index = binarySearch(nums, target);
+            if(index == 0) {
+                answers[0] = -1;
+                answers[1] = -1;
+            }
+            else {
+                int duplicateIndex = index + 1;
+                answers[0] = index;
+                answers[1] = duplicateIndex;
+            }
         }
 
-        return returnIndices;
+        System.out.print(answers[0] + "," + answers[1]);
+        return answers;
     }
 
     public static int binarySearch(int[] nums, int target) {
+        /*
+            if(target ! exist in array) return -1,-1 - how do I know when to stop the binary search
+
+            while(low <= high) {
+                mid = (low+high)/2
+                if(arr[mid] == target) return mid
+                if(arr[mid] < target) lower = mid+1
+                if(arr[mid] > target) higher = mid-1
+            }
+        */
         int low = 0;
         int high = nums.length;
         int mid = 0;
 
         while(low <= high) {
-            mid = low+high/2;
+            mid = (low+high)/2;
 
-            if(nums[mid] == target) {
-                setIndex(mid);
+            if(mid >= nums.length) {
+                return 0;
+            }
+            if(nums[mid] ==  target) {
                 return mid;
             }
             if(nums[mid] < target) {
@@ -92,9 +109,8 @@ public class Main {
             if(nums[mid] > target) {
                 high = mid-1;
             }
-         }
+        }
 
-        setIndex(-1);
-        return -1;
+        return mid;
     }
 }
