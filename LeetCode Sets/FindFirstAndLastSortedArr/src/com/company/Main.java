@@ -21,8 +21,8 @@ public class Main {
     */
 
     public static void main(String[] args) {
-//        int[] nums = new int[]{5,7,7,8,8,10};
-//        int target = 8;
+        int[] nums = new int[]{5,7,7,8,8,10};
+        int target = 8;
 
 //        int[] nums = new int[]{5,7,7,8,8,10};
 //        int target = 6;
@@ -36,84 +36,72 @@ public class Main {
 //        int[] nums = new int[]{2,2};
 //        int target = 3;
 
-        int[] nums = new int[]{2,2};
-        int target = 2;
+//        int[] nums = new int[]{2,2};
+//        int target = 2;
 
         searchRange(nums, target);
     }
 
+    /*
+        This solution works since we are basically implementing two binary searches:
+            - One of them is indexed to the left most occurrence
+            - One of them is indexed to the right most occurrence
+
+         Same algorithm just changing the indices around, so we search right then left and place the pointer either before or after
+
+    */
+
     public static int[] searchRange(int[] nums, int target) {
-        /*
-            int[] answers = new int[2]
-            if(arr.length == 1 && target == the one element) return 0,0
-            if(arr.length == 0) return -1,-1
-
-            int index = binarySearch(nums);
-            int duplicateIndex = index+1
-
-            answers[0] = index;
-            answers[1] = duplicateIndex
-        */
-        int[] answers = new int[2];
-
-        if(nums.length == 1 && target == nums[0]) {
-            answers[0] = 0;
-            answers[1] = 0;
-        }
-        else if(nums.length == 0) {
-            answers[0] = -1;
-            answers[1] = -1;
-        }
-
-        else {
-            int index = binarySearch(nums, target);
-            if(index == 0) {
-                answers[0] = -1;
-                answers[1] = -1;
-            }
-            else {
-                int duplicateIndex = index + 1;
-                answers[0] = index;
-                answers[1] = duplicateIndex;
-            }
-        }
-
-        System.out.print(answers[0] + "," + answers[1]);
-        return answers;
+        int[] res = new int[2];
+        int first = firstOcc(nums, target);
+        int last = lastOcc(nums, target);
+        res[0] = first;
+        res[1] = last;
+        return res;
     }
 
-    public static int binarySearch(int[] nums, int target) {
-        /*
-            if(target ! exist in array) return -1,-1 - how do I know when to stop the binary search
+    public static int firstOcc(int[] nums, int target) {
+        int res = -1;
+        int left = 0;
+        int right = nums.length - 1;
 
-            while(low <= high) {
-                mid = (low+high)/2
-                if(arr[mid] == target) return mid
-                if(arr[mid] < target) lower = mid+1
-                if(arr[mid] > target) higher = mid-1
-            }
-        */
-        int low = 0;
-        int high = nums.length;
-        int mid = 0;
-
-        while(low <= high) {
-            mid = (low+high)/2;
-
-            if(mid >= nums.length) {
-                return 0;
-            }
-            if(nums[mid] ==  target) {
-                return mid;
+        while(left <= right) {
+            int mid = (right+left)/2;
+            if(nums[mid] == target) {
+                res = mid;
+                right = mid - 1;
             }
             if(nums[mid] < target) {
-                low = mid+1;
+                left = mid + 1;
             }
             if(nums[mid] > target) {
-                high = mid-1;
+                right = mid - 1;
             }
         }
 
-        return mid;
+        return res;
     }
+
+    public static int lastOcc(int[] nums, int target) {
+        int res = -1;
+        int left = 0;
+        int right = nums.length - 1;
+
+        while(left <= right) {
+            int mid = (left+right)/2;
+            if(nums[mid] == target) {
+                res = mid;
+                left = mid + 1;
+            }
+            if(nums[mid] < target) {
+                left = mid + 1;
+            }
+            if(nums[mid] > target) {
+                right =  mid - 1;
+            }
+        }
+
+        return res;
+    }
+
 }
