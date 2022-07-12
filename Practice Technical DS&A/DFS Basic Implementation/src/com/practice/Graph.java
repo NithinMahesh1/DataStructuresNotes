@@ -22,17 +22,18 @@ public class Graph {
         adj[v].add(w);
     }
 
-    void DFSUtil(int v, boolean[] visited) {
+    void DFSHelper(int v, boolean[] visited) {
         // Mark the current node as visited
         visited[v] = true;
         System.out.print(v + " ");
 
-        // Loop through all vertices adjacent to this vertex that are not visited
+        // Iterate through the current vertex and its adjacent edges
+        // If it is not visited we visit that index and call helper again
         Iterator<Integer> iter = adj[v].listIterator();
         while(iter.hasNext()) {
             int n = iter.next();
             if(!visited[n]) {
-                DFSUtil(n,visited);
+                DFSHelper(n,visited);
             }
         }
 
@@ -40,6 +41,6 @@ public class Graph {
 
     void DFS(int v) {
         boolean visited[] = new boolean[V];
-        DFSUtil(v, visited);
+        DFSHelper(v, visited);
     }
 }

@@ -17,7 +17,7 @@ public class Main {
                         + "(starting from vertex 2)");
 
         graph.DFS(2);
-
+//
 //        Graph g = new Graph(6);
 //
 //        g.addEdge(0, 1);
