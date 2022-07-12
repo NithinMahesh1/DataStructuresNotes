@@ -1,59 +1,45 @@
 package com.practice;
 
-import java.util.LinkedList;
-import java.util.Stack;
+//https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
 
-//https://favtutor.com/blogs/depth-first-search-java
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Graph {
-    int V;                                          //number of nodes
+    int V;
+    public LinkedList<Integer> adj[];
 
-    LinkedList<Integer>[] adj;                      //adjacency list
+    Graph(int v) {
+        this.V = v;
+        adj = new LinkedList[v];
 
-    Graph(int V)
-    {
-        this.V = V;
-        adj = new LinkedList[V];
-
-        for (int i = 0; i < adj.length; i++)
-            adj[i] = new LinkedList<Integer>();
-
-    }
-
-    void addEdge(int v, int w)
-    {
-        adj[v].add(w);                              //adding an edge to the adjacency list (edges are bidirectional in this example)
-    }
-
-    void DFS(int n)
-    {
-        boolean nodes[] = new boolean[V];
-
-        Stack<Integer> stack = new Stack<>();
-
-        stack.push(n);                                    //push root node to the stack
-        int a = 0;
-
-        while(!stack.empty())
-        {
-            n = stack.peek();                       //extract the top element of the stack
-            stack.pop();                            //remove the top element from the stack
-
-            if(nodes[n] == false)
-            {
-                System.out.print(n + " ");
-                nodes[n] = true;
-            }
-
-            for (int i = 0; i < adj[n].size(); i++)  //iterate through the linked list and then propagate to the next few nodes
-            {
-                a = adj[n].get(i);
-                if (!nodes[a])                    //only push those nodes to the stack which aren't in it already
-                {
-                    stack.push(a);                          //push the top element to the stack
-                }
-            }
-
+        for(int i=0; i<v; ++i) {
+            adj[i] = new LinkedList<>();
         }
+    }
+
+    void addEdge(int v, int w) {
+        adj[v].add(w);
+    }
+
+    void DFSUtil(int v, boolean[] visited) {
+        // Mark the current node as visited
+        visited[v] = true;
+        System.out.print(v + " ");
+
+        // Loop through all vertices adjacent to this vertex that are not visited
+        Iterator<Integer> iter = adj[v].listIterator();
+        while(iter.hasNext()) {
+            int n = iter.next();
+            if(!visited[n]) {
+                DFSUtil(n,visited);
+            }
+        }
+
+    }
+
+    void DFS(int v) {
+        boolean visited[] = new boolean[V];
+        DFSUtil(v, visited);
     }
 }

@@ -291,6 +291,36 @@ Integer.MAX_VALUE :
 * This will check if the integer is within 32 bit range integer range in memory
 
 
+Pre-Increment VS Post-Increment:
+
+Post-Increment:
+```
+// initialize i
+int i = 0;
+System.out.println("Post-Increment");
+
+// i values is incremented to 1 after returning
+// current value i.e; 0
+System.out.println(i++);
+
+Output: 0
+```
+
+
+Pre-Increment:
+```
+// initialized to 0
+int j = 0;
+System.out.println("Pre-Increment");
+
+// j is incremented to 1 and then it's value is
+// returned
+System.out.println(++j);
+
+Output: 1
+```
+
+
 <br/>
 
 ## System Architecture and Design:
