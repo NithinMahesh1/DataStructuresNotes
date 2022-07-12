@@ -104,7 +104,7 @@ DFS:
 * Done recursively using helper such as hasPath() to check each node, node by node until we find the one we are looking for
 * Need an isVisited flag to identify we have found the node to avoid being stuck in a infinite loop
 
-[Take a look at the implementation](DataStructuresNotes/Practice Technical DS&A/DFS Basic Implementation/README.md)
+[Take a look at the implementation](https://github.com/NithinMahesh1/DataStructuresNotes/tree/development/Practice%20Technical%20DS%26A/DFS%20Basic%20Implementation)
 
 BFS:
 * Goes broad to each neighbor before going deep
