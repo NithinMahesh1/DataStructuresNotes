@@ -5,7 +5,7 @@
 ## Explanation:
 
 In this example we are looking at the following graph and its adjacent vertices:
-![DataStructuresNotes](images/DFS_Graph_Walkthrough.gif)
+![DFS Basic Implementation](images/DFS_Graph_Walkthrough.gif)
 
 These are the outputs and inputs:
 ```
