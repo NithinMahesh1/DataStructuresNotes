@@ -111,7 +111,78 @@ BFS:
 * Iterative, need to use a queue e.g. queue a,b
 * Add all the children to the queue, then pull out the first element to the queue, check if it has a path, and if it is not the final element add all of its children to the queue
 
+<!-- TODO add in the implementation for BFS  -->
 
+Spring Common Questions:
+SBEVision
+* What is dependency injection in Spring Frameowork?
+    - Spring container "injects" objects into other objects or "dependencies"
+    - Ensures loose coupling between classes 
+        * Loose Coupling:
+            - Classes are independent of each other
+            - The only knowledge between the two clases is what the other class has exposed through its interfaces
+    - This is responsible for injecting dependencies through either Constructor or Setter methods
+    - IOC (Inversion of Control) - emphasizes keeping the Java classes independent of each other and the container frees them from object creation and maintenance.
+    - IOC is how we create loose coupling of components
+        - An example of this is if you are driving your car to work (tight coupling) vs having a cab take you where someone is driving you to work (loose coupling) since we are changing the control to the cab driver.
+        * So for example if we have two classes:
+        * Tight Coupling
+        ```
+        public class A
+        {
+            B b;
+
+            public A()
+            {
+                b = new B();
+            }
+
+            public void Task1() {
+                // do something here..
+                b.SomeMethod();
+                // do something here..
+            }
+
+        }
+
+        public class B {
+
+            public void SomeMethod() { 
+                //doing something..
+            }
+        }
+        ```
+
+        * After Inversion of control
+        ```
+        public class A
+        {
+            B b;
+
+            public A()
+            {
+                b = Factory.GetObjectOfB ();
+            }
+
+            public void Task1() {
+                // do something here..
+                b.SomeMethod();
+                // do something here..
+            }
+        }
+
+        public class Factory
+        {
+            public static B GetObjectOfB() 
+            {
+                return new B();
+            }
+        }
+        ```
+
+
+* What is loose coupling:
+    - Imagine you have created two classes, A and B, in your program. Class A is called volume, and class B evaluates the volume of a cylinder. If you change class A volume, then you are not forced to change class B. This is called loose coupling in Java. When class A requires changes in class B, then you have tight coupling.
 
 
 <br/>
