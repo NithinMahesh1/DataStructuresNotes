@@ -4,6 +4,14 @@ import java.util.Stack;
 
 public class Main {
 
+    // Actually way easier way of doing this:
+    /*
+        String test = "this";
+        for(int i=test.length()-1; i>=0; i--) {
+            System.out.print(test.charAt(i));
+        }
+    */
+
     public static int reverse(int x) {
         String s = String.valueOf(x);
         Stack<String> stack = new Stack<>();
