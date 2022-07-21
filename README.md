@@ -694,6 +694,33 @@ These are the differet access modifiers we should use:
     - Attributes cannot be accessed directly and these methods cannot be invoked by any other classes. 
 
 
+Abstraction:
+    * Dividing up objects into classes and including their attributes
+    * Simplifies a concept and ignores unimportant details within some context
+    * Class is like a template for instances of a concept
+    * An object instantiated from a class then has the essential details to represent the details of some concept
+    * They also contain behaviors such as student must take courses
+
+Encapsulation:
+    * Involves 3 ideas
+        - Bundle attribute values (data and behaviors/functions)
+        - Expose certain data and functions for the object which can be accessed from other objects
+        - Restrict access to certain data and functions to only within that object
+    * Ensures data integrity and exposes certain attributes through other methods or interfaces
+
+Decomposition:
+    * Taking a whole thing and dividing it into parts or taking a whole bunch of seperate parts and combining them together to form a whole
+    * Car for example is a whole object that can be divided into other objects such as engine, wheels, steering wheel
+        - Each with their own parts that make up more parts
+
+Generalizations:
+    * Reduce the amount of redudency when solving problems
+    * Methods are a way of applying the same behavior to a different set of data
+    * Frequently used when designing algorithms, which are meant to be used to perform the same action on different sets of data
+    * We can generalize the actions into its own method, and simply pass it through a different set of data through arguments
+    * We take repeated, common, and shared characteristics between two or more classes and factor them out into another class
+        - e.g. a parent class and its subclass or child class (inheritance)
+
 
 
 <br/>
