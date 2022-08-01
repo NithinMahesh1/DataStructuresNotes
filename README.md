@@ -722,6 +722,28 @@ Generalizations:
         - e.g. a parent class and its subclass or child class (inheritance)
 
 
+Design Complexity:
+* Since design complexity applies to both classes and the methods within them we will use the term module 
+* Module refers to any program unit like these
+* The two metrics to evaulate design complexity are: 
+    - Coupling: Focuses on the complexity between a module and other modules
+    - Cohesion: Focuses on the complexity within a module
+
+Coupling:
+* We want to have loose coupling 
+* There are three things we need to consider: degree, ease, and flexibility
+* Degree: the number of connections between the module and others. With coupling, you want to keep the degree small. For instance, if the module needed to connect to other modules through a few small parameters or narrow interfaces, then the degree would be small, and coupling loose. 
+* Ease: how obvious are the connections between the module and others. With coupling, you want the connections to be easy to make without needing to understand the implementations of the other modules. 
+* Flexibility: how interchangeable the other modules are for this module. With coupling, you want the other modules easily replaceable for something better in the future. 
+
+Cohesion:
+* Represents the clarity of the responsibilies of a module
+* If you module performs one task and nothing else or has a clear purpose - this is high cohension
+* If you module tries to encapsulate more than one purpose or has an unclear purpose - this is low cohension
+
+
+
+
 
 <br/>
 
