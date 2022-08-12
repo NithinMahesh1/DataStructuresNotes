@@ -742,7 +742,40 @@ Cohesion:
 * If you module tries to encapsulate more than one purpose or has an unclear purpose - this is low cohension
 
 
+UML Sequence Diagrams:
+- Used to show your team how objects in your program interact with each other to complete tasks
+- Think of it like a map of conversations between different people, where this map follow all the messages sent from person to person
 
+![DataStructuresNotes](images/Sequence_Diagram_Example.jpg)
+
+1. First we use a box to represent a role played by an object
+2. The role is typically labeled by the name of the class for the object:
+
+![DataStructuresNotes](images/SequenceDiagramRoleObject.jpg)
+
+3. Then we use vertical dotted lines known as life lines to represent an object as time passes by:
+
+![DataStructuresNotes](images/SequenceDiagramLifeLines.jpg)
+
+4. Last we use arrows to show messages that are sent from one object to another
+
+![DataStructuresNotes](images/SequenceDiagramMessageArrows.jpg)
+
+If we are to look at an example with a TV sequence diagram for a TV Viewer changing the channel it would look something like this:
+
+![DataStructuresNotes](images/TVSequenceDiagram.jpg)
+
+In this diagram the boxes indicate an object is activated. Also if one object sends a message to another object or objects, we denote this by drawing a solid line arrow from the sender to the reciever. Dotted line arrows indicate we are returning data and control ack to the initiating object. Here we see the dotted line arrow returning control back to the TV Viewer:
+
+![DataStructuresNotes](images/SequenceDiagramIndicatingReturnControl.jpg)
+
+We can also use loops to make the diagram more complex. Here is an example of an alternative in which the TV Viewer knows what channel they want:
+
+![DataStructuresNotes](images/TVViewerSequenceDiagramWithAlt.jpg)
+
+Here is the else to that alternative in which they do not know what channel they want to watch (note we are also adding a loop to this condition):
+
+![DataStructuresNotes](images/TVSequenceDiagramWithLoop.jpg)
 
 
 <br/>
