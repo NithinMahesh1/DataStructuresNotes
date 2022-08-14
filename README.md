@@ -783,6 +783,9 @@ UML State Diagram:
 * Can describe a single object and illustrate how that object behaves in response to a series of events in your system
 * A state is the way an object exists at a particular point in time
     - The state of an objet is determined by the values of its attributes
+* Can also help you find issues in your system
+    - Like discovering a condition you did not plan for 
+    - Or to help you to create tests
 
 Example:
 * Lets look at an example as a person with different emotional states such as if they are happy or angry
@@ -829,6 +832,32 @@ Vending Machine State Diagram:
 ![DataStructuresNotes](images/ConditionActionExample.jpg)
 
 * Back to the vending machine example
+* Suppose when in the idle state someone inserts a coin and the total so far is less than the product price
+* We will express this situation with a transition arrow that loops back to the idle state:
+
+![DataStructuresNotes](images/IdleStateTransitionExample.jpg)
+
+* Suppose the total equals the product price 
+
+![DataStructuresNotes](images/EnoughCoinsTransitionStateExample.jpg)
+
+* When in the enough coins state we have the correct payment 
+* So if someone presses the dispense button the vending machine should release one of the product:
+
+![DataStructuresNotes](images/EnoughCoinsTransitionBackExample.jpg)
+
+* Also in either state if someone presses cancel the vending machine should return all the coins inserted
+* Represent this with two transition arrows, both back to the idle state with an event press cancel:
+
+![DataStructuresNotes](images/FinalVendingMachineStateDiagram.jpg)
+
+* Note there is also another element not respresented in our last diagram is termination
+* Represents an object being destroyed or the process being completed
+* Drawn as a circle with a filled circle inside as such:
+
+![DataStructuresNotes](images/TerminationElementStateDiagram.jpg)
+
+
 
 <br/>
 
