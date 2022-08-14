@@ -778,6 +778,58 @@ Here is the else to that alternative in which they do not know what channel they
 ![DataStructuresNotes](images/TVSequenceDiagramWithLoop.jpg)
 
 
+UML State Diagram:
+* A technique that you can use to describe how your system behaves and responds
+* Can describe a single object and illustrate how that object behaves in response to a series of events in your system
+* A state is the way an object exists at a particular point in time
+    - The state of an objet is determined by the values of its attributes
+
+Example:
+* Lets look at an example as a person with different emotional states such as if they are happy or angry
+* For example if a person stubs their toe
+* Arrows are used to respresent events to transition from one state to another
+
+![DataStructuresNotes](images/StateDiagramSimpleExample.jpg)
+
+* Follows the states of a system or object and shows changes between states as events occur
+* Each State has 3 important sections:
+    - State Name : simply the name of the state e.g. idle
+    - State Variables : data relevant to the state of an object e.g. a course as an example would have a variable as the number of students enrolled
+    - Activities : actions that are performed when in a certain state 
+
+Activities:
+* 3 types of activities when in a state
+    - entry/activity : actions that occur when the state is just entered from another state
+    - do/activity : actions that occur once, or multiple times while the object is in a certain state
+    - exit/activity : actions that occur when the state is exited and moves on to another state
+
+Here is an example of a clocks state activities:
+
+![DataStructuresNotes](images/ClockExampleStateDiagramActivities.jpg)
+
+Vending Machine State Diagram:
+* First we indicate the start of this diagram with a filled circle 
+* Vending machine starts at a state called idle (when the vending machine is waiting for coins to be inserted):
+
+![DataStructuresNotes](images/VendingMachineStartingState.jpg)
+
+* When the vending machine is in the idle state it is tracking the total of coins inserted so far
+* This means it is also tracking its total:
+
+![DataStructuresNotes](images/VendingMachineIdleStateExample.jpg)
+
+* Transitions are displayed like this when showing events and actions:
+
+![DataStructuresNotes](images/EventTransitionsExampleStateDiagram.jpg)
+
+* May have a gaurd condition and an action
+* The transition and action happens from a given state if the event occurs and the condition is true
+* Example if we are submitted an assignment (transition with condition):
+
+![DataStructuresNotes](images/ConditionActionExample.jpg)
+
+* Back to the vending machine example
+
 <br/>
 
 ## Arrays:
