@@ -5,7 +5,7 @@
 
 Comprehensive Notes on all things related to Data Structures 
 
-[Check out this reddit link for course work resources](https://www.google.com/search?q=ideas+for+programming+projects&oq=ideas+for+program&aqs=chrome.0.0j69i57j0l4.5016j0j7&sourceid=chrome&ie=UTF-8)
+[Check out this reddit link for course work resources](https://www.reddit.com/r/learnprogramming/comments/ortnef/a_super_harsh_guide_to_learning_computer_science/)
 
 Contains full online courses, projects, textbook material, etc. Useful resources for any missed CS coursework.
 
