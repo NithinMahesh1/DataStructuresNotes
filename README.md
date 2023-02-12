@@ -80,6 +80,66 @@ public class Main {
 }
 ```
 
+Some Junior Level Prep Questions:
+
+Model Behavior
+* Behavior models describe the overall behavior of a system
+* There are two types of behavior models that are used to describe the system behavior
+    1. Data Processing models known as Data Flow Diagrams: show how data is processed as it moves through a system
+    2. State machine models known as State Diagrams: show how the system will react with external events
+
+Data Flow Diagrams:
+* Used to model the systems data processing
+* Functional model to show end to end data processing
+* Can be converted into software to represent the flow of the data models
+* Provides a logical model of the system and show the flow of data and the flow of logic involved
+
+Characteristics of Data Flow Diagrams:
+* External entities send and recieve data flow from the systems
+* Also called a bubble chart
+* Top down approach to analysis
+* All arrows and bubbles should be labeled with full names
+
+Notation for Data Flow Diagrams:
+* Data flow - represents the movement of data flow from a specific origin to a destination
+* Process- represents the users, proceduresm or devices that use the data
+* Entity - repesense the source of data or destination data external sources. May be users, programs, organizations, or other entities taht interact with the system but are outside its boundaries
+* Data Store - Can be a single DFD or can be explored into various levels
+
+This is what the notation looks like:
+![DataStructuresNotes](images/Data_Flow_Diagram_Notations.jpg)
+
+This is a full example of this diagram system:
+![DataStructuresNotes](images/Data_Flow_Diagram_Example.jpg)
+
+Now lets look at a State Diagram. A State Diagram is a dynamic model that represents the changes of state that an object goes through during the lifetime in response to events. It is used to help the developer better understand any complex functionality of a specialized areas of the system.
+
+Notations used in a State Diagram:
+* Initial State - represents the start point of the diagram. It is alos called as psuedo state where state has no variables and no activities.
+
+![DataStructuresNotes](images/InitialState_inStateDiagram.jpg)
+
+
+* Final State - represents the end point of the diagram. It is also psuedo state as it doesn't have any variable or activities. State diagram can have zero or more final states
+![DataStructuresNotes](images/finalState_StateDiagram.jpg)
+
+
+* State - represents the state of the object at an instant of time. State is recognizable situation and exists over an interval of time. 
+![DataStructuresNotes](images/StateNotation_StateDiagram.jpg)
+
+
+* Transition - represents changes from one state to other. Ite is denoted by an arrow. The event or action causing the transition is written beside the arrow, separated by slash. Triggerless transition occurs when the state completed the activity.
+![DataStructuresNotes](images/Transition_StateDiagram.jpg)
+
+
+* Event and Action - trigger causes a transition to occur and changes the state is called event or action.
+* History State - flow may require that the object go into wait state and on the occurence of certain event, go back to the state it was in, in this situation theis notation is used.
+* Signal - When even causes the trigger to be sent to a state that causes the transition, then that message sent by the event is called a signal.
+* Self Transition - A state that has a transition that returns to itself is called self-transition.
+
+Here is an example of a full State Diagram:
+![DataStructuresNotes](images/StateMachineDiagramExample.jpg)
+
 
 
 
