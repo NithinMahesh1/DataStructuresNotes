@@ -9,6 +9,15 @@ Comprehensive Notes on all things related to Data Structures
 
 Contains full online courses, projects, textbook material, etc. Useful resources for any missed CS coursework.
 
+Information on required skills for [Database Design](https://vertabelo.com/blog/database-designer-skills/) (really comes down to relational databases)
+
+Main points to take from this:
+* Understanding how tables are composed of rows (or tuples) 
+* Each table is (or relation) is defined by its attributes (or columns)
+* All relations should have one or more outstanding attributes that represent a unique identifier for each tuple
+* This is the key of the table
+* Non-key attributes are key-dependent in the sense that each key determines a single possible value for each attribute
+
 
 <br/>
 
