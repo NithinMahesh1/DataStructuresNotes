@@ -141,6 +141,29 @@ Here is an example of a full State Diagram:
 ![DataStructuresNotes](images/StateMachineDiagramExample.jpg)
 
 
+Vue.js Notes:
+
+1. Explain the difference between slots and scoped slots?
+
+Answer: 
+A slot is a placeholder in a child component that is with content passed from the parent. Content of a regular slot is compiled in the parent scope then passed to the child component.
+
+This means you can't use child component properties in a slots content. But scoped slots allows you to pass child component data to the parent scope then use that data in slot content. 
+
+2. Explain Vue.js reactivity and common issues when tracking changes.
+
+Answer:
+Properties are reactive 
+If they change the components will automatically udpated and re-rendered as needed.
+All properties are converted to getter and setter during the initialization, letting vue detect when those properties are accessed or changed.
+
+There are problems that occur due to this:
+* Vue can't detect object property addition or deletion due to a JS limitation. Can use vue.set and vue.delete to get around
+* Similarly Vue cannot detect array item modifications using an index, need to use vue.set
+
+3. 
+
+
 
 
 Common Interview Topics to Know by Heart:
