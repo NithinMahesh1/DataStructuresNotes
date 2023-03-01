@@ -47,42 +47,37 @@ public class Main {
         map.put("V",5);
         map.put("IX",9);
         map.put("X",10);
+        map.put("XL",40);
         map.put("L",50);
+        map.put("XC",90);
         map.put("C",100);
         map.put("CD",400);
         map.put("D",500);
         map.put("CM",900);
         map.put("M",1000);
 
+        System.out.println("This is the length of the full string: " +s.length());
 
-        // Loop and check the current index with the next one if it is in the map
-        // if not then just check map for the current val
-        String concat = "";
+        for(int i=0; i<=s.length()-1; i++) {
+                if(i+2 <= s.length()) {
+                    if(map.containsKey(s.substring(i,i+2))) {
+                        result += map.get(s.substring(i,i+2));
+                        i++;
+                    }
+                    else {
+                        result += map.get(Character.toString(s.charAt(i)));
+                    }
+                }
 
-        for(int i=0; i<s.length(); i++) {
-            if(i+1 < s.length()) {
-                String twovals = s.substring(i,i+2);
-                if(map.containsKey(twovals)) {
-                    // if there is a key in the map with these two then get the val
-                    // concat to return string
-                    concat += map.get(twovals);
-                }
-                else {
-                    // If there is not then use the current index key to get the val
-                    // concat to return string
-                    concat += map.get(Character.toString(s.charAt(i)));
-                }
-            }
         }
-
-        result = Integer.parseInt(concat);
 
         return result;
     }
 
     public static void main(String[] args) {
         String s = "MCMXCIV";
+//        String s = "LVIII";
 
-        romanToInt(s);
+        System.out.print(romanToInt(s));
     }
 }
