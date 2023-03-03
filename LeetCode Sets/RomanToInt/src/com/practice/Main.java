@@ -56,27 +56,34 @@ public class Main {
         map.put("CM",900);
         map.put("M",1000);
 
-        System.out.println("This is the length of the full string: " +s.length());
-
-        for(int i=0; i<=s.length()-1; i++) {
-                if(i+2 <= s.length()) {
-                    if(map.containsKey(s.substring(i,i+2))) {
-                        result += map.get(s.substring(i,i+2));
-                        i++;
-                    }
-                    else {
-                        result += map.get(Character.toString(s.charAt(i)));
-                    }
-                }
-
+        int strSize = s.length()-1;
+        int i = 0;
+        String doubles = "";
+        while(i <= strSize) {
+            // check first and second indices for mapkeys
+            if(i != strSize) {
+                char curr = s.charAt(i);
+                char next = s.charAt(i+1);
+                doubles = "" +curr+ "" +next;
+            }
+            if(map.containsKey(doubles)) {
+                result += map.get(s.substring(i,i+2));
+                i = i+2;
+            }
+            // check curr index for mapkeys
+            else {
+                result += map.get(Character.toString(s.charAt(i)));
+                i++;
+            }
         }
 
         return result;
     }
 
     public static void main(String[] args) {
-        String s = "MCMXCIV";
+//        String s = "MCMXCIV";
 //        String s = "LVIII";
+        String s = "MDCXCV";
 
         System.out.print(romanToInt(s));
     }
