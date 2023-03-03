@@ -66,6 +66,9 @@ public class Main {
                 char next = s.charAt(i+1);
                 doubles = "" +curr+ "" +next;
             }
+            if(i == strSize) {
+                doubles = "";
+            }
             if(map.containsKey(doubles)) {
                 result += map.get(s.substring(i,i+2));
                 i = i+2;
