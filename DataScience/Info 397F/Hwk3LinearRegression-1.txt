@@ -1,0 +1,65 @@
+---
+title: "CS 397F Homework 3-1"
+author: "Pinak Kapoor"
+output: html_document
+---
+
+### Week 3: Algorithms- Linear regression
+
+#### Part 1: Simple regression
+
+Are Midterm grades predictive of FinalExam grades? This part asks you to fit a linear regression model to the data.
+
+Q1: Read in the Grades.tsv data file with the read.table function and assign the output to the variable "df.grades".
+```{r}
+df.grades <- read.table("/Users/Pinak/Desktop/College/Spring 2016/CS397F/Week3/Grades.tsv", sep="", header = TRUE)
+```
+
+Q2: Plot the data in a scatter plot with the final exam on the y axis and the midterm on the x axis.
+```{r}
+plot(x=df.grades$Midterm, y=df.grades$FinalExam, ylab="Final Exam", xlab = "Midterm")
+```
+
+Q3: Fit a linear model to the data with the midterm as covariate and final exam as the response variable. Display the output of the fit with the summary function.
+
+```{r}
+fit <- lm(FinalExam ~ Midterm, data=df.grades)
+summary(fit)
+```
+
+Q4: Plot the data again with the regression line. Title the axes :Midterm" and Final Exam" respectively.
+```{r}
+plot(FinalExam ~ Midterm, data=df.grades)
+abline(coef(fit), col = "red", lty=1)
+```
+
+Q5: Plot the residuals against the data. Does this suggest and probelms with the model?
+```{r}
+plot(df.grades$Midterm, fit$residuals, pch=10)
+abline(h=0)
+```
+
+Q6: In your opinion, is the model a good fit to the data? What percent of the variance is explained by the model?
+    What is the overall accuracy of the model?
+```{r}
+#In my opinion the model is a fairly good fit to the data, it follows the normal distribution to an extent, but it is a limited data set as values cannot fall below 0 or exceed 100 and many students scored cloer to 100 so there is not a large amount of variance. The overall accuracy of the model is about 80%, for every point students scored correctly on the midterm, they would score .8 correctly on the final or in other terms if students got 10 questions correct on the midterm they would get 8 correct on the final. The model is off by about 19 points, which is quite high for a spread of 0 to 100.
+```
+
+
+Q7: Predict the final exam grade from a midterm grade of 88. Use a 95% prediction interval.
+```{r}
+attributes(fit)
+intercept <- fit$coefficients[[1]]
+param <- fit$coefficients[[2]]
+newdata = data.frame(score=88)
+colnames(newdata) <- c("Midterm")
+predict(fit, newdata, interval="predict")
+```
+Q8: How does your prediction match the data? Select a subset of the data for Midterm scores of 88 and show the summary statistics of the final exam scores.
+
+```{r}
+fullsum <- subset(df.grades, Midterm > 88)
+summary(fullsum)
+
+#My prediction matches the data fairly accurately. 
+```

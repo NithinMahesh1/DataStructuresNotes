@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0055)https://www.stat.berkeley.edu/classes/s133/Nclass1.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><meta name="GENERATOR" content="TtH 3.67">
+ <style type="text/css">div.p{margin-top:7pt}</style>
+ <style type="text/css">td div.comp{margin-top:-.6ex;margin-bottom:-1ex}td div.comb{margin-top:-.6ex;margin-bottom:-.6ex}td div.hrcomp{line-height:.9;margin-top:-.8ex;margin-bottom:-1ex}td div.norm{line-height:normal}span.roman{font-family:serif;font-style:normal;font-weight:normal}span.overacc2{position:relative;left:.8em;top:-1.2ex}span.overacc1{position:relative;left:.6em;top:-1.2ex}</style>
+
+
+<title> Classification Analysis</title>
+ 
+</head><body><h1 align="center">Classification Analysis </h1>
+
+
+
+ <h2><a name="tth_sEc1">
+1</a>&nbsp;&nbsp;Introduction to Classification Methods</h2>
+When we apply cluster analysis to a dataset, we let the values of the variables 
+that were measured tell us if there is any structure to the observations in the 
+data set, by choosing a suitable metric and seeing if groups of observations that
+are all close together can be found.   If we have an auxilliary variable (like the 
+country of origin from the cars example), it may be interesting to see if the 
+natural clustering of the data corresponds to this variable, but it's important to
+remember that the idea of clustering is just to see if any groups form naturally,
+not to see if we can actually figure out which group an observation belongs to 
+based on the values of the variables that we have.
+
+<div class="p"><!----></div>
+When the true goal of our data analysis is to be able to predict which of several
+non-overlapping groups an observation belongs to, the techniques we use are known
+as classification techniques.  We'll take a look at three classification techniques:
+kth nearest neighbor classification, linear discrimininant analysis, and recursive
+partitioning.
+
+<div class="p"><!----></div>
+ <h2><a name="tth_sEc2">
+2</a>&nbsp;&nbsp;kth Nearest Neighbor Classification</h2>
+The idea behind nearest neighbor classification is simple and somewhat intuitive -
+find other observations in the data that are close to an observation we're interested,
+and classify that observation based on the class of its neighbors.   The number of 
+neighbors that we consider is where the "k" comes in - usually we'll have to look
+at several different values of k to determine which ones work well with a particular
+data set.  Values in the range of one to ten are usually reasonable choices.  
+
+<div class="p"><!----></div>
+To provide some independence to our estimates, traditionally methods like nearest 
+neighbor classification required the data to be divided into two groups - a training
+group and a test group.  The <tt>knn</tt> function in the <tt>class</tt> package 
+(included in the basic R distribution)
+uses this approach.  
+Many statisticians don't like the idea of having to "hold back" some of their data
+when building models, so an alternative way to bring some independence to our predictions
+known as cross validation has been devised.  The idea is to try to classify
+each observation without using that observation in the model that's being calculated.
+The basic idea is that we want
+to make the prediction for an observation as independent from that observation as we
+can.  One method of performing cross-validation is known as v-fold cross validation.
+In this method, the data is divided into v groups, and only data from the other v-1
+groups is used when we classify an observation in a particular group.  We continue
+through each observation,
+classifying observations
+using only observations from the other groups.  When we're done we'll have a prediction
+for each observation, and can compare them to the actual values.
+
+<div class="p"><!----></div>
+For the problem of nearest neighbor classification, a simpler approach called
+"leave-out-one" cross-validation can be used, and this is provided by the <tt>knn.cv</tt>
+function.  Using this technique, 
+the observation itself is ignored when looking for its neighbors.  (Note that if we try
+to trick the ordinary <tt>knn</tt> function by using our entire data set for both training
+and testing, each observation will always be one of its own nearest neighbors.)
+To use <tt>knn.cv</tt>, we provide the data frame or matrix with all the variables except for 
+the classification variable, the vector of true classes, and a value for <tt>k</tt>, the 
+number of nearest neighbors we'll be using.
+
+<div class="p"><!----></div>
+To illustrate the kth nearest neighbor classification technique,
+consider a data set from a wine recognition experiment where a number of chemical and
+other measurements were taken on wines from three cultivars, with the goal being to
+see if we can determine the cultivar of the wine using the measurements that were
+collected.  The data is available at <a href="http://www.stat.berkeley.edu/classes/s133/data/wine.data">http://www.stat.berkeley.edu/classes/s133/data/wine.data</a>;  information about
+the variables is at <a href="http://www.stat.berkeley.edu/classes/s133/data/wine.names">http://www.stat.berkeley.edu/classes/s133/data/wine.names</a>
+First, we'll read in the data:
+
+<pre>wine&nbsp;=&nbsp;read.csv('http://www.stat.berkeley.edu/classes/s133/data/wine.data',header=FALSE)
+names(wine)&nbsp;=&nbsp;c("Cultivar",&nbsp;"Alcohol",&nbsp;"Malic.acid",&nbsp;"Ash",&nbsp;"Alkalinity.ash",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Magnesium",&nbsp;"Phenols",&nbsp;"Flavanoids",&nbsp;"NF.phenols",&nbsp;"Proanthocyanins",
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Color.intensity","Hue","OD.Ratio","Proline")
+wine$Cultivar&nbsp;=&nbsp;factor(wine$Cultivar)
+
+</pre>
+ the <tt>knn.cv</tt> function will return a vector representing how each observation
+has been classified, using its kth nearest neighbors, but not including itself.  We can compare
+with the true values using the <tt>table</tt> function:
+
+<pre>&gt;&nbsp;library(class)
+&gt;&nbsp;knn.class&nbsp;=&nbsp;knn.cv(wine[,-1],wine$Cultivar,k=1)
+&gt;&nbsp;tt&nbsp;=&nbsp;table(knn.class,wine$Cultivar)
+&gt;&nbsp;tt&nbsp;
+knn.class&nbsp;&nbsp;1&nbsp;&nbsp;2&nbsp;&nbsp;3
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;52&nbsp;&nbsp;5&nbsp;&nbsp;3
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;3&nbsp;54&nbsp;14
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;4&nbsp;12&nbsp;31
+
+</pre>
+ Observations along the diagonal mean that they were correctly classified; observations
+on the off-diagonal mean a misclassification.  To calculate the misclassification rate, we
+need to add up the off-diagonal elements and divide by the total number of observations.  To 
+isolate the off-diagonal elements we use the <tt>row</tt> and <tt>col</tt> functions.  On 
+their own, these functions don't seem so useful - they just return an array similar to their
+input, but with row and column numbers in place.  For example, using the <tt>tt</tt> table that
+we just created:
+
+<pre>&gt;&nbsp;row(tt)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[,1]&nbsp;[,2]&nbsp;[,3]
+[1,]&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;1
+[2,]&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;2
+[3,]&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;3
+&gt;&nbsp;col(tt)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[,1]&nbsp;[,2]&nbsp;[,3]
+[1,]&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3
+[2,]&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3
+[3,]&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;3
+
+</pre>
+  However, we can use them together to find the misclassifacation rate as
+follows:
+
+<pre>&gt;&nbsp;errorrate&nbsp;=&nbsp;sum(tt[row(tt)&nbsp;!=&nbsp;col(tt)])&nbsp;/&nbsp;sum(tt)
+&gt;&nbsp;errorrate
+[1]&nbsp;0.2303371
+
+</pre>
+ (If there is a tie for which classification occurs most often among the
+kth nearest neighbors, the observation will be randomly classified into one of the 
+tied groups.  For this reason, the misclassification rate may be different if you
+rerun the <tt>knn.cv</tt> function on the same data, even using the same value 
+of <tt>k</tt>.)
+
+<div class="p"><!----></div>
+To see if we can improve this error rate by changing the value of <tt>k</tt>
+we can write a function and use <tt>sapply</tt>:
+
+<pre>&gt;&nbsp;knn.error&nbsp;=&nbsp;function(k){
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tt&nbsp;=&nbsp;table(knn.cv(wine[,-1],wine$Cultivar,k=k),wine$Cultivar)
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum(tt[row(tt)&nbsp;!=&nbsp;col(tt)])&nbsp;/&nbsp;sum(tt)
++&nbsp;}
+&gt;&nbsp;sapply(1:10,knn.error)
+&nbsp;[1]&nbsp;0.2303371&nbsp;0.2808989&nbsp;0.2752809&nbsp;0.2921348&nbsp;0.2865169&nbsp;0.3370787&nbsp;0.3202247
+&nbsp;[8]&nbsp;0.2921348&nbsp;0.2865169&nbsp;0.3033708
+
+</pre>
+ It doesn't look like changing the value of <tt>k</tt> improves the 
+misclassification rate.
+
+
+<br><br><hr><small>File translated from
+T<sub><font size="-1">E</font></sub>X
+by <a href="http://hutchinson.belmont.ma.us/tth/">
+T<sub><font size="-1">T</font></sub>H</a>,
+version 3.67.<br>On 26 Oct 2007, 15:17.</small>
+<script async="" src="./Classification Analysis_files/analytics.js"></script><script>if(window.parent==window){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-41540427-2','auto',{'siteSpeedSampleRate':100});ga('send','pageview');}</script>
+</body></html>

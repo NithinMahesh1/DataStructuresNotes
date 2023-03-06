@@ -1,0 +1,256 @@
+---
+title: "Homework 9-1 Decision Trees"
+author: "Allen Tan"
+output: html_document
+---
+
+### Decision Trees
+
+Using the "tree" library.
+
+```{r}
+library(tree)
+```
+#### Orange Juice sales
+
+In this part, you will use a classification tree model on the data set orange_juiced.csv to predict the purchase of either Minute Maid or Citrus Hill brand orange juice.
+
+The predicted variable:
+Purchase: A factor with levels CH and MM indicating whether the customer purchased Citrus Hill or
+Minute Maid Orange Juice.
+
+The predictors:
+WeekofPurchase: Week of purchase
+StoreID: Store ID
+PriceCH: Price charged for CH
+PriceMM: Price charged for MM
+DiscCH: Discount offered for CH
+DiscMM: Discount offered for MM
+SpecialCH: Indicator of special on CH
+SpecialMM: Indicator of special on MM
+LoyalCH: Customer brand loyalty for CH
+SalePriceMM: Sale price for MM
+SalePriceCH: Sale price for CH
+PriceDiff: Sale price of MM less sale price of CH
+Store7: A factor with levels No and Yes indicating whether the sale is at Store 7
+PctDiscMM: Percentage discount for MM
+PctDiscCH: Percentage discount for CH
+ListPriceDiff: List price of MM less list price of CH
+STORE: Which of 5 possible stores the sale occured at
+
+
+Q1 (5pts): Read the file "orange_juiced.csv" and assign it to a variable called "sales.df". Using the seed value given below, create a training data set with 800 rows by random sampling, and a test set containing the rest of the data. Also create a variable "true.labels" and assign to it the rows from the test set for the "Purchase" column.
+
+```{r}
+set.seed(12345)
+
+sales.df <- read.csv("orange_juiced.csv")
+
+train.rows <- sample(1:nrow(sales.df), 800)
+train.data <- sales.df[train.rows,]
+
+test.data <- sales.df[-train.rows,]
+
+true.labels <- sales.df$Purchase[-train.rows]
+```
+
+Q2 (5pts): Fit a classification tree to the training data with Purchase as the predicted class. What is the training (misclassification) error rate? How many leaf nodes does the tree have? Name the predictors used in the model.
+
+```{r}
+trainingSales.tree<- tree(Purchase ~., train.data)
+summary(trainingSales.tree)
+```
+
+--------------------------------------------
+The misclassification rate seems to be 0.17, which isn't too bad. The number of leaf nodes is 9. The predictors used in constructing this tree is LoyalCH, PriceDiff, and WeekofPurchase
+--------------------------------------------
+
+```{r}
+trainingSales.tree
+```
+
+Q3 (2pts): Consider leaf node 26. What outcome does that node predict? What predictor is used and what is the split criterion to reach this node? How many data points are included in this partition? What percent of those data are CH?
+
+--------------------------------------------
+Leaf node 26 predicts that predicts that the person will buy a Citrus Hill orange juice. The predictor it used is PriceDiff, with a split criterion of 0.325. In this partition, there are 17 data points, with 8 of them being Citrus Hill, which is about 47%
+--------------------------------------------
+
+Q4 (3pts): A tree can be seen as a collection of rules that lead to a prediction. Each path is a sequence of rules, which are the split criteria that lead from the root to a terminal node. For example, the rules that lead to terminal node 4, which predicts MM are:
+LoyalCH < 0.5036, LoyalCH < 0.0356415 -> MM
+
+Terminal node 47 predicts CH. Write the sequences of rules that lead to this node. 
+
+--------------------------------------------
+LoyalCH < 0.5036, LoyalCH < 0.0356415, PriceDiff > -0.34, WeekofPurchase > 249.5, LoyalCH > 0.104031 -> CH
+--------------------------------------------
+
+Q5 (5pts): Create predictions on the test set and print a confusion matrix of the results. Print the misclassification rate.
+
+```{r}
+testSales.tree<- tree(Purchase ~., test.data, subset=train.rows)
+treeSales.pred<- predict(testSales.tree, test.data, type="class")
+
+theTable <- table(treeSales.pred, true.labels)
+misclassRate <- 1-sum(diag(theTable))/sum(theTable)
+
+theTable
+misclassRate
+```
+
+Q6 (5pts): Use the cv.tree function on the tree fitted to the training set to determine the best tree size. Plot the tree size on the horizontal axis and the cv error on the vertical axis. What is the best size according to the output?
+
+```{r}
+cv.treeOne<-cv.tree(trainingSales.tree, FUN=prune.misclass)
+par(mfrow=c(1,2))
+plot(cv.treeOne$size, cv.treeOne$k, type="b")
+```
+
+Q7 (5pts): Create a pruned tree of size 4. Plot the pruned tree including the selection criteria and terminal node labels.
+
+```{r}
+pruned.tree<-prune.misclass(trainingSales.tree, best=4)
+plot(pruned.tree)
+text(pruned.tree, pretty=0)
+```
+
+Q8 (10pts): Display the fit error rates for both the unpruned and pruned trees. Which has a better fit? Explain why you would or would not expect this result.
+
+```{r}
+cv.treeTwo<-cv.tree(pruned.tree, FUN=prune.misclass)
+
+cv.treeOne
+cv.treeTwo
+```
+--------------------------------------------
+The pruned tree has a better fit. I would expect this result because there are less nodes in the pruned tree so the results aren't overfit. 
+--------------------------------------------
+
+Q9 (10pts): Create predictions and a confusion matrix for the pruned tree. Calculate the misclassification rate for the pruned tree. Compare the misclassification rate for the unpruned and pruned trees. Explain why you would or would not expect this result.
+
+```{r}
+prunedTree.pred<- predict(pruned.tree, test.data, type="class")
+theTablee <- table(prunedTree.pred, true.labels)
+misclassRatee <- 1-sum(diag(theTablee))/sum(theTablee)
+
+theTablee
+misclassRatee
+```
+--------------------------------------------
+The misclassification rate for the unpruned tree was 0.14 while the misclassification rate for the pruned tree was a little higher at 0.19. I would expect this result because the two values are pretty close to each other and yet, the pruned tree has less variables used in the tree construction. It means the pruning was successful since it has almost the same prediction power and yet there are much less variables.   
+--------------------------------------------
+
+
+#### Use a classification tree to predict spam.
+
+In this part, you will use a classification tree model on the data set HeartDisease.csv to predict the presence of heart disease.
+
+Predictors:
+48 word percentages of occurence in emails
+6 character percentages
+CAP- uninterrupted capital letter sequence
+
+Predicted class:
+spam:  0="email", 1="spam"
+
+Q10 (5pts): Read the file "spambase.csv" and assign it to a variable called "spam.df". Convert the "spam" column to a factor with levels "email", "spam". Using the seed value given below, create a training data set that contains 66% of the rows by random sampling, and a test set containing the rest of the data. Also create a variable "true.labels" and assign to it the rows from the test set for the "Purchase" column.
+
+```{r}
+set.seed(12345)
+
+spam.df <- read.csv("spambase.csv")
+spam.df$spam <- factor(spam.df$spam)
+levels(spam.df$spam) <- c('email','spam')
+
+data.size <- nrow(spam.df)
+train.size2 <- 0.66
+
+train.row.nums2<-sample(1:data.size, data.size*train.size2, replace=FALSE)
+train.data2<-subset(spam.df[train.row.nums2,])
+
+test.row.nums2<-setdiff(1:data.size,train.row.nums2)
+test.data2<-subset(spam.df[test.row.nums2,])
+
+true.labels2 <- test.data2[, 58]
+```
+
+Q11 (5pts): Fit a classification tree to the training data with "spam" as the predicted class. Print a summary of the fitted model. What is the training error rate? How many leaf nodes does the tree have? How many predictors are used?
+
+```{r}
+trainingEmail.tree<- tree(spam ~., train.data2)
+summary(trainingEmail.tree)
+```
+--------------------------------------------
+The training error rate is 0.07806, which is not a bad error rate. It has 13 leaf nodes. It used 10 predictors
+--------------------------------------------
+
+Q12 (5pts): Create a plot of the tree including the selection criteria and terminal node labels. Also print text representation of the tree to the console. Pick a node that predicts "email". Write the rules that lead to this node starting at the root. How many data points are included in this node. How many of these data are classified as "spam"?
+
+```{r}
+plot(trainingEmail.tree)
+text(trainingEmail.tree, pretty=0) 
+```
+
+```{r}
+trainingEmail.tree
+```
+--------------------------------------------
+char_freq_..4 < 0.0555, word_freq_remove < 0.055, char_freq_..3 < 0.191, word_freq_hp < 0.025, capital_run_length_longest < 10.5
+
+There are 5 data points in this node. None of them were classified as spam.
+--------------------------------------------
+
+Q13 (5pts): Create predictions on the test set, print a confusion matrix of the results as well as the misclassification rate.
+
+```{r}
+testTree<- tree(spam ~., spam.df, subset=train.row.nums2)
+testTreePrediction <- predict(testTree, test.data2, type="class")
+
+theTable1 <- table(testTreePrediction, true.labels2)
+misclassRate1 <- 1-sum(diag(theTable1))/sum(theTable1)
+
+theTable1
+misclassRate1
+```
+
+Q14 (5pts): Use the cv.tree function on the tree fitted to the training set to determine the best tree size. Plot the tree size on the horizontal axis and the cv error on the vertical axis. 
+
+```{r}
+cv.unprunedTree<-cv.tree(testTree, FUN=prune.misclass)
+par(mfrow=c(1,2))
+plot(cv.unprunedTree$size, cv.unprunedTree$k, type="b")
+```
+
+Q15 (5pts): Create a pruned tree of size 6. Plot the pruned tree with labels.
+
+```{r}
+pruned.treeSizeSix<-prune.misclass(testTree, best=6)
+plot(pruned.treeSizeSix)
+text(pruned.treeSizeSix, pretty=0)
+```
+
+Q16 (10pts): Display the fit error rates for both the unpruned and pruned trees. Which has a better fit? Explain why you would or would not expect this result.
+
+```{r}
+cv.prunedTree <- cv.tree(pruned.treeSizeSix, FUN=prune.misclass)
+
+cv.unprunedTree
+cv.prunedTree
+```
+--------------------------------------------
+The pruned tree has a better fit. I would expect this result because there are less nodes in the pruned tree so the results aren't overfit. 
+--------------------------------------------
+
+Q17 (10pts): Create predictions and a confusion matrix for the pruned tree. Calculate themisclassification rate for the pruned tree. Compare the misclassification rate for the unpruned and pruned trees. Explain why you would or would not expect this result.
+
+```{r}
+prunedTreePredictions <- predict(pruned.treeSizeSix, test.data2, type="class")
+theTable2 <- table(prunedTreePredictions, true.labels2)
+misclassRate2 <- 1-sum(diag(theTable2))/sum(theTable2)
+
+theTable2
+misclassRate2
+```
+--------------------------------------------
+The misclassification rate for the unpruned tree is 0.09 while the misclassification rate for the pruned tree is 0.11. I would expect this result because the pruned tree had less nodes to make predictions off of, so it'll be slightly off more, but not by a whole lot. 
+--------------------------------------------
+

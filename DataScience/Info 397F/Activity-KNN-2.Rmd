@@ -1,0 +1,167 @@
+---
+title: "Activity- K-Nearest Neighbor"
+author: "Gordon Anderson"
+output: html_document
+---
+
+### Algorithms- K nearest neighbor
+
+#### K nearest neighbor 
+
+K nearest neighbor, or KNN is an algorithm that is commonly used to classify or label data. You are given a set of variables, or features, and a set of labels. The KNN algorithm assigns a label to a set of features. Note that labels are categorical, not continuous data. Linear regression differs in that it assigns a set of features to a continuous value.
+
+KNN is often used for recommendation systems. For example, a movie recommendation classifies movies into genres by finding all movies that have similar descriptions. A user can then select a genre and a list will be presented- perhaps weighted by its similarity to the genre. Another approach would be to track the user's selections and recommend movies that have similar features to her past choices.
+
+In both cases, we need a way to determine similarity, or distance, between the entities we are labeling. For continuous values, the euclidean distance is often used. For discrete values, the Hamming distance is an option.
+
+Recall that euclidean distance between points x1,y1 and x2,y2 is sqrt((x1-x2)^2 + (y1-y2)^2).
+The Hamming distance between two strings is the number of places where the letter or symbols differ.
+s1: "freddy" 
+s2: "teddie"
+hamm(s1, s2)=5
+
+There are many other ways of calculating distance metrics on categorical and numeric data. We will explore this topic some more later on in the course.
+
+Once we have a distance metric, we can calculate a distance matrix of distances between all data points. Then, for a new point, we can calculate its distance to all other points, find the K nearest points, and assign the most common label to the new point.
+
+A small example, with age and income as the features, credit as the label (Refer to the text, ch3, p78 as this code is very similar):
+```{r}
+cred.data <- data.frame(age=c(69,66,49,49,58,44),
+ income=c(3,57,79,17,26,71),
+ credit = c('low','low','low','low','high','high'))
+```
+The data is a two-dimensional space, each point associated with a label. The code below plots the data with the label indicated by symbol type: low=not filled(white), high=filled(black).
+```{r}
+plot(cred.data$age, cred.data$income, pch= ifelse(cred.data$credit =="low", 1, 16), xlab="age", ylab="income")
+```
+
+Calculate the distances between all points. This results in a distance matrix of 6X6, since we have 6 data points. Notice the diagonal values are the distances between the points themselves.
+```{r}
+d <- dist(cred.data[,1:2], method="euclidean")
+dm <- as.matrix(d)
+dm
+```
+Let's say we want to classify data point 4, pretending we don't know it is already labeled as "low". First, get the row 4 values in sorted order. These are the "neighbors"" of 4.
+```{r}
+test.point=4
+order(dm[test.point, ])
+```
+
+Look up the labels for the points, ignoring the first value since that is the test.point (4).
+```{r}
+order(dm[test.point, ])[2:6]
+cred.data[order(dm[test.point, ])[2:6],3]
+```
+If we considered k=5, which would consider all of the other data points, we would label point 4 "low" because that is the most common label of its 5 neighbors (Of course we could not have k>5). What if k=3? We would still label it "low" as that is the most common label of its three closest neighbors. At k=2 we have a tie. In that case, we could break the tie in many ways. Often it is done by a random choice. We could label point 4 as either "low" or "high". If k=1, we would label it "high". The choice of k does have an impact on the precision of labeling. 
+
+If the data set is dominated by one label, we can adjust by adding a weight to the neighbors, something like the reciprocal of the distance so closer neighbors count more. The data used here is too small to provide a real example of this, though it served as an introduction to the KNN algorithm.
+
+To label a new data point, we would re-calculate the distance matrix and perform the same steps as above. For example, add a 57 year old who makes $37K. Note that we leave the label blank- which will result in R using NA as a value.
+
+```{r}
+cred.data<- rbind(cred.data, c(57, 37))
+```
+
+Re-run the distance matrix calculation:
+```{r}
+d <- dist(cred.data[,1:2], method="euclidean")
+dm <- as.matrix(d)
+dm
+```
+Again, retrieve the row for point 7 and look up the labels for the points, ignoring the first value since that is the test.point (7).
+```{r}
+test.point=7
+order(dm[test.point, ])[2:7]
+cred.data[order(dm[test.point, ])[2:7],3]
+```
+
+Based on this output, what label to assign to point 7? If k=1, "high", but if k=3, "low". Let's go with "low". Assign the seventh row to the label "low", then plot the seven data points as above.
+```{r}
+cred.data[7,3]<-"low"
+plot(cred.data$age, cred.data$income, pch= ifelse(cred.data$credit =="low", 1, 16), xlab="age", ylab="income")
+```
+
+#### Now let's do KNN on a larger data set.
+
+Read in the creditRatings.csv data file with the read.csv function and assign the output to the variable "df.credit".
+```{r}
+df.credit <- read.csv("creditRatings.csv", header=TRUE)
+```
+
+Inspecting the columns we find a continuous feature "Rating"", but we need a categorical label. Following along with the example above, let's create a "CreditLabel" column that assigns "high" to ratings above the median value and "low" to ratings <= median. First find the median and then use the cut function to make the values as mentioned. Finally, make CreditLabel a factor and assign the proper levels.
+
+```{r}
+median.rating<-median(df.credit$Rating)
+df.credit$CreditLabel<-cut(df.credit$Rating, c(-Inf,median.rating,Inf))
+df.credit$CreditLabel<-factor(df.credit$CreditLabel)
+levels(df.credit$CreditLabel)<- c("low","high")
+```
+
+In preparation to make the test and training data sets, create variables for the data size, the training set size (or rate or proportion- anyway its .75 in this case). Also calculate the number of test labels- for use later.
+
+```{r}
+data.size<-nrow(df.credit)
+train.size<-0.75
+num.test.labels<-data.size*(1-train.size)
+```
+
+Make up a training set. Assign rows to the training set by random sampling. Use the sample function to obtain row numbers. First set the random number generator seed so we could repeat this if needed (can always turn it off). Note that we need to sample without replacement- so replace parameter is set to false.
+```{r}
+set.seed(123456)
+train.row.nums<-sample(1:data.size, data.size*train.size, replace=FALSE)
+train.data<-subset(df.credit[train.row.nums,], select=c(Age, Income))
+```
+Make the test set by first getting row numbers. Use the setdiff function and the training rows to get the test row numbers. Then use subset to get the test data set.
+(see the text p78).
+```{r}
+test.row.nums<-setdiff(1:data.size,train.row.nums)
+test.data<-subset(df.credit[test.row.nums,], select=c(Age, Income))
+```
+Get the training and test set labels.
+```{r}
+class.labels<-df.credit$CreditLabel[train.row.nums]
+true.labels<-df.credit$CreditLabel[test.row.nums]
+```
+
+We'll use the misclassification rate as the evaluation metric.
+
+misclassification rate = 1 - accuracy,
+where accuracy = correctly labeled / total labels
+note that misclassification rate = 1 - accuracy = incorrectly labeled / total labels
+
+##### Run KNN and evaluate
+
+We will use KNN to label the test data set. Let's use k=3, and a distance metric "euclidean". The algorithm finds the k closest neighbors in the train set and assign the label of the majority of those neighbors. We will then compare the assigned labels to the actual labels. Use the R function knn in the "class" library. Call up the doc on this function.
+Assign the call to knn and assign it to pred.labels. This is the knn analog to the linear regression model fit.
+```{r}
+library(class)
+pred.labels<-knn(train.data, test.data, class.labels, k=3)
+```
+Now calculate the misclassification rate. First get the number of incorrect labels- the sum of the occurences where the predicted labels do not match the true labels. Then the miscalculation rate is the ratio of incorrect labels over the total number of test labels.
+```{r}
+num.incorrect.labels<- sum(pred.labels!=true.labels)
+misc.rate <- num.incorrect.labels/num.test.labels
+misc.rate
+```
+
+Create a table, a "confusion matrix", with the predictions and labels from the test data. This table conveniently shows the true positives, true negatives, false positives, and false negatives.
+Use the table function and pass in the predicted labels and the true labels.
+
+```{r}
+conf.mat<-table(pred.labels, true.labels)
+conf.mat
+```
+
+##### Can we do better?
+
+Let's try a bunch of different values for k. Use this loop to run knn 10 times. Put in the statements needed to get predictions from the call to knn using the loop index k. Get the number of incorrect labels and calculate the misclassification rate (use the variable "misc.rate" to work with the code provided).
+```{r}
+for (k in 1:10) {
+  pred.labels<-knn(train.data, test.data, class.labels, k)
+  num.incorrect.labels<- sum(pred.labels!=true.labels)
+  misc.rate <- num.incorrect.labels/num.test.labels
+  cat("   ",k,"            ", misc.rate,"\n")
+}
+```
+How could we improve or explore the behavior on the data? We varied the value of k. We could try a different training and test set (don't use the seed). We could also try a larger (or smaller) training set. Think about how varying these aspects of the analysis could affect the misclassification rate.
+One other consideration is that we assigned the labels based on the median of the Rating column. Perhaps there is an underlying process that we are missing. Perhaps we should label the top quartile as "high"?

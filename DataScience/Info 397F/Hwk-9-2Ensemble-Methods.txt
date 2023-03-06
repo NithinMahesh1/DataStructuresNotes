@@ -1,0 +1,277 @@
+---
+title: "Homework 9-2 Tree Ensemble Methods Solutions"
+author: "Allen Tan"
+output: html_document
+---
+
+### Ensemble Methods with Trees
+
+This file deals with bagging, random forests, and boosting techniques. The first part demonstrates fitting and evaluating a single regression tree on a data set, as done previously. Then ensemble techniques are fit to the same data set and their evaluations compared. In the second part, you are asked to fit ensemble techniques to data sets you have previously analyzed with single trees.
+
+```{r}
+library(tree)
+library(randomForest)
+library(gbm) # for boosting
+```
+
+#### Part 1: Regression analysis on Carseat Sales.
+
+You will compare single and ensemble decision tree methods to predict carseat sales using the "carseat_sales_reg.csv"" data set. It is the same data as the carseat_sales.csv except the Sales column is a numeric value. You will predict the Sales variable using all of the other columns as predictors.
+
+Q1 (5pts): Using the seed value below, create test and train sets that are 50% of the data each. Read in the file "carseat_sales_reg.csv" and remove the SalesLevel column.
+Also create a variable that is assigned to the true Sales values from the test set.
+
+```{r}
+seed.val<-12345
+set.seed(seed.val)
+
+data.df<- read.csv("carseat_sales_reg.csv")
+
+data.size<-nrow(data.df)
+
+train.rows<-sample(1:data.size, data.size/2)
+train.data<-data.df[train.rows,]
+
+test.data<-data.df[-train.rows,]
+
+true.vals<-test.data[, 1]
+```
+
+#### Single tree models
+
+Q2 (5pts): Fit a tree using the "tree" function on the training data that predicts Sales. Plot the tree with selection criteria and labels. Also print the text representation of the tree to the console.
+
+```{r}
+originalTree<-tree(Sales~., data=train.data)
+summary(originalTree)
+plot(originalTree)
+text(originalTree, pretty=0)
+```
+
+Q3 (5pts): Now look for a smaller tree size by plotting the deviation vs tree size. Use the seed provided.
+
+```{r}
+set.seed(seed.val)
+
+pruningData<-cv.tree(originalTree)
+plot(pruningData$size, pruningData$dev, type="b")
+
+pruningData
+```
+
+Q4 (5pts): Generate a pruned tree by picking the size in the range of [5,10] with the lowest deviance from the plot above. Plot the tree with selection criteria and labels. Also print the text representation of the pruned tree to the console.
+
+```{r}
+prunedTree<-prune.tree(originalTree, best=5)
+plot(prunedTree)
+text(prunedTree, pretty=0)
+```
+What are the most important predictors included in the model?
+
+----------------------------------------
+SalesLevel, ShelveLoc, and Education
+----------------------------------------
+
+Q5 (5pts): Now make predictions and calculate mean squared error MSE to evaluate the unpruned and pruned tree models. Summarize the results. Are these expected? Briefly explain.
+
+```{r}
+unprunedPredictions <- predict(originalTree, newdata=test.data)
+mean((unprunedPredictions-true.vals)^2)
+
+prunedPredictions <- predict(prunedTree, newdata=test.data)
+mean((prunedPredictions-true.vals)^2)
+```
+----------------------------------------
+As we can see, the unpruned tree has an MSE of 2.7, while the pruned tree has an MSE of 2.6. This shows the that pruned tree is a slightly better fit to the data set than the unpruned tree is. This is expected because the original tree was likely overfit with all the factors involved in it, while the pruned tree only has 3 factors in it
+----------------------------------------
+
+#### Bagging, Boosting and Random Forest.
+
+Q6 (5pts): Use the "randomForest" function to create a bagged ensemble on the training data. Generate predictions on the test data and display the mean squared error MSE.
+
+```{r}
+set.seed(seed.val)
+
+bootstrapForest <- randomForest(Sales~., data=train.data, mtry=11, importance=TRUE)
+bootstrapPredictions <- predict(bootstrapForest, newdata=test.data)
+
+mean((bootstrapPredictions-true.vals)^2)
+```
+
+Q7 (5pts): Use the "randomForest" function to create a random forest ensemble on the training data. Generate predictions on the test data and display the mean squared error MSE. Use 6 predictors for the random selection at each node splitting decision.
+
+```{r}
+set.seed(seed.val)
+
+randomForestt <- randomForest(Sales~., data=train.data, mtry=6, importance=TRUE)
+randomForestPredictions <- predict(randomForestt, newdata=test.data)
+
+mean((randomForestPredictions-true.vals)^2)
+```
+
+```{r}
+importance(randomForestt)
+```
+
+Q8 (5pts): What are the five most important predictors in the random forest model? List them in order of most important to least important.
+
+----------------------------------------
+SalesLevel, ShelveLoc, Price, CompPrice, Education
+----------------------------------------
+
+Q9 (5pts): Use the gbm function to create a boosted model on the training data. Generate predictions on the test data and display the mean squared error MSE. Use 5,000 trees and a depth of 4.
+
+```{r}
+set.seed(seed.val)
+
+boostedModel<-gbm(Sales~., data=train.data, distribution="gaussian", n.trees=5000, interaction.depth=4)
+boostedModelPredictions<-predict(boostedModel, newdata=test.data, n.trees=5000)
+
+mean((boostedModelPredictions-true.vals)^2)
+```
+
+Q10 (5pts): Summarize the results of the MSE calculations for the single unpruned and pruned trees as well as for the bag, random forest, and boosted models. Briefly describe these results in terms of what you know about ensemble methods versus single tree models.
+
+----------------------------------------
+Summary of the MSE results:
+
+single,  unpruned tree:                    2.709357
+
+single, pruned tree:                       2.595379
+
+Bagged model:                              1.889968
+
+Random Forest selecting 6 predictors:      1.726015
+
+Boosted model:                             1.520678
+
+As we can see, the error rates is going down the more advanced the technique we use. This makes sense. The unpruned tree was likely overfitting the data to be able to make solid predictions. THe pruned tree was a little better since it was less overfit, but still not perfect. The bagged model did pretty good since it was an aggregate of a number of unpruned trees, but it still had some work to do. The random forst was better still since it sampled a wide variety of the predictors and aggregated their trees, but still not the best. The best one we looked at was the boosted model, since these trees essentially learn from all the past trees that were created. 
+----------------------------------------
+
+### Part 2: Regression analysis on Baseball Salaries.
+
+In this part, you will work with the "baseball.csv"" data set to predict average salaries. As above, you will generate single tree models and compare their prediction performance with ensemble methods. 
+
+Q11 (5pts): Read in the the file "baseball.csv". Remove all NA values from the data before making the train and test sets. Transform the Salary column by applying the log function. This will make the MSE errors more readable. 
+
+```{r}
+baseballData.df<- read.csv("baseball.csv")
+baseballData.df$Salary <- log(baseballData.df$Salary)
+baseballData.df <- na.omit(baseballData.df)
+
+baseballData.df
+```
+
+Q12 (5pts): Using the seed value below, create test and train sets that are 50% of the data each from  Also create a variable that is assigned to the true Salary values from the test set. 
+
+```{r}
+seed.val<-12345
+set.seed(seed.val)
+
+data.sizeBaseball<-nrow(baseballData.df)
+
+train.rowsBaseball<-sample(1:data.sizeBaseball, data.sizeBaseball/2)
+train.dataBaseball<-baseballData.df[train.rowsBaseball,]
+
+test.dataBaseball<-baseballData.df[-train.rowsBaseball,]
+
+true.valsBaseball<-test.dataBaseball[, 19]
+```
+
+#### Single tree models
+
+Q13 (5pts): Fit a tree using the "tree" function on the training data that predicts Salary. Then, generate a plot of deviance vs tree size and use it to find a smaller size tree. Fit this size tree as the pruned tree.
+
+```{r}
+set.seed(seed.val)
+
+par(mfrow=c(1,2))
+
+unprunedBaseballTree <- tree(Salary~., data=train.dataBaseball)
+
+pruningBaseballData<-cv.tree(unprunedBaseballTree)
+plot(pruningBaseballData$size, pruningBaseballData$dev, type="b")
+
+prunedBaseballTree<-prune.tree(unprunedBaseballTree, best=5)
+plot(prunedBaseballTree)
+text(prunedBaseballTree, pretty=0)
+```
+
+Q14 (5pts): What are the three most important predictors of Salary in the single tree models?
+
+----------------------------------------
+CAtBat, CRuns, Hits
+----------------------------------------
+
+Q15 (5pts): Calculate and display the MSE for the predictions of the unpruned and pruned trees.
+
+```{r}
+unprunedBaseballPredictions <- predict(unprunedBaseballTree, newdata=test.dataBaseball)
+mean((unprunedBaseballPredictions-true.valsBaseball)^2)
+
+prunedBaseballPredictions <- predict(prunedBaseballTree, newdata=test.dataBaseball)
+mean((prunedBaseballPredictions-true.valsBaseball)^2)
+```
+
+#### Bagging, Boosting and Random Forest.
+
+Q16 (5pts): Use the "randomForest" function to create a bagged ensemble on the training data. Generate predictions on the test data and display the mean squared error MSE.
+
+```{r}
+set.seed(seed.val)
+
+bootstrapBaseballForest <- randomForest(Salary~., data=train.dataBaseball, mtry=19, importance=TRUE)
+bootstrapBaseballPredictions <- predict(bootstrapBaseballForest, newdata=test.dataBaseball)
+
+mean((bootstrapBaseballPredictions-true.valsBaseball)^2)
+```
+
+Q17 (5pts): Use the "randomForest" function to create a random forest ensemble on the training data. Generate predictions on the test data and display the mean squared error MSE. Use 6 predictors for the random selection at each node splitting decision.
+
+```{r}
+set.seed(seed.val)
+randomBaseballForestt <- randomForest(Salary~., data=train.dataBaseball, mtry=6, importance=TRUE)
+randomBaseballForestPredictions <- predict(randomBaseballForestt, newdata=test.dataBaseball)
+
+mean((randomBaseballForestPredictions-true.valsBaseball)^2)
+```
+
+Q18 (5pts): Use the gbm function to create a boosted model on the training data. Generate predictions on the test data and display the mean squared error MSE. Use 5,000 trees and a depth of 4.
+
+```{r}
+set.seed(seed.val)
+
+boostedBaseballModel<-gbm(Salary~., data=train.dataBaseball, distribution="gaussian", n.trees=5000, interaction.depth=4)
+boostedBaseballModelPredictions<-predict(boostedBaseballModel, newdata=test.dataBaseball, n.trees=5000)
+
+mean((boostedBaseballModelPredictions-true.valsBaseball)^2)
+```
+
+```{r}
+summary(boostedBaseballModel)
+```
+
+Q19 (5pts): What are the four most important predictors in the boosted model? List them in order of most important to least important.
+
+----------------------------------------
+CRBI, AtBat, Errors, League
+----------------------------------------
+
+Q20 (5pts): Summarize the results of the MSE calculations for the single unpruned and pruned trees as well as for the bag, random forest, and boosted models. Briefly describe these results in terms of what you know about ensemble methods versus single tree models.
+
+----------------------------------------
+single,  unpruned tree:                    0.3742327
+
+single, pruned tree:                       0.3149435
+
+Bagged model:                              0.3371888
+
+Random Forest selecting 6 predictors:      0.3117557
+
+Boosted model:                             0.2690355
+
+
+As we can see, the error rate is generally going downwards as we move on. The unpruned single tree had the most error, which made sense because it was most likely overfit. THe pruned tree did a little better since it was probably less overfit. The bagged model surprisingly didn't do as well this time, but it is totally possible. The random forest did a little better since it chose a number of forests at random, and like before, the boosted model did the best since it learned from its predecessors. 
+----------------------------------------
+
+

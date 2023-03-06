@@ -1,0 +1,2681 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/QAPage">
+
+<head>
+
+<title>machine learning - Difference between classification and clustering in data mining? - Stack Overflow</title>
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+    <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="stackoverflow.com"/>
+    <meta property="og:type" content="website" />
+
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded" />
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="Difference between classification and clustering in data mining?" />
+    <meta name="twitter:description" property="og:description" itemprop="description" content="Can someone say what is difference between classification and clustering in data mining?
+
+If you can, please give examples of both to understand the main idea." />
+    <meta property="og:url" content="http://stackoverflow.com/questions/5064928/difference-between-classification-and-clustering-in-data-mining"/>
+    <link rel="canonical" href="http://stackoverflow.com/questions/5064928/difference-between-classification-and-clustering-in-data-mining" />
+
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.sstatic.net/Js/stub.en.js?v=01d9387a67d6"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.sstatic.net/Sites/stackoverflow/all.css?v=998538ead664">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;Difference between classification and clustering in data mining?&#39;" href="/feeds/question/5064928">
+            <meta name="twitter:app:country" content="US" />
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS" />
+            <meta name="twitter:app:id:iphone" content="871299723" />
+            <meta name="twitter:app:url:iphone" content="se-zaphod://stackoverflow.com/questions/5064928/difference-between-classification-and-clustering-in-data-mining" />
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS" />
+            <meta name="twitter:app:id:ipad" content="871299723" />
+            <meta name="twitter:app:url:ipad" content="se-zaphod://stackoverflow.com/questions/5064928/difference-between-classification-and-clustering-in-data-mining" />
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://stackoverflow.com/questions/5064928/difference-between-classification-and-clustering-in-data-mining">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:5064928});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('1', '5064928');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text', true); });
+
+            });
+        </script>
+
+
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","serverTime":1488914287,"routeName":"Questions/Show","site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","recaptchaAudioLang":"en","enableNewTagCreationWarning":true,"insertSpaceAfterNameTabCompletion":false,"id":1,"enableInsertDocLinkDialog":true,"enableSocialMediaInSharePopup":true,"protocol":"http"},"user":{"fkey":"33b37abcc96538be508dc815176c887a","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true,"canSeeNewHeaderDesign":true,"ab":{"question_show_tweaks":{"v":"altern_unansw_cta","g":1},"simplified_signup_form":{"v":"messaging_b","g":2}}},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableNewLinkInsertDialog":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{"openGraphAPIKey":"58740831ad23540e00c58987"},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"analytics":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"markdown":{"asteriskIntraWordEmphasis":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"848c5965d3e6","js/moderator.en.js":"807bb02152f9","js/full-anon.en.js":"04758254b3b5","js/full.en.js":"90435d2ca815","js/wmd.en.js":"4c05bcf337d1","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"c37948fe0a99","js/help.en.js":"118cb359bcc6","js/tageditor.en.js":"248fce004255","js/tageditornew.en.js":"253eeb7b3008","js/inline-tag-editing.en.js":"e445e14be978","js/revisions.en.js":"8f22ba768cac","js/review.en.js":"7884923db2c6","js/tagsuggestions.en.js":"ddb0e41afe26","js/post-validation.en.js":"fce27e94a6e2","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"3ca3f038145b","js/keyboard-shortcuts.en.js":"c07f3b7e8f50","js/external-editor.en.js":"8d2d531d73f0","js/adops.en.js":"9a6a7812a212","js/external-editor.en.js":"8d2d531d73f0","js/snippet-javascript.en.js":"e76aab1cc9bc","js/snippet-javascript-codemirror.en.js":"fcfb4c815a5e"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page new-topbar">
+    <noscript><div id="noscript-padding"></div></noscript>
+            <script>(function () { var old = $.fn.contents; $.fn.contents = function () { try { return old.apply(this, arguments); } catch (e) { return $([]); } } })()</script>
+        <iframe id="adzerk-user-match" width="0" height="0" frameborder="0" scrolling="no" onload="window.AUMIframeDone=true"
+                src="https://ssum-sec.casalemedia.com/usermatch?s=183712&amp;cb=https%3A%2F%2Fengine.adzerk.net%2Fudb%2F22%2Fsync%2Fi.gif%3FpartnerId%3D1%26userId%3D"
+                style="display: none;" marginheight="0" marginwidth="0"></iframe>
+
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+<header class="so-header js-so-header _fixed">
+    <div class="-container">
+        <div class="-main">            
+            <a href="http://stackoverflow.com" class="-logo ">
+                <span class="-img">Stack Overflow</span>
+            </a>
+
+            <nav class="navigation">
+                <ol class="-list">
+                        <li class="-item _current">
+        <a id="nav-questions" href="/questions" class="-link js-gps-track" 
+            data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">Questions</a>
+    </li>
+
+    <li class="-item">
+        <a id="nav-jobs" href="/jobs?med=site-ui&amp;ref=jobs-tab" class="-link js-gps-track" 
+            data-gps-track="top_nav.click({is_current:false, location:2, destination:6})">Jobs</a>
+    </li>
+                        <li class="-item">
+        <a id="nav-docs" href="/documentation" class="-link js-gps-track" 
+            data-gps-track="top_nav.click({is_current:false, location:2, destination:7})">Documentation <small class='beta-badge'>beta</small></a>
+    </li>
+                        <li class="-item">
+        <a id="nav-tags" href="/tags" class="-link js-gps-track" 
+            data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">Tags</a>
+    </li>
+
+                        <li class="-item">
+        <a id="nav-users" href="/users" class="-link js-gps-track" 
+            data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">Users</a>
+    </li>
+
+                </ol>
+            </nav>
+
+            <form id="search" action="/search" method="get" class="searchbar" autocomplete="off">
+                <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M12.864 11.32h-.813l-.288-.277A6.66 6.66 0 0 0 13.38 6.69a6.69 6.69 0 1 0-6.69 6.69 6.66 6.66 0 0 0 4.354-1.617l.278.288v.813L16.467 18 18 16.467l-5.136-5.146zm-6.174 0a4.625 4.625 0 0 1-4.632-4.63A4.625 4.625 0 0 1 6.69 2.058a4.625 4.625 0 0 1 4.63 4.632 4.625 4.625 0 0 1-4.63 4.63z"/></svg>
+                <input name="q" type="text" placeholder="Search..." value="" tabindex="1" autocomplete="off" maxlength="240" class="f-input js-search-field" />
+                <button type="submit" class="btn js-search-submit">
+                    <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M12.864 11.32h-.813l-.288-.277A6.66 6.66 0 0 0 13.38 6.69a6.69 6.69 0 1 0-6.69 6.69 6.66 6.66 0 0 0 4.354-1.617l.278.288v.813L16.467 18 18 16.467l-5.136-5.146zm-6.174 0a4.625 4.625 0 0 1-4.632-4.63A4.625 4.625 0 0 1 6.69 2.058a4.625 4.625 0 0 1 4.63 4.632 4.625 4.625 0 0 1-4.63 4.63z"/></svg>
+                </button>
+            </form>
+
+        </div>
+        
+
+
+<div class="-actions">
+    <nav class="secondary-nav">
+        <div class="-dialog-container js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="http://stackoverflow.com">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+                    <a href="http://chat.stackoverflow.com" class="js-gps-track"     data-gps-track="site_switcher.click({ item_type:6 })"
+>chat</a>
+            </div>
+
+    <a href="http://stackoverflow.com"
+       class="current-site-link site-link js-gps-track"
+       data-id="1"
+       data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-stackoverflow" title="Stack Overflow"></div>
+        Stack Overflow
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                        
+    <a href="https://meta.stackoverflow.com"
+       class="site-link js-gps-track"
+       data-id="552"
+       data-gps-track="site.switch({ target_site:552, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-stackoverflowmeta" title="Meta Stack Overflow"></div>
+        Meta Stack Overflow
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://stackoverflow.com/users/signup?ssrc=site_switcher&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" class="login-link js-gps-track"     data-gps-track="site_switcher.click({ item_type:10 })"
+>Sign up</a> or <a href="https://stackoverflow.com/users/login?ssrc=site_switcher&amp;returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5064928%2fdifference-between-classification-and-clustering-in-data-mining" class="login-link js-gps-track"     data-gps-track="site_switcher.click({ item_type:11 })"
+>log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="http://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="http://stackoverflow.blog" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+                <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://meta.stackoverflow.com" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+
+        </div>
+        <ol class="-list">
+            
+    <li class="-item"><a href="#" class="-link js-help-button" title="Help Center and other resources">
+        <svg viewBox="0 0 18 18" width="18" height="18" role="icon"><path fill-rule="evenodd" d="M9 0a9 9 0 1 0 .001 18.001A9 9 0 0 0 9 0zm.812 13.126c-.02.716-.55 1.157-1.238 1.137-.659-.02-1.177-.49-1.157-1.209.02-.715.566-1.17 1.225-1.15.691.021 1.194.507 1.17 1.222zm1.956-5.114c-.168.237-.546.542-1.02.912l-.527.361c-.257.197-.417.43-.502.695-.044.141-.076.507-.084.752-.004.048-.032.156-.181.156H7.883c-.165 0-.185-.096-.18-.144.023-.667.12-1.218.397-1.66.374-.594 1.426-1.221 1.426-1.221.161-.12.286-.25.382-.39.177-.24.321-.51.321-.8 0-.333-.08-.65-.293-.915-.249-.31-.518-.458-1.036-.458-.51 0-.808.257-1.021.594-.213.338-.177.735-.177 1.097H5.746c0-1.366.357-2.238 1.112-2.752.51-.35 1.162-.502 1.921-.502.996 0 1.788.184 2.487.715.647.49.988 1.181.988 2.113 0 .575-.2 1.057-.486 1.447z" /></svg>
+    </a></li>
+                <li class="-item">
+        <a href="http://stackexchange.com" class="-link js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 166 Stack Exchange sites">
+            <svg viewBox="0 0 18 19" width="18" height="19" role="icon"><path fill-rule="evenodd" d="M0 14a2 2 0 0 0 2 2h10v3l3-3h1a2 2 0 0 0 2-2v-2H0v2zM16 0H2a2 2 0 0 0-2 2v2h18V2a2 2 0 0 0-2-2zM0 6h18v4H0V6z" /></svg>
+        </a>
+    </li>
+
+
+        </ol>
+    </nav>
+        <div class="-ctas">
+                    <a href="https://stackoverflow.com/users/login?ssrc=head&returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5064928%2fdifference-between-classification-and-clustering-in-data-mining" class="login-link btn-clear" rel="nofollow">Log In</a>
+                        <a href="https://stackoverflow.com/users/signup?ssrc=head&returnurl=%2fusers%2fstory%2fcurrent&amp;utm_source=stackoverflow.com&amp;utm_medium=dev-story&amp;utm_campaign=signup-redirect" class="login-link btn" rel="nofollow">Sign Up</a>
+
+        </div>
+</div>
+    </div>
+</header>
+
+    <script>
+        StackExchange.ready(function () { StackExchange.topbar.init(); });
+            StackExchange.scrollPadding.setPaddingTop(60, 10);     </script>
+
+    <div class="container">
+        
+
+
+        <div id="content" class="snippet-hidden">
+
+
+
+            
+
+<div itemscope itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon.png?v=c78bd457575a">
+
+
+<div id="herobox" class="alternate">
+    <div class="test"></div>
+        <div id="close">
+            <a title="click to minimize"><span>x</span> Dismiss</a>
+        </div>
+    <div class="content">
+        <b>Join the Stack Overflow Community</b>
+        <div class="separator"></div>
+        <div class="blurb">
+            Stack Overflow is a community of 6.8 million programmers, just like you, helping each other.
+                <br />
+Join them; it only takes a minute:                <br />
+        </div>
+        <a href="/users/signup?ssrc=hero&amp;returnurl=%2fusers%2fstory%2fcurrent&amp;amp;utm_source=stackoverflow.com&amp;amp;utm_medium=dev-story&amp;amp;utm_campaign=signup-redirect" id="tell-me-more" class="button">Sign up</a>
+    </div>
+</div>
+<script>
+    StackExchange.ready(function () {
+
+        var location = 0;
+        if ($("body").hasClass("questions-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("question-page")) {
+            location = 1;;
+        } else if ($("body").hasClass("faq-page")) {
+            location = 5;;
+        } else if ($("body").hasClass("home-page")) {
+            location = 3;;
+        }
+
+        $('#tell-me-more').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+            });
+        });
+        $('#herobox #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+            });
+            $.cookie("hero", "mini", { path: "/", expires: 365 });
+            $.ajax({
+                url: "/hero-mini",
+                success: function (data) {
+                    $("#herobox").fadeOut("fast", function () {
+                        $("#herobox").replaceWith(data);
+                        $("#herobox-mini").fadeIn("fast");
+                    });
+                }
+            });
+            return false;
+        });
+    });
+
+</script>			<div id="question-header">
+                <h1 itemprop="name"><a href="/questions/5064928/difference-between-classification-and-clustering-in-data-mining" class="question-hyperlink">Difference between classification and clustering in data mining?</a></h1>
+
+            
+<div class="aside-cta">
+    <a href="/questions/ask" class="btn-outlined">Ask Question</a>
+</div>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="5064928"  id="question">
+
+    <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk1045292866",4).setZone(43); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk1045292866"></div>    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="5064928">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">97</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="#">favorite</a>
+        <div class="favoritecount"><b>21</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>Can someone say what is difference between classification and clustering in data mining?</p>
+
+<p>If you can, please give examples of both to understand the main idea.</p>
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/machine-learning" class="post-tag" title="show questions tagged &#39;machine-learning&#39;" rel="tag">machine-learning</a> <a href="/questions/tagged/classification" class="post-tag" title="show questions tagged &#39;classification&#39;" rel="tag">classification</a> <a href="/questions/tagged/cluster-analysis" class="post-tag" title="show questions tagged &#39;cluster-analysis&#39;" rel="tag">cluster-analysis</a> <a href="/questions/tagged/data-mining" class="post-tag" title="show questions tagged &#39;data-mining&#39;" rel="tag">data-mining</a> <a href="/questions/tagged/terminology" class="post-tag" title="show questions tagged &#39;terminology&#39;" rel="tag">terminology</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/q/5064928" title="short permalink to this question" class="short-link" id="link-post-5064928">share</a><span class="lsep">|</span><a href="/posts/5064928/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="/posts/5064928/revisions" title="show all edits to this post">edited <span title="2015-08-19 12:36:26Z" class="relativetime">Aug 19 '15 at 12:36</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1060350/anony-mousse"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/NLHKI.png?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1060350/anony-mousse">Anony-Mousse</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 44,261" dir="ltr">44.3k</span><span title="6 gold badges"><span class="badge1"></span><span class="badgecount">6</span></span><span title="66 silver badges"><span class="badge2"></span><span class="badgecount">66</span></span><span title="122 bronze badges"><span class="badge3"></span><span class="badgecount">122</span></span>
+        </div>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2011-02-21 10:39:53Z" class="relativetime">Feb 21 '11 at 10:39</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/626393/kristaps"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/5053bfab0b2fc33a144dd9b51e0ed71f?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/626393/kristaps">Kristaps</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">489</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="5 bronze badges"><span class="badge3"></span><span class="badgecount">5</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+                    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5064928" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-5064928" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>        </table>
+</div>
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								12 Answers
+                                <span style="display:none;" itemprop="answerCount">12</span>
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/5064928/difference-between-classification-and-clustering-in-data-mining?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="/questions/5064928/difference-between-classification-and-clustering-in-data-mining?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere" href="/questions/5064928/difference-between-classification-and-clustering-in-data-mining?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="5064981"></a>
+<div id="answer-5064981" class="answer" data-answerid="5064981"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="5064981">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">140</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>In general, in classification you have a set of predefined classes and want to know which class a new object belongs to.</p>
+
+<p>Clustering tries to group a set of objects and find whether there is <em>some</em> relationship between the objects.</p>
+
+<p>In the context of machine learning, classification is <a href="http://en.wikipedia.org/wiki/Supervised_learning" rel="noreferrer"><em>supervised learning</em></a> and clustering is <a href="http://en.wikipedia.org/wiki/Unsupervised_learning" rel="noreferrer"><em>unsupervised learning</em></a>.</p>
+
+<p>Also have a look at <a href="http://en.wikipedia.org/wiki/Classification_(machine_learning)" rel="noreferrer"><em>Classification</em></a> and <a href="http://en.wikipedia.org/wiki/Cluster_analysis" rel="noreferrer"><em>Clustering</em></a> at Wikipedia.</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/5064981" title="short permalink to this answer" class="short-link" id="link-post-5064981">share</a><span class="lsep">|</span><a href="/posts/5064981/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="/posts/5064981/revisions" title="show all edits to this post">edited <span title="2011-02-21 10:52:03Z" class="relativetime">Feb 21 '11 at 10:52</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2011-02-21 10:44:56Z" class="relativetime">Feb 21 '11 at 10:44</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/218196/felix-kling"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/4P5DY.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/218196/felix-kling">Felix Kling</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 420,405" dir="ltr">420k</span><span title="88 gold badges"><span class="badge1"></span><span class="badgecount">88</span></span><span title="673 silver badges"><span class="badge2"></span><span class="badgecount">673</span></span><span title="706 bronze badges"><span class="badge3"></span><span class="badgecount">706</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5064981" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="2"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+
+
+    <tr id="comment-5672652" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Thanks for reply. So as I understand. In classification I have examples and I qroup these examples into one or another class. But in clustering I have examples but have not classes where to group examples. So in clustering based on examples I need to find clases? Am I right or is there anything important to take in mind? And pleas can You give example?  Best regards, Kristaps</span>
+                    &ndash;&nbsp;<a href="/users/626393/kristaps"
+                       title="489 reputation"
+                       class="comment-user owner">Kristaps</a>
+                <span class="comment-date" dir="ltr"><span title="2011-02-21 11:13:23Z" class="relativetime-clean">Feb 21 '11 at 11:13</span></span>
+                        <span class="edited-yes" title="this comment was edited 2 times"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-5697133" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@Kristaps: I think you are are right so far. But you don&#39;t necessarily find classes with clustering. It is more that you want to see whether some set of items form some kind of relationship (by being closer together in some model). You normally don&#39;t find classes (if you think that you use clustering to find classes for classification). That is not the case. Instead, you have a <i>training set</i> at the beginning which consist of labelled items (so you know which class they belong to). You then <i>train</i> a classification algorithm to assign the items to the right classes and you verify the</span>
+                    &ndash;&nbsp;<a href="/users/218196/felix-kling"
+                       title="420,405 reputation"
+                       class="comment-user">Felix Kling</a>
+                <span class="comment-date" dir="ltr"><span title="2011-02-22 22:32:54Z" class="relativetime-clean">Feb 22 '11 at 22:32</span></span>
+                        <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-5697186" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">correctness (which you can do, as the data is labelled). A daily example of classification would be spam filtering. The spam filter has to decide if a mail is spam or not. You can also tell the filter if a mail has been wrongly classified. For clustering, I don&#39;t really know an example. But you could e.g. take 1000 Twitter messages, try to clustering and then examine what (and if) relation the clusters expose.</span>
+                    &ndash;&nbsp;<a href="/users/218196/felix-kling"
+                       title="420,405 reputation"
+                       class="comment-user">Felix Kling</a>
+                <span class="comment-date" dir="ltr"><span title="2011-02-22 22:37:03Z" class="relativetime-clean">Feb 22 '11 at 22:37</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-15456161" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I think both <b>Classification</b> and <b>Clustering</b> are <b>Classify</b> method, it that right ?</span>
+                    &ndash;&nbsp;<a href="/users/802585/mrroy"
+                       title="5,774 reputation"
+                       class="comment-user">MrROY</a>
+                <span class="comment-date" dir="ltr"><span title="2012-07-26 04:39:12Z" class="relativetime-clean">Jul 26 '12 at 4:39</span></span>
+                        <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-36316136" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">@MrROY If by Classify you mean: &quot;arrange (a group of people or things) in classes or categories according to shared qualities or characteristics.&quot; , then yes.</span>
+                    &ndash;&nbsp;<a href="/users/313113/mnemonic-flow"
+                       title="4,575 reputation"
+                       class="comment-user">Mnemonic Flow</a>
+                <span class="comment-date" dir="ltr"><span title="2014-05-14 06:09:46Z" class="relativetime-clean">May 14 '14 at 6:09</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-5064981" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link  dno"
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   ></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href=# onclick="">show <b>2</b> more comments</a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk1900934450",4).setZone(44); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk1900934450"></div>
+  
+<a name="27679252"></a>
+<div id="answer-27679252" class="answer" data-answerid="27679252"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="27679252">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">19</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p><strong>If you have asked this question to any data mining or machine learning persons they will use the term supervised learning and unsupervised learning to explain you the difference between clustering and classification. So let me first explain you about the key word supervised and unsupervised.</strong></p>
+
+<p><strong>Supervised learning:</strong>
+suppose you have a basket and it is filled with some fresh fruits and your task is to arrange the same type fruits at one place. suppose the fruits are apple,banana,cherry, and grape.
+so you already know from your previous work that, the shape of each and every fruit so it is easy to arrange the same type of fruits at one place.
+here your previous work is called as trained data in data mining.
+so you already learn the things from your trained data, This is because of you have a response variable which says you that if some fruit have so and so features it is grape, like that for each and every fruit.</p>
+
+<p>This type of data you will get from the trained data.
+This type of learning is called as supervised learning.
+This type solving problem comes under Classification.
+So you already learn the things so you can do you job confidently.</p>
+
+<p><strong>unsupervised :</strong>
+suppose you have a basket and it is filled with some fresh fruits and your task is to arrange the same type fruits at one place.</p>
+
+<p>This time you don't  know any thing about that fruits, you are first time seeing these fruits so how  will you arrange the same type of fruits.</p>
+
+<p>What you will do first  is you take on the fruit and you will select any physical character of that particular fruit. suppose you taken color.</p>
+
+<p>Then you will arrange them based on the color, then the  groups will be some thing like this.
+<strong>RED COLOR GROUP:</strong> apples &amp; cherry fruits.
+<strong>GREEN COLOR GROUP:</strong> bananas &amp; grapes.
+so now you will take another physical character as size, so now the groups will be some thing like this.
+<strong>RED COLOR AND BIG SIZE:</strong> apple.
+<strong>RED COLOR AND SMALL SIZE:</strong> cherry fruits.
+<strong>GREEN COLOR AND BIG SIZE:</strong> bananas.
+<strong>GREEN COLOR AND SMALL SIZE</strong>: grapes.
+job done happy ending.</p>
+
+<p>here you didn't  learn any thing before ,means no train data and no response variable.
+This type of learning is known unsupervised learning.
+clustering comes under unsupervised learning.</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/27679252" title="short permalink to this answer" class="short-link" id="link-post-27679252">share</a><span class="lsep">|</span><a href="/posts/27679252/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="/posts/27679252/revisions" title="show all edits to this post">edited <span title="2016-11-18 14:20:02Z" class="relativetime">Nov 18 '16 at 14:20</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2182243/cybercop"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/REXWZ.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2182243/cybercop">Cybercop</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">2,763</span><span title="10 gold badges"><span class="badge1"></span><span class="badgecount">10</span></span><span title="43 silver badges"><span class="badge2"></span><span class="badgecount">43</span></span><span title="86 bronze badges"><span class="badge3"></span><span class="badgecount">86</span></span>
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-12-28 18:18:50Z" class="relativetime">Dec 28 '14 at 18:18</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/4282849/maxmod"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/0b3c862e10b47592ed10e3722759fe06?s=32&amp;d=identicon&amp;r=PG&amp;f=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/4282849/maxmod">maxmod</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">199</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="8 bronze badges"><span class="badge3"></span><span class="badgecount">8</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-27679252" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-27679252" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="8192666"></a>
+<div id="answer-8192666" class="answer" data-answerid="8192666"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="8192666">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">16</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>+Classification:
+you are given some new data, you have to set new label for them.</p>
+
+<p>For example, a company wants to classify their prospect customers. When a new customer comes, they have to determine if this is a customer who is going to buy their products or not.</p>
+
+<p>+Clustering:
+you're given a set of history transactions which recorded who bought what.</p>
+
+<p>By using clustering techniques, you can tell the segmentation of your customers. </p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/8192666" title="short permalink to this answer" class="short-link" id="link-post-8192666">share</a><span class="lsep">|</span><a href="/posts/8192666/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2011-11-19 07:40:32Z" class="relativetime">Nov 19 '11 at 7:40</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1055064/studyhorror"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/327d5544b70e9105f1a243d583e06d9e?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1055064/studyhorror">studyhorror</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">161</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="2 bronze badges"><span class="badge3"></span><span class="badgecount">2</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-8192666" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+
+
+    <tr id="comment-63471671" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">I would argue that &quot;When a new customer comes, they have to determine if this is a customer who is going to buy their products or not.&quot; is a better candidate for logistic regression. An example of classification would be to predict whether the customer is going to buy the &quot;premium&quot;,&quot;standard&quot; or &quot;economy&quot; model. Airline example: coach, coach with early boarding, coach with extra leg room.</span>
+                    &ndash;&nbsp;<a href="/users/341922/gdb"
+                       title="483 reputation"
+                       class="comment-user">GDB</a>
+                <span class="comment-date" dir="ltr"><span title="2016-06-24 13:37:13Z" class="relativetime-clean">Jun 24 '16 at 13:37</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-8192666" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="38841376"></a>
+<div id="answer-38841376" class="answer" data-answerid="38841376"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="38841376">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">12</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p><strong>Please read the following information:</strong></p>
+
+<p><a href="https://i.stack.imgur.com/sxEi9.jpg"><img src="https://i.stack.imgur.com/sxEi9.jpg" alt="enter image description here"></a></p>
+
+<p><a href="https://i.stack.imgur.com/a8t3k.jpg"><img src="https://i.stack.imgur.com/a8t3k.jpg" alt="enter image description here"></a>
+<a href="https://i.stack.imgur.com/6e5dt.jpg"><img src="https://i.stack.imgur.com/6e5dt.jpg" alt="enter image description here"></a></p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/38841376" title="short permalink to this answer" class="short-link" id="link-post-38841376">share</a><span class="lsep">|</span><a href="/posts/38841376/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2016-08-09 03:03:28Z" class="relativetime">Aug 9 '16 at 3:03</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/6633975/sayali-sonawane"><div class="gravatar-wrapper-32"><img src="https://lh6.googleusercontent.com/-_Ta3cjF1uhk/AAAAAAAAAAI/AAAAAAAAAk8/V1id8gyx0PE/photo.jpg?sz=32" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/6633975/sayali-sonawane">Sayali Sonawane</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">1,527</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="11 silver badges"><span class="badge2"></span><span class="badgecount">11</span></span><span title="28 bronze badges"><span class="badge3"></span><span class="badgecount">28</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-38841376" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+
+
+    <tr id="comment-65317893" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">looks like you like to visualize it. Very nice!</span>
+                    &ndash;&nbsp;<a href="/users/992600/adhg"
+                       title="2,536 reputation"
+                       class="comment-user">adhg</a>
+                <span class="comment-date" dir="ltr"><span title="2016-08-16 18:59:21Z" class="relativetime-clean">Aug 16 '16 at 18:59</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-65318996" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Thank you. According to me, &quot;A picture is worth a thousand words&quot;.</span>
+                    &ndash;&nbsp;<a href="/users/6633975/sayali-sonawane"
+                       title="1,527 reputation"
+                       class="comment-user">Sayali Sonawane</a>
+                <span class="comment-date" dir="ltr"><span title="2016-08-16 19:35:15Z" class="relativetime-clean">Aug 16 '16 at 19:35</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-38841376" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="5249881"></a>
+<div id="answer-5249881" class="answer" data-answerid="5249881"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="5249881">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">6</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I'm a new comer to Data Mining, but as my textbook says, CLASSICIATION is supposed to be supervised learning, and CLUSTERING unsupervised learning. The difference between supervised learning and unsupervised learning can be found <a href="http://stackoverflow.com/questions/1832076/what-is-the-difference-between-supervised-learning-and-unsupervised-learning">here</a>.</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/5249881" title="short permalink to this answer" class="short-link" id="link-post-5249881">share</a><span class="lsep">|</span><a href="/posts/5249881/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2011-03-09 17:40:58Z" class="relativetime">Mar 9 '11 at 17:40</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/652066/leo"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/db603cb103e26403b43849bc073d3dd5?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/652066/leo">leo</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">151</span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="3 bronze badges"><span class="badge3"></span><span class="badgecount">3</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-5249881" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-5249881" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="32096080"></a>
+<div id="answer-32096080" class="answer" data-answerid="32096080"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="32096080">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">4</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<h2>Classification</h2>
+
+<p>Is the assignment of <strong>predefined classes</strong> to <strong>new observations</strong>, based on <em>learning</em> from examples.</p>
+
+<p>It is one of the key tasks in machine learning.</p>
+
+<h2>Clustering (or Cluster Analysis)</h2>
+
+<p>While popularly dismissed as "unsupervised classification" it is quite different.</p>
+
+<p>In contrast to what many machine learners will teach you, it is not about assigning "classes" to objects, but without having them predefined. This is the very limited view of people who did too much classification; a typical example of <em>if you have a hammer (classifier), everything looks like a nail (classification problem) to you</em>. But it is also why classification people do not get a hang of clustering.</p>
+
+<p>Instead, consider it as <strong>structure discovery</strong>. The task of clustering is to find structure (e.g. groups) in your data that you <strong>did not know before</strong>. Clustering has been successful <em>if</em> you learned something new. It failed, if you only got the structure you already knew.</p>
+
+<p>Cluster analysis is a key task of data mining (and the ugly duckling in machine-learning, so don't listen to machine learners dismissing clustering).</p>
+
+<h2>"Unsupervised learning" is somewhat an Oxymoron</h2>
+
+<p>This has been iterated up and down the literature, but unsupervised learning is b<em>llsh</em>t. It does not exist, but it is an oxymoron like "military intelligence".</p>
+
+<p>Either the algorithm learns from examples (then it is "supervised learning"), or it does not learn. If all the clustering methods are "learning", then computing the minimum, maximum and average of a data set is "unsupervised learning", too. Then any computation "learned" its output. Thus <strong>the term 'unsupervised learning' is totally meaningless</strong>, it means everything and nothing.</p>
+
+<p>Some "unsupervised learning" algorithms do, however, fall into the <strong>optimization</strong> category. For example k-means <em>is</em> a least-squares optimization. Such methods are all over statistics, so I don't think we need to label them "unsupervised learning", but instead should continue to call them "optimization problems". It's more precise, and more meaningful.
+There are plenty of clustering algorithms who do not involve optimization, and who do not fit into machine-learning paradigms well. So stop squeezing them in there under the umbrella "unsupervised learning".</p>
+
+<p>There is some "learning" associated with clustering, but it is not the program that learns. It is the user that is supposed to learn new things about his data set.</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/32096080" title="short permalink to this answer" class="short-link" id="link-post-32096080">share</a><span class="lsep">|</span><a href="/posts/32096080/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2015-08-19 12:53:23Z" class="relativetime">Aug 19 '15 at 12:53</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1060350/anony-mousse"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/NLHKI.png?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1060350/anony-mousse">Anony-Mousse</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 44,261" dir="ltr">44.3k</span><span title="6 gold badges"><span class="badge1"></span><span class="badgecount">6</span></span><span title="66 silver badges"><span class="badge2"></span><span class="badgecount">66</span></span><span title="122 bronze badges"><span class="badge3"></span><span class="badgecount">122</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-32096080" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-32096080" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="35785683"></a>
+<div id="answer-35785683" class="answer" data-answerid="35785683"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="35785683">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">4</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I am sure a number of you have heard about machine learning. A dozen of you might even know what it is. And a couple of you might have worked with machine learning algorithms too. 
+You see where this is going? Not a lot of people are familiar with the technology that will be absolutely essential 5 years from now. Siri is machine learning. Amazon’s Alexa is machine learning. Ad and shopping item recommender systems are machine learning. 
+Let’s try to understand machine learning with a simple analogy of a 2 year old boy. Just for fun, let’s call him Kylo Ren</p>
+
+<p><a href="https://i.stack.imgur.com/bVaxZ.png" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/bVaxZ.png" alt="Source : blog.printkeg.com"></a></p>
+
+<p>Let’s assume Kylo Ren saw an elephant. What will his brain tell him ?(Remember he has minimum thinking capacity, even if he is the successor to Vader). His brain will tell him that he saw a big moving creature which was grey in color. He sees a cat next, and his brain tells him that it is a small moving creature which is golden in color. Finally, he sees a light saber next and his brain tells him that it is a non-living object which he can play with!</p>
+
+<p>His brain at this point knows that saber is different from the elephant and the cat, because the saber is something to play with and doesn’t move on its own. His brain can figure this much out even if Kylo doesn’t know what movable means. This simple phenomenon is called Clustering .</p>
+
+<p><a href="https://i.stack.imgur.com/aTxuX.png" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/aTxuX.png" alt="Source : jeffcarpenterblog.tumblr.com"></a></p>
+
+<p>Machine learning is nothing but the mathematical version of this process.
+A lot of people who study statistics realized that they can make some equations work in the same way as brain works. 
+Brain can cluster similar objects, brain can learn from mistakes and brain can learn to identify things.</p>
+
+<p>All of this can be represented with statistics, and the computer based simulation of this process is called Machine Learning. Why do we need the computer based simulation? because computers can do heavy math faster than human brains. 
+I would love to go into the mathematical/statistical part of machine learning but you don’t wanna jump into that without clearing some concepts first.</p>
+
+<p>Let’s get back to Kylo Ren. Let’s say Kylo picks up the saber and starts playing with it. He accidentally hits a stormtrooper and the stormtrooper gets injured. He doesn’t understand what’s going on and continues playing. Next he hits a cat and the cat gets injured. This time Kylo is sure he has done something bad, and tries to be somewhat careful. But given his bad saber skills, he hits the elephant and is absolutely sure that he is in trouble. 
+He becomes extremely careful thereafter, and only hits his dad on purpose as we saw in Force Awakens!!</p>
+
+<p><a href="https://i.stack.imgur.com/Wp7UV.png" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/Wp7UV.png" alt="Source : joyreactor.com"></a></p>
+
+<p>This entire process of learning from your mistake can be mimicked with equations, where the feeling of doing something wrong is represented by an error or cost. This process of identifying what not to do with a saber is called Classification . 
+Clustering and Classification are the absolute basics of machine learning. Let’s look at the difference between them.</p>
+
+<p>Kylo differentiated between animals and light saber because his brain decided that light sabers cant move by themselves and are therefore, different. The decision was based solely upon the objects present (data) and no external help or advice was provided. 
+In contrast to this, Kylo differentiated the importance of being careful with light saber by first observing what hitting an object can do. The decision wasn’t completely based on the saber, but on what it could do to different objects . In short, there was some help here.</p>
+
+<p><a href="https://i.stack.imgur.com/GaYED.png" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/GaYED.png" alt="Source: pintrest"></a></p>
+
+<p>Because of this difference in learning, Clustering is called an unsupervised learning method and Classification is called a supervised learning method. 
+They are very different in the machine learning world, and are often dictated by the kind of data present. Obtaining labelled data (or things that help us learn , like stormtrooper,elephant and cat in Kylo’s case) is often not easy and becomes very complicated when the data to be differentiated is large. On the other hand, learning without labels can have it’s own disadvantages , like not knowing what are the label titles. 
+If Kylo was to learn being careful with the saber without any examples or help, he wouldn’t know what it would do. He would just know that it is not suppose to be done. It’s kind of a lame analogy but you get the point!</p>
+
+<p>We are just getting started with Machine Learning. Classification itself can be classification of continuous numbers or classification of labels. For instance, if Kylo had to classify what each stormtrooper’s height is, there would be a lot of answers because the heights can be 5.0, 5.01, 5.011, etc. But a simple classification like types of light sabers (red,blue.green) would have very limited answers. Infact they can be represented with simple numbers. Red can be 0 , Blue can be 1 and Green can be 2.</p>
+
+<p>If you know basic math, you know that 0,1,2 and 5.1,5.01,5.011 are different and are called discrete and continuous numbers respectively. The classification of discrete numbers is called Logistic Regression , and classification of continuous numbers is called Regression. 
+Logistic Regression is also known as categorical classification, so don’t be confused when you read this term elsewhere</p>
+
+<p>This was a very basic introduction to Machine Learning. I will dwell into the statistical side in my next post. Please let me know if I need any corrections :)</p>
+
+<p>Second part posted here <a href="http://ow.ly/Z1htY" rel="nofollow noreferrer">http://ow.ly/Z1htY</a>
+<a href="https://i.stack.imgur.com/YBwvK.png" rel="nofollow noreferrer"><img src="https://i.stack.imgur.com/YBwvK.png" alt="enter image description here"></a></p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/35785683" title="short permalink to this answer" class="short-link" id="link-post-35785683">share</a><span class="lsep">|</span><a href="/posts/35785683/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="/posts/35785683/revisions" title="show all edits to this post">edited <span title="2016-03-04 01:55:17Z" class="relativetime">Mar 4 '16 at 1:55</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2016-03-04 00:16:25Z" class="relativetime">Mar 4 '16 at 0:16</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2770606/amit-juneja"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/0901ebf408a786624ea0fb60c7221fb6?s=32&amp;d=identicon&amp;r=PG&amp;f=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2770606/amit-juneja">Amit Juneja</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">106</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-35785683" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+
+
+    <tr id="comment-59243066" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Hey Amit, why don&#39;t you add your blog post to the answer instead of just a link. Link only answers are frowned upon because sites go down and with it the answer.</span>
+                    &ndash;&nbsp;<a href="/users/2214462/mathemats"
+                       title="935 reputation"
+                       class="comment-user">Mathemats</a>
+                <span class="comment-date" dir="ltr"><span title="2016-03-04 00:36:04Z" class="relativetime-clean">Mar 4 '16 at 0:36</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-59244372" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Thanks. I will do that :)</span>
+                    &ndash;&nbsp;<a href="/users/2770606/amit-juneja"
+                       title="106 reputation"
+                       class="comment-user">Amit Juneja</a>
+                <span class="comment-date" dir="ltr"><span title="2016-03-04 01:50:28Z" class="relativetime-clean">Mar 4 '16 at 1:50</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-35785683" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="23248501"></a>
+<div id="answer-23248501" class="answer" data-answerid="23248501"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="23248501">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">1</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Clustering aims at finding groups in data. “Cluster” is an intuitive concept and does
+not have a mathematically rigorous definition. The members of one cluster should be
+similar to one another and dissimilar to the members of other clusters. A clustering
+algorithm operates on an unlabeled data set Z and produces a partition on it.</p>
+
+<p>For Classes and Class Labels,
+class contains similar objects, whereas objects from different classes
+are dissimilar. Some classes have a clear-cut meaning, and in the simplest case
+are mutually exclusive. For example, in signature verification, the signature is either
+genuine or forged. The true class is one of the two, no matter that we might not be
+able to guess correctly from the observation of a particular signature.</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/23248501" title="short permalink to this answer" class="short-link" id="link-post-23248501">share</a><span class="lsep">|</span><a href="/posts/23248501/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2014-04-23 15:13:33Z" class="relativetime">Apr 23 '14 at 15:13</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/3565229/dr-eng-amr"><div class="gravatar-wrapper-32"><img src="https://graph.facebook.com/696700943/picture?type=large" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/3565229/dr-eng-amr">Dr.Eng.Amr</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">11</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-23248501" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-23248501" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="8820756"></a>
+<div id="answer-8820756" class="answer" data-answerid="8820756"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="8820756">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Classification
+– Predicts categorical class labels
+– Classifies data (constructs a model) based on a training set and the values (class labels) in a class label attribute 
+– Uses the model in classifying new data</p>
+
+<p>Cluster: a collection of data objects
+– Similar to one another within the same cluster
+– Dissimilar to the objects in other clusters</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/8820756" title="short permalink to this answer" class="short-link" id="link-post-8820756">share</a><span class="lsep">|</span><a href="/posts/8820756/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2012-01-11 14:15:21Z" class="relativetime">Jan 11 '12 at 14:15</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1140227/george"><div class="gravatar-wrapper-32"><img src="https://i.stack.imgur.com/JLyN0.jpg?s=32&amp;g=1" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1140227/george">George</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">3,631</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="31 silver badges"><span class="badge2"></span><span class="badgecount">31</span></span><span title="46 bronze badges"><span class="badge3"></span><span class="badgecount">46</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-8820756" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-8820756" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="18323142"></a>
+<div id="answer-18323142" class="answer" data-answerid="18323142"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="18323142">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>I believe classification is classifying records in a data set into predefined classes or even defining classes on the go. I look at it as pre-requisite for any valuable data mining, I like to think of it at unsupervised learning i.e. one does not know what he/she is looking for while mining the data and classification serves as a good starting point</p>
+
+<p>Clustering on the other end falls under supervised learning i.e. one know what parameters to look for, the correlation between them along with critical levels. I believe it requires some understanding of statistics and maths</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/18323142" title="short permalink to this answer" class="short-link" id="link-post-18323142">share</a><span class="lsep">|</span><a href="/posts/18323142/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2013-08-19 21:07:17Z" class="relativetime">Aug 19 '13 at 21:07</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2209158/ashish-verma"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/0f128a195e9b87a28071416d146d797c?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2209158/ashish-verma">Ashish Verma</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">11</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-18323142" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+
+
+    <tr id="comment-26892184" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">It is actually the other way around. Classification is usually supervised and clustering is usually unsupervised.</span>
+                    &ndash;&nbsp;<a href="/users/879399/alexk"
+                       title="971 reputation"
+                       class="comment-user">AlexK</a>
+                <span class="comment-date" dir="ltr"><span title="2013-08-19 21:26:49Z" class="relativetime-clean">Aug 19 '13 at 21:26</span></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-18323142" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="19298999"></a>
+<div id="answer-19298999" class="answer" data-answerid="19298999"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="19298999">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>If you are trying to file up a large number of sheets on to your shelf(based on date or some other specification of the file), you are CLASSIFYING.</p>
+
+<p>If you were to create clusters from the set of sheets, it would mean that there is something similar among the sheets.</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/19298999" title="short permalink to this answer" class="short-link" id="link-post-19298999">share</a><span class="lsep">|</span><a href="/posts/19298999/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2013-10-10 14:45:49Z" class="relativetime">Oct 10 '13 at 14:45</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1929187/0aslam0"><div class="gravatar-wrapper-32"><img src="https://www.gravatar.com/avatar/4ec85f02401d596848f4aef24110afd9?s=32&amp;d=identicon&amp;r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1929187/0aslam0">0aslam0</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">464</span><span title="5 silver badges"><span class="badge2"></span><span class="badgecount">5</span></span><span title="25 bronze badges"><span class="badge3"></span><span class="badgecount">25</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-19298999" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-19298999" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+
+  
+<a name="42495963"></a>
+<div id="answer-42495963" class="answer" data-answerid="42495963"  itemscope itemtype="http://schema.org/Answer">
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="42495963">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">0</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>There are two definitions in data mining "Supervised" and "Unsupervised".
+When someone tells the computer, algorithm, code, ... that this thing is like an apple and that thing is like an orange, this is supervised learning and using supervised learning (like tags for each sample in a data set) for classifying the data, you'll get classification. But on the other hand if you let the computer find out what is what and differentiate between features of the given data set, in fact learning unsupervised, for classifying the data set this would be called clustering. In this case data that are fed to the algorithm don't have tags and the algorithm should find out different classes.</p>
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/42495963" title="short permalink to this answer" class="short-link" id="link-post-42495963">share</a><span class="lsep">|</span><a href="/posts/42495963/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2017-02-27 21:19:44Z" class="relativetime">Feb 27 at 21:19</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/6709183/siii-fsxa"><div class="gravatar-wrapper-32"><img src="https://lh5.googleusercontent.com/-H-3ErFom5CA/AAAAAAAAAAI/AAAAAAAAACs/qdd_gdC5p5A/photo.jpg?sz=32" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/6709183/siii-fsxa">siii fsxa</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">9</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-42495963" class="comments  dno">
+		    <table>
+                <tbody data-remaining-comments-count="0"
+                       data-canpost="false"
+                       data-cansee="true"
+                       data-comments-unavailable="false"
+                       data-addlink-disabled="true">
+
+                        <tr><td></td><td></td></tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-42495963" data-rep=50 data-anon=true>
+
+                <a class="js-add-link comments-link disabled-link "
+                   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”."
+                   >add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href=# onclick=""></a>
+        </div>         
+    </td>
+</tr>    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/5064928/answer/submit" method="post"  class="post-form">
+						    <input type="hidden" id="post-id" value="5064928" />
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false" />
+                            <input type="hidden" name="referrer" value="https://www.google.com/"/>
+							<h2 class="space">Your Answer</h2>
+
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: true,
+                reputationToPostImages: 10,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="33b37abcc96538be508dc815176c887a">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+							<div style="position: relative;">
+								
+								            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?ssrc=question_page&returnurl=http%3a%2f%2fstackoverflow.com%2fquestions%2f5064928%2fdifference-between-classification-and-clustering-in-data-mining%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                                    
+                                var $window = $(window),
+                                    onScroll = function(e) {
+                                        var $elem = $('.new-login-left'),
+                                            docViewTop = $window.scrollTop(),
+                                            docViewBottom = docViewTop + $window.height(),
+                                            elemTop = $elem.offset().top,
+                                            elemBottom = elemTop + $elem.height();							
+                                        if ((docViewTop < elemTop) && (docViewBottom > elemBottom))  {
+                                            StackExchange.using('gps', function() { StackExchange.gps.track('embedded_signup_form.view', { location: 'question_page' }); });
+                                            $window.unbind('scroll', onScroll);
+                                        }
+                                    };
+                                $window.on('scroll', onScroll);
+                                    
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="hidden" name="use-google" class="use-google" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" />
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'http%3a%2f%2fstackoverflow.com%2fquestions%2f5064928%2fdifference-between-classification-and-clustering-in-data-mining%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" />
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="btn-clear discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' name='privacy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' name='tos' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice" data-loc="1">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/machine-learning" class="post-tag" title="show questions tagged &#39;machine-learning&#39;" rel="tag">machine-learning</a> <a href="/questions/tagged/classification" class="post-tag" title="show questions tagged &#39;classification&#39;" rel="tag">classification</a> <a href="/questions/tagged/cluster-analysis" class="post-tag" title="show questions tagged &#39;cluster-analysis&#39;" rel="tag">cluster-analysis</a> <a href="/questions/tagged/data-mining" class="post-tag" title="show questions tagged &#39;data-mining&#39;" rel="tag">data-mining</a> <a href="/questions/tagged/terminology" class="post-tag" title="show questions tagged &#39;terminology&#39;" rel="tag">terminology</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2011-02-21 10:39:53Z"><b>6 years ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>108823 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2017-02-27 21:19:44Z">7 days ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </table>
+			    </div>
+			<div class="module community-bulletin" data-tracker="cb=1">
+    <div class="related">
+                <div class="bulletin-title">
+                    Blog
+                </div>
+                <hr />
+    <div class="spacer">
+        <div class="bulletin-item-type">
+                <a href="https://stackoverflow.blog/2017/03/06/stack-overflow-podcast-103-grandma/" class="question-hyperlink">
+<div class="favicon favicon-stackexchangemeta" title="Meta Stack Exchange"></div>                </a>
+            </div>
+                <div class="bulletin-item-content">
+                    <a href="https://stackoverflow.blog/2017/03/06/stack-overflow-podcast-103-grandma/" class="question-hyperlink">Stack Overflow Podcast #103 : Grandma, is that you?</a>
+                </div>
+                <br class="cbt" />
+            </div>
+    </div>
+</div>			
+			<script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22,8277,"adzerk2123073733",[5,17,2221]).setZone(45); });
+            </script>
+            <div class="everyonelovesstackoverflow" id="adzerk2123073733"></div>
+            <div id="hireme"></div>
+        <script>
+window.clc_request = 'AkO-na-OZdQIAAAAAOBITQACAAAAAgAAAABKAAAAfG1hY2hpbmUtbGVhcm5pbmd8Y2xhc3NpZmljYXRpb258Y2x1c3Rlci1hbmFseXNpc3xkYXRhLW1pbmluZ3x0ZXJtaW5vbG9neXwAcK8_rvW4U0AaJg';
+;(function(n){var t,u,r,i;try{if(typeof[].indexOf!="function")return;if(window.attachEvent&&!window.addEventListener)return;if(n.allowed[0]!=="*"&&n.allowed.indexOf(location.hostname)===-1)return;if(t=window,t.clc=t.clc||{},u=t.clc_request||t.clcfl_request,u||console.warn("clc_request missing"),t.clc.init=t.clc.init||[],t.clc.init.push(function(n){return n.load()}),t.clc.options){for(r in t.clc.options)n[r]=t.clc.options[r];t.clc.options=n}else t.clc.options=n;i=document.createElement("script");i.async=!0;i.src=n.lib;document.body.appendChild(i)}catch(f){console.error("[clc] Error in loader:",f)}}).call(null, {"azw":true,"kt":2000,"tto":true,"autoload":true,"d":{"sb":["hireme","clc-sb"],"tlb":["careers1","clc-tlb"],"mlb":["careers3","clc-mlb"]},"allowed":["stackoverflow.com","serverfault.com","blog.codinghorror.com","talent.stackoverflow.com"],"h":"clc.stackoverflow.com","u":"https://clc.stackoverflow.com/markup.js","lib":"https://cdn.sstatic.net/clc/clc.min.js?v=51f344c0b478"});        </script>
+			
+
+            <div class="module sidebar-linked">
+	<h4 id="h-linked">Linked</h4>
+	<div class="linked" data-tracker="lq=1">
+
+<div class="spacer">
+	<a href="/q/1832076" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes answered-accepted large">193</div>
+	</a>
+	<a href="/questions/1832076/what-is-the-difference-between-supervised-learning-and-unsupervised-learning?noredirect=1" class="question-hyperlink">What is the difference between supervised learning and unsupervised learning?</a>
+</div>
+<div class="spacer">
+	<a href="/q/22496689" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">2</div>
+	</a>
+	<a href="/questions/22496689/when-to-use-k-means-clustering-algorithm?noredirect=1" class="question-hyperlink">When to use k means clustering algorithm?</a>
+</div>
+<div class="spacer">
+	<a href="/q/35974643" title="Vote score (upvotes - downvotes)">
+		<div class="answer-votes  default">-1</div>
+	</a>
+	<a href="/questions/35974643/text-classification?noredirect=1" class="question-hyperlink">Text classification</a>
+</div>			</div>
+</div>
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer"><a href="/q/10059594" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted large">364</div></a><a href="/questions/10059594/a-simple-explanation-of-naive-bayes-classification" class="question-hyperlink">A simple explanation of Naive Bayes Classification</a></div><div class="spacer"><a href="/q/17918214" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">-2</div></a><a href="/questions/17918214/clustering-classify-sparse-large-features" class="question-hyperlink">Clustering &amp; Classify sparse large features</a></div><div class="spacer"><a href="/q/20337591" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">3</div></a><a href="/questions/20337591/cluster-analysis-label-the-cluster" class="question-hyperlink">cluster analysis? label the cluster</a></div><div class="spacer"><a href="/q/20937568" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">1</div></a><a href="/questions/20937568/difference-between-classification-and-detection" class="question-hyperlink">difference between classification and detection</a></div><div class="spacer"><a href="/q/21848185" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">0</div></a><a href="/questions/21848185/guidance-on-a-data-mining-project" class="question-hyperlink">Guidance on a data mining project</a></div><div class="spacer"><a href="/q/31296865" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="/questions/31296865/difference-between-data-mining-algorithms-and-methods" class="question-hyperlink">Difference between Data Mining algorithms and methods</a></div><div class="spacer"><a href="/q/33399000" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="/questions/33399000/refitting-clusters-around-fixed-centroids" class="question-hyperlink">Refitting clusters around fixed centroids</a></div><div class="spacer"><a href="/q/34706203" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="/questions/34706203/deciding-about-dimensionality-reduction-classification-and-clustering" class="question-hyperlink">Deciding about dimensionality reduction, classification and clustering?</a></div><div class="spacer"><a href="/q/35040369" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">0</div></a><a href="/questions/35040369/difference-between-classification-and-segmentation-in-data-mining-tasks" class="question-hyperlink">Difference between classification and segmentation in data mining tasks?</a></div><div class="spacer"><a href="/q/41170256" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">-1</div></a><a href="/questions/41170256/clustering-vs-unsupervised-classification" class="question-hyperlink">Clustering vs unsupervised classification</a></div>
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="http://stackexchange.com/questions?tab=hot"
+           class="js-gps-track" 
+           data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li >
+                <div class="favicon favicon-ukrainian" title="Ukrainian Language Stack Exchange"></div><a href="http://ukrainian.stackexchange.com/questions/856/what-is-the-ukrainian-word-with-the-closest-meaning-to-the-english-verb-waste" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:672 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is the Ukrainian word with the closest meaning to the English verb &quot;waste&quot;?
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-crypto" title="Cryptography Stack Exchange"></div><a href="http://crypto.stackexchange.com/questions/44472/applicability-of-ibms-projected-50-qubit-quantum-computer-q-to-cryptanalysis" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:281 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Applicability of IBM&#39;s projected 50-qubit quantum computer Q to cryptanalysis?
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/2175777/does-the-measurability-of-a-set-depend-on-a-specific-measure-or-is-it-universal" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Does the measurability of a set depend on a specific measure or is it &quot;universal&quot;?
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-ell" title="English Language Learners Stack Exchange"></div><a href="http://ell.stackexchange.com/questions/121718/which-is-correct-sandwiches-with-ham-sandwiches-and-ham-or-ham-sandwiches" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:481 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Which is correct &quot;sandwiches with ham&quot;, &quot;sandwiches and ham&quot;, or &quot;ham sandwiches&quot;?
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-parenting" title="Parenting Stack Exchange"></div><a href="http://parenting.stackexchange.com/questions/29211/what-age-limit-is-appropriate-for-using-tools-such-as-screwdrivers-hacksaw-dr" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:228 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What age limit is appropriate for using tools (such as screwdrivers, hacksaw, drill etc)?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-photo" title="Photography Stack Exchange"></div><a href="http://photo.stackexchange.com/questions/87697/led-flicker-has-technology-eliminated-it" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:61 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    LED flicker, has technology eliminated it?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-diy" title="Home Improvement Stack Exchange"></div><a href="http://diy.stackexchange.com/questions/109837/240v-outlet-with-120v-and-215v-how" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:73 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    240v Outlet with 120v and 215v - How?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-ell" title="English Language Learners Stack Exchange"></div><a href="http://ell.stackexchange.com/questions/121654/what-does-odds-mean-in-this-sentence" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:481 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What does &quot;odds&quot; mean in this sentence?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="http://codegolf.stackexchange.com/questions/112208/charlie-oscar-delta-echo" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Charlie, Oscar, Delta, Echo
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-chemistry" title="Chemistry Stack Exchange"></div><a href="http://chemistry.stackexchange.com/questions/69987/how-is-the-position-of-a-peak-on-an-ir-spectrum-determined" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:431 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How is the position of a peak on an IR spectrum determined?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-sitecore" title="Sitecore Stack Exchange"></div><a href="http://sitecore.stackexchange.com/questions/4773/handle-all-custom-errors-in-sitecore-mvc" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:664 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Handle all Custom Errors in Sitecore MVC
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-electronics" title="Electrical Engineering Stack Exchange"></div><a href="http://electronics.stackexchange.com/questions/290846/what-do-moving-rails-voltage-shifting-on-the-rails-do-to-an-opamp" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:135 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What do moving rails (voltage shifting on the rails) do to an opamp?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="http://travel.stackexchange.com/questions/89415/am-i-allowed-to-leave-airport-with-24-hour-layover" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Am I allowed to leave airport with 24 Hour layover?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-ukrainian" title="Ukrainian Language Stack Exchange"></div><a href="http://ukrainian.stackexchange.com/questions/868/%d0%9f%d1%80%d0%b0%d0%b2%d0%be%d0%bf%d0%b8%d1%81-%d0%bf%d1%80%d1%96%d0%b7%d0%b2%d0%b8%d1%89-%d1%96%d0%bd%d1%88%d0%be%d0%bc%d0%be%d0%b2%d0%bd%d0%be%d0%b3%d0%be-%d0%bf%d0%be%d1%85%d0%be%d0%b4%d0%b6%d0%b5%d0%bd%d0%bd%d1%8f" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:672 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Правопис прізвищ іншомовного походження
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/2175526/what-does-this-series-converge-to-if-anything" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What does this series converge to, if anything?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-sqa" title="Software Quality Assurance &amp; Testing Stack Exchange"></div><a href="http://sqa.stackexchange.com/questions/25941/good-practices-to-audit-test-automation-code" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:244 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Good practices to audit test automation code
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="http://mathematica.stackexchange.com/questions/139446/solving-a-cryptarithm" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Solving a cryptarithm
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="http://travel.stackexchange.com/questions/89308/driving-in-the-uk-for-the-the-first-time-rules-to-dos-that-are-different-to" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Driving in the UK for the the first time - rules &amp; to-dos that are different to India
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-politics" title="Politics Stack Exchange"></div><a href="http://politics.stackexchange.com/questions/16143/is-there-anything-that-functionally-prevents-a-us-president-from-switching-parti" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:475 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is there anything that functionally prevents a US President from switching parties?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-workplace" title="The Workplace Stack Exchange"></div><a href="http://workplace.stackexchange.com/questions/86142/candidate-brought-parent-to-interview" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:423 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Candidate brought parent to interview
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-movies" title="Movies &amp; TV Stack Exchange"></div><a href="http://movies.stackexchange.com/questions/69679/why-would-a-ship-able-to-recycle-all-water-consumed-have-trouble-running-out-of" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:367 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why would a ship able to recycle all water consumed have trouble running out of water?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-retrocomputing" title="Retrocomputing Stack Exchange"></div><a href="http://retrocomputing.stackexchange.com/questions/2421/were-there-8086-coprocessors-other-than-the-8087" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:648 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Were there 8086 coprocessors other than the 8087?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="http://security.stackexchange.com/questions/153194/what-is-a-good-alternative-standard-to-iso-27001" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is a good alternative standard to ISO 27001?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-unix" title="Unix &amp; Linux Stack Exchange"></div><a href="http://unix.stackexchange.com/questions/349669/how-will-you-ssh-into-some-other-systems-root-account" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:106 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How will you ssh into some Other system&#39;s root account?
+                </a>
+
+            </li>
+    </ul>
+
+        <a href="#" 
+           class="show-more js-show-more js-gps-track" 
+           data-gps-track="posts_hot_network.click({ item_type:3, location:11 })">
+            more hot questions
+        </a>
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="/feeds/question/5064928" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/5064928/ivc/1c3f');});
+</script>
+<noscript>
+    <div><img src="/posts/5064928/ivc/1c3f" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">            
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                    <a href="http://stackoverflow.com/company/about">about us</a>
+                        <a href="/tour">tour</a>
+                    <a href="/help">help</a>
+                    <a href="http://stackoverflow.blog?blb=1">blog</a>
+                        <a href="http://chat.stackoverflow.com">chat</a>
+                    <a href="https://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackoverflow.com/company/work-here">work here</a>
+                    <a href="https://www.stackoverflowbusiness.com/advertise">advertising info</a>
+                        <a href="http://stackoverflow.com/jobs/directory/developer-jobs">developer jobs directory</a>
+
+                    <a onclick='StackExchange.switchMobile("on")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="https://meta.stackoverflow.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="//stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="//serverfault.com" title="system and network administrators">Server Fault</a></li>
+                        <li><a href="//superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="//webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="//askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="//webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="//gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="//tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                        <li><a href="//softwareengineering.stackexchange.com" title="professionals, academics, and students working within the systems development life cycle who care about creating, delivering, and maintaining software responsibly">Software Engineering</a></li>
+                        <li><a href="//unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                        <li><a href="//apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="//wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Development</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="//gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="//electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="//android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="//security.stackexchange.com" title="information security professionals">Information Security</a></li>
+                        <li><a href="//dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="//drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="//sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="//ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="//mathematica.stackexchange.com" title="users of Wolfram Mathematica">Mathematica</a></li>
+                        <li><a href="//salesforce.stackexchange.com" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                        <li><a href="//expressionengine.stackexchange.com" title="administrators, end users, developers and designers for ExpressionEngine&#174; CMS">ExpressionEngine&#174; Answers</a></li>
+                        <li><a href="//crypto.stackexchange.com" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="//codereview.stackexchange.com" title="peer programmer code reviews">Code Review</a></li>
+                        <li><a href="//magento.stackexchange.com" title="users of the Magento e-Commerce platform">Magento</a></li>
+                        <li><a href="//dsp.stackexchange.com" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                        <li><a href="//raspberrypi.stackexchange.com" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                        <li><a href="//codegolf.stackexchange.com" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="//photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="//scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="//graphicdesign.stackexchange.com" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                        <li><a href="//movies.stackexchange.com" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                        <li><a href="//music.stackexchange.com" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                        <li><a href="//cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="//diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="//money.stackexchange.com" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="//academia.stackexchange.com" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (8)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="//english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="//skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="//judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="//travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="//christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="//ell.stackexchange.com" title="speakers of other languages learning English">English Language Learners</a></li>
+                        <li><a href="//japanese.stackexchange.com" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                        <li><a href="//gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="//bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="//rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                        <li><a href="//anime.stackexchange.com" title="anime and manga fans">Anime &amp; Manga</a></li>
+                        <li><a href="//mechanics.stackexchange.com" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (17)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="//mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                        <li><a href="//math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="//stats.stackexchange.com" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="//cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="//physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="//chemistry.stackexchange.com" title="scientists, academics, teachers and students">Chemistry</a></li>
+                        <li><a href="//biology.stackexchange.com" title="biology researchers, academics, and students">Biology</a></li>
+                        <li><a href="//cs.stackexchange.com" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                        <li><a href="//philosophy.stackexchange.com" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (3)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="//meta.stackexchange.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="//stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="//area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="https://www.stackoverflowbusiness.com/talent">Stack Overflow Talent</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+            <div id="copyright">
+                site design / logo &#169; 2017 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2017.3.7.25334
+            </div>
+                </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">Stack Overflow works best with JavaScript enabled<img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+<script>var p = "http", d = "static"; if (document.location.protocol == "https:") { p += "s"; d = "engine"; } var z = document.createElement("script"); z.type = "text/javascript"; z.async = true; z.src = p + "://" + d + ".adzerk.net/ados.js"; var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(z, s);</script>
+<script>
+    var ados = ados || {};
+    ados.run = ados.run || [];
+    
+    
+        
+        ados.run.push(function () {
+                setTimeout(function () { $("#adzerk-user-match").remove(); }, window.AUMIframeDone ? 0 : 2000);
+                ados_setKeywords('machine-learning,classification,cluster-analysis,data-mining,terminology');; ados_load();
+        });   
+        
+</script>
+
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-5620270-1');
+                ga('create', 'UA-5620270-59', {name: 'pageData', sampleRate: 5 });
+                ga('set', 'dimension2', '|machine-learning|classification|cluster-analysis|data-mining|terminology|');
+                ga('pageData.set', 'dimension2', '|machine-learning|classification|cluster-analysis|data-mining|terminology|');
+                ga('send', 'pageview');
+                ga('pageData.send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+                qc.async = true;
+                qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                s.parentNode.insertBefore(qc, s);
+                _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+                            var sc=document.createElement('script');
+                sc.async=true;
+                sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+                s.parentNode.insertBefore(sc, s);
+                _comscore.push({ c1: "2", c2: "17440561" });
+        })();
+
+    </script>
+        
+    
+            <script type="text/javascript">
+                
+                (function(appendChild) {
+                    Node.prototype.appendChild = function() {
+                        var parent = this;
+                        var newNode = arguments[0];
+                        if (parent.nodeName === 'HEAD'
+                            && newNode
+                            && newNode.nodeName === 'SCRIPT'
+                            && newNode.src) {
+                            
+                            window.setTimeout(function() {
+                                var result = newNode.src.match(/^https:\/\/maps\.googleapis\.com\/maps\/api\/place\/js\/(\w+)Service\./i) || [];
+                                var service = result[1];
+                                if (service) {
+                                    if (service === 'Autocompletion') service =  2;
+                                    else if (service === 'Place') service = 1;
+                                    else service = 0;
+                                    StackExchange.using('gps', function() {
+                                        StackExchange.gps.track('google_maps_places_api.call', { service: service });
+                                    });
+                                }
+                            }, 0);
+                        }
+                        return appendChild.apply(this, arguments);
+                    };
+                })(Node.prototype.appendChild);
+            </script>
+    </body>
+</html>

@@ -1,0 +1,193 @@
+---
+title: "CS 397F Homework 2-1"
+author: "Your Name"
+output: html_document
+---
+
+### Week 2: Statistics
+
+#### Part1: Generating distributions with randomly generated data.
+
+This function generates 10 samples at random from the normal distribution:
+```{r, eval = FALSE}
+rnorm(10)
+```
+We'll set the random number generator to generate a set of values based on a seed value:
+```{r, eval = FALSE}
+set.seed(1234)
+rnorm(10)
+```
+
+These statements demonstrate that the seed "lasts" for one call:
+```{r, eval = FALSE}
+rnorm(10)
+set.seed(1234)
+rnorm(10)
+```
+
+These statements get descriptive statistics with a call to summary and sd- the standard deviation:
+```{r, eval = FALSE}
+data<-rnorm(10)
+summary(data)
+sd(data)
+```
+
+Q1: Repeat the above three statements with 10000 data points and see if the mean and sd get closer to the ideal. 
+```{r}
+data<-rnorm(10000)
+summary(data)
+sd(data)
+```
+Q2: Make a function call to rnorm using the parameters mean and sd to generate a normal distribution with 4 data points and a mean=5 and sd=9.
+```{r}
+rnorm(4,mean=5,sd=9)
+```
+Q3: Now generate 100000 random samples from a normal distribution using 10000 data points with a mean of 10 and a standard deviation of 3. Assign the output to the variable "data". Pass this variable in to calls to the summary and sd functions to display the descriptive statistics of this distribution.
+```{r}
+data<-rnorm(100000,mean=10,sd=3)
+summary(data)
+sd(data)
+```
+
+
+#### Part2: Read data file, plot and calculate descriptive statistics.
+
+Q4: Read in the Grades.tsv data file with the read.table function and assign the output to the variable "df.grades".
+```{r}
+WD <- "/Users/Pinak/Desktop/College/Spring 2016/CS397F"
+if (!is.null(WD))
+setwd(WD)
+WD
+read.table(Grades.tsv)
+df.grades <- read.table("Grades.tsv", sep="", header=TRUE)
+```
+Q5: View the top rows (use the head function).
+```{r}
+head(df.grades)
+```
+
+Q6: Generate the descriptive statistics (with the summary function) for the entire data set.
+```{r}
+summary(df.grades)
+```
+
+
+Q7: What is the most common grade?
+```{r}
+#The most common grade was an A.
+```
+
+
+Note the two ways you can access a column vector in a data frame:
+First way:   df.grades$Midterm
+Second way:  df.grades[,1]
+
+Q8: Now generate the descriptive statistics and the standard deviation for only the midterm exam. Use the first way shown above (using the column name) to access this column.
+```{r}
+summary(df.grades$Midterm)
+sd(df.grades$Midterm)
+#SD is 22.40716
+```
+
+
+Q9: Generate the descriptive statistics and the standard deviation for only the final exam. Use the first way shown above (using the column name) to access this column.
+```{r}
+summary(df.grades$FinalExam)
+sd(df.grades$FinalExam)
+```
+
+
+Q10: Which distribution has higher scores?
+```{r}
+#The Midterm Exam has higher scores.
+```
+
+
+Q11: Which distribution is more dispersed?
+```{r}
+#The Final Exam is more dispersed.
+```
+
+
+Q12: Generate a histogram and a density plot of the midterm distribution. Add vertical lines for the mean and median to the histogram. Make the lines different line types (with the lty parameter).  
+You may look here for graphical parameters: http://www.statmethods.net/advgraphs/parameters.html
+Make both plots appear in the same window.
+```{r}
+par(mfrow=c(1,2))
+hist(df.grades$Midterm)
+meanmid <- mean(df.grades$Midterm)
+medianmid <- median(df.grades$Midterm)
+abline(v=meanmid,col=2,lty=2)
+abline(v=medianmid,col=2,lty=4)
+plot(density(df.grades$Midterm))
+```
+
+Q13: Do the same as above for the FinalExam distribution.
+```{r}
+par(mfrow=c(1,2))
+hist(df.grades$FinalExam)
+meanmid <- mean(df.grades$FinalExam)
+medianmid <- median(df.grades$FinalExam)
+abline(v=meanfin,col=3,lty=4)
+abline(v=medianfin,col=3,lty=1)
+plot(density(df.grades$FinalExam))
+```
+
+
+Q14: Now create a plot with all four graphs: on the first row display the histogram and density for the midterm, and on the bottom row display the same for the final exam.
+```{r}
+par(mfrow=c(2,2))
+hist(df.grades$Midterm)
+meanmidterm <- mean(df.grades$Midterm)
+medianmidterm <- median(df.grades$Midterm)
+abline(v=meanmidterm,col=2,lty=2)
+abline(v=medianmidterm,col=2,lty=4)
+plot(density(df.grades$Midterm))
+hist(df.grades$FinalExam)
+meanmidterm <- mean(df.grades$FinalExam)
+medianmidterm <- median(df.grades$FinalExam)
+abline(v=meanfin,col=3,lty=4)
+abline(v=medianfin,col=3,lty=1)
+plot(density(df.grades$FinalExam))
+```
+
+The following code displays a histogram overlayed with a density plot. You want the histogram to show probability instead of frequency counts
+because that will match the desity.
+```{r, eval = FALSE}
+hist(df.grades$Midterm, prob=TRUE, main="Midterm Grades", xlab="grade")
+abline(v=mean(df.grades$Midterm), lty=2)
+abline(v=median(df.grades$Midterm), lty=3)
+lines(density(df.grades$Midterm))
+```
+
+Q15: Write the R code that produces the same plot as above but for the final exam.
+```{r}
+hist(df.grades$FinalExam, prob=TRUE, main="Final Exam Grades", xlab="grade")
+abline(v=mean(df.grades$FinalExam), lty=2)
+abline(v=median(df.grades$FinalExam), lty=3)
+lines(density(df.grades$FinalExam))
+```
+
+Q16: Write code that displays the above plots side by side in one row, midterm on the left, final exam on the right.
+```{r}
+par(mfrow=c(2,2))
+hist(df.grades$Midterm)
+meanmid <- mean(df.grades$Midterm)
+medianmid <- median(df.grades$Midterm)
+abline(v=meanmid,col=2,lty=2)
+abline(v=medianmid,col=2,lty=4)
+plot(density(df.grades$Midterm))
+hist(df.grades$FinalExam)
+meanmid <- mean(df.grades$FinalExam)
+medianmid <- median(df.grades$FinalExam)
+abline(v=meanfin,col=3,lty=4)
+abline(v=medianfin,col=3,lty=1)
+plot(density(df.grades$FinalExam))
+```
+
+Q17: Now generate box plots of the midterm final exam grades. Display both box plots in one plot (i.e. one call to boxplot).
+Use a sequence (see previous hwk) to specify the columns. Add the title:  "Midterm and Final Exam Distributions".
+```{r}
+par(mfrow=c(1,1))
+boxplot(df.grades$Midterm,df.grades$FinalExam, main="Midterm and Final Exam Distributions")
+```

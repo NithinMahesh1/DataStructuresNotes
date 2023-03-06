@@ -1,0 +1,204 @@
+---
+title: "Activity- Naive Bayes Classifier"
+author: "Gordon Anderson"
+output: html_document
+---
+
+We will predict political party affiliation based on 16 congressional votes (vote= yes/no).
+The column "Party"" is a categorical variable with two levels: Party={"democrat", "republican"}. 
+Note that abstentions have been treated as missing values.
+
+Read in the file houseVotes84.csv.
+
+```{r}
+hv84<-read.csv("houseVotes84.csv")
+```
+
+What does the data look like?
+
+```{r}
+dim(hv84)
+str(hv84)
+summary(hv84)
+```
+
+This is a classification problem, so we make up test and training sets by random sampling, with 75% for training and 25% for testing.
+
+```{r}
+data.size<-nrow(hv84)
+train.size<-0.75
+train.row.nums<-sample(1:data.size, data.size*train.size, replace=FALSE)
+train.data<-subset(hv84[train.row.nums,])
+test.row.nums<-setdiff(1:data.size,train.row.nums)
+test.data<-subset(hv84[test.row.nums,])
+```
+
+There is a naiveBayes function in the library e1071. Load it and call naiveBayes to predict the party based on voting record. Use a formula with Party predicted by all of the remaining columns.
+
+```{r}
+model <- naiveBayes(Party ~ ., data = train.data) 
+
+```
+Now test the predictions against the true labels. First, let's look at the model's posterior probabilities for the two labels. Note that the first four correct labels are "republican", "republican", "democrat", "democrat". According to the posterior probabilities, these are the labels according to our model:  "republican", "democrat", "republican", "democrat". It gets the first and fourth correct. Verify this by inspecting the posterior probabilities in the output.
+
+```{r}
+predict(model, test.data[1:20,-1], type = "raw") 
+```
+
+Now let's get the predictions for the entire test set. Remember to remove the label column from the test data set.
+```{r}
+pred.labels <- predict(model, test.data[,-1])
+```
+
+Create a confusion matrix (contingency table). Much better over the entire data set than the 50% error rate on the first four rows!
+
+```{r}
+conf.matrix <- table(pred.labels, test.data[,1]) 
+conf.matrix
+```
+
+Misclassification rate:
+
+```{r}
+num.incorrect.labels<-sum(conf.matrix[row(conf.matrix)!=col(conf.matrix)])
+misc.rate <- num.incorrect.labels/length(pred.labels)
+misc.rate
+```
+
+#### Using Laplace smoothing:
+
+With Laplace smoothing, we take care of the possibility that a word occurs zero times, resulting in a zero probability as a factor. Let's say we observe a word in the training set but not in the test set. That is a way we could overfit the data. A Laplace smoothing term adds "pseudocounts" to the numerator- we pretend we saw it k extra times, where k is the additive smoothing number. Note that if k=0 the algorithm does not smooth. 
+
+```{r}
+model2 <- naiveBayes(Party ~ ., data = train.data, laplace = 3) 
+pred.labels2 <- predict(model2, test.data[,-1]) 
+
+conf.matrix <- table(pred.labels2, test.data[,1]) 
+conf.matrix
+
+num.incorrect.labels<-sum(conf.matrix[row(conf.matrix)!=col(conf.matrix)])
+misc.rate <- num.incorrect.labels/length(pred.labels2)
+misc.rate
+```
+Note that you will likely not see any difference using the smoothing on this data set.
+
+#### Adding an "abstention" category.
+
+We are missing out on some data for our classifier by ignoring the NA values. These are not really missing values but examples of a voting preference (not to vote). We surmise that the choice not to vote may provide our classifier with more evidence about voting behavior upon which to build its "theory" about party affiliation.
+
+We'll treat refusals to vote as a third level for vote: "ab" for "abstain".
+The following code copies the original df to a new df. Then adds a new level, "ab", and then assigns all NAs to that new level (Note the columns are already factors).
+
+```{r}
+hv84new<-hv84
+
+for (k in 2:17){
+  levels(hv84new[,k]) <- c(levels(hv84new[,k]), "ab")
+  hv84new[,k][is.na(hv84new[,k])] <- 'ab'
+}
+summary(hv84new)
+```
+
+#### Your turn.
+
+Make up test and training sets as before using the new data set with the abstaining category. Compare the confusion matrices and misclassification rates with the results above (you should see an improvement).
+What do you conclude about the new results?
+
+```{r}
+
+
+
+
+```
+
+### K-fold cross validation
+
+Given a data set, model, evaluation metric(s):
+
+1- obtain (at random) k equally sized subsets from the data.
+
+2- for each subset k, test = kth subset, train = the remaining k-1 subsets
+
+3- apply performance metric(s) to test having used train to fit the model.
+
+4- the output is a vector of k evaluations of the model.
+
+
+One way to make the "folds" in a data set is to generate integers randomly (uniform distribution) in the range of 1 to K. If the data size is N and there are K folds, each fold should have roughly floor(N/K) data rows. 
+
+The following R code demonstrates how to generate a sequence of integers that will serve as a "fold" column to be added to the data set. Recall the "runif" function generates a sequence of N integers in [0, N-1] uniformly. We scale this output by the number of folds and then add 1 to adjust the range. Finally, we change the numeric vector to be categorical (a factor).
+
+```{r}
+data.size<-55
+num.folds<-10
+folds<-floor(runif(data.size)*num.folds)+1
+folds<-factor(folds)
+summary(folds)
+```
+
+You can see by the summary that there are 10 folds, but that the number in each fold varies a lot. This has to do with the random number generator and the small size of the "data". This will be taken care of when we scale up.
+
+Now we'll apply this technique to creating a K-fold cross validation analysis using the model and data set from above.
+
+The fold number designates which fold that row belongs to. The fold will be accessed in the K-fold loop by the loop index number. 
+
+We'll use the "hv84new" data set, with K=10. This is a common number of folds in ML
+
+
+```{r}
+# assign the data set to a variable. this makes re-using the following code easier.
+data.set<-hv84new
+
+# the "real" code begins:
+data.size<-nrow(data.set)
+data.cols<-ncol(data.set)
+num.folds<-10
+# adding the fold column to the data set
+data.set["fold"]<-floor(runif(data.size)*num.folds)+1
+data.set$fold<-factor(data.set$fold)
+
+# using misclassification rate as the model performance metric.
+# initializing the vector with an empty call to "c". A new value will be
+# appended at each iteration.
+misclassification.rates<-c()
+
+# the loop- the loop index is "i"
+for(i in c(1:num.folds)){
+    # create the train and test subsets, excluding the fold column
+    train<-data.set[(data.set$fold!=i), 1:(data.cols)]
+    test<-data.set[(data.set$fold==i),1:(data.cols)]
+    
+    #fit model
+    model <- naiveBayes(Party ~ ., data = train) 
+    pred.labels <- predict(model, test[,-1]) 
+    true.labels <- test[,1]
+    
+    # calculate performance metric
+    num.incorrect.labels<-sum(pred.labels!=true.labels)
+    misc.rate <- num.incorrect.labels/length(pred.labels)
+    
+    # appending to the vector of misc rate
+    misclassification.rates<-c(misclassification.rates, misc.rate)
+}
+  
+```
+
+Now plot the misclassification rates for each of the ten trials.
+
+```{r}
+plot(misclassification.rates, xlab="Fold", ylab="misc rate")
+lines(misclassification.rates)
+```
+
+Of course, we can do any statistics we want on the performance data:
+
+```{r}
+summary(misclassification.rates)
+sd(misclassification.rates)
+hist(misclassification.rates)
+```
+
+
+
+
+

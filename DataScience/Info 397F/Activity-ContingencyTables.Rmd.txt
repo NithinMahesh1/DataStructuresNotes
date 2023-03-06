@@ -1,0 +1,154 @@
+---
+title: "Activity- Contingency Tables"
+author: "Gordon Anderson"
+output: html_document
+---
+
+#### Contingency tables
+
+Let's say we have data about two groups, A and B. The data is categorical in nature- i.e. it has discrete levels. We would like to know if the data we observe is dependent upon the particular group it is a member of.
+
+For example, given poll results that counted the number of males and females who registered for one of three political affiliations: democratic, independent or republican, we would like to know if there is any dependency of political affiliation on gender. In other words, are males or females more likely to affiliate with a particular political party?
+
+Our strategy is to assemble the data into a "contingency table". The term "contingency" means a dependency. A contingency table is a table with groups on one dimension and the observed variables on the other. In this example, the table will have gender as its rows and the political parties as columns.
+
+The cells of the table contain the counts (frequencies) of occurrences of that particular group and variable.
+
+We will construct a contingency table and then test for dependencies in the data. If there are dependencies, we may conclude that party affiliation does depend to some (statistically significant) extent on gender. Otherwise, we conclude that party affiliation is independent of gender (the null hypothesis).
+
+The following code produces a table of the frequencies of affiliations for males and females. The rows have two levels and the columns have three levels (remember, this is categorical data). Each cell is the "observed frequency" of the occurrence of the combination of the row and column value.
+
+```{r}
+data.table <- as.table(rbind(c(762, 327, 468), c(484, 239, 477)))
+dimnames(data.table) <- list(gender = c("F", "M"),party = c("Democrat","Independent", "Republican"))
+data.table
+```
+
+What do you notice about these data by inspection? How could we quantitatively say that there is any dependency of affiliation on gender?
+
+### Hypothesis testing with Chi Square
+
+The chi-squared statistic can be used to test the significance of an association between samples of two (or more) categorical variables (factors). The association between factors is based upon comparing "observed frequencies" at each combination of factor levels, with "expected frequencies" that are averages of observed frequencies over combinations of factor levels. 
+
+Each cell in the table has count Nij where i=row, j=col (the observed frequency)
+Ni = sum of all counts in the row
+Nj = sum of all counts in column
+N is the total number of observations in the table
+The expected value for a cell is Eij = Ni * Nj /N
+
+Chi-square is the sum over all cells of: (observed-expected)^2/expected
+
+We state a "null hypothesis", H0, that there is no significant difference between the observed and expected frequencies, and an "alternate hypothesis", Ha, that there is a significant difference.
+
+If the chi-square value is greater than a "critical" value given a confidence level, we reject the null hypothesis, otherwise we accept the null hypotheis. A typical confidence value is 95%. 
+
+The following statement performs the calculations of expected values and chi-square statistic. It also prints out the significance test for 95%. In other words, we are saying that there is a 5% chance that we would observe an independent value. This confidence is described by a "p-value" of less than .05. This refers to a part of the distribution of the chi-square statistic. 
+
+```{r}
+chisq.test(data.table)
+```
+The p-value is very small, meaning the test is significantly smaller than .05 and we conclude that there is strong evidence of dependency in the table: political affiliation is related to gender. Now, what evidence for this do you see in the table?
+
+The degrees of freedom, the number of dimensions needed to calculate a value in the table, is calculated by (number of rows-1)*(number of columns-1). This is also taken into consideration in the significance test.
+
+A quick barplot of the data:
+
+```{r}
+colors <- c("gray40", "gray90")
+barplot(data.table, beside=TRUE, col = colors, ylim=c(0,800))
+legend("topright", legend = c("Female", "Male"), fill = colors)
+```
+
+### Educational data example.
+
+Let's look at an educational data set, found in the file AttendanceData.csv. The columns are data from a student survey for a large computer programming class:
+
+CLASS_LVL: year in college 
+GENDER: female, male 
+MAJOR: 12 different majors 
+PREV: previous experience with the subject
+LECATTEND: amount of lectures attended
+DISCATTEND: amount of discussion sections attended
+
+Read in the "Attendance.csv" file. Inspect the data set with nrow, ncol, and view the first 6 rows. Finally, generate a summary of the data set.
+```{r}
+df.data <- read.csv("AttendanceData.csv")
+# enter your code here:
+
+
+
+```
+ 
+There are many ways we can look at these data. Does gender affect whether or not you attend lecture?
+
+First, as is often the case, the categorical data is coded as numbers. Let's set the levels.
+
+```{r}
+df.data$CLASS_LVL<-factor(df.data$CLASS_LVL)	
+levels(df.data$CLASS_LVL)<- c("1st-year","2nd-year","3rd-year","4th-year")
+
+df.data$GENDER<-factor(df.data$GENDER)
+levels(df.data$GENDER)<- c("female","male")
+
+df.data$MAJOR<-factor(df.data$MAJOR)
+levels(df.data$MAJOR)<- c("ChemBiochem","Biology","OtherLifeSci","GeoPhysicalSci","EnvironmentalSci","Engineering","CompSci","Math","Humanities","SocialSci","Business","Undeclared")
+
+df.data$PREV<-factor(df.data$PREV)
+levels(df.data$PREV)<- c("low","med","high")
+
+df.data$LECATTEND<-factor(df.data$LECATTEND)
+levels(df.data$LECATTEND)<- c("always","sometimes","never")
+
+df.data$DISCATTEND<-factor(df.data$DISCATTEND)
+levels(df.data$DISCATTEND)<- c("always","sometimes","never")
+```
+Now run the summary function again to see the changes:
+
+```{r}
+
+
+```
+Notice there are unobserved values, which in R are coded as NA. Often, you want to remove any unobserved values. This means that you remove the entire row even if all of the other values are present. If you have a lot of data and relatively few rows with NAs this is probably OK. It is always a concern that you may be introducing bias into your study by removing data.
+
+It's good to note how many rows with missing data there are. You may have to do a study of what you removed to justify that you are not compromising your results by doing the removal.
+
+This statement removes the rows with NAs.
+
+```{r}
+df.data <- na.omit(df.data)
+```
+
+Now carry out contingency table analysis as above on gender and lecture attendance. 
+
+First, create the table from the GENDER and LECATTEND columns of the data frame and print it to the console:
+```{r}
+cont.table<- table(df.data$GENDER,df.data$LECATTEND )
+cont.table
+```
+
+Run the Chi-square test. Does the p-value suggest that you can reject the null hypothesis?
+Therefore, what can you conclude about dependency between gender and lecture attendance?
+
+```{r}
+chisq.test(cont.table)
+```
+Actually, we'd like to see what the percentages of females and males who attended lecture by the three levels. This command will give us the row percentages (proportions):
+
+```{r}
+prop.table(cont.table, 1)
+```
+This more clearly shows about 40% of females "always" attended lecture compared with about 27% of males. This supports the chi-square result.
+
+Produce a barplot of the proportion table. Use a vector with two shades of grey to define the colors for female and male columns. Note the legend and its parameters.
+
+This is a useful site for graphical parameters in basic R:
+http://www.statmethods.net/graphs/bar.html
+
+```{r}
+colors <- c("gray70", "gray90")
+barplot(prop.table(cont.table, 1), col=colors, main="Lecture Attendance by Gender", ylim=c(0, 0.5), beside=TRUE)
+legend(x=3.5, y=0.45, legend = c("female", "male"), fill = colors, bty ="n")
+```
+
+
+
