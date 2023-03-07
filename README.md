@@ -23,6 +23,8 @@ Main points to take from this:
 
 ## Interview Prep w/Some Solutions:
 
+Top Interview [Leetcode](https://leetcode.com/problem-list/top-interview-questions/?sorting=W3sic29ydE9yZGVyIjoiQVNDRU5ESU5HIiwib3JkZXJCeSI6IkRJRkZJQ1VMVFkifV0%3D) Problems (recommend practicing all of them)
+
 Allscripts Interview Question:
 Given a list of n integers combine the lists and return one full sorted list at the end. He specified he was looking for a solution using a data structure, I tried to do it by adding every element in two loops to combine them into one array and then sort this. 
 
