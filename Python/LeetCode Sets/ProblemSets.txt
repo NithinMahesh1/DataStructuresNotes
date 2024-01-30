@@ -1,0 +1,37 @@
+# Misc:
+    1. reverseInt
+
+# Arrays:
+    1. twoSum
+    2. Container with most water
+    3. Maximum Subarray
+
+# Linked Lists:
+    1. Reverse Linked Lists
+    2. Detect Cycle in Linked List
+    3. Merge Two Sorted Lists
+
+# Stacks:
+    1. Valid Parenthesis
+    2. Min Stack
+    3. Evaluate Reverse Polish Notation
+
+# Queues:
+    1. Implement Queue using Stacks
+    2. Sliding window Maximum
+    3. Number of Recent Calls
+
+# Trees:
+    1. Maximum Depth of Binary Trees
+    2. Validate Binary Search Tree
+    3. Binary Tree Level Order Traversal
+
+# Hash Tables:
+    1. twoSum
+    2. Longest Substring without Repeating Characters
+    3. Group Anagrams
+
+# Heaps/Priority Queues
+    1. Kth Largest Element in an Array
+    2. Merge k sorted lists
+    3. Top k Frequenet Elements
