@@ -1,0 +1,21 @@
+    def ping(self, t: int) -> int:
+        # We want to check the current range with the currArr
+
+        # First we calculate t - 3000
+        # Then we check the current num with this range 
+        checkRange = t - 3000
+
+        if len(self.currArr) == 0:
+            self.currArr.append(t)
+            return 1
+        
+        # TODO try rewriting this to loop backwards and adjust logic
+        # This will avoid issues with removing an index at the start of arr
+        for i in range(len(self.currArr) - 1 ,-1,-1):
+            self.currArr.append(t)
+            if self.currArr[i] >= checkRange:
+                return len(self.currArr)
+            if self.currArr[i] < checkRange:
+                self.currArr.pop(i)
+
+        return -1

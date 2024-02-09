@@ -23,55 +23,57 @@
 # recentCounter.ping(3001);  // requests = [1, 100, 3001], range is [1,3001], return 3
 # recentCounter.ping(3002);  // requests = [1, 100, 3001, 3002], range is [2,3002], return 3
 
+from collections import deque
+
 class RecentCounter:
 
     def __init__(self):
-        self.currArr = []
+        self.queue = deque()
 
     def ping(self, t: int) -> int:
-        # We want to check the current range with the currArr
+        lower = t - 3000
 
-        # First we calculate t - 3000
-        # Then we check the current num with this range 
-        checkRange = t - 3000
+        # First we check the current t is in the range
+        # Then we loop and check if there are others in the queue in the same range
+        # Count each of the ones in the queue within the range and return counter
 
-        if len(self.currArr) == 0:
-            self.currArr.append(t)
-            return 1
-        
-        for i in range(0,len(self.currArr)):
-            if self.currArr[i] >= checkRange:
-                self.currArr.append(t)
-                return len(self.currArr)
-            if self.currArr[i] < checkRange:
-                self.currArr.pop(i)
-                i = i-1
-                # return len(self.currArr)
+        self.queue.append(t)
 
-        return -1
+        # Remember in this instance we loop backwards since we are popping off the left or front of the queue
+        # We do this to avoid issues with indexing if we are removing elems in the front of the queue while looping
+        counter = 0
+        for i in range(len(self.queue) - 1,-1,-1):
+            if self.queue[i] >= lower and self.queue[i] <= t:
+                counter += 1
+            else:
+                self.queue.popleft()
+
+        return counter
 
 
 # obj = RecentCounter()
-# param_1 = obj.ping(1)
+# param_1 = obj.ping(642)
 # print(param_1)
-# param_2 = obj.ping(100)
+# param_2 = obj.ping(1849)
 # print(param_2)
-# param_3 = obj.ping(3001)
+# param_3 = obj.ping(4921)
 # print(param_3)
-# param_4 = obj.ping(3002)
+# param_4 = obj.ping(5936)
 # print(param_4)
+# param_5 = obj.ping(5957)
+# print(param_5)
+
 
 obj = RecentCounter()
-param_1 = obj.ping(642)
+param_1 = obj.ping(1)
 print(param_1)
-param_2 = obj.ping(1849)
+param_2 = obj.ping(100)
 print(param_2)
-param_3 = obj.ping(4921)
+param_3 = obj.ping(3001)
 print(param_3)
-param_4 = obj.ping(5936)
+param_4 = obj.ping(3002)
 print(param_4)
-param_5 = obj.ping(5957)
-print(param_5)
+
 
 # Your RecentCounter object will be instantiated and called as such:
 # obj = RecentCounter()
