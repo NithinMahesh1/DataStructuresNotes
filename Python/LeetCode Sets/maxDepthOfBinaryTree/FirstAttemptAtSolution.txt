@@ -1,0 +1,20 @@
+# We can utilize DFS since we are visiting all the children left and right until there are none left
+# Every iteration of parent to children we increment the counter 1
+# Once we reach the end of both left and right we return
+
+class Solution:
+    def maxDepth(self, root: TreeNode)-> int:
+        self.count = 1
+        self.traverseTree(root,self.count)
+        print("This is the max depth of the tree " +str(self.count))
+
+    def traverseTree(self,root,count):
+        count += 1
+        if root.left is None and root.right is None:
+            print(root.val)
+        
+        print(root.val)
+        if root.left is not None and root.right is not None:
+            self.count = count
+            left = self.traverseTree(root.left,self.count)
+            right = self.traverseTree(root.right,self.count)
