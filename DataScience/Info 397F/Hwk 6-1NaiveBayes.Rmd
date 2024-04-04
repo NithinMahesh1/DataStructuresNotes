@@ -1,0 +1,139 @@
+---
+title: "Hwk6-1 Naive Bayes"
+author: "Nithin Mahesh"
+output: html_document
+---
+
+(100pts total)
+For this homework, you will train a Naive Bayes classifier to recognize whether an email is Spam or not. The data has been adapted from the Ling-Spam dataset (refer to: http://csmining.org/index.php/ling-spam-datasets.html for the original files). 
+The data file is named "email.csv". Each row is a vector of word counts in a particular email. The first colum is a unique document ID, the second column is the "class label", Spam: 1= spam, 0= not spam, the rest of the columns are the frequency counts for words occurring in a particular email. Each column header is a unique ID for a word in the dictionary of words in the document corpus. Note that the "stop" words have been removed and the remaining words were "stemmed".
+
+Q1(5pts): Assign the variable "email.df" to the data in the file "email.csv". Remember to remove the document ID column after reading in the data. Make the class label column a factor. 
+```{r}
+email.df<- read.csv("email.csv")
+email.df<- subset(email.df[, -1])
+em.vec<- factor(email.df$Spam, labels = c("not spam", "spam"))
+email.df$Spam<- em.vec
+```
+
+Q2(10pts): Declare and assign the following variables for use in this analysis: "train.data", "test.data", "true.labels". Create train and test sets by random sampling, using an 80% train/20% test ratio. Use the e1071 library and the set.seed function with the seed value provided:
+
+```{r}
+library (e1071)
+seed.val<-12345
+data.size<- nrow(email.df)
+train.size<- 0.80
+train.row.nums<- sample(1:data.size, data.size*train.size, replace = FALSE)
+train.data<- subset(email.df[train.row.nums,])
+test.row.nums<- setdiff(1:data.size, train.row.nums)
+test.data<- subset(email.df[test.row.nums,])
+```
+
+Q3(5pts): Fit a naive bayes model to the training data set and produce a vector of predicted labels using the test set.
+
+```{r}
+model <- naiveBayes(Spam ~ ., data = train.data) 
+pred.labels <- predict(model, test.data[,-1]) 
+```
+
+Q4(5pts): Display a confusion matrix of predicted vs true labels.
+
+```{r}
+conf.matrix <- table(pred.labels, test.data[,1]) 
+conf.matrix
+
+```
+
+Q5(5pts): In a sentence or two, summarize the results in the confusion matrix.
+
+-----------------------------------------------------
+# We can see that 102 are spam and 90 are not spam. There are a total of 192 predictions and the classifier predicted spam 86 times and predicted not spam 106 times. 
+
+-----------------------------------------------------
+
+Q6(5pts): Calculate and display the misclassification rate of this classifier.
+
+```{r}
+num.incorrect.labels<-sum(conf.matrix[row(conf.matrix)!=col(conf.matrix)])
+misc.rate <- num.incorrect.labels/length(pred.labels)
+misc.rate
+```
+
+### K-fold cross validation
+
+Conduct a K-fold cross validation analysis using a naive bayes classifier and the email data set. Use the misclassification rate as the model performance metric. Collect the misclassification rates from each fold, graph and report statistics on these ten results.
+
+Q7(5pts): Declare variables data.size- the number of rows in the data set, data.cols- the number of columns in the data set, and num.folds- the number of folds- ten in this case.
+
+```{r}
+data.set<- email.df
+data.size<- nrow(data.set)
+data.cols<-ncol(data.set)
+num.folds<-10
+```
+
+Q8(10pts): Create a column to represent the folds, with integers in the range of 1 to 10, evenly distributed among the ten folds. Add this fold column to the data set. You may also want to declare a vector to store the misclassification results.
+
+```{r}
+data.set["fold"]<-floor(runif(data.size)*num.folds)+1
+data.set$fold<-factor(data.set$fold)
+
+misclassification.rates<-c()
+
+```
+
+Q9(20pts): Write the code that loops through the ten folds, creating train and test sets based on the current fold, fits a model and calculates the misclassification rate.
+
+```{r}
+
+for(i in c(1:num.folds)){
+  train<-data.set[(data.set$fold!=i), 1:(data.cols)]
+  test<-data.set[(data.set$fold==i),1:(data.cols)]
+  model <- naiveBayes(Spam ~ ., data = train) 
+  pred.labels <- predict(model, test[,-1]) 
+  true.labels <- test[,1]
+  num.incorrect.labels<-sum(pred.labels!=true.labels)
+  misc.rate <- num.incorrect.labels/length(pred.labels)
+  misclassification.rates<-c(misclassification.rates, misc.rate)
+}
+
+
+
+
+  
+```
+
+Q10(5pts): Display a summary statistics and the standard deviation of the misclassification rates.
+
+```{r}
+summary(misclassification.rates)
+sd(misclassification.rates)
+
+```
+
+Q11(5pts): Plot the misclassification rates for each of the ten trials. Add lines between the data points to better see the trend. Label the horizontal axis "fold" and the vertical axis "misclassification rate"
+
+```{r}
+plot(misclassification.rates, xlab="fold", ylab="misclassification rate")
+lines(misclassification.rates)
+
+```
+
+Q12(10pts): In one plot, combine a histogram and a density curve of the misclassification rates. Set the prob parameter to true and the colors of the histogram columns to grey. Make the density curve a dotted line.
+
+```{r}
+hist(misclassification.rates, prob="True", col="gray", xlab="Misclassification Rate", ylab="Density", main="Misclassification Rates Vs Density")
+
+d <- density(misclassification.rates)
+lines(d, main="Misclassification Rates", lty=2)
+```
+
+Q13(10pts): Briefly summarize the results of the 10-fold cross validation.
+
+-----------------------------------------------------
+# The mean of the missclassification rates shows us that there is a low error rate in this case and this would be validated. 
+
+
+
+
+-----------------------------------------------------

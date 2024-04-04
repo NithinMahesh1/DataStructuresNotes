@@ -1,0 +1,144 @@
+---
+title: "CS 397F Homework 2-2"
+author: "Pinak Kapoor"
+output: html_document
+---
+
+### Week 2: Statistics.
+
+#### Part 1: Read data file, plot and calculate descriptive stats, plotting the data.
+
+Q1: Read in the FlightDelays.csv data file with the read.table or read.csv function and assign the output to the variable "df.delays".
+
+```{r}
+df.delays <- read.table(file ="/Users/Pinak/Desktop/College/Spring 2016/CS397F/Week3/FlightDelays.csv", sep=",", header=TRUE)
+```
+
+Q2: Use the dim and head functions to show the size and first rows of this data set.
+
+```{r}
+dim(df.delays)
+head(df.delays)
+```
+
+Q3: Display the summary of the distributions of flight lengths for each carrier. Select the distribution of FlightLength for Carrier AA and call summary, then do the same for Carrier UA. You can use the subset function along with the select function (to select the FlightLength).
+
+```{r}
+summaryua <- subset(df.delays, Carrier == "UA", FlightLength)
+summary(summaryua)
+summaryaa <- subset(df.delays, Carrier == "AA", FlightLength)
+summary(summaryaa)
+```
+
+Q4: Now generate box plots of the distributions of flight lengths for each carrier.
+Display both box plots in one plot (i.e. one call to boxplot). Use the formula FlightLength~Carrier and specify data=df.delays. Add the title:"Flight Lengths" and appropriate x and y axis labels.
+
+```{r}
+boxplot(FlightLength~Carrier, data=df.delays, main="Flight Delays",ylab="Flight Length",xlab="Carriers")
+```
+
+Q5: Briefly explain what the boxplots show about the flight lengths of the carriers.
+
+```{r}
+#The boxplots show that the carrier AA has a higher median and higher upper & lower quartiles, but has no outliers; while carrier UA has a smaller median and lower quartiles but has many outliers. 
+```
+
+
+Q6: Compute the total delay time (y axis) for each destination (x axis) and plot these values in a barplot.
+Add the title: Total Delay per Destination, and label the x and y axes appropriately. You can use the tapply function to do the sum.
+
+```{r}
+barplot(tapply(df.delays$Delay,df.delays$Destination,sum), main="Total Delays Per Destination", xlab="Destination",ylab="Total Delay Time")
+```
+
+Q7: Alter the plot so that the delays are shown in ascending order- i.e. the longest delay is at the right.
+
+```{r}
+delaydestt <- tapply(df.delays$Delay,df.delays$Destination,sum)
+barplot(sort(delaydestt,decreasing=FALSE), main="Total Delays Per Destination", xlab="Destination",ylab="Total Delay Time")
+```
+#### Part 2: Analyzing categorical data for independence: contingency tables.
+
+You will perform a contingency table analysis on two data sets.
+
+##### Process data sets.
+
+Q8: Read in the file "TestProcessAB.csv" to a variable df.process.
+
+```{r}
+df.process <- read.table(file ="/Users/Pinak/Desktop/College/Spring 2016/CS397F/Week2/TestProcessAB.csv", sep=",", header=TRUE)
+```
+
+Q9: After looking at the data (with the functions dim, head, names, etc.), create a table from the dataframe called cont.table.
+
+```{r}
+cont.table <- data.frame(df.process)
+```
+
+Inspect the table visually. Do you think there are any dependencies, or are the results independent of the process that genarated them?
+```{r}
+#I think that all the results are fairly independent of the process that generated them seeing as some grade letters are not properly matched up with their results.
+```
+Q10: Run the chi-square test on the table.
+
+```{r}
+chisq.test(cont.table$Process,cont.table$Result)
+```
+
+Interpret the results. Are the results independent of the process? Briefly explain why.
+```{r}
+#The results show that they are a bit dependent of the process as the p-value is .3466 or ~35%
+```
+
+
+
+Q11: Create a bar plot of the table. Include a legend.
+
+```{r}
+reg.table <- table(df.process)
+barplot(reg.table, main="Grades",xlab="Letter Grades",ylab="Results",legend = c("A's","B's"), args.legend = list(title="Grades", x="topright", cex =.5))
+```
+
+##### Flight delay data.
+
+Now analyze the FlightDelays.csv data. We want to know if destinations are realted to the number of delays of 30 minutes or more.
+
+Q12:Read in the data if you haven't already done so. Assign the data frame to the variable df.delays.
+
+```{r}
+df.delays <- read.table(file ="/Users/Pinak/Desktop/College/Spring 2016/CS397F/Week3/FlightDelays.csv", sep=",", header=TRUE)
+flight.frame <- data.frame(df.delays)
+```
+
+Q13: Create a table from the columns Delayed30 and Destination. You may use any way to access the columns- either by column name using the $ operator, or with bracket [] notation.
+
+```{r}
+desdelay <- table(flight.frame$Delayed30,flight.frame$Destination)
+```
+
+Q14: Run the chi-square test on the table.
+
+```{r}
+chisq.test(desdelay)
+```
+
+Q15: What are your conclusion(s)? Is there a dependency? Explain briefly.
+```{r}
+#There is a high dependency as the P-Value is below 1%. 
+```
+
+
+
+Q16: Create a barplot of the data with a legend. The legend will have two titles: "No delay" and "Delay".
+
+```{r}
+barplot(desdelay, xlab="Destinations", ylab="Time Delayed",legend = c("No delay", "Delay"), args.legend = list(title="Delayed 30?", x="topright", cex =.5))
+```
+
+
+
+
+
+
+
+

@@ -1,0 +1,108 @@
+---
+title: "Activity- Basic Stats and Plots"
+author: "Gordon Anderson"
+output: html_document
+---
+
+### A look at basic statistics and plotting in R. 
+
+In the process of making these plots, you will gain practice manipulating data and performing basic statistical calculations in R. You will also gain experience using some graphing and plotting functions and their parameters. 
+
+There are many libraries that have been written for R. Most of these libraries come with data sets. See the file BackgroundRInfo.R for some specifics about libraries and datasets.
+
+Now, we will use the mtcars data set included in basic R to create a bar graph of how many cars have each number of cylinders.
+
+First, take a look at the dimensions (rows and columns) of the mtcars dataset and view the first 6 rows:
+
+```{r}
+dim(mtcars)
+head(mtcars)
+```
+
+Create the basic descriptive statistics for the entire data set:
+```{r}
+summary(mtcars)
+```
+Notice the number of cylinders is treated like a numerical (continuous) data type, when in fact it is categorical. 
+
+Let's change it to a factor, using the numbers as the levels. Then redisplay the summary.
+```{r}
+mtcars$cyl<-factor(mtcars$cyl)
+summary(mtcars)
+```
+Notice the difference in the output of summary for the "cyl" column.
+
+Now create a table of the counts of cars with each number of cylinders. The table function
+is really useful:
+
+```{r}
+counts <- table(mtcars$cyl)
+counts
+```
+This table can be passed in to the barplot function with these parameters:
+
+```{r}
+barplot(counts, main="Car Distribution", xlab="Number of Cylinders") 
+```
+
+Make the y axis higher:
+```{r}
+barplot(counts, main="Car Distribution", xlab="Number of Cylinders", ylim=c(0,20)) 
+```
+
+Now the question is asked: Do the number of cylinders in a car engine have any
+bearing on gas mileage? We want to visualize the average miles per gallon for
+all cars having the same number of cylinders. A good way to visualize this is with a bar graph. 
+
+We want to group cars by their number of cylinders, then calculate the mean of each group.
+The highly useful function tapply will be helpful for this.
+The general form:  tapply(Summary Variable, Group Variable, Function)
+```{r}
+tapply(mtcars$mpg, mtcars$cyl, mean)
+```
+
+The output of this call produces the data we need for the bar graph. Before we render the data,
+we will check the results by selecting the cars with 6 cylinders and applying the mean function.
+Use the subset function along with the select function to get the mpg column:
+```{r}
+testdata <- subset(mtcars, cyls=6, select=c(mpg)) 
+mean(testdata$mpg)
+```
+Does this match the results above?
+The column name is cyl, not cyls. R didn't tell us this was wrong! Yikes!
+Try this:
+```{r}
+testdata <- subset(mtcars, cyl=6, select=c(mpg)) 
+mean(testdata$mpg)
+```
+
+Still not right? Why do you think it returned the same value? 
+How about this:
+
+```{r}
+testdata <- subset(mtcars, cyl==6, select=c(mpg)) 
+mean(testdata$mpg)
+```
+
+Now we get a matching result. R did not tell us we were referencing a column name that didn't
+exist, nor did it tell us we were using the assignment operator (=) instead of the logical
+operator for equality (==).
+
+Now that we have our data, let's make the plot:
+
+```{r}
+avgmpg<-tapply(mtcars$mpg, mtcars$cyl, mean)
+barplot(avgmpg, main="Average MPG per number of Cylinders",
+   xlab="Number of Cylinders", ylab="Avg MPG") 
+```
+
+Let's make the y axis a little higher:
+
+```{r}
+barplot(avgmpg, main="Average MPG per number of Cylinders",
+   xlab="Number of Cylinders", ylab="Avg MPG", ylim=c(0, 30)) 
+```
+  
+We have calculated a statistic (the mean) for each category (number of cylinders) on the data.
+What does this view of the data tell us about the relationship between mpg and cylinder numbers?
+

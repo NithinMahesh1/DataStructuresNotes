@@ -19,27 +19,29 @@
 # 2 <= n <= 105
 # 0 <= height[i] <= 104
 
-# height = [1,8,6,2,5,4,8,3,7]
+height = [1,8,6,2,5,4,8,3,7]
 # height = [1,1]
-height = [1,0,0,0,2]
+# height = [1,0,0,0,2]
 # height = [0,1]
+
+# Best way to solve this is to take take the left most value and right most value
+# Check the max area with the newly calculated area
+# If not the max we shift the left or right pointer depending on which is the min
+# Continue calculating until we find our max
 
 left = 0
 right = len(height) - 1
 maxArea = 0
 
 while left < right:
-    currentArea = min(height[left], height[right]) * (right - left)
-    maxArea = max(currentArea, maxArea)
-
+    #calculate area
+    area = min(height[left],height[right]) * (right - left)
+    maxArea = max(maxArea,area)
+    
     if(height[left] < height[right]):
         left+=1
     else:
         right-=1
-        
-    if(len(height) == 2 & height[left] !=0 | height[right] != 0):
-        maxArea = height[left] * height[right]
 
-    
-    
+
 print(maxArea)

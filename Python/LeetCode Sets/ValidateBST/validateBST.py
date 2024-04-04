@@ -31,16 +31,26 @@ class Solution:
         def traverseTree(root,i):
             if root is None: 
                 return True
-            left = traverseTree(root.left,1)
-            right = traverseTree(root.right,1)
+            i += 1
+            left = traverseTree(root.left,i)
+            right = traverseTree(root.right,i)
             # Instead call another method to compare left and right as we recursively iterate tree
-            if left.val > root.val and right.val < root.val:
+            isBST = compare(left,right,root)
+            if isBST is False:
                 return False
             return True
+        
+        def compare(left,right,root):
+            leftNode = left.val
+            rightNode = right.val
 
-        isValid = traverseTree(root,0)
-        return isValid
+            if leftNode > root.val and rightNode < root.val:
+                return False 
+            return True
 
+
+        traverseTree(root,0)
+        return compare
 
 # Build the tree method
 # Use DFS to traverse tree root, left, right pre order traversal
