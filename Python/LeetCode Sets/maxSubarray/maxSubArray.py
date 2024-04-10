@@ -45,3 +45,27 @@ else:
 
 
 print(maxSum)
+
+# Another attempt with solution
+# Cleaner solution and easy to read
+
+# Keep adding values in subarrays
+# However when we end up with a negative sum we don't account those values into our max sum
+# Compare the current sum to the maxSum values
+# Return the maxSum
+
+# Check this solution for better understanding:
+# https://www.youtube.com/watch?v=5WZl3MMT0Eg&ab_channel=NeetCode
+# maxSum = nums[0] #Since the first value will never be empty in the input
+# currSum = 0
+
+# for num in nums:
+#     # If we have negative curr sum then we skip those values
+#     if(currSum < 0):
+#         currSum = 0
+
+#     currSum += num
+#     maxSum = max(maxSum,currSum)
+
+
+# print(maxSum)
