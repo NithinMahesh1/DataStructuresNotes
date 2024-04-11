@@ -53,14 +53,34 @@ def printAList(ListNode):
 
 
 def numComponents(head: [ListNode], nums: [int]) -> int:
-    print("test")
+    # Iterate through linked list
+    # Two pointers curr and next
+    # If next contains one of the values from the arr nums we keep checking until there is not
+    # Increment a counter if this is the case
+    curr = head
+    next = curr.next
 
-    return 0
+    count = 0
+    while curr != None:
+        next = curr.next
+        if next == None:
+            break
+
+        if(curr.val in nums):
+            if(curr.val in nums and next.val in nums):
+                count += 1
+            else:
+                count += 1
+
+        curr = curr.next
+        
+    print(count)
+
 
 
 input = [0,1,2,3]
 head = createLinkedList(input)
-printAList(head)
+# printAList(head)
 
 nums = [0,1,3]
 numComponents(head,nums)
