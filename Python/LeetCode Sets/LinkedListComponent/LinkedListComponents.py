@@ -51,36 +51,37 @@ def printAList(ListNode):
         print(curr.val)
         curr = curr.next
 
+from collections import deque
 
 def numComponents(head: [ListNode], nums: [int]) -> int:
-    # Iterate through linked list
-    # Two pointers curr and next
-    # If next contains one of the values from the arr nums we keep checking until there is not
-    # Increment a counter if this is the case
+    # Iterate through linked list with one curr pointer
+    # If the curr val is in nums then we add to queue
+    # Incremement count by 1
+    # Continue iterating if the next value after and so on is in nums and queue is not None nothing changes
+    # If the curr val aka the next value not nums and queue contains values we empty the queue
     curr = head
-    next = curr.next
-
     count = 0
+    visited = deque()
+
     while curr != None:
-        next = curr.next
-        if next == None:
-            break
-
         if(curr.val in nums):
-            if(curr.val in nums and next.val in nums):
+            if(len(visited) == 0):
                 count += 1
-            else:
-                count += 1
-
+            visited.append(curr.val)
+        if(curr.val not in nums and len(visited) != 0):
+            visited = deque()
+            
         curr = curr.next
-        
+            
     print(count)
 
 
 
-input = [0,1,2,3]
+# input = [0,1,2,3]
+input = [0,1,2,3,4]
 head = createLinkedList(input)
 # printAList(head)
 
-nums = [0,1,3]
+# nums = [0,1,3]
+nums = [0,3,1,4]
 numComponents(head,nums)
