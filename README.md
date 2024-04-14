@@ -396,7 +396,7 @@ public class Main {
 
 
 What languages are managed and unmanaged?
-- With memory collecion a managed language deals with removing the memory from the heap after the program executes
+- With memory collection a managed language deals with removing the memory from the heap after the program executes
 - Managed languages remove this automatically (most modern languages do this)
 - Unmanaged languages require the coder to remove the memory from the heap (such as C and C++)
 
@@ -496,6 +496,15 @@ Output: 1
 <br/>
 
 ## System Architecture and Design:
+
+Note: this section needs updating, when I wrote this I think the topics I had learned where either more business oriented or conceptual ways of creating more detail in a system you are designing. 
+
+A much better approach to system design interviews are reading up on books like Alex Yu's System Design Interview [Link to File](System Design Books/Alex Yu - System Design Interview An Insiders Guide by Alex Yu z-liborg.pdf) or Grokking the Advanced System Design Interview [Link to File](System Design Books/Grokking the Advanced System Design Interview.pdf). More importantly delving into topics such as:
+* Back of the evenlope estimations
+* Common system architectures e.g. News Feeds, google drive, "design youtube", URL Shortenere etc
+* Also know uses for components such as load balancers, CDN's, Caching, DB master and slave replication, etc..
+
+### Anything from this point on may need to be edited or removed completely as I don't deem it necessary anymore to my studying - start
 
 One common approach for designing a larger enterprise web application is using an MVC, DDD (domain driven design) and a database-independent data layer:
 * Presentation Layer: Model - View - Controller (calls from the UI to the business logic layer should be placed inside the presentation controller)
@@ -741,6 +750,7 @@ Interfaces:
 We use interfaces in cases where instead of having a Superclass and Subclass in which one Subclass can only implement one Superclass. However when we can use multiple interfaces for one subclass.
 
 When declaring this as part of a UML diagram it would look like this:
+
 ![DataStructuresNotes](images/interface_example_UML.jpg)
 
 
@@ -956,7 +966,7 @@ Vending Machine State Diagram:
 
 ![DataStructuresNotes](images/TerminationElementStateDiagram.jpg)
 
-
+## End
 
 <br/>
 
