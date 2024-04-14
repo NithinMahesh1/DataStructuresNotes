@@ -966,7 +966,7 @@ Vending Machine State Diagram:
 
 ![DataStructuresNotes](images/TerminationElementStateDiagram.jpg)
 
-## End
+### End
 
 <br/>
 
