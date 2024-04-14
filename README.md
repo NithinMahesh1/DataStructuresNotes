@@ -499,7 +499,7 @@ Output: 1
 
 Note: this section needs updating, when I wrote this I think the topics I had learned where either more business oriented or conceptual ways of creating more detail in a system you are designing. 
 
-A much better approach to system design interviews are reading up on books like Alex Yu's System Design Interview [Link to File](System Design Books/Alex Yu - System Design Interview An Insiders Guide by Alex Yu z-liborg.pdf) or Grokking the Advanced System Design Interview [Link to File](System Design Books/Grokking the Advanced System Design Interview.pdf). More importantly delving into topics such as:
+A much better approach to system design interviews are reading up on books like Alex Yu's System Design Interview [Link to File](System%20Design%20Books/Alex%20Yu%20-%20System%20Design%20Interview%20An%20Insiders%20Guide%20by%20Alex%20Yu%20z-liborg.pdf) or Grokking the Advanced System Design Interview [Link to File](System%20Design%20Books/Grokking%20the%20Advanced%20System%20Design%20Interview.pdf). More importantly delving into topics such as:
 * Back of the evenlope estimations
 * Common system architectures e.g. News Feeds, google drive, "design youtube", URL Shortenere etc
 * Also know uses for components such as load balancers, CDN's, Caching, DB master and slave replication, etc..
