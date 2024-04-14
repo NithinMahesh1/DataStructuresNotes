@@ -504,7 +504,7 @@ A much better approach to system design interviews are reading up on books like 
 * Common system architectures e.g. News Feeds, google drive, "design youtube", URL Shortenere etc
 * Also know uses for components such as load balancers, CDN's, Caching, DB master and slave replication, etc..
 
-### Anything from this point on may need to be edited or removed completely as I don't deem it necessary anymore to my studying - start
+### Anything from this point on may need to be edited or removed completely as I don't deem it necessary anymore to my studying - Start
 
 One common approach for designing a larger enterprise web application is using an MVC, DDD (domain driven design) and a database-independent data layer:
 * Presentation Layer: Model - View - Controller (calls from the UI to the business logic layer should be placed inside the presentation controller)
