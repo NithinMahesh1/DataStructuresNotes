@@ -20,74 +20,68 @@
 # Check tree2.jpg
 
 from collections import deque
-# Definition for a binary tree node. 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
+
 class Solution:
-    def isValidBST(self, root: TreeNode) -> bool:
-        def traverseTree(root,i):
-            if root is None: 
-                return True
-            i += 1
-            left = traverseTree(root.left,i)
-            right = traverseTree(root.right,i)
-            # Instead call another method to compare left and right as we recursively iterate tree
-            isBST = compare(left,right,root)
-            if isBST is False:
-                return False
-            return True
-        
-        def compare(left,right,root):
-            leftNode = left.val
-            rightNode = right.val
+    def isValidBST(self, root:[TreeNode]) -> bool:
+        # Use dfs to traverse 
+        # First we compare the root with left node 
+        # Then we compare root with right node
+        # Using recursion we keep doing this left and right 
+        # In any case where from left to right it is not incremental we output false
+        isValid = False
 
-            if leftNode > root.val and rightNode < root.val:
-                return False 
-            return True
-
-
-        traverseTree(root,0)
-        return compare
-
-# Build the tree method
-# Use DFS to traverse tree root, left, right pre order traversal
-# If we can traverse the tree and compare the left < root and right > root at each level
-    # Then it is a bst
-        
+        def dfs(root,isValid):
+            if root is None: return True
+            left = root.left
+            right = root.right
+            if left is None and right is None:
+                isValid = True
+                return isValid
+            if((left == None and right != None) or (right == None and left != None)):
+                isValid = False
+                return isValid
+            if left.val >= root.val or right.val <= root.val:
+                isValid = False
+                return isValid
+            return dfs(left,right)
 
 
-# Build tree:
-def createTree(arr):
-    root = TreeNode(arr[0])
-    queue = deque([root])
+        print(dfs(root,isValid))
+        return dfs(root,isValid)
+    
+
+def createATree(arr) -> [TreeNode]:
+    tree = TreeNode(arr[0])
+    queue = deque([tree])
 
     i = 1
     while queue and i < len(arr):
         node = queue.popleft()
 
-        if arr[i] and i < len(arr):
+        if(arr[i] is not None):
             node.left = TreeNode(arr[i])
             queue.append(node.left)
         i += 1
 
-        if arr[i] is not None and i < len(arr):
+        if(i < len(arr) and arr[i] is not None):
             node.right = TreeNode(arr[i])
             queue.append(node.right)
         i += 1
 
-        return node
-    
+    return tree
 
 
-values = [2,1,3]
-root = createTree(values)
+# root = [2,1,3]
+# root = [5,1,4,None,None,3,6]
+# root = [1,1]
+# root = [0]
+root = [0,-1]
+tree = createATree(root)
 
 obj = Solution()
-obj.isValidBST(root)
-
-
-    
-
+obj.isValidBST(tree)
