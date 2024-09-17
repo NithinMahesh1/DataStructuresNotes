@@ -8,16 +8,20 @@
 # Output: false
 
 def isAnagram(s,t) -> bool:
-    # Loop the first value backwards and compare it to t at that index
-    # Also before we even loop check that the strings are the same length
-    compare = ""
-    if(len(s) == len(t)):
-        for i in range(len(s)-1,-1,-1):
-            compare = compare + s[i]
-        if(compare == s):
-            return True
+    # Loop through the values of first str
+    # Check if "in" the second str
+    # return false if there are any that are not in there
 
-    return False
+    if(len(s) == len(t)):
+        for i in range(0,len(s),+1):
+            if(s[i] in t):
+                continue
+            else:
+                return False
+    else:
+        False
+
+    return True
 
 def main():
     # s = "racecar"
