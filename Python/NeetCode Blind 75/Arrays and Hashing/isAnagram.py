@@ -8,26 +8,36 @@
 # Output: false
 
 def isAnagram(s,t) -> bool:
-    # Loop through the values of first str
-    # Check if "in" the second str
-    # return false if there are any that are not in there
+    # Loop through s 
+    # If it contains a val in t
+    # Then we replace with blank value
+    # If at the end of the loop t is an empty str return true
+    if(len(s) != len(t)):
+        return False
 
-    if(len(s) == len(t)):
-        for i in range(0,len(s),+1):
-            if(s[i] in t):
-                continue
-            else:
-                return False
-    else:
-        False
+    i = len(s)-1
+    while i >= 0:
+        if(s[i] in t):
+            delete = s[i]
+            s = s.replace(delete,"",1)
+            t = t.replace(delete,"",1)
+        i -= 1
+    
+        if(len(s) == 0):
+            return True
 
-    return True
+    return False
+    
 
 def main():
     # s = "racecar"
     # t = "carrace"
-    s = "jar"
-    t = "jam"
+    # s = "jar"
+    # t = "jam"
+    # s = "bbcc"
+    # t = "ccbc"
+    s = "xx"
+    t = "x"
     print(isAnagram(s,t))
 
 main()
