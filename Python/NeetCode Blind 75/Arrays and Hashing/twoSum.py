@@ -28,25 +28,25 @@ def twoSum(nums,target) -> list[int,int]:
     # Push to dictionary
     # subtract target from nums 
     # Check if in dictionary and return indices
-
     dict = {}
 
     for i in range(0, len(nums), +1):
-        list = []
         diff = target - nums[i]
-        if(len(dict) == 0):
-            dict[i] = nums[i]
-        
-        if(diff in dict.values()):
-            list.append(dict.get(diff, []))
-            list.append(i)
+        if diff in dict:
+            return [dict.get(diff), i]
+
+        dict[nums[i]] = i
             
 
 def main():
-    nums = [3,4,5,6]
-    target = 7
+    # nums = [3,4,5,6]
+    # target = 7
+    nums = [4,5,6]
+    target = 10
+    # nums = [5,5]
+    # target = 10
 
-    twoSum(nums,target)
+    print(twoSum(nums,target))
 
 
 main()
