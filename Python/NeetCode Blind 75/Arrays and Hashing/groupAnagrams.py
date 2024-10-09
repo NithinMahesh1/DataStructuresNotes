@@ -46,11 +46,11 @@ def groupAnagrams(strs) -> list[list[str]]:
                     remove = str[i]
                     str = str.replace(remove,"",1)
                     dictVal = dictVal.replace(remove,"",1)
-                if(i == 0 & len(str) == 0 & len(dictVal) == 0):
+                if(i == 0 and len(str) == 0 and len(dictVal) == 0):
                     vals = dict.get(len(actualStr))
                     vals.append(actualStr)
-                else:
-                    dict[0] = actualStr
+                if(i == 0 and len(str) > 0 and len(actualStr) > 0):
+                    dict[0] = listDictVals[0]
                 i -= 1
         else:
             vals.append(str)
