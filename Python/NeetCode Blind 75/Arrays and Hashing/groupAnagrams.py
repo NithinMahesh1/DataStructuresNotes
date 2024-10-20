@@ -16,74 +16,21 @@
 # Input: strs = [""]
 # Output: [[""]]
 
+from collections import defaultdict
 
 def groupAnagrams(strs) -> list[list[str]]:
-    # Dict with the key as the num of char
-    # and val as the List of strs that are anagrams to that
-    dict = {}
-    vals = []
-
-    if(len(strs) == 1 and strs[0] == ""):
-        vals.append(strs)
-        dict[-1] = vals
-        return dict[-1]
+    # Need to use a default dict
+    # Sort the chars and add to key
+    dict = defaultdict(list)
 
     for str in strs:
-        vals = []
+        dict["".join(sorted(str))].append(str)
 
-        if(len(dict) == 0):
-            vals.append(str)
-            dict[len(str)] = vals
-            continue
-
-        if(str == ""):
-            vals.append(str)
-            dict[-1] = vals
-            continue
-
-        if(len(str) in dict.keys()):
-            # Grab the vals (the list var)
-            # Get one of the vals as a var
-            # Use th is var to compare with the current str
-            # while loop that value to check each char
-            # Add to list if it equals
-            listDictVals = dict.get(len(str))
-            dictVal = listDictVals[0]
-            
-            i = len(str) - 1
-            actualStr = str
-            while i >= 0:
-                #act
-                #cat
-                if(str[i] in dictVal):
-                    remove = str[i]
-                    str = str.replace(remove,"",1)
-                    dictVal = dictVal.replace(remove,"",1)
-                if(i == 0 and len(str) == 0 and len(dictVal) == 0):
-                    vals = dict.get(len(actualStr))
-                    vals.append(actualStr)
-                if(i == 0 and len(str) > 0 and len(actualStr) > 0):
-                    vals.append(actualStr)
-                    dict[0] = vals
-                i -= 1
-        else:
-            vals.append(str)
-            dict[len(str)] = vals
-
-    # if(len(dict) == 1 and -1 in dict):
-    #     vals.append(strs)
-    #     result = vals
-    # else:
-    result = [value for value in dict.values()]
-
-
-    return result
-        
-
-
+    return dict.values()
+    
 def main():
-    # strs = ["act","pots","tops","cat","stop","hat"]
-    strs = ["",""]
+    strs = ["act","pots","tops","cat","stop","hat"]
+    # strs = ["",""]
     # strs = ["x"]
     # strs = [""]
     print(groupAnagrams(strs))
