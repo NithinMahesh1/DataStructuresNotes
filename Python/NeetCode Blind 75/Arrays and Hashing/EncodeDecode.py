@@ -11,28 +11,34 @@
 # Input: ["we","say",":","yes"]
 # Output: ["we","say",":","yes"]
 
-class Solution:
-    def encode(self, strs) -> str:
-        fullstr = ""
-        for str in strs:
-            if(len(fullstr) == 0):
-                fullstr = str
-            else:
-                fullstr = fullstr + "," +str
-        return fullstr
 
-    def decode(self, str) -> list[str]:
-        newList = []
-        for item in str:
-            newList.append(item)
-        return newList
+# TODO
+# Basically we need to use some delimeter such as 4# to encode the strs
+# We take basically append the number of chars for the str as the number + #
+# This way when we decode we are checking the int first then after #
+# we start to check for each char after and add it to a list
+
+
+class Solution:
+
+    def encode(self, strs: list[str]) -> str:
+        return ""
+
+    def decode(self, s: str) -> list[str]:
+        return [""]
 
     def run(self):
         input = ["neet","code","love","you"]
         strVersion = self.encode(input)
-        self.decode(strVersion)
+        print("This is the encoding: ")
+        print(strVersion)
+        
+        print("This is the decoding back: ")
+        print(self.decode(strVersion))
 
 
 def main():
-    run = Solution.run(self)
+    solution = Solution()
+    solution.run()
     
+main()
