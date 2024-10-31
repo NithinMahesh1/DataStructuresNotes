@@ -22,10 +22,35 @@
 class Solution:
 
     def encode(self, strs: list[str]) -> str:
-        return ""
+        returnStr = ""
+        for item in strs:
+            if(len(returnStr) == 0):
+                returnStr = str(len(item)) + "#"
+            else:
+                returnStr =  returnStr + str(len(item)) + "#"
+        return returnStr
+
 
     def decode(self, s: str) -> list[str]:
+        # 4#neet4#code4#love3#you
+        returnList = []
+        buildStrs = ""
+        count = 0
+        for char in s:
+            if(char.isdigit()):
+                count = char
+                continue
+            if(char == "#"):
+                continue
+            if(count > 0):
+                if(len(buildStrs) == 0):
+                    buildStrs = char
+                else:
+                    buildStrs = buildStrs + char
+                count -= 1
+
         return [""]
+
 
     def run(self):
         input = ["neet","code","love","you"]
