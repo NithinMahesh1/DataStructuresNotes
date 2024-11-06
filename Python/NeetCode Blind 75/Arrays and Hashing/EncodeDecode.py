@@ -25,31 +25,29 @@ class Solution:
         returnStr = ""
         for item in strs:
             if(len(returnStr) == 0):
-                returnStr = str(len(item)) + "#"
+                returnStr = str(len(item)) + "#" + item
             else:
-                returnStr =  returnStr + str(len(item)) + "#"
+                returnStr =  returnStr + str(len(item)) + "#" + item
         return returnStr
 
 
     def decode(self, s: str) -> list[str]:
         # 4#neet4#code4#love3#you
         returnList = []
-        buildStrs = ""
-        count = 0
+        appendStr = ""
+        count = -1
         for char in s:
             if(char.isdigit()):
-                count = char
+                count = int(char)
                 continue
-            if(char == "#"):
-                continue
-            if(count > 0):
-                if(len(buildStrs) == 0):
-                    buildStrs = char
-                else:
-                    buildStrs = buildStrs + char
+            if(count > 0 and char != "#"):
+                appendStr = appendStr + char
                 count -= 1
+            if(count <= 0):
+                returnList.append(appendStr)
+                appendStr = ""
 
-        return [""]
+        return returnList
 
 
     def run(self):
