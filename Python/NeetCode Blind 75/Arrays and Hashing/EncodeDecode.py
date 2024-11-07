@@ -37,6 +37,8 @@ class Solution:
 
         # Following is neetcodes solution
         # We need to understand this algorithm better
+        # Check the solution video for more help: 
+        # https://www.youtube.com/watch?v=B1k_sxOSgv8&ab_channel=NeetCode
         while i < len(s):
             j = i
             # Basically we loop s to get the amount of digits for count
@@ -46,7 +48,10 @@ class Solution:
             # We get length is from the index of the first char
             # to the end where j is no longer a pound so we are at a string char
             length = int(s[i:j])
+            # Basically truncating from the beginning index of after the int and #
+            # So we are starting the str from after that then that index plus the length of string
             returnList.append(s[j + 1 : j + 1 + length])
+            # After that we set i to the length of the end of the char in our large encoded string
             i = j + 1 + length
 
         return returnList
