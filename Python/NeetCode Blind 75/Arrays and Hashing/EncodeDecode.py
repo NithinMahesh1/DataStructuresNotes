@@ -32,26 +32,29 @@ class Solution:
 
 
     def decode(self, s: str) -> list[str]:
-        # 4#neet4#code4#love3#you
-        returnList = []
-        appendStr = ""
-        count = -1
-        for char in s:
-            if(char.isdigit()):
-                count = int(char)
-                continue
-            if(count > 0 and char != "#"):
-                appendStr = appendStr + char
-                count -= 1
-            if(count <= 0):
-                returnList.append(appendStr)
-                appendStr = ""
+        # 4neet4code4love3you
+        returnList, i = [], 0
+
+        # Following is neetcodes solution
+        # We need to understand this algorithm better
+        while i < len(s):
+            j = i
+            # Basically we loop s to get the amount of digits for count
+            # This ensures if we have 10 digits we are counting up to 10 chars
+            while s[j] != "#":
+                j += 1
+            # We get length is from the index of the first char
+            # to the end where j is no longer a pound so we are at a string char
+            length = int(s[i:j])
+            returnList.append(s[j + 1 : j + 1 + length])
+            i = j + 1 + length
 
         return returnList
-
+    
 
     def run(self):
-        input = ["neet","code","love","you"]
+        # input = ["neet","code","love","you"]
+        input = ["we","say",":","yes","!@#$%^&*()"]
         strVersion = self.encode(input)
         print("This is the encoding: ")
         print(strVersion)
