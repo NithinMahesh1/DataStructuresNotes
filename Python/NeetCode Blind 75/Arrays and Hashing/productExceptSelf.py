@@ -15,11 +15,14 @@
 # Output: [0,-6,0,0,0]
 
 
+# Explanation:
+# We need to multiply all the values in the arr except for curr index
+# Append those values to a new arr
 class Solution:
     def productExceptSelf(self, nums: list[int]) -> list[int]:
+        # Multiply all the vals
+        # but somehow without division exclude the curr val
         
-
-
         return []
 
     def run(self):
