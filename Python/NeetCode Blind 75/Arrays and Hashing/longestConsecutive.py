@@ -16,12 +16,40 @@
 
 class Solution:
     def longestConsecutive(self, nums: list[int]) -> int:
+        # Basically we need to sort them in order
+        # Remove duplicates
+        # Then as we loop the arr we will check the curr and last val is diff by 1
 
-        return []
+        # [2,20,4,10,3,4,5]
+        # [2,3,4,5] -> 4
+        nums = sorted(set(nums))
+
+        # [2,20,4,10,3,4,5]
+        # [2,3,4,5,10,20]
+
+        prev = 0
+        res = 0
+        for i in range(len(nums)):
+            if(i == 0):
+                prev = nums[i]
+                res += 1
+                continue
+            if(nums[i] - prev == 1):
+                res += 1
+                prev = nums[i]
+            else:
+                break
+            
+        return res
 
     def run(self):
-        nums = [2,20,4,10,3,4,5]
-        self.longestConsecutive(nums)
+        # nums = [2,20,4,10,3,4,5]
+        # nums = [0,3,2,5,4,6,1,1]
+        # nums = [0,-1]
+        # nums = [-2,-1]
+        # nums = [2,1]
+        nums=[9,1,4,7,3,-1,0,5,8,-1,6]
+        print(self.longestConsecutive(nums))
 
 def main():
     solution = Solution()
