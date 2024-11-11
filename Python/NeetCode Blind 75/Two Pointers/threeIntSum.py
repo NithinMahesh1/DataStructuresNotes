@@ -26,7 +26,22 @@
 
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
+        res = []
 
+        if(len(nums) == 3):
+            if(nums[0] + nums[1] + nums[2] == 0):
+                res = list[nums]
+                return res
+
+        # Check the first index
+        # Then we add the next two indices
+        # if not sum of 0 then we increment both those indices right
+        # if it is then we append that to res
+        # Next time around we check that the values are not in the res
+        
+        #   . - - =======>
+        # [-1,0,1,2,-1,-4]
+        
 
         return []
 
