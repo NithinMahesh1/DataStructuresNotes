@@ -18,6 +18,9 @@ class Solution:
         if(len(s) == 1):
             return True
         
+        # There is a better way of handling this using ASCII
+        # Use the ord() method instead next time
+        # Here is the neetcode video for this as well: https://www.youtube.com/watch?app=desktop&v=jJXJ16kPFWg&ab_channel=NeetCode
         s = s.replace(" ", "").replace("?","").replace("!","").replace(":","").replace(",","").replace("'","").replace(".","")
         s = s.lower()
         str = ""
@@ -35,7 +38,7 @@ class Solution:
         print(self.isPalindrome(s))
 
 
-def main():
+def main()::
     solution = Solution()
     solution.run()
 
