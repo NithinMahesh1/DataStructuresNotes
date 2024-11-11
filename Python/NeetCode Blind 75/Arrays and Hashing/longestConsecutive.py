@@ -14,6 +14,9 @@
 # Input: nums = [0,3,2,5,4,6,1,1]
 # Output: 7
 
+
+
+# https://www.youtube.com/watch?v=P6RZZMu_maU&ab_channel=NeetCode
 class Solution:
     def longestConsecutive(self, nums: list[int]) -> int:
         # Basically we need to sort them in order
@@ -22,26 +25,19 @@ class Solution:
 
         # [2,20,4,10,3,4,5]
         # [2,3,4,5] -> 4
-        nums = sorted(set(nums))
-
-        # [2,20,4,10,3,4,5]
-        # [2,3,4,5,10,20]
-
-        prev = 0
-        res = 0
-        for i in range(len(nums)):
-            if(i == 0):
-                prev = nums[i]
-                res += 1
-                continue
-            if(nums[i] - prev == 1):
-                res += 1
-                prev = nums[i]
-            else:
-                break
-            
-        return res
-
+        
+        # nums=[9,1,4,7,3,-1,0,5,8,-1,6]
+        # {0, 1, 3, 4, 5, 6, 7, 8, 9, -1}
+        numSet = set(nums)
+        longest = 0
+        for n in nums:
+            if(n-1) not in numSet:
+                length = 0
+                while(n+length) in numSet:
+                    length += 1
+                longest = max(length,longest)
+        return longest
+        
     def run(self):
         # nums = [2,20,4,10,3,4,5]
         # nums = [0,3,2,5,4,6,1,1]
