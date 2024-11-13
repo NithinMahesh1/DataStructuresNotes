@@ -38,7 +38,7 @@ class Solution:
         print(self.isPalindrome(s))
 
 
-def main()::
+def main():
     solution = Solution()
     solution.run()
 
