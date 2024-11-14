@@ -77,7 +77,7 @@ class Solution:
         self.threeSum(nums)
 
 def main():
-
-    solution = Solution().run()
+    solution = Solution()
+    solution.run()
 
 main()
