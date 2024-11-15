@@ -24,37 +24,29 @@
 # Output: [1,2]
 # Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
 
-import numpy
 class Solution:
     def twoSum(self, numbers: list[int], target: int) -> list[int]:
-        curr = 0
-        iter = curr + 1
-        while iter < len(numbers):
-            if(numbers[curr] + numbers[iter] == target):
-                return [curr+1,iter+1]
-            i = iter
-            for i in range(i,len(numbers),1):
-                if(numbers[curr] + numbers[i] == target):
-                    # we do the adding again to see if we should return
-                    return [curr+1, i+1]
-            # If that above did not work we increment curr and iter
-            if(curr < len(numbers)):
-                curr += 1
-                iter += 1
-        
+        seen = {}
+
+        # Proper solution and obvious one is to use a hashmap!
+        for i, vals in enumerate(numbers):
+            diff = target - vals
+            if(diff in seen):
+                return [seen[diff]+1,i+1]
+            seen[vals] = i
+
         return []
 
 
-
     def run(self):
-        numbers = [2,7,11,15]
-        target = 9
+        # numbers = [2,7,11,15]
+        # target = 9
         # numbers = [2,3,4]
         # target = 6
         # numbers = [-1,0]
         # target = -1
-        # numbers = [5,25,75]
-        # target = 100
+        numbers = [5,25,75]
+        target = 100
         print(self.twoSum(numbers, target))
 
 
