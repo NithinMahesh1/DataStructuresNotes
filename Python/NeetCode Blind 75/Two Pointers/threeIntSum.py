@@ -29,55 +29,42 @@ class Solution:
         res = []
         # Sort arr
         nums = sorted(nums)
-
-        if(len(nums) == 3):
-            list = []
-            sum = nums[0] + nums[1] + nums[2]
-            if(sum == 0):
-                list.append(nums[0]), list.append(nums[1]), list.append(nums[2])
-                res.append(list)
-                return res
-            else:
-                return res
             
-        
         # We have an anchor point left most val to begin with
         # We get the sum of anchor + L + R
         # If the value is greater than 0 we decrement R and if less than 0 increment L
-        L = 0
-        R = 0
-        for i, anchor in enumerate(nums):
-            list = []
-            anchor = i
-            L = anchor + 1
-            R = len(nums) - 1
-            if(L < len(nums)):
-                sum = nums[anchor] + nums[L] + nums[R]
-            if(sum == 0):
-                list.append(nums[anchor]), list.append(nums[L]), list.append(nums[R])
-                res.append(list)
-            else:
-                while L < R and sum is not 0:
-                    sum = nums[anchor] + nums[L] + nums[R]
-                    if(sum == 0):
-                        list.append(nums[anchor]), list.append(nums[L]), list.append(nums[R])
-                        res.append(list)
-                        continue
-                    if(sum > 0):
-                        R -= 1
-                    if(sum < 0):
-                        L += 1
 
-        # Keep doing this until L < R
-        # If not we increment our anchor
+        for i, anchor in enumerate(nums):
+            if i > 0 and anchor == nums[i-1]:
+                # We are doing this to ensure we don't add the same val if there are duplicates
+                continue
+
+            L,R = i+1,len(nums) -1
+            while L < R:
+                sum = anchor + nums[L] + nums[R]
+                if sum >0:
+                    R -= 1
+                elif sum < 0:
+                    L += 1
+                else:
+                    res.append([anchor,nums[L],nums[R]])
+                    # Now we deal with the case of incrementing the pointers
+                    # basically increment on L pointer since they will be handled above
+                    # since there each value only has one corresponding sum to 0 so only need
+                    # to increment one of them
+                    L += 1
+                    while nums[L] == nums[L - 1] and L < R:
+                        # keep shifting pointer skipping duplicates
+                        # also l < r always so its not past the len
+                        L += 1
 
         return res
 
     def run(self):
-        # nums = [-1,0,1,2,-1,-4]
+        nums = [-1,0,1,2,-1,-4]
         # nums=[0,1,1]
         # nums=[0,0,0]
-        nums=[0,0,0,0]
+        # nums=[0,0,0,0]
         print(self.threeSum(nums))
 
 def main():
