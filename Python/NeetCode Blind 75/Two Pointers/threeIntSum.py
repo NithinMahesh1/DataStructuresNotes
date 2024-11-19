@@ -23,58 +23,62 @@
 # Output: [[0,0,0]]
 # Explanation: The only possible triplet sums up to 0.
 
-
+# https://www.youtube.com/watch?v=jzZsG8n2R9A&ab_channel=NeetCode
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
         res = []
+        # Sort arr
+        nums = sorted(nums)
 
         if(len(nums) == 3):
-            if(nums[0] + nums[1] + nums[2] == 0):
-                res = list[nums]
+            list = []
+            sum = nums[0] + nums[1] + nums[2]
+            if(sum == 0):
+                list.append(nums[0]), list.append(nums[1]), list.append(nums[2])
+                res.append(list)
                 return res
-
-        # First we sort the arr
-        nums = nums.sort()
-
-
-        # Then we take the first index and iterate L and R on the end indices
-        # As we loop them we add the value of L + R + Curr
-        for i in range(len(nums)):
-            currList = []
-
-            curr = nums[i]
-            L = nums[curr+1] # come back to this and make sure we don't index past this
-            R = nums[len(nums) - 1]
-            # If the diff isn't 0 then we increment or decrement the L or R depending on the one with
-            # a bigger diff value >=
-            if(L + R + curr == 0):
-                currList.append(L), currList.append(R), currList.append(curr)
-                res.append(currList)
-                continue
-            diffL = curr - L
-            diffR = curr - R
-            if(diffR >= diffL):
-                R -= 1
-            if(diffL >= diffR):
-                L -= 1
-            if(curr <= len(nums) - 1 and L <= len(nums) - 1 and R <= len(nums)):
-                curr += 1
-                L += 1
-                R += 1
+            else:
+                return res
             
         
-        # If we get a match we add to a list of list
-        
-        
-        
-        # Continue looping and use the next index for Curr
-        
+        # We have an anchor point left most val to begin with
+        # We get the sum of anchor + L + R
+        # If the value is greater than 0 we decrement R and if less than 0 increment L
+        L = 0
+        R = 0
+        for i, anchor in enumerate(nums):
+            list = []
+            anchor = i
+            L = anchor + 1
+            R = len(nums) - 1
+            if(L < len(nums)):
+                sum = nums[anchor] + nums[L] + nums[R]
+            if(sum == 0):
+                list.append(nums[anchor]), list.append(nums[L]), list.append(nums[R])
+                res.append(list)
+            else:
+                while L < R and sum is not 0:
+                    sum = nums[anchor] + nums[L] + nums[R]
+                    if(sum == 0):
+                        list.append(nums[anchor]), list.append(nums[L]), list.append(nums[R])
+                        res.append(list)
+                        continue
+                    if(sum > 0):
+                        R -= 1
+                    if(sum < 0):
+                        L += 1
 
-        return []
+        # Keep doing this until L < R
+        # If not we increment our anchor
+
+        return res
 
     def run(self):
-        nums = [-1,0,1,2,-1,-4]
-        self.threeSum(nums)
+        # nums = [-1,0,1,2,-1,-4]
+        # nums=[0,1,1]
+        # nums=[0,0,0]
+        nums=[0,0,0,0]
+        print(self.threeSum(nums))
 
 def main():
     solution = Solution()
