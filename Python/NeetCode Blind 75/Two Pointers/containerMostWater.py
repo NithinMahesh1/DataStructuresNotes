@@ -15,27 +15,34 @@ class Solution:
         # Use a counter i starting at 1 while we loop and subtract L index from last index (len(R) - 1)
         # We loop and multiply the greater of L and R by the counter val then use max() until we loop to end
         # Then we return the max var res
-        
-        counter = 1
-        multiply = 0
+
+        L = 0
+        R = len(heights) - 1
         res = 0
-        for i in range(len(heights)):
-            L = i
-            R = len(heights) - 1
+        # Stop looping when L = R - 1
+        while L < R:
+            # In order to get the difference take the R index and subtract from L index
+            distance = R - L
+            # Take the smaller val in heights between L and R then multiply by distance
+            mult = 0
             if(heights[L] < heights[R]):
-                multiply = heights[L]
-            if(heights[R] < heights[L]):
-                multiply = heights[R]
-            diff = multiply * ((R+1) - counter)
-            res = max(res,diff)
-            counter += 1
-        
+                mult = heights[L] * distance
+                L += 1
+            else:
+                mult = heights[R] * distance
+                R -= 1
+            # Set the res to max of the res and the mult val
+            res = max(res,mult)
+
+        print(res)
         return res
+        
+        
 
 def main():
     solution = Solution()
-    height = [1,7,2,5,4,7,3,6]
-    # height = [2,2,2]
+    # height = [1,7,2,5,4,7,3,6]
+    height = [2,2,2]
     solution.maxArea(height)
 
 main()
