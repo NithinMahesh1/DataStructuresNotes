@@ -12,30 +12,29 @@
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        # We need to use a set so it does not take duplicates
+        charSet = set()
+        l = 0
         res = 0
-        # L and R pointers
-        curr = 0
-        dict = {}
-        counter = 0
-        # Loop and use a dictionary adding unique vals
-        # dict needs index + 1 as val and key as the s val
-        # if it is in dict then we stop looping
-        while curr < len(s):
-            # Also take max of the substring then change L to be R and R back to L + 1
-            val = s[curr]
-            
-            if(val not in dict.keys()):
-                dict[val] = curr + 1
-                counter += 1
-                res = max(res,counter)
-            else:
-                dict = {}
-                counter = 0
 
-            curr += 1
+        # Loop with right pointer forward
+        for r in range(len(s)):
+            while s[r] in charSet:
+                # If there is a value in set as in there is duplicate
+                # we will need to remove it from the set
+                charSet.remove(s[l])
+                # then we increment l one more
+                l += 1
+            # As we remove duplicates and update our window above
+            # we also need to add more values to slide the window right s[r]
+            charSet.add(s[r])
+            # Got to compute the current window size if the current window size is greater
+            # than what it is right now
+            # so we do right - left to give us size + 1 since those are indices
+            res = max(res,r - l + 1)
 
-        print(res)
         return res
+
 
 def main():
     solution = Solution()
