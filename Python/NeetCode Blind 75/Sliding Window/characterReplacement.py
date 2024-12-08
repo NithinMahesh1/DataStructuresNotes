@@ -1,6 +1,11 @@
 # You are given a string s consisting of only uppercase english characters and an integer k. 
 # You can choose up to k characters of the string and replace them with any other uppercase English character.
+<<<<<<< HEAD
 # After performing at most k replacements, return the length of the longest substring which contains only one distinct character.
+=======
+# After performing at most k replacements, 
+# return the length of the longest substring which contains only one distinct character.
+>>>>>>> eeb399f31c5fd94afbc5b62ecf834e06fdba0e0c
 
 # Example 1:
 # Input: s = "XYYX", k = 2
@@ -14,6 +19,7 @@
 from collections import Counter
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
+<<<<<<< HEAD
         # Use a dict to store freq of each char
         # Also use a sliding window to increment L and R pointers
         dict = {}
@@ -50,11 +56,51 @@ class Solution:
         print(res)
         return res
         
+=======
+        # Use window and dict
+        # Check len(window) - most freq <= k
+        # Increase R as that condition is still met
+        # Once it is not we increment L
+        l,r = 0,0
+        window = 0
+        freq = 0
+        dict = {}
+
+        for r in range(0,len(s)-1,1):
+            if(len(dict) == 0):
+                dict[s[r]] = 1
+                r += 1
+                window = 1
+                continue
+            if(window <= k):
+                if(s[r] in dict.keys()):
+                    dict[s[r]] = dict[s[r]] + 1
+                else:
+                    dict[s[r]] = 1
+                r += 1
+                window = max(window,window + 1)
+            else:
+                l += 1
+                window = max(window,window + 1)
+            c = Counter(dict)
+            freq = c.most_common(1)[0][1]
+            window = max(window,window - freq)
+
+        return window
+
+>>>>>>> eeb399f31c5fd94afbc5b62ecf834e06fdba0e0c
 
 def main():
     solution = Solution()
     s = "XYYX"
+<<<<<<< HEAD
     k = 2
     solution.characterReplacement(s,k)
 
 main()
+=======
+    k = 2    
+    solution.characterReplacement(s,k)
+
+main()
+>>>>>>> eeb399f31c5fd94afbc5b62ecf834e06fdba0e0c
