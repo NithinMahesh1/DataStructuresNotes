@@ -29,34 +29,27 @@ class Solution:
         # Once we get to a close bracket we check if the dict val of that equals top of stack
         # if so we pop the stack
         # Keep doing this until one does not match then is not valid return false
-
-        dict = {
-            "}" : "{",
-            "]" : "[",
-            ")" : "("
-        }
         stack = []
+        closeToOpen = { ")" : "(", "]" : "[", "}" : "{" }
 
-        if(len(s) == 1 or s[0] == ")" or s[0] ==  "}" or s[0] ==  "]"):
-            return False
-
-        for i in range(len(s)):
-            if(s[i] == "(" or s[i] ==  "{" or s[i] ==  "["):
-                stack.append(s[i])
-            if(s[i] in dict.keys()):
-                if(dict[s[i]] == stack[len(stack)-1]):
+        for c in s:
+            if c in closeToOpen:
+                if stack and stack[-1] == closeToOpen[c]:
                     stack.pop()
                 else:
                     return False
-
-        return True
+            else:
+                stack.append(c)
+        
+        print(True if not stack else False)
+        return True if not stack else False
 
 def main():
     solution = Solution()
     # s = "[]"
     # s = "([{}])"
-    # s = "[(])"
-    s="(("
+    s = "[(])"
+    # s="(("
     solution.isValid(s)
 
 main()
