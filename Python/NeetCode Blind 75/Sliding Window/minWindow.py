@@ -19,28 +19,65 @@
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
+        if(len(s) == 1 and s == t):
+            return s
         # L and R pointer window
         # Start L at first occurence of t val
-        # Once we get there increment R until all of t vals are touched
-        # Take the min of the window as res so res = min(res,win)
-        # Keep looping until R is at last val
-        # Increment L to next occurence of t val once all vals are hit in last round
-        l = 0, r = 0
-        res = 0
-        win = 0
+        l,r = 0,0
+        tremove = t
+        win = ""
+        count = 0
+        dict = {}
         for l in range(len(s)):
+            # We loop until L is in t
             if(s[l] in t):
-                # loop here from L and R = L + 1
+                # Add count, remove our placeholder tremove (using to check what vals we hit from t)
+                # Increment win with our str
+                # Set R to be ahead of l
+                tremove = tremove.replace(s[l],"")
+                count += 1
+                win = win + s[l]
                 r = l + 1
-                while r < len(s):
-                    # increment r here until it reaches 2 more t vals
+                # Begin moving R until we are out of vals from tremove
+                while r < len(s) and len(tremove) != 0:
+                    # Add to count to keep track of the vals in dict that will help us with min res
+                    # Add vals for our return substring key in dict
+                    count += 1
+                    win = win + s[r]
+                    if(s[r] in tremove):
+                        # Remove from our reference tremove if we get another t val
+                        tremove = tremove.replace(s[r],"")
+                    if(len(tremove) == 0):
+                        # Reset everything so we can loop L until end of str
+                        # Plus we need to check for more substrings to get min
+                        dict[win] = count
+                        win = ""
+                        count = 0
+                        tremove = t
+                        break
+                    r += 1
             l += 1
 
+        # We get the minimum value from dict
+        # Then using lambda that statement is taking any key from dict
+        # and returns its corresponding value
+        if(dict):
+            res = min(dict, key=lambda x: dict[x])
+        else:
+            res = ""
+        
+        print(res)
+        return res
+    
 
 
 def main():
-    s = "OUZODYXAZV"
-    t = "XYZ"
+    # s = "OUZODYXAZV"
+    # t = "XYZ"
+    # s = "xyz"
+    # t = "xyz"
+    s = "x"
+    t = "xy"
     solution = Solution()
     solution.minWindow(s,t)
 
