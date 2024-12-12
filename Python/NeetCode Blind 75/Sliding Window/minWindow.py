@@ -84,8 +84,10 @@ def main():
     # t = "xy"
     # s="a"
     # t="aa"
-    s="aa"
-    t="aaa"
+    # s="aa"
+    # t="aaa"
+    s="babb"
+    t="baba"
     solution = Solution()
     solution.minWindow(s,t)
 
