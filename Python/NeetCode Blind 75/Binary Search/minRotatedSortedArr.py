@@ -33,28 +33,52 @@
 
 class Solution:
     def findMin(self, nums: list[int]) -> int:
+        if(len(nums) == 1):
+            return nums[0]
+        if(len(nums) == 2):
+            return min(nums[0], nums[1])
+
         # Since we know it has to be done in Olog(n)
         # we will end up using binary search to sort it
 
-        # Since there is a pivot point and it is partially sorted 
-        # the logic will look something like this:
-        # L = 0 and R = len(nums)-1
-        # if (L+R)/2 >= nums[L] or if the mid is >= nums[L] we search right
-        # this is because there is that pivot point and we want to search the section with
-        # lower values
-        # and that means:
-        # else: search left
+        # 3 4 5 1 2
+        # L   M   R
+        # nums[M] (index 2) >= nums[L] -> Set L to M and search right side
+        # 3 4 5 1 2
+        #     L M R 
+        # (L + R)/2 (or basically (2+4)/2) = 3 -> so nums[M] (nums[3]) <= nums[L] (nums[2])
+        # Since 1 <= 5 -> L = M
+        # 3 4 5 1 2
+        #       L R
+        # If left is R - 1 then we return our min compare to current L
+        L,R = 0,len(nums)-1
+        res = nums[L]
+        while L < R:
+            if(L == R-1):
+                res = min(res,nums[M])
+                break
+            M = int((L+R)/2)
+            if(nums[M] >= nums[L]):
+                res = min(res,nums[M])
+                L = M
+                continue
+            if(nums[M] <= nums[L]):
+                res = min(res,nums[M])
+                R = M
+                continue
 
-        # Sudo Code:
-        # L, R = 0, len(nums)-1
-        # mid = (l+R)/2
-        # if(mid >= nums[L]):
-        #   L = 
-
-
-
+        
+        print(res)
+        return res
         
 def main():
     solution = Solution()
-    nums = [3,4,5,6,1,2]
+    # nums = [3,4,5,6,1,2]
+    # nums = [4,5,0,1,2,3]
+    # nums = [4,5,6,7]
+    # nums = [1,2]
+    # nums = [1]
+    nums = [2,3,1]
     solution.findMin(nums)
+
+main()
