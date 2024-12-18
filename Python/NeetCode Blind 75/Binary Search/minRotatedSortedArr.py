@@ -33,52 +33,37 @@
 
 class Solution:
     def findMin(self, nums: list[int]) -> int:
-        if(len(nums) == 1):
-            return nums[0]
-        if(len(nums) == 2):
-            return min(nums[0], nums[1])
+        # nums = [3,4,5,6,1,2]
+        res = nums[0]
+        l, r = 0, len(nums) - 1
 
-        # Since we know it has to be done in Olog(n)
-        # we will end up using binary search to sort it
-
-        # 3 4 5 1 2
-        # L   M   R
-        # nums[M] (index 2) >= nums[L] -> Set L to M and search right side
-        # 3 4 5 1 2
-        #     L M R 
-        # (L + R)/2 (or basically (2+4)/2) = 3 -> so nums[M] (nums[3]) <= nums[L] (nums[2])
-        # Since 1 <= 5 -> L = M
-        # 3 4 5 1 2
-        #       L R
-        # If left is R - 1 then we return our min compare to current L
-        L,R = 0,len(nums)-1
-        res = nums[L]
-        while L < R:
-            if(L == R-1):
-                res = min(res,nums[M])
+        while l <= r:
+            # This is because we are checking if left is greater than right
+            # If left is less than we take res check for that min
+            if nums[l] < nums[r]:
+                res = min(res, nums[l])
                 break
-            M = int((L+R)/2)
-            if(nums[M] >= nums[L]):
-                res = min(res,nums[M])
-                L = M
-                continue
-            if(nums[M] <= nums[L]):
-                res = min(res,nums[M])
-                R = M
-                continue
+            
+            m = (l + r) // 2
+            res = min(res, nums[m])
+            # Using our pointer mid if mid is greater or equal
+            # then we need to search right side since smaller
+            if nums[m] >= nums[l]:
+                l = m + 1
+            else:
+                r = m - 1
 
-        
         print(res)
         return res
         
 def main():
     solution = Solution()
-    # nums = [3,4,5,6,1,2]
+    nums = [3,4,5,6,1,2]
     # nums = [4,5,0,1,2,3]
     # nums = [4,5,6,7]
     # nums = [1,2]
     # nums = [1]
-    nums = [2,3,1]
+    # nums = [2,3,1]
     solution.findMin(nums)
 
 main()
