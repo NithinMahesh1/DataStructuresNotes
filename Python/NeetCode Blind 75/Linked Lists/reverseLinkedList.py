@@ -17,30 +17,46 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        return 0
+        prev = None
+        curr = head
+
+        while curr:
+            # Set next node
+            nextnode = curr.next
+            curr.next = prev # change pointer to previous
+            prev = curr
+            curr = nextnode
+            
+
+        return prev
+
 
     def printList(self,head):
-        # Build the list first
-        curr = ListNode()
-        currHead = None
-        
-        for val in head:
-            if currHead == None:
-                currhead = ListNode(head)
-                curr = currhead
-            else:
-                curr.next = ListNode(val)
-                curr = curr.next
-
+        curr = head
         while(curr is not None):
             print(curr.val)
             curr = curr.next
 
+    def buildLinkedList(self,arr):
+        head = None
+        curr = None
+        for nums in arr:
+            if curr == None:
+                head = ListNode(nums)
+                curr = head
+            else:
+                curr.next = ListNode(nums)
+                curr = curr.next
+
+        return head
+
+
+
 def main():
     head = [0,1,2,3]
     solution = Solution()
-    solution.printList(head)
-    solution.reverseList(head)
-    
+    head = solution.buildLinkedList(head)
+    # solution.printList(head)
+    solution.printList(solution.reverseList(head))
 
 main()
