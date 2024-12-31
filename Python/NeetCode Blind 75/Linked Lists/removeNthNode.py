@@ -22,39 +22,34 @@ class ListNode:
 
 class Solution:
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
-        # First we want to reverse the list
-        # Then iterate it again but this time remove the nth node
-        # Loop it once more after removing and reverse it again
-
-        curr = head
-        prev = None
-
-        while curr:
-            nextnode = curr.next
-            curr.next = prev
-            prev = curr
-            curr = nextnode
-
-        i = 0
-        curr = prev
-        prev = None
-        while curr:
+        # We loop through with two pointers
+        # First pointer L is incremented one
+        # Second pointer R is incremented + n
+        # L and R distance will be n each time until R is at None
+        # L will point to dummy which is one behind
+        # When R reaches the end we use L.next.next to skip that node and point to next
+        dummy = L = ListNode(0,head)
+        R = head
+        
+        # First we will loop to get R to correct increment of n
+        i = 1
+        while i < n:
+            R = R.next
             i += 1
-            nextnode = curr.next
-            if i == n:
-                temp = nextnode.next
-                nextnode.next = prev
-                curr = nextnode
-                nextnode = temp
-            else:               
-                curr.next = prev
-                nextnode.next = curr
-                prev = curr
-                curr = nextnode
-            
+            if(i == n):
+                break
 
+        while R != None:
+            if(R.next == None):
+                L.next = L.next.next
+                break
 
-        print(prev)
+            L = L.next
+            R = R.next
+
+        dummy = dummy.next
+        
+        return dummy
 
     
     def buildList(self,arr):
@@ -79,8 +74,10 @@ class Solution:
 
 def main():
     solution = Solution()
-    head = [1,2,3,4]
-    n = 2
+    # head = [1,2,3,4]
+    # n = 2
+    head = [5]
+    n = 1
     head = solution.buildList(head)
     solution.printList(solution.removeNthFromEnd(head, n))
 
