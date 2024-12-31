@@ -41,15 +41,18 @@ class Solution:
         while curr:
             i += 1
             nextnode = curr.next
-            if(i == n):
-                curr.next = prev
-                prev.next = nextnode
+            if i == n:
+                temp = nextnode.next
+                nextnode.next = prev
                 curr = nextnode
-                prev = curr
-            else:
+                nextnode = temp
+            else:               
                 curr.next = prev
+                nextnode.next = curr
                 prev = curr
                 curr = nextnode
+            
+
 
         print(prev)
 
