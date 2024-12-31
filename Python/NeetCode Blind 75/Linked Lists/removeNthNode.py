@@ -22,7 +22,37 @@ class ListNode:
 
 class Solution:
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
-        
+        # First we want to reverse the list
+        # Then iterate it again but this time remove the nth node
+        # Loop it once more after removing and reverse it again
+
+        curr = head
+        prev = None
+
+        while curr:
+            nextnode = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nextnode
+
+        i = 0
+        curr = prev
+        prev = None
+        while curr:
+            i += 1
+            nextnode = curr.next
+            if(i == n):
+                curr.next = prev
+                prev.next = nextnode
+                curr = nextnode
+                prev = curr
+            else:
+                curr.next = prev
+                prev = curr
+                curr = nextnode
+
+        print(prev)
+
     
     def buildList(self,arr):
         curr = None
@@ -45,8 +75,10 @@ class Solution:
 
 
 def main():
-    head, n = [1,2,3,4], 2
-    head = Solution.buildList(head)
-    Solution.printList(Solution.removeNthFromEnd(head))
+    solution = Solution()
+    head = [1,2,3,4]
+    n = 2
+    head = solution.buildList(head)
+    solution.printList(solution.removeNthFromEnd(head, n))
 
 main()
