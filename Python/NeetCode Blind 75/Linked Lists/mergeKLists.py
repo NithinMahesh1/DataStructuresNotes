@@ -26,8 +26,8 @@ class Solution:
     def mergeKLists(self, lists: list[Optional[ListNode]]) -> Optional[ListNode]:
         # Seems like this problem is similar to mergeTwoSortedLists but this time with k lists
         # We can loop the list of lists call a helper mergeTwoLists and handle merging two first
-        if len(lists) == 0 or len(lists) == 1:
-            return lists
+        if not lists:
+            return ListNode().next
 
         for i in range(1,len(lists)):
             lists[i] = self.mergeTwo(lists[i - 1], lists[i])
@@ -73,7 +73,7 @@ def main():
     lists = [[1,2,4],[1,3,5],[3,6]]
     solution = Solution()    
     lists = solution.buildList(lists)
-    solution.mergeKLists(lists)
+    solution.mergeKLists(lists = [])
     
 
 main()
