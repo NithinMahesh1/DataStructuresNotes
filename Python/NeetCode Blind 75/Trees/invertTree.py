@@ -24,20 +24,15 @@ class Solution:
         # Need to use DFS algorithm
         # We can use inorder traversal since we want to swap left and right
         # Start at root -> left -> right traversal using DFS
-        start = root
-        curr = TreeNode(start)
+        if not root: 
+            return None
 
-        while curr:
-            left = curr.left
-            right = curr.right
-
-            curr.left = right
-            curr.right = left
-
-            curr = curr.left or curr.right
-            
-
-        return start
+        root.left, root.right = root.right, root.left
+        
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        
+        return root
 
     def buildTree(self, arr):
         tree = TreeNode(arr[0])
