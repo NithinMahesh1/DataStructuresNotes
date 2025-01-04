@@ -27,6 +27,17 @@ class TreeNode:
 
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        # We will want to use DFS again
+        root1 = p
+        root2 = q
+
+        def dfs(root1, root2):
+            if root1.val != root2.val:
+                return False
+            dfs(root1.left,root2.left)
+            dfs(root1.right,root2.right)
+
+        return dfs(root1,root2)
     
     def buildTree(self,arr) -> TreeNode:
         if(len(arr) == 0 ):
