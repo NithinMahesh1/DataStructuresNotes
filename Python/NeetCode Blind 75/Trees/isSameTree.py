@@ -28,19 +28,18 @@ class TreeNode:
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         # We will want to use DFS again
-        root1 = p
-        root2 = q
-
-        def dfs(root1, root2):
-            if root1.val != root2.val:
-                return False
-            dfs(root1.left,root2.left)
-            dfs(root1.right,root2.right)
-
-        return dfs(root1,root2)
+        if not q and not p:
+            return True
+        if not p or not q:
+            return False
+        if p.val != q.val:
+            return False
+        
+        print(self.isSameTree(q.left,p.left) and self.isSameTree(q.right,p.right))
+        return self.isSameTree(q.left,p.left) and self.isSameTree(q.right,p.right)
     
     def buildTree(self,arr) -> TreeNode:
-        if(len(arr) == 0 ):
+        if(len(arr) == 0):
             return TreeNode()
 
         root = TreeNode(arr[0])
@@ -55,7 +54,7 @@ class Solution:
                 queue.append(node.left)
             i += 1
 
-            if(arr[i] and i < len(arr)):
+            if(i < len(arr) and arr[i]):
                 root.right = TreeNode(arr[i])
                 queue.append(node.right)
             i += 1
@@ -64,10 +63,12 @@ class Solution:
 
 def main():
     solution = Solution()
-    p = [1,2,3]
-    q = [1,2,3]
-    q = solution.buildTree(q)
+    # p = [1,2,3]
+    # q = [1,2,3]
+    p = [4,7]
+    q = [4,None,7]
     p = solution.buildTree(p)
+    q = solution.buildTree(q)
     solution.isSameTree(p,q)
 
 
