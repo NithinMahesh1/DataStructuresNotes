@@ -40,7 +40,7 @@ class Solution:
             print("true")
             return True
 
-        return self.isSubtree(root.left, subRoot) and self.isSubtree(root.right, subRoot)
+        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
 
 
     def isSameTree(self,left,right) -> bool:
@@ -51,7 +51,7 @@ class Solution:
         if(left.val != right.val):
             return False
 
-        return self.isSameTree(left.left, right.left) or self.isSameTree(left.right, right.right)
+        return self.isSameTree(left.left, right.left) and self.isSameTree(left.right, right.right)
 
     def buildTree(self, arr):
         tree = TreeNode(arr[0])
