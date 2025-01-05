@@ -24,28 +24,34 @@ class TreeNode:
 
 class Solution:   
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
-        # Similar to isSameTree but this time we check if there is a subtree 
-        # and no left or right vals to it
-        # We should use dfs similarly as well
-
-        # We need to check if the current node (root) == subRoot (the curr root node)
-
-        if(root is None and subRoot is None):
+        # Similar to isSameTree but we need to check only the subtree vals
+        # First we will recursively iterate left and right first checking the curr root node
+        # if the curr root node == the subRoot node then we call isSameTree and compare
+        if(subRoot is None):
+            print("true")
             return True
-        if(root.val == subRoot.val):
-            # If we find an identical root for both root and subRoot
-            # Then we check if the left and right vals are the same
-            if(root.left == subRoot.left and root.right == subRoot.right):
-                # Check if they have children and compare those
-                if(self.isSubtree(root.left,subRoot.left) == self.isSubtree(root.right,subRoot.right)):
-                    return True
-                
-        self.isSubtree(root.left,subRoot.left)
-        self.isSubtree(root.right,subRoot.right)
-                
-        return self.isSubtree(root,subRoot)
+        if(root is None):
+            print("false")
+            return False
+        
+        # After checking edge cases we need to check if the curr vals are equal
+        # but also if the subtrees of them are the same
+        if(root.val == subRoot.val and self.isSameTree(root,subRoot)):
+            print("true")
+            return True
+
+        return self.isSubtree(root.left, subRoot) and self.isSubtree(root.right, subRoot)
 
 
+    def isSameTree(self,left,right) -> bool:
+        if(left is None and right is None):
+            return True
+        if(not left or not right):
+            return False
+        if(left.val != right.val):
+            return False
+
+        return self.isSameTree(left.left, right.left) or self.isSameTree(left.right, right.right)
 
     def buildTree(self, arr):
         tree = TreeNode(arr[0])
@@ -71,6 +77,8 @@ def main():
     solution = Solution()
     root = [1,2,3,4,5]
     subRoot = [2,4,5]
+    # root = [1,2,3,4,5,None,None,6]
+    # subRoot = [2,4,5]
     solution.isSubtree(solution.buildTree(root),solution.buildTree(subRoot))
 
 main()
