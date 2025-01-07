@@ -33,28 +33,38 @@ class Solution:
         if(root.left is None and root.right is None):
             return [[root.val]]
 
-        curr = root
         returnList.append([root.val])
-        while curr.left or curr.right:
-            appendList = []
-            if(curr.left):
-                left = curr.left
-                appendList.append(left.val)
+        curr = root
 
-            if(curr.right):
-                right = curr.right
+        # Need to pass root which will store to returnList each time
+        # It will take root
+        # Then iterate both root.left and root.right at the same time
+        self.levelOrderHelper(curr,returnList)
+
+        return returnList
+        
+    def levelOrderHelper(self, curr: TreeNode, returnList: list[list[int]]):
+        while curr.left != None or curr.right != None:
+            appendList = []
+            left = curr.left
+            right = curr.right
+
+            if(left is not None):
+                appendList.append(left.val)
+                
+            if(right is not None):
                 appendList.append(right.val)
 
             returnList.append(appendList)
 
-        return returnList
-        
+            self.levelOrderHelper(left,returnList) and self.levelOrderHelper(right,returnList)
+
     
     def buildTrees(self, arr):
         tree = TreeNode(arr[0])
         queue = deque([tree])
 
-        i = 0
+        i = 1
         while queue and i < len(arr):
             node = queue.popleft()
 
