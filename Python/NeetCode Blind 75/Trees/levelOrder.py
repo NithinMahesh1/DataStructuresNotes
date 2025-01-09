@@ -24,23 +24,33 @@ class TreeNode:
 
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> list[list[int]]:
-        # Simply use DFS to traverse left and right of trees
-        # As we loop through need to create a new list of the left and right nodes and append to returnList
+        # BFS since we want to hit every node at each layer
+        if root is None: 
+            return []
+
+        queue = deque([root])
         res = []
 
-        def dfs(node, depth):
-            if node is None:
-                return []
-            if len(res) == depth:
-                res.append([])
-            
-            res[depth].append(node.val)
-            dfs(node.left,depth+1)
-            dfs(node.right,depth+1)
-        
-        dfs(root,0)
-        return res
+        while queue:
+            # Size ensures we are going one level at a time
+            size = len(queue)
+            level = []
 
+            for i in range(size):
+                node = queue.popleft()
+
+                if(node):
+                    # Append to our level list the val
+                    level.append(node.val)
+                    # Append our nodes left and right at each level
+                    queue.append(node.left)
+                    queue.append(node.right)
+            # Make sure we don't have null levels we are adding
+            if level:
+                # Finally append each level as we loop the len of queue
+                res.append(level)
+
+        return res
 
     def buildTrees(self, arr):
         tree = TreeNode(arr[0])
