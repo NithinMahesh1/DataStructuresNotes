@@ -26,40 +26,22 @@ class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> list[list[int]]:
         # Simply use DFS to traverse left and right of trees
         # As we loop through need to create a new list of the left and right nodes and append to returnList
-        returnList = []
+        res = []
 
-        if(root is None):
-            return []
-        if(root.left is None and root.right is None):
-            return [[root.val]]
-
-        returnList.append([root.val])
-        curr = root
-
-        # Need to pass root which will store to returnList each time
-        # It will take root
-        # Then iterate both root.left and root.right at the same time
-        self.levelOrderHelper(curr,returnList)
-
-        return returnList
+        def dfs(node, depth):
+            if node is None:
+                return []
+            if len(res) == depth:
+                res.append([])
+            
+            res[depth].append(node.val)
+            dfs(node.left,depth+1)
+            dfs(node.right,depth+1)
         
-    def levelOrderHelper(self, curr: TreeNode, returnList: list[list[int]]):
-        while curr.left != None or curr.right != None:
-            appendList = []
-            left = curr.left
-            right = curr.right
+        dfs(root,0)
+        return res
 
-            if(left is not None):
-                appendList.append(left.val)
-                
-            if(right is not None):
-                appendList.append(right.val)
 
-            returnList.append(appendList)
-
-            self.levelOrderHelper(left,returnList) and self.levelOrderHelper(right,returnList)
-
-    
     def buildTrees(self, arr):
         tree = TreeNode(arr[0])
         queue = deque([tree])
