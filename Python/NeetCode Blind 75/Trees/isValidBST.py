@@ -25,32 +25,30 @@ class TreeNode:
 
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        # Similar to levelorder 
-        # We iterate tree and compare left to root then right to root
-        # Need to do this recursively so we compare each and if one subtree does not match
-        # then we would return False
-        if(root is None):
-            return True
-        if(root and root.left is None and root.right is None):
-            return True
-        
-        queue = deque([root])
+        # Basically we want to use recursive DFS again
+        # Essentially we will have a left and right boundary we check our nodes with
+        # This ensure that all values on the right side of the tree are greater than the root
+        # and the opposite for the left side of the tree
 
-        while queue:
-            node = queue.popleft()
-            left = node.left
-            right = node.right
-
-            if(left == None or left.val >= node.val):
-                print("False")
+        def valid(node,left,right):
+            if node is None:
+                return True
+            # Here we check left and right through each iteration
+            if not(left < node.val and right > node.val):
                 return False
-            if(right == None or right.val <= node.val):
-                print("False")
-                return False
-        
-        print("True")
-        return True
+            
+            # For the left subtree:
+            #   Compare left to the left boundary
+            #   Compare right side to the right node
+            # For the right subtree
+            #   Compare left side to root node
+            #   Compare right side to the right boundary
+            return valid(node.left, left, node.val) and valid(node.right, node.val, right)
 
+        # We first set the boundaries to be -inifite to infinite
+        # Since the that is the starting boundary for root
+        # As we go down it is updated with new boundaries that we set
+        return valid(root,float("-inf"),float("inf"))
 
     def buildTrees(self,arr) -> TreeNode:
         root = arr[0]
