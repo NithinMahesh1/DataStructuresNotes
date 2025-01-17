@@ -26,25 +26,33 @@ class TreeNode:
 
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        # Using DFS in order traversal left, root, right and an arr to store sorted vals
-        # We keep recursively iterating left until we reach node.left is none
-        # Once we get to node.left is None we want to append to our arr
-        # Keep adding to arr until end of tree traversal then we simply return arr[k]
-        arr = []
+        # Using DFS in order traversal left, root, right
+        # Using iterative approach instead of recursive
+        # We basically go all the way left and at each root we push to stack
+        # We keep pushing roots until root.left is None then we pop the stack and increment k += 1
+        # This naturally makes a sorted order and as we iterate to i == k then we return that root.val
+        stack = [root]
+        i = 0
+        node = root
 
-        def dfs(left,node,right,counter):
-            if node is None:
-                return arr[k]
-            if node.left is None:
-                counter += 1
-                left = node.left
-                right = node.right
-                arr.append(left.val)
-                arr.append(node.val)
-                arr.append(right)
-            return dfs(left,node,right,counter)
+        while stack:
+            if(node.left is None and node.right is None):
+                node = stack.pop()
+                node = node.right
+            if(i == k):
+                print(node.val)
+                return node.val
+            if(node.left is not None):
+                stack.append(node.left)
+                node = stack.pop()
+                i += 1
+            if(node.right is not None):
+                stack.append(node.right)
+                node = stack.pop()
+                i += 1
 
-        return dfs(root.left,root,root.right,0)
+        return 0
+
         
     def buildTrees(self,arr) -> TreeNode:
         root = TreeNode(arr[0])
