@@ -31,28 +31,23 @@ class Solution:
         # We basically go all the way left and at each root we push to stack
         # We keep pushing roots until root.left is None then we pop the stack and increment k += 1
         # This naturally makes a sorted order and as we iterate to i == k then we return that root.val
-        stack = [root]
+        stack = []
         i = 0
-        node = root
+        curr = root
 
-        while stack:
-            if(node.left is None and node.right is None):
-                node = stack.pop()
-                node = node.right
+        while curr or stack:
+            # We need to use a second while loop in here
+            # this is how we achieve the iterating all the way left
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+            
+            curr = stack.pop()
+            i += 1
             if(i == k):
-                print(node.val)
-                return node.val
-            if(node.left is not None):
-                stack.append(node.left)
-                node = stack.pop()
-                i += 1
-            if(node.right is not None):
-                stack.append(node.right)
-                node = stack.pop()
-                i += 1
-
-        return 0
-
+                return curr.val
+            curr = curr.right
+            
         
     def buildTrees(self,arr) -> TreeNode:
         root = TreeNode(arr[0])
