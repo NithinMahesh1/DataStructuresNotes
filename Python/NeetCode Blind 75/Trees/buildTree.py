@@ -26,24 +26,6 @@ class TreeNode:
 class Solution:
     def buildTree(self, preorder: list[int], inorder: list[int]) -> Optional[TreeNode]:
         # The preorder first value gives us the root of the tree
-        # The inorder values show us the left and right of the tree
-        # Basically the mid index in the inorder arr shows what values are on the left subtree (left side)
-        # And then from the mid and after is the right subtree
-        if not preorder or not inorder:
-            return None
-
-        root = TreeNode(preorder[0]) # gives us the root of the tree
-        mid = inorder.index(preorder[0]) # Using the root we get the index of the root val from preorder
-        # We are going to use recursion and loop both sides 
-        # Traverse left 1:mid+1 is 
-        root.left = self.buildTree(preorder[1:mid+1],inorder[:mid])
-        root.right = self.buildTree(preorder[mid+1:],inorder[mid+1:])
-        return root
-    
-
-class Solution:
-    def buildTree(self, preorder: list[int], inorder: list[int]) -> Optional[TreeNode]:
-        # The preorder first value gives us the root of the tree
         # The inorder values show us the left and right subtrees of the tree
         # In the inorder traversal, the values before the root are in the left subtree,
         # and the values after the root are in the right subtree.
@@ -59,9 +41,9 @@ class Solution:
         # The preorder array is divided into:
         #   * Left subtree: the next `mid` elements, because these correspond to the left subtree in inorder
         #   * Right subtree: the remaining elements after the left subtree
-        #
+        
         # Explanation of the slicing:
-        # - preorder[1:mid+1]: Takes the first `mid` elements after the root (these are the left subtree nodes)
+        # - preorder[1:mid+1]: Takes the first `mid` elements after the root (these are the subtree nodes)
         # - inorder[:mid]: Includes all elements of the left subtree in inorder
         root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])  # Recursively build the left subtree
         
@@ -70,8 +52,6 @@ class Solution:
         root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])  # Recursively build the right subtree
         
         return root
-
-
 
 def main():
     solution = Solution()
