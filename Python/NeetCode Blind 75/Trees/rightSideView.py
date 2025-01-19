@@ -22,20 +22,21 @@ class TreeNode:
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> list[int]:
         # I think for this problem we need to use dfs 
-        # but simply only traverse the right subtree
-        if(root is None):
-            return []
-        node = root
-        res = [node.val]
+        # Use depth as a counter
+        # Count until our res and depth == each other
+        # this is because each node we append to res is a level of depth
+        res = []
 
-        def dfs(node,res):            
+        def dfs(node,depth):            
             if node is None:
-                return res
-            res.append(node.val)                            
-            return dfs(node.right,res) or dfs(node.left, res)
-        
-        return dfs(node.right,res)
-        
+                return None
+            if depth == len(res):
+                res.append(node.val)
+            dfs(node.right,depth+1)
+            dfs(node.left,depth+1)
+
+        dfs(root,0)
+        return res
 
     def buildTrees(self, arr) -> TreeNode:
         if arr is None:
