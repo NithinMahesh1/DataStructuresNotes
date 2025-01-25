@@ -30,30 +30,22 @@ class Solution:
         # If left - right < 0 then multiply by -1
         # If the the val of that is greater than 1 then we return False
         # Otherwise return True
-        self.res = False
+        def dfs(node):
+            if not node:
+                return 0
+            left = dfs(node.left)
+            right = dfs(node.right)
 
-        if root is None:
-            return True
-
-        def dfs(node,depth):
-            if node is None:
-                return depth
+            # If a subtree is unbalanced
+            if left == -1 or right == -1 or abs(left - right) > 1:
+                return -1
             
-            left = dfs(node.left,depth+1)
-            right = dfs(node.right,depth+1)
-
-            diffOfSides = left - right
-
-            if diffOfSides < 0:
-                diffOfSides = diffOfSides * -1
-            if(diffOfSides == 1 or diffOfSides == 0):
-                return True
-
-            return False
-
-
-        return dfs(root,0)
-        # return self.res
+            # left and right are the heights of each node at each level
+            # We then compare them in our above code to see if there are different by more than one
+            # We need max to check what the most height is from that node and pass that to the curr node
+            return max(left,right) + 1
+            
+        return dfs(root) != -1
 
     def buildTrees(self,arr):
         if arr is None:
@@ -81,8 +73,8 @@ class Solution:
     
 def main():
     solution = Solution()
-    # root = [1,2,3,None,None,4]
-    root=[1,2,3,None,None,4,None,5]
+    root = [1,2,3,None,None,4]
+    # root=[1,2,3,None,None,4,None,5]
     solution.isBalanced(solution.buildTrees(root))
 
 main()
