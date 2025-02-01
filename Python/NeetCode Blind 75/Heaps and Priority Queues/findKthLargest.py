@@ -22,10 +22,10 @@ class Solution:
         for i in range(k-1):
             heapq.heappop(nums)
 
-        # Finally pop the kth largest value and return the absolute val of it 
+        # Finally pop the kth largest value and negate the "-" we added
         largest = heapq.heappop(nums)
-        print(abs(largest))
-        return abs(largest)
+        print(-largest)
+        return -largest
 
 def main():
     nums = [2,3,1,5,4]
