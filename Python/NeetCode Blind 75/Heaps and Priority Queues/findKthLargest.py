@@ -18,10 +18,14 @@ class Solution:
         nums = [-n for n in nums]
         heapq.heapify(nums)
 
-        # Loop the nums list and add a tuple of the
+        # Loop the nums list and pop until we get to the kth-1 val
+        for i in range(k-1):
+            heapq.heappop(nums)
 
-        print(nums[k])
-        return 
+        # Finally pop the kth largest value and return the absolute val of it 
+        largest = heapq.heappop(nums)
+        print(abs(largest))
+        return abs(largest)
 
 def main():
     nums = [2,3,1,5,4]
