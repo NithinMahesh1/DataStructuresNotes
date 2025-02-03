@@ -147,12 +147,13 @@ main()
 
 # Aggregation & Grouping:
 #   * How would you calculate the total sales per customer in a Sales table?
+#
 #   * What is the difference between HAVING and WHERE?
 #       HAVING is like a WHERE but applies only to groups as a whole where as the WHERE is for individual rows
 
 # Subqueries & Common Table Expressions (CTEs):
 #   * Write a query using a subquery to find employees earning above the average salary.
-#       SELECT 
+#
 #   * When would you use a CTE instead of a subquery?
 
 
