@@ -186,3 +186,146 @@ main()
 # Partitioning & Caching:
 #   * What is table partitioning, and when should you use it?
 #   * How would you optimize queries on a table with millions of records?
+
+
+
+
+# Chat GPT Solutions:
+
+
+# Query Writing
+
+# Basic SQL:
+#   * Write a query to select all columns from a table where a certain condition is met.
+#       SELECT * FROM table_name WHERE condition;
+
+#   * How would you retrieve the top 5 highest-paid employees from an Employees table?
+#       SELECT * FROM Employees ORDER BY Salary DESC LIMIT 5;
+
+# Joins & Relationships:
+#   * Explain the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN.
+#       INNER JOIN returns only matching rows between both tables.
+#       LEFT JOIN returns all records from the left table and matching records from the right table.
+#       RIGHT JOIN returns all records from the right table and matching records from the left table.
+#       FULL JOIN returns all records from both tables, with NULLs where there is no match.
+
+#   * Given two tables: Orders(OrderID, CustomerID, OrderDate) and Customers(CustomerID, Name),
+#     write a query to get all customers and their orders, including customers who have not placed an order.
+#       SELECT Customers.CustomerID, Customers.Name, Orders.OrderID
+#       FROM Customers
+#       LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+
+# Aggregation & Grouping:
+#   * How would you calculate the total sales per customer in a Sales table?
+#       SELECT CustomerID, SUM(SaleAmount) AS TotalSales
+#       FROM Sales
+#       GROUP BY CustomerID;
+
+#   * What is the difference between HAVING and WHERE?
+#       WHERE filters individual rows before aggregation.
+#       HAVING filters groups after aggregation (e.g., filtering grouped results with SUM or COUNT).
+
+# Subqueries & Common Table Expressions (CTEs):
+#   * Write a query using a subquery to find employees earning above the average salary.
+#       SELECT * FROM Employees
+#       WHERE Salary > (SELECT AVG(Salary) FROM Employees);
+
+#   * When would you use a CTE instead of a subquery?
+#       - When you need to reference the same subquery multiple times.
+#       - When improving readability by breaking down complex queries.
+#       - When using recursion, which CTEs support but subqueries do not.
+
+# Schema Design
+# Normalization & Indexing:
+#   * What is database normalization? Explain 1NF, 2NF, and 3NF with examples.
+#       - 1NF (First Normal Form): No duplicate columns, unique rows, atomic values.
+#         Example: No multiple phone numbers in a single field.
+#       - 2NF (Second Normal Form): 1NF + all non-key attributes must depend on the entire primary key.
+#         Example: A table with OrderID and ProductID should store product details separately.
+#       - 3NF (Third Normal Form): 2NF + no transitive dependency (no indirect relationships).
+#         Example: A Customer table should not store City/State; it should reference an Address table.
+
+#   * What are the different types of indexes in SQL Server, and when would you use each?
+#       - Clustered Index: Sorts and stores rows physically (one per table, usually primary key).
+#       - Non-Clustered Index: Stores pointers to data (faster lookups but more storage usage).
+#       - Unique Index: Ensures all values in a column are unique.
+#       - Full-Text Index: Used for searching text-heavy columns.
+
+#   * How would you design a database schema for an e-commerce platform with users, products, and orders?
+#       - Users(UserID, Name, Email, PasswordHash)
+#       - Products(ProductID, Name, Price, StockQuantity)
+#       - Orders(OrderID, UserID, OrderDate, TotalAmount)
+#       - OrderDetails(OrderDetailID, OrderID, ProductID, Quantity, PriceAtPurchase)
+#       - Foreign keys: Orders.UserID → Users.UserID, OrderDetails.OrderID → Orders.OrderID, etc.
+
+# Constraints & Relationships:
+#   * What are primary keys and foreign keys?
+#       - Primary Key: A unique identifier for a table (e.g., UserID in Users table).
+#       - Foreign Key: A reference to a primary key in another table to enforce relationships.
+
+#   * How would you enforce referential integrity between tables?
+#       - By using FOREIGN KEY constraints with CASCADE options for updates/deletes.
+
+# Stored Procedures & Triggers:
+#   * What are the benefits of using stored procedures?
+#       - Improves performance by reducing query compilation time.
+#       - Enhances security by limiting direct table access.
+#       - Promotes code reusability and maintainability.
+
+#   * Write a simple stored procedure that inserts a new customer into a Customers table.
+#       CREATE PROCEDURE InsertCustomer
+#       @Name VARCHAR(100), @Email VARCHAR(255)
+#       AS
+#       BEGIN
+#           INSERT INTO Customers (Name, Email) VALUES (@Name, @Email);
+#       END;
+
+#   * What are SQL triggers, and when would you use them?
+#       - Triggers are special procedures that execute automatically in response to INSERT, UPDATE, or DELETE.
+#       - Used for logging, enforcing business rules, or synchronizing tables.
+
+# Performance Tuning
+# Indexing & Query Optimization:
+#   * How do indexes improve query performance, and when should you avoid them?
+#       - Indexes speed up searches by reducing the number of scanned rows.
+#       - Avoid too many indexes as they slow down INSERT, UPDATE, DELETE operations.
+
+#   * How would you identify slow-performing queries in SQL Server?
+#       - Use `EXPLAIN` or `SHOW EXECUTION PLAN` to analyze query execution.
+#       - Check `sys.dm_exec_requests` for long-running queries.
+#       - Use `SQL Profiler` or `Extended Events` to track slow queries.
+
+#   * Explain the purpose of the SQL Execution Plan. How do you use it to optimize queries?
+#       - The execution plan shows how SQL Server executes a query.
+#       - Helps identify slow operations like full table scans or missing indexes.
+#       - Optimize queries by adding indexes, rewriting joins, or breaking down queries.
+
+# Transactions & Locking:
+#   * What are SQL Server transaction isolation levels, and how do they affect performance?
+#       - Read Uncommitted: Fastest, but allows dirty reads.
+#       - Read Committed: Prevents dirty reads but allows non-repeatable reads.
+#       - Repeatable Read: Prevents dirty and non-repeatable reads.
+#       - Serializable: Prevents all issues but can cause blocking.
+#       - Snapshot: Uses versioning to prevent blocking.
+
+#   * What is the difference between deadlock and blocking, and how do you resolve them?
+#       - Blocking: One query holds a resource while another waits.
+#       - Deadlock: Two queries wait on each other indefinitely.
+#       - Resolve by:
+#           - Using proper indexing.
+#           - Avoiding long transactions.
+#           - Using `WITH (NOLOCK)` carefully.
+#           - Identifying deadlocks using `sys.dm_tran_locks`.
+
+# Partitioning & Caching:
+#   * What is table partitioning, and when should you use it?
+#       - Splitting a large table into smaller partitions for better performance.
+#       - Useful for large datasets like logs, where older data can be archived.
+
+#   * How would you optimize queries on a table with millions of records?
+#       - Use indexing to speed up lookups.
+#       - Partition large tables to distribute data.
+#       - Avoid `SELECT *`, fetch only required columns.
+#       - Use proper data types to reduce storage.
+#       - Optimize joins using indexed columns.
+
