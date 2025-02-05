@@ -127,74 +127,9 @@ main()
 # Query writing, schema design and performance tuning in Microsoft SQL Server 
 
 
-# gpt questions to prep:
-
-# Query Writing
-
-# Basic SQL:
-#   * Write a query to select all columns from a table where a certain condition is met.
-#   * How would you retrieve the top 5 highest-paid employees from an Employees table?
-#       SELECT * FROM Employees WHERE DESC(pay)
-
-# Joins & Relationships:
-#   * Explain the difference between INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN.
-#       INNER JOIN is for combining both matching rows (may also contain duplicates), LEFT JOIN/RIGHT JOIN joins all matching records from their side from the other side. FULL JOIN joins all values rows matching and non matching rows. 
-#   * Given two tables: Orders(OrderID, CustomerID, OrderDate) and Customers(CustomerID, Name), 
-#     write a query to get all customers and their orders, including customers who have not placed an order.
-#       SELECT CustomerID, OrderID, Name
-#       FROM Orders
-#       LEFT JOIN CustomerID ON Orders.CustomerID = CustomerID.CustomerID;
-
-# Aggregation & Grouping:
-#   * How would you calculate the total sales per customer in a Sales table?
-#
-#   * What is the difference between HAVING and WHERE?
-#       HAVING is like a WHERE but applies only to groups as a whole where as the WHERE is for individual rows
-
-# Subqueries & Common Table Expressions (CTEs):
-#   * Write a query using a subquery to find employees earning above the average salary.
-#
-#   * When would you use a CTE instead of a subquery?
-
-
-# Schema Design
-# Normalization & Indexing:
-#   * What is database normalization? Explain 1NF, 2NF, and 3NF with examples.
-#   * What are the different types of indexes in SQL Server, and when would you use each?
-#   * How would you design a database schema for an e-commerce platform with users, products, and orders?
-
-# Constraints & Relationships:
-#   * What are primary keys and foreign keys?
-#   * How would you enforce referential integrity between tables?
-
-# Stored Procedures & Triggers:
-#   * What are the benefits of using stored procedures?
-#   * Write a simple stored procedure that inserts a new customer into a Customers table.
-#   * What are SQL triggers, and when would you use them?
-
-
-# Performance Tuning
-#   * Indexing & Query Optimization:
-#   * How do indexes improve query performance, and when should you avoid them?
-#   * How would you identify slow-performing queries in SQL Server?
-#   * Explain the purpose of the SQL Execution Plan. How do you use it to optimize queries?
-
-# Transactions & Locking:
-#   * What are SQL Server transaction isolation levels, and how do they affect performance?
-#   * What is the difference between deadlock and blocking, and how do you resolve them?
-
-# Partitioning & Caching:
-#   * What is table partitioning, and when should you use it?
-#   * How would you optimize queries on a table with millions of records?
-
-
-
-
 # Chat GPT Solutions:
 
-
 # Query Writing
-
 # Basic SQL:
 #   * Write a query to select all columns from a table where a certain condition is met.
 #       SELECT * FROM table_name WHERE condition;
@@ -244,6 +179,7 @@ main()
 #         Example: A table with OrderID and ProductID should store product details separately.
 #       - 3NF (Third Normal Form): 2NF + no transitive dependency (no indirect relationships).
 #         Example: A Customer table should not store City/State; it should reference an Address table.
+#     This is a good video explaining it: https://www.youtube.com/watch?v=J-drts33N8g&ab_channel=LearnLearnScratchTutorials
 
 #   * What are the different types of indexes in SQL Server, and when would you use each?
 #       - Clustered Index: Sorts and stores rows physically (one per table, usually primary key).

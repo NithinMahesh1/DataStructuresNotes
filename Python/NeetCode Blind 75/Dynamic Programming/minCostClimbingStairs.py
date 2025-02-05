@@ -37,7 +37,11 @@ class Solution:
         for i in range(len(cost) - 3, -1,-1):
             cost[i] = min(cost[i] + cost[i+1], cost[i] + cost[i+2])
 
-        # Need to get 
+        # Need to get minimum of first two values
+        # this is because these represent the bottom up approach
+        # the start of the stairs contain the values we calculated from the previous values
+        # We don't want the other ones since those represent the top of the staircase
+        # We are also modifying the arr cost in place so we check the last two values to compare
         return min(cost[0],cost[1])
     
 
