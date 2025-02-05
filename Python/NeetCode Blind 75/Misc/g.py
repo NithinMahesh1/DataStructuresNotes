@@ -201,6 +201,11 @@ main()
 
 #   * How would you enforce referential integrity between tables?
 #       - By using FOREIGN KEY constraints with CASCADE options for updates/deletes.
+#       - e.g. with foreign key constraint if we remove the primary key from the main table the foreign key in the related table
+#              would be orphaned with no link to the data. Basically if an attempt is made to remove a row in the primary key table
+#              we would first need to remove the foreign key data or change it to another reference. 
+#       - CASCADE options basically define or set an action to occur when the user tries to delete or update a key to which an existing
+#         foreign keys point.
 
 # Stored Procedures & Triggers:
 #   * What are the benefits of using stored procedures?
