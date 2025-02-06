@@ -186,6 +186,13 @@ main()
 #       - Non-Clustered Index: Stores pointers to data (faster lookups but more storage usage).
 #       - Unique Index: Ensures all values in a column are unique.
 #       - Full-Text Index: Used for searching text-heavy columns.
+#       Good explanation on this video: https://www.youtube.com/watch?v=BIlFTFrEFOI&ab_channel=CockroachDB
+#           - Two types
+#               * Clustered Index: Sort and store the data rows in table or view based on their key values. Only one clustered index
+#                                  per a table. Data rows also stored in order based on the clustered index key. Only store tables so don't
+#                                  take extra storage.
+#               * Non Clustered Index: Seperate structure from data rows. Store in index key values and pointers (row locaters) to the
+#                                      actual data rows. Stored in a seperate place from the actual table and take space. 
 
 #   * How would you design a database schema for an e-commerce platform with users, products, and orders?
 #       - Users(UserID, Name, Email, PasswordHash)
