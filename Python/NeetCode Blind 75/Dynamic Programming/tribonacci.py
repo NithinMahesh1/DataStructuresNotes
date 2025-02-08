@@ -45,10 +45,11 @@ main()
 #             return trib[n];
 #         }
 
-#         foreach(int t in trib) {
+#         for(int i=3; i<=n; i++) {
+#             int sumTrib = trib[0] + trib[1] + trib[2];
 #             trib[0] = trib[1];
 #             trib[1] = trib[2];
-#             trib[2] = trib.Sum();
+#             trib[2] = sumTrib;
 #         }
 
 #         return trib[2];
