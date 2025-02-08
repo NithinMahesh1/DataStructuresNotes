@@ -39,6 +39,18 @@ main()
 # TODO Resolve this in C# after
 # public class Solution {
 #     public int Tribonacci(int n) {
-#           
+#         int[] trib = new int[]{0,1,1};
+
+#         if(n < 3){
+#             return trib[n];
+#         }
+
+#         foreach(int t in trib) {
+#             trib[0] = trib[1];
+#             trib[1] = trib[2];
+#             trib[2] = trib.Sum();
+#         }
+
+#         return trib[2];
 #     }
 # }
