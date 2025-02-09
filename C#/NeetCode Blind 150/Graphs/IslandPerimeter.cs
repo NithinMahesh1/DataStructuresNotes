@@ -25,7 +25,50 @@
 // Output: 4
 
 public class Solution {
+    public HashSet<(int,int)> visited = new HashSet<(int,int)>();
+    public int perimeter = 0;
+
     public int IslandPerimeter(int[][] grid) {
-        
+        // Use DFS for this since its a graph problem
+        // Visiting every cell in visit(i,j) and add to a perimeter value
+        // Basically we keep traversing until we hit one node that is a 1
+        // When we hit the node 1 we will check top, left, right, down
+        // As we check each possible position to move to we add another 1 to our perimeter
+        // We may want to use a visited hashset as well to keep track of nodes we visited
+
+
+        // First traverse grid until we get to a 1:
+        for(int i=0; i<grid.Length; i++) {
+            for(int j=0; j<grid[0].Length; j++) {
+                if(grid[i][j] == 1) {
+                    return dfs(grid,i,j);
+                }
+            }
+        }
+
+        return 0;
+    }
+    public int dfs(int grid[][], int i, int j) {
+        // Check for a 1 and return 1
+        if(i >= grid.Length() || j >= grid[0].Length 
+                || i < 0 || j < 0 || grid[i][j] == 0) {
+            return 1;
+        }
+
+        // Check for a 0 and return 0 if we visited them already
+        if(visited.Contains((i,j))) {
+            return 0;
+        }
+
+        // If not add to visited set
+        visited.Add((i,j));
+
+        // Increment up, left, down, and right
+        perimeter = dfs(i,j+1);
+        perimeter = dfs(i+1,j);
+        perimeter = dfs(i,j-1);
+        perimeter = dfs(i-1,j);
+
+        return perimeter;
     }
 }
