@@ -277,3 +277,68 @@ main()
 #       - Use proper data types to reduce storage.
 #       - Optimize joins using indexed columns.
 
+
+
+# C#
+# Take home homework to create a small random number generator based on probabilities, 
+# and to write an SQL query selecting data from given tables:
+
+# This is using an array of probabilities for a given arr of integers
+#using System;
+
+# public class RandomNumberGenerator
+# {
+#     private Random _random = new Random();
+    
+#     public int GenerateWithProbability(int[] numbers, double[] probabilities)
+#     {
+#         // Compute cumulative probability
+#         double[] cumulative = new double[probabilities.Length];
+#         cumulative[0] = probabilities[0];
+        
+#         for (int i = 1; i < probabilities.Length; i++)
+#         {
+#             cumulative[i] = cumulative[i - 1] + probabilities[i];
+#         }
+        
+#         // Generate a random number between 0 and 1
+#         double randomValue = _random.NextDouble(); 
+        
+#         // Find the number corresponding to the random value
+#         for (int i = 0; i < cumulative.Length; i++)
+#         {
+#             if (randomValue < cumulative[i])
+#                 return numbers[i];
+#         }
+        
+#         return numbers[numbers.Length - 1]; // Fallback (should not be reached)
+#     }
+# }
+
+# // Example usage:
+# public class Program
+# {
+#     public static void Main()
+#     {
+#         var rng = new RandomNumberGenerator();
+        
+#         int[] numbers = {1, 2, 3};
+#         double[] probabilities = {0.2, 0.5, 0.3};
+        
+#         Console.WriteLine(rng.GenerateWithProbability(numbers, probabilities));
+#     }
+# }
+
+
+# Difference between float and double?
+# The difference is in precision. The float is 6-9 significant figures and double is about 15-17 significant figures.
+# This means that double is safer to use for calculations. There is also Decimal in C# that is a decimal number from 0-9 sig figs
+# and has more precision than float and double. 
+# Float is 32 bit, double is 64 bit, and decimal is 128 bit.
+
+# Time complexity of BFS/DFS
+# Based off of the number of vertices
+
+# Look into Graph Traversal Problems
+
+# Practice the rest of the Dynamic Programming Questions in C#
