@@ -38,20 +38,28 @@ public class Solution {
 
 
         // First traverse grid until we get to a 1:
-        for(int i=0; i<grid.Length; i++) {
-            for(int j=0; j<grid[0].Length; j++) {
-                if(grid[i][j] == 1) {
-                    return dfs(grid,i,j);
+        for (int i = 0; i < grid.Length; i++) {
+            for (int j = 0; j < grid[0].Length; j++) {
+                if (grid[i][j] == 1) {
+                    // Start DFS from the first land cell
+                    return dfs(grid, i, j);  
                 }
             }
         }
 
-        return 0;
+        // In case there is no land
+        return 0;  
     }
     public int dfs(int grid[][], int i, int j) {
         // Check for a 1 and return 1
-        if(i >= grid.Length() || j >= grid[0].Length 
-                || i < 0 || j < 0 || grid[i][j] == 0) {
+        // Checking if we are out of bounds
+        // if i < 0 we are outside top bound
+        // if j < 0 we are outside left bound
+        // if i >= grid length we are outside bottom bound
+        // if j >= we are outside the bound of right bound
+        // if grid[i][j] == 0 we that cell is water so we return
+        if (i < 0 || j < 0 || i >= grid.Length || j >= grid[0].Length 
+                || grid[i][j] == 0) {
             return 1;
         }
 
@@ -64,11 +72,9 @@ public class Solution {
         visited.Add((i,j));
 
         // Increment up, left, down, and right
-        perimeter = dfs(i,j+1);
-        perimeter = dfs(i+1,j);
-        perimeter = dfs(i,j-1);
-        perimeter = dfs(i-1,j);
-
-        return perimeter;
+        return dfs(grid,i,j+1) +
+               dfs(grid,i+1,j) +
+               dfs(grid,i,j-1) +
+               dfs(grid,i-1,j);
     }
 }
