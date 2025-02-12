@@ -34,10 +34,11 @@ public class Solution {
         int z = 0;
         foreach(char s in order) {
             alienDict[s] = z;
+            z+=1;
         }
 
         // Loop the list of words
-        for(int i=0; i<words.Length; i++) {
+        for(int i=0; i<words.Length-1; i++) {
             string w1 = words[i];
             string w2 = words[i+1];
             // Loop the chars in the words
@@ -47,8 +48,11 @@ public class Solution {
                     // we are still looping in bounds of w1
                     return false;
                 }
-                if(alienDict[w1[j]] > alienDict[w2[j]]) {
-                    return false;
+                if(w1[j] != w2[j]) {
+                    if(alienDict[w1[j]] > alienDict[w2[j]]) {
+                        return false;
+                    }
+                    break;
                 }
             }
         }
