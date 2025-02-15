@@ -26,24 +26,36 @@
 
 public class Solution {
     public int FindJudge(int n, int[][] trust) {
-        // n is the number of people so 1 - n people
-        // Trust shows us who trusts who
-        // Have a possibleJudge being a var that shows up more than once (hashset)
-        // We can loop through the int[][] and store to a dict the k : index and V : array
-        // Compare the values of the first array to the second -> if there is a match then return -1
-        HashSet<int> possibleJudge = new HashSet<int>();
-        Dictionary<int,int[]> pairs = new Dictionary<int, int[]>();        
+        // This is a graph problem since there are vertices going to edges
+        // We need to use two arrays here one with incoming one outgoing
+        // We count each list and increment a counter on either incoming or outgoing
+        // At the end we need to figure out who the judge is based off of the following
+        //  - They are n-1 count for incoming since n people trust the judge
+        //  - There are 0 outgoing since the judge trusts no one else
 
-        for(int i=0; i<trust.Length; i++) {
-            int[] people = trust[i];
-            for(int j=0; j < people.Length; j++) {
-                if(!possibleJudge.ContainsKey(people[j])) {
-                    possibleJudge.Add(people[j]);
-                }
-                if(possibleJudge.ContainsKey(people[j])) {
-                    
-                }
+        // Since it is 1 to n then we return 1 if only one person
+        if(n == 1 && trust.Length == 0) {
+            return 1;
+        }
+
+        int[] incoming = new int[n+1];
+        int[] outgoing = new int[n+1];
+
+        // Loop through trust and input incoming and outgoing values
+        // Looping each list and then taking the people from the list t 
+        foreach(var t in trust) {
+            int a = t[0], b = t[1];
+            // incrementing a count by index a or b
+            incoming[b]++;
+            outgoing[a]++;
+        }
+
+        for(int i=1; i<=n; i++) {
+            if(incoming[i] == n-1 && outgoing[i] == 0) {
+                return i;
             }
-        } 
+        }
+
+        return -1;
     }
 }
