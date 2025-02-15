@@ -169,6 +169,7 @@ main()
 #       - When you need to reference the same subquery multiple times.
 #       - When improving readability by breaking down complex queries.
 #       - When using recursion, which CTEs support but subqueries do not.
+# https://www.geeksforgeeks.org/cte-in-sql/#
 
 # Schema Design
 # Normalization & Indexing:
