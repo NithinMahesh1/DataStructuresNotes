@@ -1,63 +1,81 @@
-﻿public class Solution {
+﻿// You are given a 2-D matrix grid. Each cell can have one of three possible values:
+
+// 0 representing an empty cell
+// 1 representing a fresh fruit
+// 2 representing a rotten fruit
+// Every minute, if a fresh fruit is horizontally or vertically adjacent to a rotten fruit, then the fresh fruit also becomes rotten.
+
+// Return the minimum number of minutes that must elapse until there are zero fresh fruits remaining. 
+// If this state is impossible within the grid, return -1.
+
+// Example 1:
+// Input: grid = [[1,1,0],[0,1,1],[0,1,2]]
+// Output: 4
+
+// Example 2:
+// Input: grid = [[1,0,1],[0,2,0],[1,0,1]]
+// Output: -1
+public class Solution {
     public static void Main(string[] args) {
         int[][] grid = new int[][]{
-            new int[]{2147483647,-1,0,2147483647},
-            new int[]{2147483647,2147483647,2147483647,-1},
-            new int[]{2147483647,-1,2147483647,-1},
-            new int[]{0,-1,2147483647,2147483647},
+            new int[]{1,1,0},
+            new int[]{0,1,1},
+            new int[]{0,1,2}
         };
 
         Solution obj = new Solution();
-        obj.islandsAndTreasure(grid);
+        obj.OrangesRotting(grid);
     }
-    public void islandsAndTreasure(int[][] grid) {
-        // In problems where we are trying to find distance to something we should be using BFS
-        // We also need a queue set to keep track of the treasure chests and a hashset to keep track of the visited cell
-        // Proper way to do this is using the treasure chest's "0" as the starting points
-        // From there we should count and replace the 2147483647 values with the distance from the 0
-        Queue<(int,int)> queue = new Queue<(int,int)>();
-        HashSet<(int,int)> visited = new HashSet<(int,int)>();
+    public int OrangesRotting(int[][] grid) {
+        // Loop and start at the first rotting banana 2
+        // Use BFS and check for 1's and convert to 2's
+        // Increment counter each iteration
+        HashSet<(int,int)> visited = new HashSet<(int, int)>{};
+        Queue<(int,int)> q = new Queue<(int, int)>{};
+        int counter = 0;
+        bool rotted = false;
 
-        // Loop to find the treasure cells first
         for(int i=0; i<grid.Length; i++) {
             for(int j=0; j<grid[i].Length; j++) {
-                if(grid[i][j] == 0) {
-                    queue.Enqueue((i,j));
+                if(grid[i][j] == 2) {
+                    q.Enqueue((i,j));
                     visited.Add((i,j));
+                }
+                else if(grid[i][j] == 1) {
+                    counter += 1;
                 }
             }
         }
 
-        int dist = 0;
-        // Start a while loop from the treasure chests and start setting the distances        
-        while(queue.Count != 0) {
-            // Get grid position from queue
-            for(int z=0; z<queue.Count; z++) {
-                // We are popping the the treasure chests from the queue 
-                var (i,j) = queue.Dequeue();
-                
-                // For each treasure chest we are changing to be the current distance
-                // We end up updating the distance each iteration of treasure chests from queue
-                grid[i][j] = dist;
+        if(counter == 0) {
+            return -1;
+        }
 
-                // Increment the positions of the grid (traversal)
-                traverseGrid(grid,i+1,j,visited,queue);
-                traverseGrid(grid,i-1,j,visited,queue);
-                traverseGrid(grid,i,j+1,visited,queue);
-                traverseGrid(grid,i,j-1,visited,queue);
+        while(q.Count != 0) {
+            int size = q.Count;
+            for(int z=0; z<size; z++) {
+                var (i,j) = q.Dequeue();
+                grid[i][j] = 2;
+                rotted = bfs(grid,i+1,j,q,visited);
+                rotted = bfs(grid,i-1,j,q,visited);
+                rotted = bfs(grid,i,j+1,q,visited);
+                rotted = bfs(grid,i,j-1,q,visited);
             }
-            // Here we increment the distance for each cell from the treasure chest
-            dist += 1;
+            if(rotted) {
+                counter += 1;
+            }            
         }
 
+        return counter;
     }
-    private void traverseGrid(int[][] grid, int i, int j, HashSet<(int,int)> visited, Queue<(int,int)> queue) {
-        if(i < 0 || i >= grid.Length || j < 0 || j >= grid[i].Length || grid[i][j] == -1) {
-            return;
+    private bool bfs(int[][] grid, int i, int j, Queue<(int,int)> q, HashSet<(int,int)> visited)  {
+        if(i < 0 || i >= grid.Length || j < 0 || j >= grid[i].Length || grid[i][j] == 0 || visited.Contains((i,j))) {
+            return false;
         }
 
-        // Mark it as visited
+        q.Enqueue((i,j));
         visited.Add((i,j));
-        queue.Enqueue((i,j));
+
+        return true;
     }
 }
