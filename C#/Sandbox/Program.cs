@@ -15,67 +15,44 @@
 // Example 2:
 // Input: grid = [[1,0,1],[0,2,0],[1,0,1]]
 // Output: -1
+
 public class Solution {
     public static void Main(string[] args) {
-        int[][] grid = new int[][]{
-            new int[]{1,1,0},
-            new int[]{0,1,1},
-            new int[]{0,1,2}
+        // [1,2],[5,1],[1,3],[1,4]
+        // int[][] edges = new int[][]{
+        //     new int[]{1,2},
+        //     new int[]{5,1},
+        //     new int[]{1,3},
+        //     new int[]{1,4}
+        // };
+        int[][] edges = new int[][]{
+            new int[]{1,2},
+            new int[]{2,3},
+            new int[]{4,2}
         };
 
         Solution obj = new Solution();
-        obj.OrangesRotting(grid);
+        obj.FindCenter(edges);
     }
-    public int OrangesRotting(int[][] grid) {
-        // Loop and start at the first rotting banana 2
-        // Use BFS and check for 1's and convert to 2's
-        // Increment counter each iteration
-        HashSet<(int,int)> visited = new HashSet<(int, int)>{};
-        Queue<(int,int)> q = new Queue<(int, int)>{};
-        int counter = 0;
-        bool rotted = false;
-
-        for(int i=0; i<grid.Length; i++) {
-            for(int j=0; j<grid[i].Length; j++) {
-                if(grid[i][j] == 2) {
-                    q.Enqueue((i,j));
-                    visited.Add((i,j));
-                }
-                else if(grid[i][j] == 1) {
-                    counter += 1;
-                }
+    public int FindCenter(int[][] edges) {
+        // Can we just check every index and add to a Dictionary with a counter
+        Dictionary<int,int> dict = new Dictionary<int, int>();
+        for(int i=0; i<edges.Length; i++) {
+            int edge = edges[i][0];
+            int vertice = edges[i][1];
+            if(dict.ContainsKey(edge)) {
+                dict[edge] = dict[edge] + 1;
+            }
+            else if(dict.ContainsKey(vertice)) {
+                dict[vertice] = dict[vertice] + 1;                
+            }
+            else {
+                dict[edges[i][0]] = 1;
+                dict[edges[i][1]] = 1;
             }
         }
 
-        if(counter == 0) {
-            return -1;
-        }
-
-        while(q.Count != 0) {
-            int size = q.Count;
-            for(int z=0; z<size; z++) {
-                var (i,j) = q.Dequeue();
-                grid[i][j] = 2;
-                rotted = bfs(grid,i+1,j,q,visited);
-                rotted = bfs(grid,i-1,j,q,visited);
-                rotted = bfs(grid,i,j+1,q,visited);
-                rotted = bfs(grid,i,j-1,q,visited);
-            }
-            if(rotted) {
-                counter += 1;
-            }            
-        }
-
-        return counter;
-    }
-    private bool bfs(int[][] grid, int i, int j, Queue<(int,int)> q, HashSet<(int,int)> visited)  {
-        if(i < 0 || i >= grid.Length || j < 0 || j >= grid[i].Length || grid[i][j] == 0 || visited.Contains((i,j))) {
-            return false;
-        }
-
-        q.Enqueue((i,j));
-        visited.Add((i,j));
-
-        return true;
+        Console.WriteLine(dict.MaxBy(e => e.Value).Key);
+        return dict.MaxBy(e => e.Value).Key;
     }
 }
