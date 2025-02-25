@@ -19,6 +19,7 @@
 // Example 2:
 // Input: heights = [[1],[1]]
 // Output: [[0,0],[0,1]]
+
 public class Solution {
     public static void Main(string[] args) {
         
@@ -32,49 +33,59 @@ public class Solution {
         obj.PacificAtlantic(heights);
     }
     public List<List<int>> PacificAtlantic(int[][] heights) {
-        // Look at row 0 and column 0 -> Append the cells that are valid (all of them) for pacific
-        // Keep appending the pacific ones to a hash set
-        // Do the same for the atlantic ones
-        // At the end we loop and take the intersection of the values both have
+        // Look at row 0 and column 0 -> append those to pacific hashset
+        // Look at row n-1 amd column n-1 for atlantic hashset
+        // We then use dfs to check from the oceans for example pacific
+        // to the points meaning it will be checking values that are the opposite
+        // greater than equal to values not less than or equal to
 
-        // We need a queue, and hashset for each one
         HashSet<(int,int)> pacific = new HashSet<(int, int)>();
-        Queue<(int,int)> pacificQ = new Queue<(int, int)>();
         HashSet<(int,int)> atlantic = new HashSet<(int, int)>();
-        Queue<(int,int)> atlanticQ = new Queue<(int, int)>();
+        int rows = heights.Length;
+        int columns = heights[0].Length;
 
-        HashSet<(int,int)> visited = new HashSet<(int, int)>();
+        // Looping the columns:
+        for(int c=0; c<columns; c++) {
+            dfs(heights[0][c],0,c,heights[0][c],heights,pacific);
+            dfs(heights[rows-1][c],rows-1,c,heights[rows-1][c],heights,atlantic);
+        }
 
-        int[][] directions = new int[][]{
-            new int[] {0,1},
-            new int[] {0,-1},
-            new int[] {1,0},
-            new int[] {-1,0}
-        };
-        // BFS for pacific
-        for(int r=0; r<heights.Length; r++) {
-            for(int c=0; c<heights[r].Length; c++) {
-                if(r == 0 || c == 0) {
-                    pacific.Add((r,c));
-                    pacificQ.Enqueue((r,c));
-                    visited.Add((r,c));
-                }
-                while(pacificQ.Count > 0) {
-                    foreach(int[] direction in directions) {
-                        int row = r + direction[0];
-                        int column = c + direction[1];
+        // Looping rows first starting with first and last:
+        for(int r=0; r<rows; r++) {
+            // Need to pass previous height as we loop 
+            // Starts at the first row
+            dfs(heights[r][0],r,0,0,heights,pacific);
+            // Since we are already looping same len of first row
+            // We should loop Atlantic last row
+            dfs(heights[r][columns-1],r,columns-1,0,heights,atlantic);
+        }
 
-                    }
+
+
+        List<List<int>> res = new List<List<int>>();
+        // Loop and compare the two hashsets
+        // Result is the intersection of atlantic and pacific
+        for(int i=0; i<rows; i++) {
+            for(int j=0; j<columns; j++) {
+                if(pacific.Contains((i,j)) && atlantic.Contains((i,j))) {
+                    List<int> vals = new List<int>{ i,j };
+                    res.Add(vals);
                 }
             }
         }
 
-        // BFS for atlantic 
+        return res;
+    }
+    private void dfs(int height, int r, int c, int prevHeight, int[][] heights, HashSet<(int,int)> visited) {
+        if(r < 0 || r >= heights.Length || c < 0 || c >= heights[r].Length 
+                    || visited.Contains((r,c)) || heights[r][c] < prevHeight) {
+            return;
+        }
 
-
-        // Get intersection
-
-
-        return new List<List<int>>();
+        visited.Add((r,c));
+        dfs(heights[r][c],r+1,c,heights[r][c],heights,visited);
+        dfs(heights[r][c],r-1,c,heights[r][c],heights,visited);
+        dfs(heights[r][c],r,c+1,heights[r][c],heights,visited);
+        dfs(heights[r][c],r,c-1,heights[r][c],heights,visited);
     }
 }
