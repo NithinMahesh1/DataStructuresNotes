@@ -1,91 +1,59 @@
-﻿// You are given a 2-D matrix board containing 'X' and 'O' characters.
+﻿// You are given an array prerequisites where prerequisites[i] = [a, b] 
+// indicates that you must take course b first if you want to take course a.
 
-// If a continous, four-directionally connected group of 'O's is surrounded by 'X's, 
-// it is considered to be surrounded.
+// The pair [0, 1], indicates that must take course 1 before taking course 0.
 
-// Change all surrounded regions of 'O's to 'X's and do so in-place by modifying the input board.
+// There are a total of numCourses courses you are required to take, labeled from 0 to numCourses - 1.
 
-// Example 1:
-// Input: board = [
-//   ["X","X","X","X"],
-//   ["X","O","O","X"],
-//   ["X","O","O","X"],
-//   ["X","X","X","O"]
-// ]
-
-// Output: [
-//   ["X","X","X","X"],
-//   ["X","X","X","X"],
-//   ["X","X","X","X"],
-//   ["X","X","X","O"]
-// ]
-// Explanation: Note that regions that are on the border are not considered surrounded regions.
-
-using System.Reflection.Metadata;
+// Return true if it is possible to finish all courses, otherwise return false.
 
 public class Solution {
     public static void Main(string[] args) {
-        
-        char[][] board = new char[][]{
-            new char[] {'X','X','X','X'},
-            new char[] {'X','O','O','X'},
-            new char[] {'X','O','O','X'},
-            new char[] {'X','X','X','O'},
+        int numCourses = 2;
+        int[][] prerequisites = new int[][]{
+            new int[]{0,1}
         };
 
         Solution obj = new Solution();
-        obj.Solve(board);
+        obj.CanFinish(numCourses,prerequisites);
     }
-    public void Solve(char[][] board) {
-        // Basically we want to change all the surounded O's into X's (ones that are not on borders)
-        // We then use DFS on O's on the border and convert them to T's
-        // This ensures we do not change the bordering ones and the connected ones to the border into X's
-        HashSet<(int,int)> visited = new HashSet<(int, int)>();
-        int rows = board.Length;
-        int columns = board[0].Length;
+    public bool CanFinish(int numCourses, int[][] prerequisites) {
+        // Need to detect if it is a cycle and if it is return false
+        // e.g. 0,1 and 1,0 is 0 -> 1 -> 0
+        // Use a hash map to add the courses as key and the vals as preqs
+        // Iterate through and use a visit hashset - this will show us if our graph returns to a visited cell
+        // means we return false and a cycle was detected
 
-        // Convert to border O -> T's
-        for(int i=0; i<board.Length; i++) {
-            for(int j=0; j<board[i].Length; j++) {
-                if(board[i][j] == 'O' && (i == 0 || j == 0 
-                        || i == rows-1 || j == columns-1)) {
-                    // run dfs and convert them to T's
-                    dfs(board,i,j,visited);
-                }
+        Dictionary<int,List<int>> courseMap = new Dictionary<int, List<int>>();
+        HashSet<int> visited = new HashSet<int>();
+
+        // Loop through and populate courseMap
+        foreach(int[] course in prerequisites) {
+            if(!courseMap.ContainsKey(course[0])) {
+                courseMap[course[1]] = new List<int>{ course[0] };
+            }
+            else {
+                List<int> templist = courseMap[course[1]];
+                templist.Add(course[0]);
             }
         }
 
-        // Convert surounded O's -> X's
-        for(int z=0; z<board.Length; z++) {
-            for(int x=0; x<board[z].Length; x++) {
-                if(board[z][x] == 'O' && (z != 0 || z != rows-1 
-                        || x != 0 || x != columns-1)) {
-                    board[z][x] = 'X';
-                }
-            }
-        }
-
-        // Convert T's -> O's
-        for(int z=0; z<board.Length; z++) {
-            for(int x=0; x<board[z].Length; x++) {
-                if(board[z][x] == 'T') {
-                    board[z][x] = 'O';
-                }
-            }
-        }
-        Console.WriteLine("done");
+        // Utilize dfs to traverse using the courseMap
+        dfs(courseMap,visited);
+        return false;
     }
-    private void dfs(char[][] board, int r, int c, HashSet<(int,int)> visited) {
-        if(r < 0 || r >= board.Length || c < 0 || c >= board[r].Length 
-                || visited.Contains((r,c)) || board[r][c] == 'X') {
-            return;
+    private bool dfs(Dictionary<int,List<int>> courseMap, HashSet<int> visited) {
+        // Need to loop dictionary keys then dfs their values
+        // If we get back to one that is visited we return false
+        for(int i=0; i<courseMap.Keys.Count; i++) {
+            if(visited.Contains(i)) {
+                return false;
+            }
+            dfs();
+
+            visited.Add(courseMap.FirstOrDefault(cs => cs.Value == courseMap[i]).Key);
         }
 
-        visited.Add((r,c));
-        board[r][c] = 'T';
-        dfs(board,r+1,c,visited);
-        dfs(board,r-1,c,visited);
-        dfs(board,r,c+1,visited);
-        dfs(board,r,c-1,visited);
+        return true;
     }
 }
