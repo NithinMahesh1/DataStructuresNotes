@@ -1,4 +1,4 @@
-﻿// You are given a 2-D matrix board containing 'X' and 'O' characters.
+// You are given a 2-D matrix board containing 'X' and 'O' characters.
 
 // If a continous, four-directionally connected group of 'O's is surrounded by 'X's, 
 // it is considered to be surrounded.
