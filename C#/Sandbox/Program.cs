@@ -1,87 +1,81 @@
-﻿// You are given an array prerequisites where prerequisites[i] = [a, b] 
-// indicates that you must take course b first if you want to take course a.
+﻿// You are given an array prerequisites where prerequisites[i] = [a, b] indicates that you must take course b first if you want to take course a.
 
-// The pair [0, 1], indicates that must take course 1 before taking course 0.
-
+// For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
 // There are a total of numCourses courses you are required to take, labeled from 0 to numCourses - 1.
 
-// // Return true if it is possible to finish all courses, otherwise return false.
+// Return a valid ordering of courses you can take to finish all courses. If there are many valid answers, return any of them. 
+// If it's not possible to finish all courses, return an empty array.
 
 // Example 1:
-// Input: numCourses = 2, prerequisites = [[0,1]]
-// Output: true
-// Explanation: First take course 1 (no prerequisites) and then take course 0.
+// Input: numCourses = 3, prerequisites = [[1,0]]
+// Output: [0,1,2]
+// Explanation: We must ensure that course 0 is taken before course 1.
 
 // Example 2:
-// Input: numCourses = 2, prerequisites = [[0,1],[1,0]]
-// Output: false
-// Explanation: In order to take course 1 you must take course 0, and to take course 0 you must take course 1. So it is impossible.
+// Input: numCourses = 3, prerequisites = [[0,1],[1,2],[2,0]]
+// Output: []
+// Explanation: It's impossible to finish all courses.
 
 public class Solution {
     public static void Main(string[] args) {
-        int numCourses = 2;
+        int numCourses = 3;
         int[][] prerequisites = new int[][]{
-            new int[]{0,1}
+            new int[]{0,1},
+            new int[]{1,2},
+            new int[]{2,0},
         };
 
         Solution obj = new Solution();
-        obj.CanFinish(numCourses,prerequisites);
+        obj.FindOrder(numCourses,prerequisites);
     }
-    public bool CanFinish(int numCourses, int[][] prerequisites) {
+    public int[] FindOrder(int numCourses, int[][] prerequisites) {
         Dictionary<int,List<int>> courseDict = new Dictionary<int, List<int>>();
-        // Track fully processed nodes using visited
         HashSet<int> visited = new HashSet<int>();
-        // We also need to declare a path var to keep track of recursive stack visits
         HashSet<int> path = new HashSet<int>();
+        int[] res = new int[]{};
 
-        for(int i=0; i<numCourses; i++) {
-            // Initialize empty lists since some courses will not have prereqs
-            // but we need to keep track of empty ones for proper lookups
-            courseDict[i] = new List<int>();
+        // Populate the dictionary with lists and empty lists
+        for(int n=0; n<numCourses; n++) {
+            courseDict[n] = new List<int>();
         }
 
-        // Now we populate the dictionary with the actual courses
-        // and their associated prereqs
+        // Populate with keys as prereqs and courses as values
         foreach(int[] courses in prerequisites) {
             int course = courses[0];
-            int prereq = courses[1];
-            courseDict[prereq].Add(course);
+            int prereqs = courses[1];
+            courseDict[course].Add(prereqs);
         }
 
         for(int c=0; c<numCourses; c++) {
-            if(!dfs(c,visited,path,courseDict)) {
-                return false;
+            res = dfs(c,courseDict,visited,path,res);
+            if(res.Length == 0) {
+                return res;
             }
         }
 
-        return true;
+        return res;
     }
-    private bool dfs(int course, HashSet<int> visited, HashSet<int> path,Dictionary<int,List<int>> courses) {
-        // Means we have detected a cycle course in the recursive stack
-        if(path.Contains(course)) {
-            return false;
-        }
-
-        // This means we have a valid course that was previously checked
-        if(visited.Contains(course)) {
-            return true;
-        }
-
-        // Mark our current visited course in the recusive stack as visited
-        path.Add(course);
-
-        // Iterate the course prereqs
-        foreach(int prereq in courses[course]) {
-            if(!dfs(prereq,visited,path,courses)){
-                return false;
+    private int[] dfs(int currCourse, Dictionary<int,List<int>> courseDict, HashSet<int> visited, HashSet<int> path, int[] res) {
+        // If the course prereqs are empty then we append to res and continue
+        // also if we see a visited value
+        // also remove node from visited
+        // and clear path
+        if(courseDict[currCourse].Count == 0 || visited.Contains(currCourse)) {
+            res = res.Append(currCourse).ToArray();
+            visited.Remove(currCourse);
+            path = new HashSet<int>{};
+            // Loop the prereqs
+            foreach(int prereq in courseDict[currCourse]) {
+                dfs(prereq,courseDict,visited,path,res);
             }
         }
 
-        // If we get here it means that we need to remove from the path
-        // We also need to mark this course as a fully visited path by adding it to visit set
-        path.Remove(course);
-        visited.Add(course);
+        // If we get to a path we have seen then we return []
+        if(path.Contains(currCourse)) {
+            return new int[]{};
+        }
 
-        return true;
+        // Otherwise we return res
+        return res;
     }
 }
