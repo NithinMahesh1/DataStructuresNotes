@@ -1,4 +1,4 @@
-﻿// There is an undirected graph with n nodes. There is also an edges array, where edges[i] = [a, b] 
+// There is an undirected graph with n nodes. There is also an edges array, where edges[i] = [a, b] 
 // means that there is an edge between node a and node b in the graph.
 
 // The nodes are numbered from 0 to n - 1.
@@ -21,19 +21,19 @@
 public class Solution {
     public int count = 0;
     public static void Main(string[] args) {
-        // int n = 6;
-        // int[][] edges = new int[][]{
-        //     new int[]{0,1},
-        //     new int[]{1,2},
-        //     new int[]{2,3},
-        //     new int[]{4,5}
-        // };
-
-        int n = 3;
+        int n = 6;
         int[][] edges = new int[][]{
             new int[]{0,1},
-            new int[]{0,2}
+            new int[]{1,2},
+            new int[]{2,3},
+            new int[]{4,5}
         };
+
+        // int n = 3;
+        // int[][] edges = new int[][]{
+        //     new int[]{0,1},
+        //     new int[]{0,2}
+        // };
 
         Solution obj = new Solution();
         obj.CountComponents(n,edges);
