@@ -37,61 +37,47 @@ public class Solution {
         obj.ValidTree(n,edges);
     }
     public bool ValidTree(int n, int[][] edges) {
-        // So basically we will need to traverse using DFS
-        // We will traverse also need to set a dictionary first
-        // containing the first node and all the nodes associated to it in a list
-        // We also need to make sure every node is visited == n (meaning it is connected)
+        // Two cases we are looking for:
+        // 1. We visited all the nodes meaning they are all connected
+        // 2. There are no cycles in the graph
+        // Also we need to make sure as we check we will need to keep track of prev nodes
+        // this ensures we can still detect cycle but also as we return back up a node we know
+        // it was already visited
 
-        Dictionary<int,List<int>> treeNodes = new Dictionary<int,List<int>>();
+        Dictionary<int,List<int>> treeNodes = new Dictionary<int, List<int>>();
         HashSet<int> visited = new HashSet<int>();
-        HashSet<int> path = new HashSet<int>();
 
-        for(int e=0; e<n; e++) {
-            treeNodes[e] = new List<int>();
+        for(int i=0; i<n; i++) {
+            treeNodes[i] = new List<int>();
         }
 
-        // Populate the values in dictionary
         foreach(int[] nodes in edges) {
             int node1 = nodes[0];
             int node2 = nodes[1];
-            treeNodes[node1].Add(node2);            
+            // We will add both since they are pairs stated in problem
+            treeNodes[node1].Add(node2);
+            treeNodes[node2].Add(node1);
         }
 
-        // Loop through edges by n and run dfs on each
-        for(int i=0; i<n; i++) {
-            // Use the dfs bool to check
-            if(!dfs(i,n,treeNodes,visited,path)) {
-                return false;
-            }
-        }
+        var res = dfs(0,-1,treeNodes,visited) && visited.Count == n ? true : false;
 
-        return true;
+        return res;
     }
-    private bool dfs(int e, int n, Dictionary<int,List<int>> treeNodes, HashSet<int> visited, HashSet<int> path) {
-        // if path contains value then we return false
-        if(path.Contains(e)) {
+    private bool dfs(int i, int prev, Dictionary<int,List<int>> treeNodes, HashSet<int> visited) {
+        // If curr node is in visited then we return false
+        if(visited.Contains(i)) {
             return false;
         }
 
-        // if visited we return true
-        if(visited.Contains(e) || visited.Count == n) {
-            return true;
-        }
+        // If not we will need to add it to visited
+        visited.Add(i);
 
-        // add to path edge we visited
-        path.Add(e);
-
-        // Loop the other edges associated in dict
-        foreach(int edge in treeNodes[e]) {
-            if(!dfs(edge,n,treeNodes,visited,path)) {
-                return false;
+        foreach(int node in treeNodes[i]) {
+            if(node == prev) {
+                continue;
             }
-        }
 
-        // Remove from path after
-        // Add to visited
-        path.Remove(e);
-        visited.Add(e);
+        }
 
         return true;
     }
