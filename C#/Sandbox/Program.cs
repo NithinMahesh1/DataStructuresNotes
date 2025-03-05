@@ -76,7 +76,9 @@ public class Solution {
             if(node == prev) {
                 continue;
             }
-
+            if(!dfs(node,i,treeNodes,visited)) {
+                return false;
+            }
         }
 
         return true;
