@@ -1,89 +1,97 @@
-﻿// You are given an array prerequisites where prerequisites[i] = [a, b] indicates that you must take course b first if you want to take course a.
-
-// For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
-// There are a total of numCourses courses you are required to take, labeled from 0 to numCourses - 1.
-
-// Return a valid ordering of courses you can take to finish all courses. If there are many valid answers, return any of them. 
-// If it's not possible to finish all courses, return an empty array.
+﻿// Given n nodes labeled from 0 to n - 1 and a list of undirected edges 
+// (each edge is a pair of nodes), 
+// write a function to check whether these edges make up a valid tree.
 
 // Example 1:
-// Input: numCourses = 3, prerequisites = [[1,0]]
-// Output: [0,1,2]
-// Explanation: We must ensure that course 0 is taken before course 1.
+// Input:
+// n = 5
+// edges = [[0, 1], [0, 2], [0, 3], [1, 4]]
+// Output:
+// true
 
 // Example 2:
-// Input: numCourses = 3, prerequisites = [[0,1],[1,2],[2,0]]
-// Output: []
-// Explanation: It's impossible to finish all courses.
+// Input:
+// n = 5
+// edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]]
+// Output:
+// false
+
+// Note:
+// You can assume that no duplicate edges will appear in edges. 
+// Since all edges are undirected, [0, 1] is the same as [1, 0] 
+// and thus will not appear together in edges.
+
+using System.Collections;
 
 public class Solution {
     public static void Main(string[] args) {
-        int numCourses = 3;
-        int[][] prerequisites = new int[][]{
+        int n = 5;
+        int[][] edges = new int[][]{
             new int[]{0,1},
+            new int[]{0,2},
+            new int[]{0,3},
+            new int[]{1,4}
         };
 
         Solution obj = new Solution();
-        obj.FindOrder(numCourses,prerequisites);
+        obj.ValidTree(n,edges);
     }
-    public int[] FindOrder(int numCourses, int[][] prerequisites) {
-        Dictionary<int,List<int>> courseDict = new Dictionary<int, List<int>>();
+    public bool ValidTree(int n, int[][] edges) {
+        // So basically we will need to traverse using DFS
+        // We will traverse also need to set a dictionary first
+        // containing the first node and all the nodes associated to it in a list
+        // We also need to make sure every node is visited == n (meaning it is connected)
+
+        Dictionary<int,List<int>> treeNodes = new Dictionary<int,List<int>>();
         HashSet<int> visited = new HashSet<int>();
         HashSet<int> path = new HashSet<int>();
-        List<int> res = new List<int>{};
 
-        // Populate the dictionary with lists and empty lists
-        for(int n=0; n<numCourses; n++) {
-            courseDict[n] = new List<int>();
+        for(int e=0; e<n; e++) {
+            treeNodes[e] = new List<int>();
         }
 
-        // Actually populate dictionary with courses and prereqs
-        foreach(int[] courses in prerequisites) {
-            int course = courses[0];
-            int prereqs = courses[1];
-            courseDict[course].Add(prereqs);
+        // Populate the values in dictionary
+        foreach(int[] nodes in edges) {
+            int node1 = nodes[0];
+            int node2 = nodes[1];
+            treeNodes[node1].Add(node2);            
         }
 
-        for(int c=0; c<numCourses; c++) {
-            if(!dfs(c,courseDict,visited,path,res)) {
-                return new int[]{};
+        // Loop through edges by n and run dfs on each
+        for(int i=0; i<n; i++) {
+            // Use the dfs bool to check
+            if(!dfs(i,n,treeNodes,visited,path)) {
+                return false;
             }
         }
 
-        return res.ToArray();
+        return true;
     }
-    private bool dfs(int currCourse, Dictionary<int,List<int>> courseDict, HashSet<int> visited, HashSet<int> path, List<int> res) {
-        // If path contains a course then return false
-        if(path.Contains(currCourse)) {
+    private bool dfs(int e, int n, Dictionary<int,List<int>> treeNodes, HashSet<int> visited, HashSet<int> path) {
+        // if path contains value then we return false
+        if(path.Contains(e)) {
             return false;
         }
 
-        // If visited contains a course it means we need to loop those courses
-        // so we return true
-        if(visited.Contains(currCourse)) {
+        // if visited we return true
+        if(visited.Contains(e) || visited.Count == n) {
             return true;
         }
 
-        // We need to add it to the path since we just handled it
-        path.Add(currCourse);
+        // add to path edge we visited
+        path.Add(e);
 
-        // Check if there even are any courses to loop:
-        if(courseDict.ContainsKey(currCourse)){
-            // Handle looping it's prereqs
-            // If we run into one that if false we return false
-            foreach(int prereq in courseDict[currCourse]) {
-                if(!dfs(prereq,courseDict,visited,path,res)) {
-                    return false;
-                }
+        // Loop the other edges associated in dict
+        foreach(int edge in treeNodes[e]) {
+            if(!dfs(edge,n,treeNodes,visited,path)) {
+                return false;
             }
         }
 
-        // Need to remove from the path after we process
-        path.Remove(currCourse);
+        // Remove from path after
         // Add to visited
-        visited.Add(currCourse);
-        // Also add to our output
-        res.Add(currCourse);
+        path.Remove(e);
+        visited.Add(e);
 
         return true;
     }
