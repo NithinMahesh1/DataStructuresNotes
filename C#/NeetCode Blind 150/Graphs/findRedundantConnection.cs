@@ -1,4 +1,4 @@
-﻿// You are given a connected undirected graph with n nodes labeled from 1 to n. Initially, 
+// You are given a connected undirected graph with n nodes labeled from 1 to n. Initially, 
 // it contained no cycles and consisted of n-1 edges.
 
 // We have now added one additional edge to the graph. 
