@@ -1,95 +1,71 @@
-﻿// You are given a connected undirected graph with n nodes labeled from 1 to n. Initially, 
-// it contained no cycles and consisted of n-1 edges.
+﻿// You are given two words, beginWord and endWord, and also a list of words wordList. 
+// All of the given words are of the same length, consisting of lowercase English letters, 
+// and are all distinct.
 
-// We have now added one additional edge to the graph. 
-// The edge has two different vertices chosen from 1 to n, 
-// and was not an edge that previously existed in the graph.
+// Your goal is to transform beginWord into endWord by following the rules:
+// * You may transform beginWord to any word within wordList, 
+//   provided that at exactly one position the words have a different character, 
+//   and the rest of the positions have the same characters.
+// * You may repeat the previous step with the new word that you obtain, 
+//   and you may do this as many times as needed.
 
-// The graph is represented as an array edges of length n where edges[i] = [ai, bi] 
-// represents an edge between nodes ai and bi in the graph.
-
-// Return an edge that can be removed so that the graph is still a connected non-cyclical graph. 
-// If there are multiple answers, return the edge that appears last in the input edges.
+// Return the minimum number of words within the transformation sequence needed to obtain the endWord, or 0 if no such sequence exists.
 
 // Example 1:
-// Input: edges = [[1,2],[1,3],[3,4],[2,4]]
-// Output: [2,4]
+// Input: beginWord = "cat", endWord = "sag", wordList = ["bat","bag","sag","dag","dot"]
+// Output: 4
+// Explanation: The transformation sequence is "cat" -> "bat" -> "bag" -> "sag".
 
 // Example 2:
-// Input: edges = [[1,2],[1,3],[1,4],[3,4],[4,5]]
-// Output: [3,4]
-
-using System.ComponentModel;
-using System.Runtime.InteropServices;
+// Input: beginWord = "cat", endWord = "sag", wordList = ["bat","bag","sat","dag","dot"]
+// Output: 0
+// Explanation: There is no possible transformation sequence from "cat" to "sag" since the word "sag" is not 
+// in the wordList.
 
 public class Solution {
     public int count = 0;
     public static void Main(string[] args) {
-        int[][] edges = new int[][]{
-            new int[]{1,2},
-            new int[]{1,3},
-            new int[]{3,4},
-            new int[]{2,4}
-        };
+        string beginWord = "cat";
+        string endWord = "sag";
+        string[] wordList = new string[]{"bat","bag","sag","dag","dot"};
 
         Solution obj = new Solution();
-        obj.FindRedundantConnection(edges);
+        obj.LadderLength(beginWord,endWord,wordList);
     }
 
-    public int[] FindRedundantConnection(int[][] edges) {
-        // Basically we need to detect a cycle in the graph
-        // Once we detect a cycle (we can keep appending this to a path)
-        // we will then remove the last edge in that cycle
-        // Thats why in example 2 we would elimate 3,4 since that is the end of the cycle
-        Dictionary<int,List<int>> dict = new Dictionary<int, List<int>>();
+    public int LadderLength(string beginWord, string endWord, IList<string> wordList) {
+        // Need to map each char in the wordlist to a dict of edges that are undirected
+        // We then need visited and res hashsets to keep track of the nodes
+        // Visited will ensure we don't backtrack and res will allow us to check if we have all the chars we need
+        // Also we will need to loop in this method (not the dfs method) and increment a count each time we get a character
+        Dictionary<char,List<char>> edgeDict = new Dictionary<char,List<char>>();
+        HashSet<char> visited = new HashSet<char>();
+        HashSet<char> res = new HashSet<char>();
+        int wordLength = wordList[0].Length;
 
-        // Loop and initialize with empty list
-        // We do 2 times the length since both edges (undirected)
-        // will be added
-        for(int i=0; i<edges.Length*2; i++) {
-            dict[i] = new List<int>();
-        }
-
-        // Iterate through each edge and add it to graph
-        foreach(int[] pair in edges) {
-            int node1 = pair[0];
-            int node2 = pair[1];
-            dict[node1].Add(node2);
-            dict[node2].Add(node1);
-
-            // For each new edge check if adding it creates a cycle
-            bool[] visited = new bool[edges.Length+1];
-            if(dfs(node1,-1,dict,visited)) {
-                // If we detect a cycle we return that edge
-                // since it would be the last edge in the cycle
-                return new int[]{node1,node2};
+        // Initialize from each word the chars based on their length
+        // create an empty list to initialize them which we will populate after
+        for(int s=0; s<wordList.Count; s++) {
+            string word = wordList[s];
+            for(int i=0;i<wordLength;i++) {
+                char c = word[i];
+                edgeDict[c] = new List<char>();
             }
         }
 
-        return new int[]{};
-    }    
-    private bool dfs(int curr, int prev, Dictionary<int,List<int>> dict, bool[] visited) {
-        // Return true since we have detected cycle and add it to our current visited list
-        // that checks if adding our new value 
-        if(visited[curr]) {
-            return true;
-        }
-
-        // Otherwise this is marked as visited
-        visited[curr] = true;
-
-
-        foreach(int edge in dict[curr]) {
-            // We then check if edge is prev then skip 
-            // since we have already checked that node when backtracking in the stack
-            if(edge == prev) {
-                continue;
-            }
-            if(dfs(edge,curr,dict,visited)) {
-                return true;
+        foreach(string word in wordList) {
+            // Loop through each word and all the chars
+            for(int i=0; i<wordLength; i++) {
+                char c1 = word[i];
+                if(i+1 <= wordLength) {
+                    char c2 = word[i+1];
+                    edgeDict[c1].Add(c2);
+                    edgeDict[c2].Add(c1);
+                }
             }
         }
+        
 
-        return false;
+        return -1;
     }
 }
