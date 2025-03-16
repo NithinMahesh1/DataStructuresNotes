@@ -1,4 +1,4 @@
-﻿// You are given two words, beginWord and endWord, and also a list of words wordList. 
+// You are given two words, beginWord and endWord, and also a list of words wordList. 
 // All of the given words are of the same length, consisting of lowercase English letters, 
 // and are all distinct.
 
