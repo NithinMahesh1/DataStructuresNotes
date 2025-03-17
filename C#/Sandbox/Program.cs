@@ -1,101 +1,99 @@
-﻿// You are given two words, beginWord and endWord, and also a list of words wordList. 
-// All of the given words are of the same length, consisting of lowercase English letters, 
-// and are all distinct.
+﻿// You are given the head of a linked list of length n. Unlike a singly linked list, 
+// each node contains an additional pointer random, which may point to any node in the list, or null.
 
-// Your goal is to transform beginWord into endWord by following the rules:
-// * You may transform beginWord to any word within wordList, 
-//   provided that at exactly one position the words have a different character, 
-//   and the rest of the positions have the same characters.
-// * You may repeat the previous step with the new word that you obtain, 
-//   and you may do this as many times as needed.
+// Create a deep copy of the list.
 
-// Return the minimum number of words within the transformation sequence needed to obtain the endWord, or 0 if no such sequence exists.
+// The deep copy should consist of exactly n new nodes, each including:
+//    * The original value val of the copied node
+//    * A next pointer to the new node corresponding to the next pointer of the original node
+//    * A random pointer to the new node corresponding to the random pointer of the original node
+// Note: None of the pointers in the new list should point to nodes in the original list.
+
+// Return the head of the copied linked list.
+
+// In the examples, the linked list is represented as a list of n nodes. Each node is represented as a pair of 
+// [val, random_index] where random_index is the index of the node (0-indexed) that the random pointer points to, 
+// or null if it does not point to any node.
 
 // Example 1:
-// Input: beginWord = "cat", endWord = "sag", wordList = ["bat","bag","sag","dag","dot"]
-// Output: 4
-// Explanation: The transformation sequence is "cat" -> "bat" -> "bag" -> "sag".
+// Input: head = [[3,null],[7,3],[4,0],[5,1]]
+// Output: [[3,null],[7,3],[4,0],[5,1]]
 
 // Example 2:
-// Input: beginWord = "cat", endWord = "sag", wordList = ["bat","bag","sat","dag","dot"]
-// Output: 0
-// Explanation: There is no possible transformation sequence from "cat" to "sag" since the word "sag" is not 
-// in the wordList.
+// Input: head = [[1,null],[2,2],[3,2]]
+// Output: [[1,null],[2,2],[3,2]]
 
-using System.ComponentModel;
+
+// Definition for a Node.
+using System.Runtime.InteropServices;
+
+public class Node {
+    public int val;
+    public Node next;
+    public Node random;
+    
+    public Node(int _val) {
+        val = _val;
+        next = null;
+        random = null;
+    }
+}
 
 public class Solution {
-    public int count = 0;
     public static void Main(string[] args) {
-        string beginWord = "cat";
-        string endWord = "sag";
-        string[] wordList = new string[]{"bat","bag","sag","dag","dot"};
-
-        Solution obj = new Solution();
-        obj.LadderLength(beginWord,endWord,wordList);
+        int?[][] input = new int?[][]{
+            new int?[] {3,null},
+            new int?[] {7,3},
+            new int?[] {4,0},
+            new int?[] {5,1}
+        };
+        Solution solution = new Solution();
+        Node head = solution.buildList(input);
     }
+    public Node buildList(int?[][] input) {
+        // Loop and create individual nodes for each list
+        // Add them to a dictionary Key being indices and Value being nodes
+        // Another loop will then allow me to put those values into the correct ran indices
+        Dictionary<int,Node> linkedDict = new Dictionary<int, Node>();
 
-    public int LadderLength(string beginWord, string endWord, IList<string> wordList) {
-        // First we need to create adjacency lists with string of each word but with * replacing one character in the string
-        // building this with key being the * string and values (list of them) being all the values that can match that
-        // e.g. cat would have the following keys *at, c*t, and ca* and if we take *at for example it would have the vals: [bat]
-        // Once we create this graph we will need to traverse it using bfs to find the shortest path
-        // Since we want to find the shortest path we want to use BFS
-        Dictionary<string,List<string>> graph = new Dictionary<string, List<string>>();
-
-        if (!wordList.Contains(endWord)) {
-            return 0;
+        foreach(int?[] pair in input) {
+            Node curr = new Node(pair[0].Value);
+            int index = pair[1] ?? -1;
+            linkedDict.Add(index,curr);
         }
 
-        // Add the begin word since wordlist doesn't contain it
-        // and we account for that being the first count
-        HashSet<string> wordSet = new HashSet<string>(wordList);
-        wordList.Add(beginWord);
+        Node node = new Node(-1);
+        for(int i=0; i<input.Length; i++) {
+            // Create a new node
+            node = new Node(linkedDict.Values.First().val);
 
-        foreach(string word in wordSet) {
-            for(int c=0;c<word.Length;c++) {
-                // first substring takes the values from 0 to c-1
-                string pattern = word.Substring(0,c) + "*" + word.Substring(c+1);
-                if(!graph.ContainsKey(pattern)) {
-                    graph[pattern] = new List<string>();
-                }
-                graph[pattern].Add(word);
+            // Remove the values as we loop dict
+            linkedDict.Remove(linkedDict.Keys.First());
+
+            // Populate the random value
+            // The key is the index associated
+            if(linkedDict.Keys.First() == -1) {
+                node.random = null;
             }
-        }
-
-        HashSet<string> visited = new HashSet<string>();
-        Queue<string> queue = new Queue<string>();
-        queue.Enqueue(beginWord);
-        visited.Add(beginWord);
-        int res = 1;
-        while(queue.Count != 0) {
-            // since size is dynamically changed
-            int size = queue.Count;
-
-            for(int i=0;i<size;i++) {
-                // Here we loop the words in queue
-                // If we get the end word we return res
-                string word = queue.Dequeue();
-                if(word == endWord) {
-                    return res; 
-                }
-                for(int j=0; j<word.Length; j++) {
-                    // Now we loop the neighbors
-                    string pattern = word.Substring(0,j) + "*" + word.Substring(j+1);
-                    if(graph.ContainsKey(pattern)) {
-                        foreach(string neighbor in graph[pattern]) {
-                            if(!visited.Contains(neighbor)) {
-                                visited.Add(neighbor);
-                                queue.Enqueue(neighbor);
-                            }
-                        }
-                    }
-                }
+            else {
+                node.random = linkedDict[linkedDict.Keys.First()];
             }
-            res++;
+
+            // Point it to the next node
+            node =  node.next;
         }
 
+        return node;
+    }
+    public Node copyRandomList(Node head) {
+        Node curr = head;
+        
+        while(curr.val != null) {
+            Console.WriteLine(curr.val);
+            Console.WriteLine(curr.random);
+            curr = curr.next;
+        }
 
-        return 0;
+        return head;
     }
 }

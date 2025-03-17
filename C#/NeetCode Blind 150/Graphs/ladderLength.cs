@@ -25,7 +25,8 @@
 using System.ComponentModel;
 
 public class Solution {
-    public int count = 0;
+    // Useful youtube video of explanation:
+    // https://www.youtube.com/watch?v=JOOu3W37QJg&ab_channel=CrackingFAANG    
     public static void Main(string[] args) {
         string beginWord = "cat";
         string endWord = "sag";
