@@ -1,4 +1,4 @@
-﻿// You are given the head of a linked list of length n. Unlike a singly linked list, 
+// You are given the head of a linked list of length n. Unlike a singly linked list, 
 // each node contains an additional pointer random, which may point to any node in the list, or null.
 
 // Create a deep copy of the list.
@@ -79,6 +79,10 @@ public class Solution {
         return linkedDict[0];
     }
     public Node copyRandomList(Node head) {
+        // First we should return head if it is null
+        if(head == null) {
+            return null;
+        } 
         // Use a dictionary to have old node as key and value as the copy node
         // No random or next pointers yet for the new node we will add that after
         Dictionary<Node,Node> oldToNew = new Dictionary<Node,Node>();
