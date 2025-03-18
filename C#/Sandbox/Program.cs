@@ -25,6 +25,7 @@
 
 
 // Definition for a Node.
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 public class Node {
@@ -49,51 +50,75 @@ public class Solution {
         };
         Solution solution = new Solution();
         Node head = solution.buildList(input);
+        Node res = solution.copyRandomList(head);
     }
     public Node buildList(int?[][] input) {
         // Loop and create individual nodes for each list
         // Add them to a dictionary Key being indices and Value being nodes
         // Another loop will then allow me to put those values into the correct ran indices
         Dictionary<int,Node> linkedDict = new Dictionary<int, Node>();
-
-        foreach(int?[] pair in input) {
-            Node curr = new Node(pair[0].Value);
-            int index = pair[1] ?? -1;
-            linkedDict.Add(index,curr);
-        }
-
-        Node node = new Node(-1);
         for(int i=0; i<input.Length; i++) {
-            // Create a new node
-            node = new Node(linkedDict.Values.First().val);
-
-            // Remove the values as we loop dict
-            linkedDict.Remove(linkedDict.Keys.First());
-
-            // Populate the random value
-            // The key is the index associated
-            if(linkedDict.Keys.First() == -1) {
-                node.random = null;
-            }
-            else {
-                node.random = linkedDict[linkedDict.Keys.First()];
-            }
-
-            // Point it to the next node
-            node =  node.next;
+            linkedDict[i] = new Node(input[i][0].Value);
         }
 
-        return node;
+        // Populate next and random values to each node in dict
+        for(int j=0; j<input.Length; j++) {   
+            // Set to the next index node         
+            if(j < input.Length - 1) {
+                linkedDict[j].next = linkedDict[j+1];
+            }
+            // Then we set our current node to the random pointer
+            if(input[j][1] != null) {
+                // We get the node by using the index in inputs to link to the node val
+                // from our dictionary
+                linkedDict[j].random = linkedDict[input[j][1].Value];
+            }            
+        }
+
+        // Since the first index is the first node we return this
+        return linkedDict[0];
     }
     public Node copyRandomList(Node head) {
-        Node curr = head;
-        
-        while(curr.val != null) {
-            Console.WriteLine(curr.val);
-            Console.WriteLine(curr.random);
-            curr = curr.next;
+        // Need a dictionary to loop through and add key as index
+        // for each value in the key it will be a tuple (node,random.val)
+        Dictionary<int,(Node,int)> indexNodeDict = new Dictionary<int,(Node,int)>();
+        Node temp = head;
+        int tempCount = 0;
+        while(temp != null) {
+            Node random = temp.random;
+            int ranvalue = -1;
+            if(random != null) {
+                ranvalue = random.val;
+            }
+            indexNodeDict[tempCount] = (temp,ranvalue);
+            tempCount++;
+            temp = temp.next;
         }
 
-        return head;
+        // Loop dictionary and build linked list
+        // We need a head node for start, then prev and curr
+        // prev will keep track of the last node to connect to our curr
+        // curr will handle setting the random node
+        Node res = indexNodeDict[0].Item1;
+        Node prev = res;
+        Node curr = res;
+        int count = 0;
+        while(curr != null) {
+            if() {
+
+            }
+            Node random = new Node(indexNodeDict[count].Item2);
+            if(random.val == -1) {
+                random = null;
+            }
+            curr.random = random;
+            curr = curr.next;
+            prev.next = curr;
+            prev = prev.next;
+            count++;
+        }
+
+
+        return res;
     }
 }
