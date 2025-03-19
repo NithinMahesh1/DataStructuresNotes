@@ -1,4 +1,4 @@
-﻿// You are given two non-empty linked lists, l1 and l2, where each represents a non-negative integer.
+// You are given two non-empty linked lists, l1 and l2, where each represents a non-negative integer.
 
 // The digits are stored in reverse order, e.g. the number 123 is represented as 3 -> 2 -> 1 -> in the linked list.
 
@@ -87,7 +87,10 @@ public class Solution {
 
             // Create the new val
             int val = val1 + val2 + carry;
+            // The division gives us the carry over since no remainder
             carry = val / 10;
+            // We can use modulus to separate the remainder
+            // And then make that the val
             val = val % 10;
             curr.next = new ListNode(val);
 
