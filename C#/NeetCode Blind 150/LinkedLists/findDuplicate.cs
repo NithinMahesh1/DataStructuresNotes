@@ -1,4 +1,4 @@
-﻿// You are given an array of integers nums containing n + 1 integers. 
+// You are given an array of integers nums containing n + 1 integers. 
 // Each integer in nums is in the range [1, n] inclusive.
 
 // Every integer appears exactly once, except for one integer which appears two or more times. 
