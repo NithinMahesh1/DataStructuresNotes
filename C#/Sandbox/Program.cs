@@ -1,40 +1,39 @@
-﻿// You are given an array of integers nums containing n + 1 integers. 
-// Each integer in nums is in the range [1, n] inclusive.
+﻿// You are given the head of a singly linked list head and a positive integer k.
 
-// Every integer appears exactly once, except for one integer which appears two or more times. 
-// Return the integer that appears more than once.
+// You must reverse the first k nodes in the linked list, 
+// and then reverse the next k nodes, and so on. If there are fewer than k nodes left, 
+// leave the nodes as they are.
 
-// Example 1:
-// Input: nums = [1,2,3,2,2]
-// Output: 2
+// Return the modified list after reversing the nodes in each group of k.
+
+// You are only allowed to modify the nodes' next pointers, not the values of the nodes.
+
+//Definition for singly-linked list.
+
+//Example 1:
+// Input: head = [1,2,3,4,5,6], k = 3
+// Output: [3,2,1,6,5,4]
 
 // Example 2:
-// Input: nums = [1,2,3,4,4]
-// Output: 4
+// Input: head = [1,2,3,4,5], k = 3
+// Output: [3,2,1,4,5]
 
-// Follow-up: Can you solve the problem without modifying the array nums and using 
-// O(1) extra space?
-
-public class Solution {
-    public static void Main(string[] args) {
-        int[] nums = new int[]{1,2,3,2,2};
-        Solution solution = new Solution();
-        solution.FindDuplicate(nums);
-    }
-    public int FindDuplicate(int[] nums) {
-        // Use a hashset to store each val
-        // While we loop if we see a val in the hashset
-        // return that val
-        HashSet<int> set = new HashSet<int>();
-
-        foreach(int val in nums){
-            if(set.Contains(val)) {
-                Console.WriteLine(val);
-                return val;
-            }
-            set.Add(val);
-        }
-
-        return 1;
+public class ListNode {
+    public int val;
+    public ListNode next;
+    public ListNode(int val=0, ListNode next=null) {
+        this.val = val;
+        this.next = next;
     }
 }
+ 
+public class Solution {
+    public ListNode ReverseKGroup(ListNode head, int k) {
+        
+    }
+    public static void Main(string[] args) {
+        
+    }
+}
+
+
