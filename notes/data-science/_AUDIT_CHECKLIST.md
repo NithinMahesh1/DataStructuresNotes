@@ -1,0 +1,70 @@
+# Audit Checklist — Data Science Notes
+
+Source course material is from **INFO 397F (Intro to Data Science, Gordon Anderson, ~2015–2019 era)**. The content is conceptually solid, but specific stats, package versions, and a few methodological framings may have shifted. Use this list to verify before relying on details for current work.
+
+---
+
+## Dated facts and statistics to re-verify
+
+- [x] **Wikipedia DB size** — *01-intro-to-data-science.md*: source claims "January 2010 Wikipedia DB = 5.87 TB SQL dataset." **VERIFIED 2026-05-03:** Original figure is suspect even for 2010 (likely conflated full-history-with-media vs. articles-only). Today (2024) the English Wikipedia articles dump is ~24 GB compressed; full history with all Wikimedia media exceeds 400 TB. md file updated. Sources: en.wikipedia.org/wiki/Wikipedia:Size_of_Wikipedia, meta.wikimedia.org/wiki/Data_dumps/Dumps_sizes_and_growth.
+- [x] **IBM Watson RAM** — *01-intro-to-data-science.md*: source claims "Watson (Feb 2011 Jeopardy!) had 16 TB of RAM." **VERIFIED 2026-05-03:** Accurate. Watson's 2011 build used 90 IBM Power 750 servers, 2,880 POWER7 cores, 16 TB RAM, 21.6 TB storage. Knowledge loaded entirely into RAM because disk was too slow. No update needed; modern context note added to md.
+- [x] **Facebook image storage** — *01-intro-to-data-science.md*: source claims "As of January 2013, Facebook users uploaded 960 billion images, ~357 PB storage." **VERIFIED 2026-05-03:** Original figure does not match contemporaneous Facebook-disclosed numbers. Closest authoritative number: 220 billion photos / 100+ PB media as of Dec 2012 (Frank Frankovsky, Intel briefing — datacenterknowledge.com). Mid-2020s: Meta operates multi-exabyte cold-storage data centers and ingests petabytes/day. md file updated.
+- [x] **"Data scientist" definitions** — *01-intro-to-data-science.md*: quotes Drew Conway's 2013 Venn diagram, josh_wills 2012 quote, Dhar/Leek 2013, NIST. **VERIFIED 2026-05-03:** 2013 definitions still describe the Data Scientist role accurately, but the function has fragmented since ~2019 into Data Scientist / ML Engineer (production systems) / Analytics Engineer (warehouse transform, popularized w/ dbt ~2020) / AI Engineer (LLM-app builder, emerging ~2023). md file updated with a "How the role has fragmented" note.
+
+## R packages — verify current API surface
+
+These were the libraries the course used. Most still exist but APIs may have shifted; some have been superseded.
+
+- [x] **`class::knn()`** — **VERIFIED 2026-05-03:** Maintenance, last release v7.3-23 (Jan 2025), Brian Ripley. Ships with R as a "Recommended" package. API unchanged. Modern alternatives for tuning/pipelines: `kknn` v1.4.1 (May 2025), `tidymodels`/`parsnip` (`nearest_neighbor()` engine = `"kknn"`), or `caret::train(method="knn")`. `11-knn.md` updated with a brief note.
+- [x] **`e1071::naiveBayes()`** — **VERIFIED 2026-05-03:** Active, last release v1.7-17 (Dec 2025). API stable. For richer distribution support / sparse data, the `naivebayes` package (Majka, v1.0.0, Mar 2024) is the modern alternative. `12-naive-bayes.md` updated.
+- [x] **`tree` package** — **VERIFIED 2026-05-03:** Maintenance, last release v1.0-45 (Aug 2025), Brian Ripley. Updates since 2019 are CRAN-compliance/internals only. `rpart` v4.1.27 (Mar 2026) is the de facto standard for new work — handles missing values via surrogate splits, cost-complexity pruning out of the box, pairs with `rpart.plot`. `13-decision-trees.md` updated.
+- [x] **`randomForest`** — **VERIFIED 2026-05-03:** Maintenance, last release v4.7-1.2 (Sept 2024), Andy Liaw. API unchanged; existing course code still runs verbatim. `ranger` v0.18.0 (Jan 2026) is the modern choice — multithreaded, ~10–100× faster on wide data, the engine `tidymodels`/`mlr3` use. `14-ensemble-methods.md` already mentions `ranger`; note tightened.
+- [x] **`gbm`** — **VERIFIED 2026-05-03:** Confirmed maintenance-only mode. Last release v2.2.3 (Jan 2026). NEWS file explicitly says "only being maintained for backwards compatibility." Modern defaults: `xgboost` v3.2.1.1 (Mar 2026) and `lightgbm` v4.6.0 (Feb 2025). **Skip `gbm3`** — never reached CRAN, low activity, breaking changes vs. `gbm`. `14-ensemble-methods.md` updated.
+- [x] **`mclust`** — **VERIFIED 2026-05-03:** Active. Latest v6.1.2 (Oct 2025), Luca Scrucca. Still the R standard for Gaussian-mixture / model-based clustering. v6.0 (2023) was a major release but everyday API is preserved. No update needed in notes.
+- [x] **`NbClust`** — **VERIFIED 2026-05-03:** Maintenance, last release v3.0.1 (May 2022). API unchanged; `NbClust(data, min.nc, max.nc, method)` runs as-is. Quiet release cadence is a yellow flag but algorithm is mathematically stable. Optional alternative for cleaner ggplot2 viz: `factoextra::fviz_nbclust()`. No md change needed.
+- [x] **`cluster` (`pam()` / `daisy()`)** — **VERIFIED 2026-05-03:** Active, v2.1.8.2 (Feb 2026), Martin Maechler. Recommended/base R package. Defaults unchanged; legacy code reproduces. Optional speedup: `pamonce = 5` (FastPAM, Schubert & Rousseeuw 2019) is ~10× faster on large datasets. `15-clustering.md` updated with FastPAM tip.
+- [x] **`fpc` (`pamk()` / `plotcluster()`)** — **VERIFIED 2026-05-03:** Active, v2.2-14 (Jan 2026), Christian Hennig. APIs stable. No md change needed.
+- [x] **`flexclust` (`randIndex()`)** — **VERIFIED 2026-05-03:** Active, v1.5.0 (Feb 2025). Maintainer transitioned from Friedrich Leisch (deceased 2024) to Bettina Grün — administrative only. For ARI alone, `mclust::adjustedRandIndex(x, y)` avoids loading flexclust's full dependency stack. `15-clustering.md` updated with that lighter alternative.
+- [x] **`RSQLite`** — **VERIFIED 2026-05-03:** Active, v2.4.6 (Feb 2026), Kirill Müller (cynkra). **Breaking change in v2.3.7 (2024):** duplicate column names in `dbGetQuery()` results no longer auto-suffixed (`col`, `col.1` → both become `col`). Workaround: alias columns explicitly in SQL. Legacy `dbGetPreparedQuery`/`dbSendPreparedQuery` deprecated; use `dbSendQuery` + `dbBind` + `dbFetch`. `07-relational-databases.md` updated.
+- [x] **R 3.6.0 RNG change** — **VERIFIED 2026-05-03:** Still in force in R 4.x and current R 4.6.0 (2026). `sample.kind = "Rejection"` is the default; "Rounding" retained only for legacy reproduction. Correct idiom for reproducing pre-3.6.0 results: `RNGversion("3.5.0"); set.seed(...); ...; RNGversion(getRversion())` or `withr::with_rng_version("3.5.0", { ... })`. No further breaking RNG changes through R 4.6. `_AUDIT_CHECKLIST.md` already documents this.
+
+## Methodology / terminology drift
+
+- [x] **Naive Bayes Laplace smoothing** — *12-naive-bayes.md*: **VERIFIED 2026-05-03:** In `e1071::naiveBayes`, `laplace` is a positive double pseudocount; package default is `laplace=0` (no smoothing); textbook convention is `laplace=1` (add-one). There is **no statistical convention for `laplace=3`** — it's a course-specific choice. Higher values smooth more aggressively (sometimes useful for sparse text features) but flatten class-conditional probabilities. md updated to clarify.
+- [x] **K-means "elbow method"** — *15-clustering.md*: **VERIFIED 2026-05-03:** "Weak heuristic" framing is now the explicit consensus — Schubert (2023, SIGKDD Explorations: *"Stop using the elbow criterion for k-means"*) calls for educators to stop teaching it as primary. Stronger modern alternatives: **silhouette score**, **gap statistic** (Tibshirani), **BIC-based methods** (X-means, G-means). md updated; elbow now framed as a quick visual sanity check only.
+- [x] **"Big Data" definition** — *01-intro-to-data-science.md*: **VERIFIED 2026-05-03:** "Big data" peaked ~2014–2017 and has largely been displaced in industry framing by **lakehouse architecture** (Databricks, 2020), **cloud-native data platforms**, **MLOps/DataOps**, and post-2023 **GenAI / agentic data** language. The "3 Vs" framing rarely appears as a headline now. md updated with a margin note.
+- [x] **R-squared interpretation caveats** — *09-linear-regression.md*: **VERIFIED 2026-05-03:** Plain R² is still taught/reported but modern regression pedagogy treats it as descriptive only — not for model selection. Adjusted R², AIC/BIC, and out-of-sample RMSE are preferred for comparing models. md updated with a stronger caveat.
+- [x] **Bias-variance tradeoff diagrams** — *04-modeling-concepts.md*: **VERIFIED 2026-05-03:** Belkin et al. (2019, PNAS) "double descent" is widely accepted: past the interpolation threshold, test error can decrease again. Applies primarily to high-capacity models (deep nets, very wide ensembles, large kernel machines). Classical U-curve still applies in the underparameterized regime covered by this course. md updated with a footnote.
+- [x] **"Data Mining" framing** — **VERIFIED 2026-05-03:** "Data mining" is KDD-era (Piatetsky-Shapiro, 1989) and has been largely absorbed into "machine learning" (algorithmic side) and "data science" (workflow side). Still appears in academic database/KDD venues and some enterprise BI contexts. `01-intro-to-data-science.md` is fine as-is since it quotes the original 2013 definitions; treating these terms as roughly synonymous in this course's context.
+- [x] **ARIMA still relevant?** — *18-time-series.md*: **VERIFIED 2026-05-03:** Still actively used in 2025-2026 for short-horizon univariate forecasting, low-data regimes, interpretable/regulated environments (finance, supply chain, econometrics), and as a baseline. Displaced as the *only* tool, not as a tool. Hybrid ARIMA + ML residual models are increasingly common. md updated with that nuance.
+
+## Sources / dataset references to spot-check
+
+- [x] **Ling-Spam dataset URL** — *12-naive-bayes.md*: **VERIFIED 2026-05-03:** csmining.org now redirects to Federation University Australia infra with mismatched TLS cert — effectively dead. Replacement primary source: **AUEB tarball** `http://www2.aueb.gr/users/ion/data/lingspam_public.tar.gz` (Ion Androutsopoulos, original author). Fallback: **Kaggle mirror** `https://www.kaggle.com/datasets/mandygu/lingspam-dataset`. md updated.
+- [x] **statmethods.net** — *05-r-basic-stats-and-plots.md*: **VERIFIED 2026-05-03:** Site 301-redirects to DataCamp's documentation. `/graphs/bar.html` → `https://www.datacamp.com/doc/r/bar`. Quick-R (Robert Kabacoff) was acquired/migrated to DataCamp. md link updated.
+- [x] **ISLR (Introduction to Statistical Learning)** — **VERIFIED 2026-05-03:** Current editions: **ISLR2** (R, 2nd ed., 2021) and **ISLP** (Python, 2023). All three datasets the course uses (OJ, Carseats, Hitters) remain in the `ISLR2` R package and the `ISLP` Python package. Free PDFs at https://www.statlearning.com/. No md file links to ISLR directly so no edit needed; noting here for future reference.
+
+## Items to verify if the notes get used as a study/teaching reference
+
+- [x] **Confirm formulas** — **VERIFIED 2026-05-03:** Chi-square `χ² = Σ(O−E)²/E`, Bayes rule `P(A|B) = P(B|A)·P(A)/P(B)`, Euclidean / Manhattan / Mahalanobis distance, OLS (minimize sum of squared residuals), ARIMA(p,d,q) parameter ordering — all standard and unchanged in modern textbook usage.
+- [x] **Confirm core algorithms** — **VERIFIED 2026-05-03:** KNN, Naive Bayes (conditional independence), k-means (assign-then-update), decision trees (recursive splits), random forests (bagging + random feature subsets), gradient boosting (sequential trees fitting residuals), linear regression (`Y = β₀ + Σβᵢ·Xᵢ + ε`, OLS), logistic regression (logit link → sigmoid) — all still taught the same way. Modern variants (XGBoost / LightGBM for boosting) are extensions, not replacements.
+- [x] **Verify R 4.x compatibility** — **VERIFIED 2026-05-03:** Most listed packages (`tree`, `randomForest`, `e1071`, `class`, `gbm`, `cluster::pam`, `mclust`) still install and run on R 4.x. **Dominant friction: R 4.0.0's `stringsAsFactors = FALSE` default.** Old code that assumes `data.frame()` / `read.csv()` auto-converts strings to factors will break for `tree` / `randomForest` / `naiveBayes` (which expect factor response variables). Workaround: explicitly `as.factor()` categorical columns or set `stringsAsFactors = TRUE` in the read call. Newer `randomForest` versions also require R ≥ 4.1.0. README updated with a compatibility note.
+
+## Audit completion
+
+✅ **Completed 2026-05-03.** All 29 items verified across three sessions of 3 parallel research agents (mix of `general-purpose` for web research and `docs-agent` for CRAN package status).
+
+**Net findings:**
+- **3 stats turned out to be wrong / dated and were corrected** — Wikipedia DB size (5.87 TB → ~24 GB articles dump / >400 TB w/ media), Facebook image storage (corrected to ~220 B photos / >100 PB Dec 2012, modern context = exabytes), "Data scientist" role (still valid but added fragmentation note).
+- **1 stat verified accurate** — IBM Watson 16 TB RAM.
+- **1 R package confirmed maintenance-only** — `gbm` (NEWS file says so); steered to `xgboost` / `lightgbm`.
+- **1 R package breaking change flagged** — `RSQLite` v2.3.7 duplicate-column-name behavior.
+- **1 R version-level breaking change flagged** — R 4.0.0's `stringsAsFactors = FALSE` default. README updated with workaround.
+- **1 dead URL replaced** — Ling-Spam dataset (csmining.org → AUEB / Kaggle).
+- **1 URL silently moved** — statmethods.net (Quick-R) → datacamp.com/doc/r/.
+- **1 textbook edition updated** — ISLR → ISLR2 (R, 2021) + ISLP (Python, 2023).
+- **2 methodology framings strengthened** — k-means elbow method (Schubert 2023 explicitly says stop teaching as primary), R² (descriptive only, prefer adjusted R² / AIC / BIC / out-of-sample RMSE).
+- **2 methodology footnotes added** — bias-variance + double descent (Belkin 2019), ARIMA still relevant for short-horizon / interpretable / regulated / baseline use.
+- **1 course-specific oddity confirmed** — Naive Bayes `laplace=3` is non-standard; standard is `laplace=1`.
+
+The notes are now reasonably current as of May 2026. Periodic re-audit recommended every ~12 months as R packages drift and new methodology emerges.
