@@ -30,6 +30,7 @@ Course Books/                   ← Programming textbooks
 System Design Books/            ← System design references (10 books)
 images/                         ← Diagrams and figures referenced in notes
 notes/data-science/             ← Data Science notes (Info 397F — 18 topics)
+notes/data-prep/                ← Data Prep notes (ESE-5410 — Python EDA, encoding, scaling, feature selection, PCA)
 ```
 
 ## Quick Links
@@ -48,6 +49,7 @@ notes/data-science/             ← Data Science notes (Info 397F — 18 topics)
 | Graphs | [BFS, DFS](notes/14-graphs.md) |
 | Big O | [Time & space complexity](notes/05-big-o-notation.md) |
 | Data Science | [18 topics from Info 397F](notes/data-science/) |
+| Data Prep | [Python EDA, encoding, scaling, feature selection, PCA](notes/data-prep/) |
 
 ## Resources
 

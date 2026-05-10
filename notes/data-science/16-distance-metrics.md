@@ -7,7 +7,7 @@
 
 The concept of **similarity** is central to ML and AI. Most classification and clustering algorithms need a way to gauge how similar two data points are. **Distance is dissimilarity** — small distance = high similarity.
 
-Examples of similarity questions: *Are two colleges similar? Is this frozen pizza healthy (vs. a "healthy food" model)? How long will the next homework take?* All can be framed as "compare a feature vector to a reference and measure distance."
+Examples of similarity questions: *Are two products similar? Is this frozen pizza healthy (vs. a "healthy food" model)? How long will the next task take?* All can be framed as "compare a feature vector to a reference and measure distance."
 
 ## Properties of a "true" distance metric
 

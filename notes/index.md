@@ -45,6 +45,16 @@ A structured guide covering data structures, algorithms, OOP, software design, a
   17. [Cross-Validation](data-science/17-cross-validation.md)
   18. [Time Series](data-science/18-time-series.md)
 
+### Data Prep (ESE-5410)
+- [Data Prep Notes](data-prep/) — 7 Python-flavored topics on the data-preparation stage of an ML workflow
+  1. [Pandas EDA Cookbook](data-prep/01-pandas-eda-cookbook.md)
+  2. [Feature Engineering](data-prep/02-feature-engineering.md)
+  3. [Categorical Encoding](data-prep/03-categorical-encoding.md)
+  4. [Scaling and Standardization](data-prep/04-scaling-and-standardization.md)
+  5. [Multicollinearity](data-prep/05-multicollinearity.md)
+  6. [Feature Selection](data-prep/06-feature-selection.md)
+  7. [PCA and Bootstrap](data-prep/07-pca-and-bootstrap.md)
+
 ## Code Solutions
 
 ### Java
